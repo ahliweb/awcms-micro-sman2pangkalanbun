@@ -29,7 +29,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - run: pnpm typecheck
-      - run: pnpm run --filter emdashcms-demo --filter @emdash-cms/demo-cloudflare typecheck
+      - run: pnpm run --filteremdash-demo --filter @emdash-cms/demo-cloudflare typecheck
       - run: pnpm typecheck:templates
 
   lint:
@@ -74,7 +74,7 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run --filter emdashcms... build
+      - run: pnpm run --filter emdash... build
       - run: pnpm test:unit
         env:
           EMDASH_TEST_PG: postgres://postgres:test@localhost:5432/emdash_test
@@ -92,7 +92,7 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run --filter emdashcms... build
+      - run: pnpm run --filter emdash... build
       - name: Validate marketplace plugins
         run: |
           CLI="node packages/core/dist/cli/index.mjs"
@@ -138,7 +138,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - run: pnpm --filter emdashcms exec vitest run --config vitest.smoke.config.ts
+      - run: pnpm --filteremdash exec vitest run --config vitest.smoke.config.ts
         timeout-minutes: 5
         env:
           DATABASE_URL: postgres://postgres:test@localhost:5432/emdash_smoke
@@ -184,7 +184,7 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run --filter emdashcms... build
+      - run: pnpm run --filter emdash... build
       - uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         id: playwright-cache
         with:

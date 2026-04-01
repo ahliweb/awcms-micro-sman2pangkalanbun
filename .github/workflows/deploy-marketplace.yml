@@ -31,7 +31,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       # Build core (produces the CLI at dist/cli/index.mjs)
-      - run: pnpm run --filter emdashcms... build
+      - run: pnpm run --filter emdash... build
 
       # Bundle and publish each standard-format plugin.
       # Only plugins with a sandbox entry can be marketplace-installed.
