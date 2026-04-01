@@ -103,11 +103,7 @@ export class LocalStorage implements Storage {
 				size: buffer.length,
 			};
 		} catch (error) {
-			throw new EmDashStorageError(
-				`Failed to upload file: ${options.key}`,
-				"UPLOAD_FAILED",
-				error,
-			);
+			throw new EmDashStorageError(`Failed to upload file: ${options.key}`, "UPLOAD_FAILED", error);
 		}
 	}
 

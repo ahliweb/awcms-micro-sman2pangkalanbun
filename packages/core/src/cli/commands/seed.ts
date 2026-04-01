@@ -135,9 +135,7 @@ export const seedCommand = defineCommand({
 		const seedPath = await resolveSeedPath(cwd, args.path);
 		if (!seedPath) {
 			consola.error("No seed file found");
-			consola.info(
-				"Provide a path, create .emdash/seed.json, or set emdash.seed in package.json",
-			);
+			consola.info("Provide a path, create .emdash/seed.json, or set emdash.seed in package.json");
 			process.exit(1);
 		}
 

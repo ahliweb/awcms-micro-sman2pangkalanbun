@@ -8,8 +8,8 @@
  */
 
 import type { APIRoute } from "astro";
-import mime from "mime/lite";
 import { parseWxrString, SchemaRegistry, type WxrData } from "emdash";
+import mime from "mime/lite";
 
 import { requirePerm } from "#api/authorize.js";
 import { apiError, apiSuccess, handleError } from "#api/error.js";

@@ -57,11 +57,7 @@ export const POST: APIRoute = async ({ params, request, locals }) => {
 		// Update sort_order for each widget
 		await Promise.all(
 			body.widgetIds.map((id, index) =>
-				db
-					.updateTable("_emdash_widgets")
-					.set({ sort_order: index })
-					.where("id", "=", id)
-					.execute(),
+				db.updateTable("_emdash_widgets").set({ sort_order: index }).where("id", "=", id).execute(),
 			),
 		);
 

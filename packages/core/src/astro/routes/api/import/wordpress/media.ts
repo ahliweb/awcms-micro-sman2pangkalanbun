@@ -11,8 +11,8 @@
 import * as path from "node:path";
 
 import type { APIRoute } from "astro";
-import mime from "mime/lite";
 import { MediaRepository, computeContentHash } from "emdash";
+import mime from "mime/lite";
 import { ulid } from "ulidx";
 
 import { requirePerm } from "#api/authorize.js";

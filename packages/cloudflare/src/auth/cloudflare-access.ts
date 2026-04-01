@@ -10,8 +10,8 @@
  * Do not import at config time.
  */
 
-import { createRemoteJWKSet, jwtVerify, type JWTPayload } from "jose";
 import type { AuthResult } from "emdash";
+import { createRemoteJWKSet, jwtVerify, type JWTPayload } from "jose";
 
 /**
  * Configuration for Cloudflare Access authentication

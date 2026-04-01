@@ -12,6 +12,7 @@
  */
 
 import { Button, Dialog, Input } from "@cloudflare/kumo";
+import type { Element } from "@emdash-cms/blocks";
 import { useFloating, offset, flip, shift, autoUpdate } from "@floating-ui/react";
 import {
 	TextB,
@@ -41,7 +42,6 @@ import {
 	type Icon,
 } from "@phosphor-icons/react";
 import { X } from "@phosphor-icons/react";
-import type { Element } from "@emdash-cms/blocks";
 import { Extension, type Range } from "@tiptap/core";
 import CharacterCount from "@tiptap/extension-character-count";
 import Focus from "@tiptap/extension-focus";

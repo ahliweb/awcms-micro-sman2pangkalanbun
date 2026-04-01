@@ -2,7 +2,7 @@
 
 ## Template Hierarchy
 
-| WP Template               | Purpose                 | EmDash Equivalent                                     |
+| WP Template               | Purpose                 | EmDash Equivalent                                       |
 | ------------------------- | ----------------------- | ------------------------------------------------------- |
 | `index.php`               | Fallback for everything | `src/pages/index.astro`                                 |
 | `front-page.php`          | Static front page       | `src/pages/index.astro`                                 |
@@ -26,7 +26,7 @@
 
 ## Template Parts
 
-| WP Pattern                                                 | EmDash Pattern             |
+| WP Pattern                                                 | EmDash Pattern               |
 | ---------------------------------------------------------- | ---------------------------- |
 | `get_template_part('content', 'post')`                     | `<PostCard />` component     |
 | `get_template_part('template-parts/header/site-branding')` | `<SiteBranding />` component |
@@ -116,10 +116,10 @@ EmDash: Create collection via admin UI or API. The collection will be created du
 
 ### Content Retrieval
 
-| WP Function                   | EmDash Equivalent                               |
+| WP Function                   | EmDash Equivalent                                 |
 | ----------------------------- | ------------------------------------------------- |
-| `have_posts()` / `the_post()` | `getEmDashCollection()`                         |
-| `get_post()`                  | `getEmDashEntry()`                              |
+| `have_posts()` / `the_post()` | `getEmDashCollection()`                           |
+| `get_post()`                  | `getEmDashEntry()`                                |
 | `the_title()`                 | `post.data.title`                                 |
 | `the_content()`               | `<PortableText value={post.data.content} />`      |
 | `the_excerpt()`               | `post.data.excerpt`                               |
@@ -132,7 +132,7 @@ EmDash: Create collection via admin UI or API. The collection will be created du
 
 ### Taxonomies
 
-| WP Function                  | EmDash Equivalent                                |
+| WP Function                  | EmDash Equivalent                                  |
 | ---------------------------- | -------------------------------------------------- |
 | `get_categories()`           | `getTaxonomyTerms("categories")`                   |
 | `get_tags()`                 | `getTaxonomyTerms("tags")`                         |
@@ -149,7 +149,7 @@ EmDash supports hierarchical taxonomies (like categories) and flat taxonomies (l
 
 ### Site Info
 
-| WP Function               | EmDash Equivalent                     |
+| WP Function               | EmDash Equivalent                       |
 | ------------------------- | --------------------------------------- |
 | `bloginfo('name')`        | `getSiteSetting("title")`               |
 | `bloginfo('description')` | `getSiteSetting("tagline")`             |
@@ -173,7 +173,7 @@ EmDash supports hierarchical taxonomies (like categories) and flat taxonomies (l
 
 ### Media
 
-| WP Function                 | EmDash Equivalent        |
+| WP Function                 | EmDash Equivalent          |
 | --------------------------- | -------------------------- |
 | `wp_get_attachment_image()` | `<img src={media.url} />`  |
 | `wp_get_attachment_url()`   | `media.url`                |
@@ -181,7 +181,7 @@ EmDash supports hierarchical taxonomies (like categories) and flat taxonomies (l
 
 ### Navigation
 
-| WP Function              | EmDash Equivalent                   |
+| WP Function              | EmDash Equivalent                     |
 | ------------------------ | ------------------------------------- |
 | `wp_nav_menu()`          | `getMenu("menu-name")` + render items |
 | `wp_list_pages()`        | Query pages collection or use menu    |
@@ -198,10 +198,10 @@ WordPress hooks don't have direct equivalents. Most hook functionality becomes:
 3. **Build-time logic** - In Astro config or components
 
 | WP Hook              | EmDash Approach                          |
-| -------------------- | ------------------------------------------ |
-| `wp_head`            | Add to `<head>` in layout                  |
-| `wp_footer`          | Add before `</body>` in layout             |
-| `the_content` filter | PortableText components                    |
+| -------------------- | ---------------------------------------- |
+| `wp_head`            | Add to `<head>` in layout                |
+| `wp_footer`          | Add before `</body>` in layout           |
+| `the_content` filter | PortableText components                  |
 | `pre_get_posts`      | Query filters in `getEmDashCollection()` |
 | `save_post`          | EmDash plugin hook: `content:beforeSave` |
 
@@ -280,14 +280,14 @@ sidebar?.widgets.forEach((widget) => {
 
 ### Widget Types
 
-| WP Widget    | EmDash Widget Type            | Notes                         |
+| WP Widget    | EmDash Widget Type              | Notes                         |
 | ------------ | ------------------------------- | ----------------------------- |
 | Text/HTML    | `content`                       | Portable Text (rich content)  |
 | Custom Menu  | `menu`                          | References menu by name       |
 | Recent Posts | `component` `core:recent-posts` | Built-in component with props |
 | Categories   | `component` `core:categories`   | Built-in component            |
 | Tag Cloud    | `component` `core:tag-cloud`    | Built-in component            |
-| Search       | `<LiveSearch />` component      | Use `emdash/ui` LiveSearch  |
+| Search       | `<LiveSearch />` component      | Use `emdash/ui` LiveSearch    |
 | Archives     | `component` `core:archives`     | Built-in component            |
 
 ### Core Widget Components
@@ -358,7 +358,7 @@ const results = query ? await search(query, { limit: 20 }) : { results: [] };
 
 ### Search Features
 
-| WordPress                    | EmDash                        |
+| WordPress                    | EmDash                          |
 | ---------------------------- | ------------------------------- |
 | Basic keyword search         | FTS5 with Porter stemming       |
 | Search all public post types | Per-collection search enable    |

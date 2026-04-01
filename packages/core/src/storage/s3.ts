@@ -97,11 +97,7 @@ export class S3Storage implements Storage {
 				size: body.length,
 			};
 		} catch (error) {
-			throw new EmDashStorageError(
-				`Failed to upload file: ${options.key}`,
-				"UPLOAD_FAILED",
-				error,
-			);
+			throw new EmDashStorageError(`Failed to upload file: ${options.key}`, "UPLOAD_FAILED", error);
 		}
 	}
 
@@ -166,11 +162,7 @@ export class S3Storage implements Storage {
 			if (hasErrorName(error) && error.name === "NotFound") {
 				return false;
 			}
-			throw new EmDashStorageError(
-				`Failed to check file existence: ${key}`,
-				"HEAD_FAILED",
-				error,
-			);
+			throw new EmDashStorageError(`Failed to check file existence: ${key}`, "HEAD_FAILED", error);
 		}
 	}
 

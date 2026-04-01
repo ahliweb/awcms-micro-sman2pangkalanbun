@@ -7,13 +7,13 @@ Implement CMS-driven features: site settings, menus, taxonomies, and widgets.
 Map WordPress customizer values to EmDash site settings:
 
 | WP Customizer Setting | EmDash Site Setting |
-| --------------------- | --------------------- |
-| Site Title            | `title`               |
-| Tagline               | `tagline`             |
-| Site Icon             | `favicon`             |
-| Custom Logo           | `logo`                |
-| Posts per page        | `postsPerPage`        |
-| Date format           | `dateFormat`          |
+| --------------------- | ------------------- |
+| Site Title            | `title`             |
+| Tagline               | `tagline`           |
+| Site Icon             | `favicon`           |
+| Custom Logo           | `logo`              |
+| Posts per page        | `postsPerPage`      |
+| Date format           | `dateFormat`        |
 
 ```astro
 ---
@@ -134,7 +134,7 @@ const sidebar = await getWidgetArea("sidebar");
 
 Map WP widgets to Astro components:
 
-| WP Widget        | EmDash Component  |
+| WP Widget        | EmDash Component    |
 | ---------------- | ------------------- |
 | Recent Posts     | `core:recent-posts` |
 | Categories       | `core:categories`   |

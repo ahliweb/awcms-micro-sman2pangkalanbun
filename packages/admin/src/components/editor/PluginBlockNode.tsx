@@ -10,6 +10,7 @@
  */
 
 import { Button, Input } from "@cloudflare/kumo";
+import type { Element } from "@emdash-cms/blocks";
 import {
 	DotsSixVertical,
 	Trash,
@@ -24,7 +25,6 @@ import {
 	Cube,
 	ListBullets,
 } from "@phosphor-icons/react";
-import type { Element } from "@emdash-cms/blocks";
 import { Node, mergeAttributes } from "@tiptap/core";
 import type { NodeViewProps } from "@tiptap/react";
 import { ReactNodeViewRenderer, NodeViewWrapper } from "@tiptap/react";

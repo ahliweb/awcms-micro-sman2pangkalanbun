@@ -97,7 +97,7 @@ EmDash is an Astro-native CMS that stores its schema in the database, not in cod
 | File                                | Purpose                                               |
 | ----------------------------------- | ----------------------------------------------------- |
 | `src/live.config.ts`                | Collection schemas + admin config (user's site)       |
-| `src/emdash-runtime.ts`           | Central runtime; orchestrates DB, plugins, storage    |
+| `src/emdash-runtime.ts`             | Central runtime; orchestrates DB, plugins, storage    |
 | `src/schema/registry.ts`            | Manages `ec_*` table creation/modification            |
 | `src/database/migrations/runner.ts` | StaticMigrationProvider; register new migrations here |
 | `src/plugins/manager.ts`            | Loads and orchestrates trusted plugins                |

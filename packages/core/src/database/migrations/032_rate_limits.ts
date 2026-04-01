@@ -27,10 +27,7 @@ export async function up(db: Kysely<unknown>): Promise<void> {
 		.execute();
 
 	// ── Device code polling tracking ─────────────────────────────────
-	await db.schema
-		.alterTable("_emdash_device_codes")
-		.addColumn("last_polled_at", "text")
-		.execute();
+	await db.schema.alterTable("_emdash_device_codes").addColumn("last_polled_at", "text").execute();
 }
 
 export async function down(db: Kysely<unknown>): Promise<void> {

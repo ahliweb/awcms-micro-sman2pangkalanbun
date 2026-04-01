@@ -342,13 +342,10 @@ test.describe("Revisions", () => {
 		const olderRevisionId = revisions[1].id;
 
 		// Restore via API
-		const restoreRes = await fetch(
-			`${baseUrl}/_emdash/api/revisions/${olderRevisionId}/restore`,
-			{
-				method: "POST",
-				headers,
-			},
-		);
+		const restoreRes = await fetch(`${baseUrl}/_emdash/api/revisions/${olderRevisionId}/restore`, {
+			method: "POST",
+			headers,
+		});
 		expect(restoreRes.status).toBe(200);
 
 		// Get revision count after restore -- should have increased

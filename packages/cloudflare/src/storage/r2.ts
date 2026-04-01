@@ -61,11 +61,7 @@ export class R2Storage implements Storage {
 			};
 		} catch (error) {
 			if (error instanceof EmDashStorageError) throw error;
-			throw new EmDashStorageError(
-				`Failed to upload file: ${options.key}`,
-				"UPLOAD_FAILED",
-				error,
-			);
+			throw new EmDashStorageError(`Failed to upload file: ${options.key}`, "UPLOAD_FAILED", error);
 		}
 	}
 
@@ -107,11 +103,7 @@ export class R2Storage implements Storage {
 			const object = await this.bucket.head(key);
 			return object !== null;
 		} catch (error) {
-			throw new EmDashStorageError(
-				`Failed to check file existence: ${key}`,
-				"HEAD_FAILED",
-				error,
-			);
+			throw new EmDashStorageError(`Failed to check file existence: ${key}`, "HEAD_FAILED", error);
 		}
 	}
 

@@ -77,10 +77,7 @@ describe("normalizeMediaValue", () => {
 	});
 
 	it("falls back to external for internal URL when local provider unavailable", async () => {
-		const result = await normalizeMediaValue(
-			"/_emdash/api/media/file/01ABC.jpg",
-			getProvider({}),
-		);
+		const result = await normalizeMediaValue("/_emdash/api/media/file/01ABC.jpg", getProvider({}));
 		expect(result).toEqual({
 			provider: "external",
 			id: "",

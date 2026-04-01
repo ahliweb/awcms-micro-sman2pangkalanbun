@@ -664,10 +664,7 @@ export async function handleTokenRevoke(
 
 		if (row.token_type === "refresh") {
 			// Revoke refresh token and all its access tokens
-			await db
-				.deleteFrom("_emdash_oauth_tokens")
-				.where("refresh_token_hash", "=", hash)
-				.execute();
+			await db.deleteFrom("_emdash_oauth_tokens").where("refresh_token_hash", "=", hash).execute();
 			await db.deleteFrom("_emdash_oauth_tokens").where("token_hash", "=", hash).execute();
 		} else {
 			// Revoke just the access token

@@ -720,9 +720,7 @@ export function WordPressImport() {
 				<div className="rounded-lg border bg-kumo-base p-12 text-center">
 					<Loader />
 					<p className="mt-4 text-kumo-subtle">Analyzing WordPress site...</p>
-					<p className="text-sm text-kumo-subtle">
-						Fetching content from the EmDash Exporter API.
-					</p>
+					<p className="text-sm text-kumo-subtle">Fetching content from the EmDash Exporter API.</p>
 				</div>
 			)}
 

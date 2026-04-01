@@ -236,11 +236,7 @@ export async function handleOAuthClientUpdate(
 			updates.scopes = input.scopes ? JSON.stringify(input.scopes) : "";
 		}
 
-		await db
-			.updateTable("_emdash_oauth_clients")
-			.set(updates)
-			.where("id", "=", clientId)
-			.execute();
+		await db.updateTable("_emdash_oauth_clients").set(updates).where("id", "=", clientId).execute();
 
 		// Fetch the updated row
 		const updated = await db

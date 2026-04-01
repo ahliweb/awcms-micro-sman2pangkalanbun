@@ -51,8 +51,8 @@ pnpm --filter @emdash-cms/template-portfolio dev
 
 Available templates:
 
-| Template  | Filter Name                    |
-| --------- | ------------------------------ |
+| Template  | Filter Name                      |
+| --------- | -------------------------------- |
 | Blog      | `@emdash-cms/template-blog`      |
 | Portfolio | `@emdash-cms/template-portfolio` |
 | Marketing | `@emdash-cms/template-marketing` |

@@ -71,9 +71,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		// Get passkey name - prefer body.name, then check stored pending name
 		let passKeyName: string | undefined = body.name ?? undefined;
 		if (!passKeyName) {
-			const pending = await optionsRepo.get<{ name?: string }>(
-				`emdash:passkey_pending:${user.id}`,
-			);
+			const pending = await optionsRepo.get<{ name?: string }>(`emdash:passkey_pending:${user.id}`);
 			if (pending?.name) {
 				passKeyName = pending.name;
 			}

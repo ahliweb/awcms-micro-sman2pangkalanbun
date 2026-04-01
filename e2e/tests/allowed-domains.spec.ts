@@ -109,10 +109,10 @@ test.describe("Allowed Domains Settings", () => {
 		await expect(successMsg).toBeVisible({ timeout: 5000 });
 
 		// Clean up via API
-		await fetch(
-			`${baseUrl}/_emdash/api/admin/allowed-domains/${encodeURIComponent(testDomain)}`,
-			{ method: "DELETE", headers },
-		).catch(() => {});
+		await fetch(`${baseUrl}/_emdash/api/admin/allowed-domains/${encodeURIComponent(testDomain)}`, {
+			method: "DELETE",
+			headers,
+		}).catch(() => {});
 	});
 
 	test("removes a domain via the UI", async ({ admin, page }) => {
@@ -193,10 +193,10 @@ test.describe("Allowed Domains Settings", () => {
 		await expect(page.locator(`.font-medium`, { hasText: testDomain })).toBeVisible();
 
 		// Clean up
-		await fetch(
-			`${baseUrl}/_emdash/api/admin/allowed-domains/${encodeURIComponent(testDomain)}`,
-			{ method: "DELETE", headers },
-		).catch(() => {});
+		await fetch(`${baseUrl}/_emdash/api/admin/allowed-domains/${encodeURIComponent(testDomain)}`, {
+			method: "DELETE",
+			headers,
+		}).catch(() => {});
 	});
 
 	test("toggling enabled/disabled updates the domain", async ({ admin, page }) => {
@@ -228,9 +228,9 @@ test.describe("Allowed Domains Settings", () => {
 		await expect(statusMsg).toBeVisible({ timeout: 5000 });
 
 		// Clean up
-		await fetch(
-			`${baseUrl}/_emdash/api/admin/allowed-domains/${encodeURIComponent(testDomain)}`,
-			{ method: "DELETE", headers },
-		).catch(() => {});
+		await fetch(`${baseUrl}/_emdash/api/admin/allowed-domains/${encodeURIComponent(testDomain)}`, {
+			method: "DELETE",
+			headers,
+		}).catch(() => {});
 	});
 });

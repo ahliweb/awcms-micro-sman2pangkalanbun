@@ -272,11 +272,7 @@ test.describe("Search", () => {
 			// TODO: getSuggestions fails in dev mode -- needs investigation
 			await enableSearch(serverInfo, "posts");
 
-			const res = await apiRequest(
-				serverInfo,
-				"GET",
-				"/_emdash/api/search/suggest?q=Fir&limit=5",
-			);
+			const res = await apiRequest(serverInfo, "GET", "/_emdash/api/search/suggest?q=Fir&limit=5");
 			expect(res.status).toBe(200);
 
 			const body = await res.json();

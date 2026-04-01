@@ -95,11 +95,7 @@ export const PUT: APIRoute = async ({ params, request, locals }) => {
 		if (newStatus === "approved" && previousStatus !== "approved" && emdash.email) {
 			try {
 				const adminBaseUrl = await getSiteBaseUrl(emdash.db, request);
-				const content = await lookupContentAuthor(
-					emdash.db,
-					updated.collection,
-					updated.contentId,
-				);
+				const content = await lookupContentAuthor(emdash.db, updated.collection, updated.contentId);
 				if (content?.author) {
 					await sendCommentNotification({
 						email: emdash.email,

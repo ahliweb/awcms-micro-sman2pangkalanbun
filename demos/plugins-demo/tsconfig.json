@@ -3,9 +3,5 @@
 	"compilerOptions": {
 		"strictNullChecks": true
 	},
-	"include": [
-		"src/**/*",
-		"astro.config.mjs",
-		"emdash-env.d.ts"
-	]
+	"include": ["src/**/*", "astro.config.mjs", "emdash-env.d.ts"]
 }

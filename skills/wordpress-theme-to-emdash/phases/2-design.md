@@ -37,7 +37,7 @@ theme.json          # Block themes (WP 5.9+) - structured design tokens
 
 ### CSS Variable Mapping
 
-| WP Pattern       | EmDash Variable  |
+| WP Pattern       | EmDash Variable    |
 | ---------------- | ------------------ |
 | Body font family | `--font-body`      |
 | Heading font     | `--font-heading`   |

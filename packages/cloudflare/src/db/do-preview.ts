@@ -22,8 +22,8 @@
 
 import type { MiddlewareHandler } from "astro";
 import { env } from "cloudflare:workers";
-import { Kysely } from "kysely";
 import { runWithContext } from "emdash/request-context";
+import { Kysely } from "kysely";
 import { ulid } from "ulidx";
 
 import type { EmDashPreviewDB } from "./do-class.js";

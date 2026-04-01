@@ -15,11 +15,7 @@ export const POST: APIRoute = async ({ params, locals }) => {
 	const { emdash, user } = locals;
 	const revisionId = params.revisionId!;
 
-	if (
-		!emdash?.handleRevisionRestore ||
-		!emdash?.handleRevisionGet ||
-		!emdash?.handleContentGet
-	) {
+	if (!emdash?.handleRevisionRestore || !emdash?.handleRevisionGet || !emdash?.handleContentGet) {
 		return apiError("NOT_CONFIGURED", "EmDash not configured", 500);
 	}
 

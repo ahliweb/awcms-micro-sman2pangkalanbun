@@ -900,15 +900,15 @@ const { entry: page } = await getEmDashEntry("pages", "about");
 
 ### Key Differences
 
-| Aspect                 | Astro Collections               | EmDash Collections                            |
-| ---------------------- | ------------------------------- | ----------------------------------------------- |
-| **Config file**        | `src/content.config.ts`         | `src/live.config.ts`                            |
-| **Schema definition**  | In config file with Zod         | In EmDash admin UI or seed file               |
-| **Data source**        | Files, APIs, custom loaders     | SQLite database                                 |
+| Aspect                 | Astro Collections               | EmDash Collections                          |
+| ---------------------- | ------------------------------- | ------------------------------------------- |
+| **Config file**        | `src/content.config.ts`         | `src/live.config.ts`                        |
+| **Schema definition**  | In config file with Zod         | In EmDash admin UI or seed file             |
+| **Data source**        | Files, APIs, custom loaders     | SQLite database                             |
 | **Query functions**    | `getCollection()`, `getEntry()` | `getEmDashCollection()`, `getEmDashEntry()` |
-| **Content editing**    | Edit source files directly      | Admin UI or API                                 |
-| **Type safety**        | Generated from schema           | Runtime validation                              |
-| **Rendering Markdown** | `render()` from `astro:content` | `<PortableText />` component                    |
+| **Content editing**    | Edit source files directly      | Admin UI or API                             |
+| **Type safety**        | Generated from schema           | Runtime validation                          |
+| **Rendering Markdown** | `render()` from `astro:content` | `<PortableText />` component                |
 
 ### When to Use Which
 

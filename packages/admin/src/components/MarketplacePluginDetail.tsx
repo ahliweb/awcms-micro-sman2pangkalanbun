@@ -329,9 +329,7 @@ export function MarketplacePluginDetail({
 							<h3 className="text-sm font-semibold mb-2">Version</h3>
 							<div className="space-y-1 text-xs text-kumo-subtle">
 								<div>v{latest.version}</div>
-								{latest.minEmDashVersion && (
-									<div>Requires EmDash {latest.minEmDashVersion}</div>
-								)}
+								{latest.minEmDashVersion && <div>Requires EmDash {latest.minEmDashVersion}</div>}
 								<div>Published {new Date(latest.publishedAt).toLocaleDateString()}</div>
 								{latest.bundleSize > 0 && <div>{formatBytes(latest.bundleSize)}</div>}
 							</div>

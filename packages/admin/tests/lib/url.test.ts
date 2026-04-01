@@ -18,9 +18,7 @@ describe("sanitizeRedirectUrl", () => {
 	});
 
 	it("allows paths with query strings", () => {
-		expect(sanitizeRedirectUrl("/_emdash/admin?tab=settings")).toBe(
-			"/_emdash/admin?tab=settings",
-		);
+		expect(sanitizeRedirectUrl("/_emdash/admin?tab=settings")).toBe("/_emdash/admin?tab=settings");
 	});
 
 	it("allows paths with hash fragments", () => {
@@ -44,9 +42,7 @@ describe("sanitizeRedirectUrl", () => {
 	});
 
 	it("rejects data: scheme", () => {
-		expect(sanitizeRedirectUrl("data:text/html,<script>alert(1)</script>")).toBe(
-			"/_emdash/admin",
-		);
+		expect(sanitizeRedirectUrl("data:text/html,<script>alert(1)</script>")).toBe("/_emdash/admin");
 	});
 
 	it("rejects backslash trick (/\\evil.com)", () => {

@@ -104,7 +104,7 @@ Common elements to check:
 
 ### Common Color Mapping
 
-| WP Pattern       | EmDash Variable   |
+| WP Pattern       | EmDash Variable     |
 | ---------------- | ------------------- |
 | Background       | `--color-base`      |
 | Text             | `--color-contrast`  |

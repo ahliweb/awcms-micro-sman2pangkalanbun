@@ -20,44 +20,44 @@ This skill maps WordPress concepts to their EmDash equivalents for plugin portin
 ### Content & Data
 
 | WordPress               | EmDash                                    | Notes                                         |
-| ----------------------- | ------------------------------------------- | --------------------------------------------- |
-| `register_post_type()`  | `SchemaRegistry.createCollection()`         | Via Admin API or seed file                    |
+| ----------------------- | ----------------------------------------- | --------------------------------------------- |
+| `register_post_type()`  | `SchemaRegistry.createCollection()`       | Via Admin API or seed file                    |
 | `register_taxonomy()`   | `_emdash_taxonomy_defs` table             | Hierarchical or flat, attached to collections |
-| `register_meta()` / ACF | Collection fields via SchemaRegistry        | All become typed schema fields                |
-| `get_post_meta()`       | `entry.data.fieldName`                      | Direct typed access                           |
-| `get_option()`          | `getSiteSetting()` / `ctx.kv`               | Site settings or plugin-namespaced KV         |
+| `register_meta()` / ACF | Collection fields via SchemaRegistry      | All become typed schema fields                |
+| `get_post_meta()`       | `entry.data.fieldName`                    | Direct typed access                           |
+| `get_option()`          | `getSiteSetting()` / `ctx.kv`             | Site settings or plugin-namespaced KV         |
 | `WP_Query`              | `getEmDashCollection()`                   | Runtime queries with filters                  |
 | `get_post($id)`         | `getEmDashEntry(collection, slug)`        | Returns entry or null                         |
 | `wp_insert_post()`      | `POST /_emdash/api/content/{type}`        | REST API                                      |
 | `wp_update_post()`      | `PUT /_emdash/api/content/{type}/{id}`    | REST API                                      |
 | `wp_delete_post()`      | `DELETE /_emdash/api/content/{type}/{id}` | Soft delete                                   |
-| Custom tables           | Plugin storage collections                  | `ctx.storage.collectionName.put/get/query`    |
+| Custom tables           | Plugin storage collections                | `ctx.storage.collectionName.put/get/query`    |
 
 ### Site Configuration
 
-| WordPress                | EmDash                    | Notes                                    |
+| WordPress                | EmDash                      | Notes                                    |
 | ------------------------ | --------------------------- | ---------------------------------------- |
 | `get_bloginfo('name')`   | `getSiteSetting('title')`   | From `options` table with `site:` prefix |
 | `get_option('blogdesc')` | `getSiteSetting('tagline')` | Site settings API                        |
-| Theme Customizer         | Site Settings admin page    | `/_emdash/admin/settings`              |
+| Theme Customizer         | Site Settings admin page    | `/_emdash/admin/settings`                |
 | `site_icon`              | `getSiteSetting('favicon')` | Media reference                          |
 | `custom_logo`            | `getSiteSetting('logo')`    | Media reference                          |
 
 ### Navigation Menus
 
-| WordPress              | EmDash                                | Notes                               |
+| WordPress              | EmDash                                  | Notes                               |
 | ---------------------- | --------------------------------------- | ----------------------------------- |
-| `register_nav_menu()`  | Create menu via admin or seed           | `_emdash_menus` table             |
+| `register_nav_menu()`  | Create menu via admin or seed           | `_emdash_menus` table               |
 | `wp_nav_menu()`        | `getMenu(name)`                         | Returns `{ items: MenuItem[] }`     |
-| `wp_nav_menu_item`     | `_emdash_menu_items` table            | Type: custom, page, post, taxonomy  |
+| `wp_nav_menu_item`     | `_emdash_menu_items` table              | Type: custom, page, post, taxonomy  |
 | `_menu_item_object_id` | `reference_id` + `reference_collection` | Links to content entries            |
 | Menu locations         | Query by name in templates              | No locations concept — direct query |
 
 ### Taxonomies
 
-| WordPress             | EmDash                                | Notes                          |
+| WordPress             | EmDash                                  | Notes                          |
 | --------------------- | --------------------------------------- | ------------------------------ |
-| `register_taxonomy()` | `_emdash_taxonomy_defs` table         | Define via admin, seed, or API |
+| `register_taxonomy()` | `_emdash_taxonomy_defs` table           | Define via admin, seed, or API |
 | `get_terms()`         | `getTaxonomyTerms(name)`                | Returns tree for hierarchical  |
 | `get_the_terms()`     | `getEntryTerms(collection, id, name)`   | Terms for specific entry       |
 | `wp_set_post_terms()` | `TaxonomyRepository.setTermsForEntry()` | Replace terms for entry        |
@@ -66,9 +66,9 @@ This skill maps WordPress concepts to their EmDash equivalents for plugin portin
 
 ### Widgets & Sidebars
 
-| WordPress            | EmDash                               | Notes                           |
+| WordPress            | EmDash                                 | Notes                           |
 | -------------------- | -------------------------------------- | ------------------------------- |
-| `register_sidebar()` | `_emdash_widget_areas` table         | Create via admin or seed        |
+| `register_sidebar()` | `_emdash_widget_areas` table           | Create via admin or seed        |
 | `dynamic_sidebar()`  | `getWidgetArea(name)`                  | Returns `{ widgets: Widget[] }` |
 | `WP_Widget` class    | Widget types: content, menu, component | Simplified — 3 types only       |
 | Text widget          | `type: 'content'` + Portable Text      | Rich text widget                |
@@ -77,7 +77,7 @@ This skill maps WordPress concepts to their EmDash equivalents for plugin portin
 
 ### Admin UI
 
-| WordPress                | EmDash                          | Notes                                    |
+| WordPress                | EmDash                            | Notes                                    |
 | ------------------------ | --------------------------------- | ---------------------------------------- |
 | `add_menu_page()`        | `admin.pages` in `definePlugin()` | Plugin config                            |
 | `add_submenu_page()`     | Nested admin pages                | Parent determines hierarchy              |
@@ -88,7 +88,7 @@ This skill maps WordPress concepts to their EmDash equivalents for plugin portin
 
 ### Hooks
 
-| WordPress                          | EmDash                                | Notes                                                 |
+| WordPress                          | EmDash                                  | Notes                                                 |
 | ---------------------------------- | --------------------------------------- | ----------------------------------------------------- |
 | `add_action('init')`               | `plugin:install` hook                   | Runs once on first install                            |
 | `add_action('save_post')`          | `content:afterSave` hook                | Filter by `event.collection`                          |
@@ -100,7 +100,7 @@ This skill maps WordPress concepts to their EmDash equivalents for plugin portin
 
 ### Frontend Output
 
-| WordPress               | EmDash                     | Notes                                                |
+| WordPress               | EmDash                       | Notes                                                |
 | ----------------------- | ---------------------------- | ---------------------------------------------------- |
 | `add_shortcode()`       | Portable Text custom block   | Content → block. Template → component. Trusted only. |
 | `register_block_type()` | PT block + `componentsEntry` | Block data → Astro component props. Trusted only.    |
@@ -109,7 +109,7 @@ This skill maps WordPress concepts to their EmDash equivalents for plugin portin
 
 ### Plugin Storage
 
-| WordPress                | EmDash                 | Notes                              |
+| WordPress                | EmDash                   | Notes                              |
 | ------------------------ | ------------------------ | ---------------------------------- |
 | `get_option('plugin_*')` | `ctx.kv.get(key)`        | Namespaced to plugin automatically |
 | `update_option()`        | `ctx.kv.set(key, value)` | Scoped KV storage                  |

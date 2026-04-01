@@ -418,9 +418,7 @@ export const publishCommand = defineCommand({
 					process.exit(1);
 				}
 			} catch {
-				consola.error(
-					"No dist/ directory found. Run `emdash plugin bundle` first or use --build.",
-				);
+				consola.error("No dist/ directory found. Run `emdash plugin bundle` first or use --build.");
 				process.exit(1);
 			}
 		}

@@ -5,9 +5,9 @@
  * interactions to the plugin's admin route and renders the returned blocks.
  */
 
-import { CircleNotch, WarningCircle } from "@phosphor-icons/react";
 import { BlockRenderer } from "@emdash-cms/blocks";
 import type { Block, BlockInteraction, BlockResponse } from "@emdash-cms/blocks";
+import { CircleNotch, WarningCircle } from "@phosphor-icons/react";
 import { useCallback, useEffect, useState } from "react";
 
 import { apiFetch, API_BASE } from "../lib/api/client.js";

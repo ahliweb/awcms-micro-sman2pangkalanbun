@@ -59,11 +59,7 @@ export const POST: APIRoute = async ({ params, request, locals, cache }) => {
 	const denied = requireOwnerPerm(user, authorId, "content:publish_own", "content:publish_any");
 	if (denied) return denied;
 
-	const result = await emdash.handleContentSchedule(
-		collection,
-		resolvedId ?? id,
-		body.scheduledAt,
-	);
+	const result = await emdash.handleContentSchedule(collection, resolvedId ?? id, body.scheduledAt);
 
 	if (!result.success) return unwrapResult(result);
 
