@@ -23,19 +23,19 @@ const TEMPLATES = {
 		name: "Blog",
 		description: "A blog with posts and pages (Node.js + SQLite)",
 		dir: "blog",
-		repo: "github:cloudflare/emdash/templates/blog",
+		repo: "github:emdash-cms/emdash/templates/blog",
 	},
 	cloudflare: {
 		name: "Cloudflare",
 		description: "A blog on Cloudflare Workers (D1 + R2)",
 		dir: "cloudflare",
-		repo: "github:cloudflare/emdash/templates/cloudflare",
+		repo: "github:emdash-cms/emdash/templates/cloudflare",
 	},
 	blank: {
 		name: "Blank",
 		description: "A minimal starter project",
 		dir: "blank",
-		repo: "github:cloudflare/emdash/templates/blank",
+		repo: "github:emdash-cms/emdash/templates/blank",
 	},
 } as const;
 

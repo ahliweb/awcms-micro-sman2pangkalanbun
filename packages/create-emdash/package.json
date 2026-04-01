@@ -31,7 +31,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cloudflare/emdash.git",
+    "url": "git+https://github.com/emdash-cms/emdash.git",
     "directory": "packages/create-emdash"
   },
   "peerDependencies": {},

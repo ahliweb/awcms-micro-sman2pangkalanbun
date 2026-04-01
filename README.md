@@ -10,7 +10,7 @@ npm create emdash@latest
 
 Or deploy directly to your Cloudflare account:
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/emdash/tree/main/templates/cloudflare)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/emdash-cms/templates/tree/main/blog-cloudflare)
 
 EmDash runs on Cloudflare (D1 + R2 + Workers) or any Node.js server with SQLite. No PHP, no separate hosting tier -- just deploy your Astro site.
 
@@ -166,7 +166,7 @@ See the [documentation](https://docs.emdashcms.com) for guides, API reference, a
 This is a pnpm monorepo. To contribute:
 
 ```bash
-git clone https://github.com/cloudflare/emdash.git && cd emdash
+git clone https://github.com/emdash-cms/emdash.git && cd emdash
 pnpm install
 pnpm build
 ```

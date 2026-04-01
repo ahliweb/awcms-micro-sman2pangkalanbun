@@ -3,7 +3,7 @@
 	"changelog": [
 		"@changesets/changelog-github",
 		{
-			"repo": "cloudflare/emdash"
+			"repo": "emdash-cms/emdash"
 		}
 	],
 	"commit": false,
