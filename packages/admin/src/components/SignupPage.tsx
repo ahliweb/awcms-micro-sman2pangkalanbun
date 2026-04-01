@@ -388,7 +388,7 @@ export function SignupPage() {
 			<div className="w-full max-w-md">
 				{/* Header */}
 				<div className="text-center mb-8">
-					<div className="text-4xl font-bold mb-2">💫 EmDash</div>
+					<div className="text-4xl font-bold mb-2">— EmDash</div>
 					<h1 className="text-2xl font-semibold text-kumo-default">
 						{step === "email" && "Create an account"}
 						{step === "check-email" && "Check your email"}

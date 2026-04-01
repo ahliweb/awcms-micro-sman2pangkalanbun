@@ -70,7 +70,7 @@ async function main() {
 
 	const monorepoRoot = useRemote ? null : findMonorepoRoot();
 
-	p.intro(`💫 ${pc.bgCyan(pc.black(" create-emdash "))}`);
+	p.intro(`— ${pc.bgCyan(pc.black(" create-emdash "))}`);
 
 	const projectName = await p.text({
 		message: "Project name?",

@@ -347,7 +347,7 @@ export function SidebarNav({ manifest }: SidebarNavProps) {
 						className="emdash-brand-link flex w-full min-w-0 items-center gap-2 px-3 py-1"
 					>
 						<span className="text-base shrink-0" aria-hidden="true">
-							💫
+							—
 						</span>
 						<span className="emdash-brand-text font-semibold truncate">EmDash</span>
 					</Link>

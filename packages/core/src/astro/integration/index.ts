@@ -42,7 +42,7 @@ const cyan = (s: string) => `\x1b[36m${s}\x1b[39m`;
 function printBanner(_logger: AstroIntegrationLogger): void {
 	const banner = `
 
-  ${bold(cyan("E C L I P T I C"))}
+  ${bold(cyan("— E M D A S H —"))}
    `;
 	console.log(banner);
 }

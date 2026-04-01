@@ -481,7 +481,7 @@ export function SetupWizard() {
 			<div className="w-full max-w-lg">
 				{/* Header */}
 				<div className="text-center mb-6">
-					<div className="text-4xl font-bold mb-2">💫 EmDash</div>
+					<div className="text-4xl font-bold mb-2">— EmDash</div>
 					<h1 className="text-2xl font-semibold text-kumo-default">
 						{currentStep === "site" && "Set up your site"}
 						{currentStep === "admin" && "Create your account"}
