@@ -4,7 +4,7 @@
  * This is the config-time helper. Import it in your astro.config.mjs:
  *
  * ```ts
- * import { cloudflareCache } from "@emdashcms/cloudflare";
+ * import { cloudflareCache } from "@emdash-cms/cloudflare";
  *
  * export default defineConfig({
  *   experimental: {
@@ -49,7 +49,7 @@ export type { CloudflareCacheConfig };
  * ```ts
  * import { defineConfig } from "astro/config";
  * import cloudflare from "@astrojs/cloudflare";
- * import { cloudflareCache } from "@emdashcms/cloudflare";
+ * import { cloudflareCache } from "@emdash-cms/cloudflare";
  *
  * export default defineConfig({
  *   adapter: cloudflare(),
@@ -75,7 +75,7 @@ export function cloudflareCache(
 ): CacheProviderConfig<CloudflareCacheConfig> {
 	return {
 		// Resolved by Vite/Astro at build time — points to the runtime module
-		entrypoint: "@emdashcms/cloudflare/cache",
+		entrypoint: "@emdash-cms/cloudflare/cache",
 		config,
 	};
 }

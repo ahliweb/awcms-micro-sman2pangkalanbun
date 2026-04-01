@@ -1,6 +1,6 @@
 import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
-import { previewDatabase } from "@emdashcms/cloudflare";
+import { previewDatabase } from "@emdash-cms/cloudflare";
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
 

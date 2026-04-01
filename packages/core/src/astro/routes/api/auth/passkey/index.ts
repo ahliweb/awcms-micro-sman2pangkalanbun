@@ -8,7 +8,7 @@ import type { APIRoute } from "astro";
 
 export const prerender = false;
 
-import { createKyselyAdapter } from "@emdashcms/auth/adapters/kysely";
+import { createKyselyAdapter } from "@emdash-cms/auth/adapters/kysely";
 
 import { apiError, apiSuccess, handleError } from "#api/error.js";
 

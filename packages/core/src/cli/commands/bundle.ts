@@ -40,7 +40,7 @@ import {
 const TS_EXT_RE = /\.tsx?$/;
 const SLASH_RE = /\//g;
 const LEADING_AT_RE = /^@/;
-const emdash_SCOPE_RE = /^@emdashcms\//;
+const emdash_SCOPE_RE = /^@emdash-cms\//;
 
 export const bundleCommand = defineCommand({
 	meta: {
@@ -179,7 +179,7 @@ export const bundleCommand = defineCommand({
 			});
 
 			// Symlink plugin's node_modules so the built module can resolve
-			// external dependencies (emdash, @emdashcms/*, etc.)
+			// external dependencies (emdash, @emdash-cms/*, etc.)
 			const pluginNodeModules = join(pluginDir, "node_modules");
 			const tmpNodeModules = join(mainOutDir, "node_modules");
 			if (await fileExists(pluginNodeModules)) {

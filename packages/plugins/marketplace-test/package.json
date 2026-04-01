@@ -1,5 +1,5 @@
 {
-	"name": "@emdashcms/plugin-marketplace-test",
+	"name": "@emdash-cms/plugin-marketplace-test",
 	"private": true,
 	"version": "0.1.0",
 	"description": "Test plugin for end-to-end marketplace publishing and audit workflow testing",

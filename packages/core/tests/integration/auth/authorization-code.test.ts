@@ -5,7 +5,7 @@
  * in-memory SQLite database.
  */
 
-import { computeS256Challenge, Role } from "@emdashcms/auth";
+import { computeS256Challenge, Role } from "@emdash-cms/auth";
 import { generateCodeVerifier } from "arctic";
 import type { Kysely } from "kysely";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";

@@ -349,7 +349,7 @@ In addition to local storage, EmDash supports external media providers for speci
 ```js title="astro.config.mjs"
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
-import { cloudflareImages } from "@emdashcms/cloudflare";
+import { cloudflareImages } from "@emdash-cms/cloudflare";
 
 export default defineConfig({
   integrations: [
@@ -381,7 +381,7 @@ export default defineConfig({
 ```js title="astro.config.mjs"
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
-import { cloudflareStream } from "@emdashcms/cloudflare";
+import { cloudflareStream } from "@emdash-cms/cloudflare";
 
 export default defineConfig({
   integrations: [
@@ -418,7 +418,7 @@ You can configure multiple providers. Each appears as a tab in the media picker:
 ```js title="astro.config.mjs"
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
-import { cloudflareImages, cloudflareStream } from "@emdashcms/cloudflare";
+import { cloudflareImages, cloudflareStream } from "@emdash-cms/cloudflare";
 
 export default defineConfig({
   integrations: [

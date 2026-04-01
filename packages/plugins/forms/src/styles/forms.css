@@ -4,7 +4,7 @@
  * Uses CSS custom properties for theming.
  * Import this stylesheet in your site to get basic form styling:
  *
- *   import "@emdashcms/plugin-forms/styles";
+ *   import "@emdash-cms/plugin-forms/styles";
  */
 
 .ec-form {

@@ -2,7 +2,7 @@
  * Unit tests for API token generation, hashing, and scope utilities.
  */
 
-import { Role, scopesForRole, clampScopes } from "@emdashcms/auth";
+import { Role, scopesForRole, clampScopes } from "@emdash-cms/auth";
 import { describe, it, expect } from "vitest";
 
 import {

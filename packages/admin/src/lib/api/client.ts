@@ -2,7 +2,7 @@
  * Base API client configuration and shared types
  */
 
-import type { Element } from "@emdashcms/blocks";
+import type { Element } from "@emdash-cms/blocks";
 
 export const API_BASE = "/_emdash/api";
 
@@ -72,7 +72,7 @@ export interface AdminManifest {
 		{
 			name?: string;
 			version?: string;
-			/** Package name for dynamic import (e.g., "@emdashcms/plugin-audit-log") */
+			/** Package name for dynamic import (e.g., "@emdash-cms/plugin-audit-log") */
 			package?: string;
 			/** Whether the plugin is enabled */
 			enabled?: boolean;
@@ -97,7 +97,7 @@ export interface AdminManifest {
 				name: string;
 				label: string;
 				fieldTypes: string[];
-				elements?: import("@emdashcms/blocks").Element[];
+				elements?: import("@emdash-cms/blocks").Element[];
 			}>;
 			/** Block types for Portable Text editor */
 			portableTextBlocks?: Array<{

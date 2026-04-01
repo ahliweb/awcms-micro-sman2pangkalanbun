@@ -31,7 +31,7 @@ The bundle command uses `package.json` exports to find entrypoints:
 
 | Export        | Purpose                       | Built as                             |
 | ------------- | ----------------------------- | ------------------------------------ |
-| `"."`         | Main entry — extract manifest | Externals: `emdash`, `@emdashcms/*` |
+| `"."`         | Main entry — extract manifest | Externals: `emdash`, `@emdash-cms/*` |
 | `"./sandbox"` | Backend code for the sandbox  | Fully self-contained (no externals)  |
 | `"./admin"`   | Admin UI components           | Fully self-contained                 |
 

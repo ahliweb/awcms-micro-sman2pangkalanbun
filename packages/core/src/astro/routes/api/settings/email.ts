@@ -5,7 +5,7 @@
  * POST /_emdash/api/settings/email/test — send a test email through the full pipeline
  */
 
-import { escapeHtml } from "@emdashcms/auth";
+import { escapeHtml } from "@emdash-cms/auth";
 import type { APIRoute } from "astro";
 import { z } from "zod";
 

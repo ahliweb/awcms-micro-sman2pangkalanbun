@@ -5,7 +5,7 @@
  * to all produce the same normalized format for the import flow.
  */
 
-import type { PortableTextBlock } from "@emdashcms/gutenberg-to-portable-text";
+import type { PortableTextBlock } from "@emdash-cms/gutenberg-to-portable-text";
 
 // =============================================================================
 // Author Types

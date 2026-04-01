@@ -5,7 +5,7 @@ description: Monetize content with the x402 payment protocol — charge bots, no
 
 import { Aside, Steps, Tabs, TabItem } from "@astrojs/starlight/components";
 
-The `@emdashcms/x402` package adds [x402 payment protocol](https://www.x402.org/) support to any Astro site on Cloudflare. It works standalone — no dependency on EmDash core — but pairs well with EmDash's CMS fields for per-page pricing.
+The `@emdash-cms/x402` package adds [x402 payment protocol](https://www.x402.org/) support to any Astro site on Cloudflare. It works standalone — no dependency on EmDash core — but pairs well with EmDash's CMS fields for per-page pricing.
 
 x402 is an HTTP-native payment protocol. When a client requests a paid resource without payment, the server responds with `402 Payment Required` and machine-readable payment instructions. Agents and browsers that understand x402 can complete payment automatically and retry the request.
 
@@ -20,17 +20,17 @@ You can also enforce payment for all visitors, or check for payment headers with
 <Tabs>
 <TabItem label="pnpm">
 ```bash
-pnpm add @emdashcms/x402
+pnpm add @emdash-cms/x402
 ```
 </TabItem>
 <TabItem label="npm">
 ```bash
-npm install @emdashcms/x402
+npm install @emdash-cms/x402
 ```
 </TabItem>
 <TabItem label="yarn">
 ```bash
-yarn add @emdashcms/x402
+yarn add @emdash-cms/x402
 ```
 </TabItem>
 </Tabs>
@@ -41,7 +41,7 @@ Add the integration to your Astro config:
 
 ```js title="astro.config.mjs"
 import { defineConfig } from "astro/config";
-import { x402 } from "@emdashcms/x402";
+import { x402 } from "@emdash-cms/x402";
 
 export default defineConfig({
 	integrations: [
@@ -59,7 +59,7 @@ export default defineConfig({
 Add the type reference so TypeScript knows about `Astro.locals.x402`:
 
 ```ts title="src/env.d.ts"
-/// <reference types="@emdashcms/x402/locals" />
+/// <reference types="@emdash-cms/x402/locals" />
 ```
 
 ## Basic Usage

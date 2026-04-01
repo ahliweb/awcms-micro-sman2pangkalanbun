@@ -4,7 +4,7 @@
  * DELETE /_emdash/api/admin/api-tokens/:id — Revoke a token
  */
 
-import { Role } from "@emdashcms/auth";
+import { Role } from "@emdash-cms/auth";
 import type { APIRoute } from "astro";
 
 import { apiError, handleError, unwrapResult } from "#api/error.js";

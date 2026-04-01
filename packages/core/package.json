@@ -152,9 +152,9 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@emdashcms/admin": "workspace:*",
-    "@emdashcms/auth": "workspace:*",
-    "@emdashcms/gutenberg-to-portable-text": "workspace:*",
+    "@emdash-cms/admin": "workspace:*",
+    "@emdash-cms/auth": "workspace:*",
+    "@emdash-cms/gutenberg-to-portable-text": "workspace:*",
     "@floating-ui/react": "^0.27.16",
     "@modelcontextprotocol/sdk": "^1.26.0",
     "@portabletext/toolkit": "^5.0.1",
@@ -205,7 +205,7 @@
   "devDependencies": {
     "@apidevtools/swagger-parser": "^12.1.0",
     "@arethetypeswrong/cli": "catalog:",
-    "@emdashcms/blocks": "workspace:*",
+    "@emdash-cms/blocks": "workspace:*",
     "@types/better-sqlite3": "^7.6.12",
     "@types/pg": "^8.16.0",
     "@types/sanitize-html": "^2.16.0",

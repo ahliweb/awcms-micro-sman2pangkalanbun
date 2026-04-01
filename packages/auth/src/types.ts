@@ -1,5 +1,5 @@
 /**
- * Core types for @emdashcms/auth
+ * Core types for @emdash-cms/auth
  */
 
 // ============================================================================

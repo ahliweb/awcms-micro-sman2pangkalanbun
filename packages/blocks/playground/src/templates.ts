@@ -1,4 +1,4 @@
-import type { Block, ChartSeries } from "@emdashcms/blocks";
+import type { Block, ChartSeries } from "@emdash-cms/blocks";
 
 export interface Template {
 	name: string;
@@ -508,7 +508,7 @@ export const templates: Template[] = [
 			},
 			{
 				type: "code",
-				code: 'import { blocks } from "@emdashcms/blocks";\n\nconst page = [\n\tblocks.header("Hello"),\n\tblocks.section("Welcome to EmDash."),\n];',
+				code: 'import { blocks } from "@emdash-cms/blocks";\n\nconst page = [\n\tblocks.header("Hello"),\n\tblocks.section("Welcome to EmDash."),\n];',
 				language: "ts",
 			},
 			{ type: "divider" },

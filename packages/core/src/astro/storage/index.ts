@@ -4,7 +4,7 @@
  * Re-exports config-time adapter functions and types.
  * Runtime entrypoints are in the emdash core package.
  *
- * For Cloudflare R2 bindings, use `r2()` from `@emdashcms/cloudflare`.
+ * For Cloudflare R2 bindings, use `r2()` from `@emdash-cms/cloudflare`.
  */
 
 // Config-time adapter functions

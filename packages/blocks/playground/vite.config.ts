@@ -6,8 +6,8 @@ export default defineConfig({
 	plugins: [react(), tailwindcss()],
 	resolve: {
 		alias: {
-			// Resolve @emdashcms/blocks from source for HMR
-			"@emdashcms/blocks": new URL("../src/index.ts", import.meta.url).pathname,
+			// Resolve @emdash-cms/blocks from source for HMR
+			"@emdash-cms/blocks": new URL("../src/index.ts", import.meta.url).pathname,
 		},
 	},
 });

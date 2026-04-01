@@ -15,7 +15,7 @@ export function sandboxedTestPlugin(): PluginDescriptor {
 		id: "sandboxed-test",
 		version: "0.0.1",
 		format: "standard",
-		entrypoint: "@emdashcms/plugin-sandboxed-test/sandbox",
+		entrypoint: "@emdash-cms/plugin-sandboxed-test/sandbox",
 
 		adminPages: [{ path: "/sandbox", label: "Sandbox Tests", icon: "shield" }],
 		adminWidgets: [{ id: "sandbox-status", title: "Sandbox Status", size: "half" }],

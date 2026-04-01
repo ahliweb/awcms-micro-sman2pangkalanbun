@@ -2,7 +2,7 @@
  * Tests for the cleanup subsystems.
  *
  * Note: runSystemCleanup() is not tested directly here because it imports
- * from @emdashcms/auth/adapters/kysely, which requires the auth package to
+ * from @emdash-cms/auth/adapters/kysely, which requires the auth package to
  * be built. Instead, we test each subsystem independently:
  * - cleanupExpiredChallenges: tested in auth/challenge-store.test.ts
  * - deleteExpiredTokens: tested below using direct DB operations

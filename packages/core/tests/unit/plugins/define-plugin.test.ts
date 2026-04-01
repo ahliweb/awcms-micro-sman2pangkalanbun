@@ -40,11 +40,11 @@ describe("definePlugin", () => {
 
 		it("accepts valid scoped ID", () => {
 			const plugin = definePlugin({
-				id: "@emdashcms/seo-plugin",
+				id: "@emdash-cms/seo-plugin",
 				version: "1.0.0",
 			});
 
-			expect(plugin.id).toBe("@emdashcms/seo-plugin");
+			expect(plugin.id).toBe("@emdash-cms/seo-plugin");
 		});
 
 		it("accepts scoped ID with numbers", () => {

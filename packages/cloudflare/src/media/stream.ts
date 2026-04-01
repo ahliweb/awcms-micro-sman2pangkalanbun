@@ -83,7 +83,7 @@ const STREAM_ICON = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http:/
  *
  * @example
  * ```ts
- * import { cloudflareStream } from "@emdashcms/cloudflare";
+ * import { cloudflareStream } from "@emdash-cms/cloudflare";
  *
  * emdash({
  *   mediaProviders: [
@@ -106,7 +106,7 @@ export function cloudflareStream(
 		id: "cloudflare-stream",
 		name: "Cloudflare Stream",
 		icon: STREAM_ICON,
-		entrypoint: "@emdashcms/cloudflare/media/stream-runtime",
+		entrypoint: "@emdash-cms/cloudflare/media/stream-runtime",
 		capabilities: {
 			browse: true,
 			search: true,

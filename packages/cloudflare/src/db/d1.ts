@@ -5,7 +5,7 @@
  * Loaded at runtime via virtual module when database queries are needed.
  *
  * This module imports directly from cloudflare:workers to access the D1 binding.
- * Do NOT import this at config time - use { d1 } from "@emdashcms/cloudflare" instead.
+ * Do NOT import this at config time - use { d1 } from "@emdash-cms/cloudflare" instead.
  */
 
 import { env } from "cloudflare:workers";

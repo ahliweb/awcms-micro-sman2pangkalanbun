@@ -1,5 +1,5 @@
 {
-  "name": "@emdashcms/auth",
+  "name": "@emdash-cms/auth",
   "version": "0.0.0",
   "description": "Passkey-first authentication for EmDash",
   "type": "module",

@@ -14,7 +14,7 @@
  * ```typescript
  * // astro.config.mjs
  * import emdash from "emdash/astro";
- * import { vectorizeSearch } from "@emdashcms/cloudflare/plugins";
+ * import { vectorizeSearch } from "@emdash-cms/cloudflare/plugins";
  *
  * export default defineConfig({
  *   integrations: [

@@ -7,7 +7,7 @@ describe("atprotoPlugin descriptor", () => {
 		const descriptor = atprotoPlugin();
 		expect(descriptor.id).toBe("atproto");
 		expect(descriptor.version).toBe("0.1.0");
-		expect(descriptor.entrypoint).toBe("@emdashcms/plugin-atproto");
+		expect(descriptor.entrypoint).toBe("@emdash-cms/plugin-atproto");
 		expect(descriptor.adminPages).toHaveLength(1);
 		expect(descriptor.adminWidgets).toHaveLength(1);
 	});

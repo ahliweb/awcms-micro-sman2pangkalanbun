@@ -15,7 +15,7 @@
  * headers from the response that next() returns.
  *
  * Do NOT import this at config time. Use cloudflareCache() from
- * "@emdashcms/cloudflare" or "@emdashcms/cloudflare/cache/config" instead.
+ * "@emdash-cms/cloudflare" or "@emdash-cms/cloudflare/cache/config" instead.
  */
 
 import type { CacheProviderFactory } from "astro";
@@ -41,7 +41,7 @@ const SWR_REGEX = /stale-while-revalidate=(\d+)/;
 /** Internal headers to strip before returning responses to the client */
 const INTERNAL_HEADERS = [STORED_AT_HEADER, MAX_AGE_HEADER, SWR_HEADER];
 
-/** Default D1 bookmark cookie name (from @emdashcms/cloudflare d1 config) */
+/** Default D1 bookmark cookie name (from @emdash-cms/cloudflare d1 config) */
 const DEFAULT_BOOKMARK_COOKIE = "__ec_d1_bookmark";
 
 export interface CloudflareCacheConfig {

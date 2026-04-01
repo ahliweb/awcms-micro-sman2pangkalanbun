@@ -6,7 +6,7 @@
  * - Runtime loads entrypoint and calls createStorage(config)
  *
  * Each adapter is responsible for accessing its own bindings.
- * For Cloudflare (R2), use `@emdashcms/cloudflare` package.
+ * For Cloudflare (R2), use `@emdash-cms/cloudflare` package.
  */
 
 import type { Storage } from "../../index.js";
@@ -27,7 +27,7 @@ export interface StorageDescriptor {
  * Each adapter accesses its own bindings directly:
  * - S3: uses credentials from config
  * - Local: uses filesystem path from config
- * - R2: use @emdashcms/cloudflare package
+ * - R2: use @emdash-cms/cloudflare package
  */
 export type CreateStorageFn = (config: Record<string, unknown>) => Storage;
 

@@ -39,7 +39,7 @@ export function webhookNotifierPlugin(): PluginDescriptor {
 		id: "webhook-notifier",
 		version: "0.1.0",
 		format: "standard",
-		entrypoint: "@emdashcms/plugin-webhook-notifier/sandbox",
+		entrypoint: "@emdash-cms/plugin-webhook-notifier/sandbox",
 		capabilities: ["network:fetch:any"],
 		storage: {
 			deliveries: { indexes: ["timestamp", "webhookUrl", "status"] },

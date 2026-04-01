@@ -83,7 +83,7 @@ Pages mount at `/_emdash/admin/plugins/<plugin-id>/<path>`.
 
 ```typescript title="src/components/SettingsPage.tsx"
 import { useState, useEffect } from "react";
-import { usePluginAPI } from "@emdashcms/admin";
+import { usePluginAPI } from "@emdash-cms/admin";
 
 export function SettingsPage() {
   const api = usePluginAPI();
@@ -135,7 +135,7 @@ export function SettingsPage() {
 Use `usePluginAPI()` to call your plugin's routes:
 
 ```typescript
-import { usePluginAPI } from "@emdashcms/admin";
+import { usePluginAPI } from "@emdash-cms/admin";
 
 function MyComponent() {
 	const api = usePluginAPI();
@@ -177,7 +177,7 @@ admin: {
 
 ```typescript title="src/components/SEOWidget.tsx"
 import { useState, useEffect } from "react";
-import { usePluginAPI } from "@emdashcms/admin";
+import { usePluginAPI } from "@emdash-cms/admin";
 
 export function SEOWidget() {
   const api = usePluginAPI();
@@ -253,7 +253,7 @@ import {
   Pagination,
   Alert,
   Loading
-} from "@emdashcms/admin";
+} from "@emdash-cms/admin";
 
 function SettingsPage() {
   return (
@@ -309,7 +309,7 @@ export default {
   },
   format: "esm",
   dts: true,
-  external: ["react", "react-dom", "emdash", "@emdashcms/admin"]
+  external: ["react", "react-dom", "emdash", "@emdash-cms/admin"]
 };
 ```
   </TabItem>
@@ -319,7 +319,7 @@ export default {
   entry: ["src/index.ts", "src/admin.tsx"],
   format: "esm",
   dts: true,
-  external: ["react", "react-dom", "emdash", "@emdashcms/admin"]
+  external: ["react", "react-dom", "emdash", "@emdash-cms/admin"]
 };
 ```
   </TabItem>

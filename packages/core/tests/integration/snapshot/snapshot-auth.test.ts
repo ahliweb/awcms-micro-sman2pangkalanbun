@@ -4,7 +4,7 @@
  * Tests the complete chain that would have caught bug #3:
  * signPreviewUrl → middleware builds header → snapshot endpoint parses and verifies
  *
- * The signing side (signPreviewUrl) lives in @emdashcms/cloudflare, but we
+ * The signing side (signPreviewUrl) lives in @emdash-cms/cloudflare, but we
  * inline the same HMAC logic here to test the format contract without
  * cross-package imports.
  */
@@ -25,7 +25,7 @@ const SECRET = "test-preview-secret";
 
 /**
  * Sign a preview URL using the same HMAC-SHA256 logic as
- * @emdashcms/cloudflare signPreviewUrl(). Inlined here so we test
+ * @emdash-cms/cloudflare signPreviewUrl(). Inlined here so we test
  * the format contract without cross-package deps.
  */
 async function signPreview(
@@ -75,7 +75,7 @@ describe("preview snapshot auth flow", () => {
 			VALUES ('p1', 'test-post', 'published', 'Test', 'Body', datetime('now'), datetime('now'), 1)
 		`.execute(db);
 
-		// 2. Sign a preview URL (same logic as @emdashcms/cloudflare signPreviewUrl)
+		// 2. Sign a preview URL (same logic as @emdash-cms/cloudflare signPreviewUrl)
 		const signed = await signPreview("https://mysite.com");
 
 		// 3. Build the header the way the preview middleware does

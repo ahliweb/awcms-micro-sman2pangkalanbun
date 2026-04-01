@@ -12,7 +12,7 @@ import { createReadStream, existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 
-import { gutenbergToPortableText } from "@emdashcms/gutenberg-to-portable-text";
+import { gutenbergToPortableText } from "@emdash-cms/gutenberg-to-portable-text";
 import { describe, it, expect, beforeAll } from "vitest";
 
 import { parseWxr } from "../../../src/cli/wxr/parser.js";

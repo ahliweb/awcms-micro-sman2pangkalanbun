@@ -10,8 +10,8 @@
  * we know setup is complete and users exist.
  */
 
-import type { User, RoleLevel } from "@emdashcms/auth";
-import { createKyselyAdapter } from "@emdashcms/auth/adapters/kysely";
+import type { User, RoleLevel } from "@emdash-cms/auth";
+import { createKyselyAdapter } from "@emdash-cms/auth/adapters/kysely";
 import { defineMiddleware } from "astro:middleware";
 import { ulid } from "ulidx";
 // Import auth provider via virtual module (statically bundled)
@@ -47,7 +47,7 @@ declare global {
 	}
 }
 
-// Role level constants (matching @emdashcms/auth)
+// Role level constants (matching @emdash-cms/auth)
 const ROLE_ADMIN = 50;
 
 /**

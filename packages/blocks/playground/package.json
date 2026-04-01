@@ -1,5 +1,5 @@
 {
-  "name": "@emdashcms/blocks-playground",
+  "name": "@emdash-cms/blocks-playground",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emdashcms/blocks": "workspace:*",
+    "@emdash-cms/blocks": "workspace:*",
     "@cloudflare/kumo": "^1.1.0",
     "@phosphor-icons/react": "catalog:",
     "react": "catalog:",

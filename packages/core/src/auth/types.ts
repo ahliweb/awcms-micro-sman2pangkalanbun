@@ -37,7 +37,7 @@ export interface AuthDescriptor {
 	/**
 	 * Module specifier to import at runtime
 	 * The module must export an `authenticate` function.
-	 * @example "@emdashcms/cloudflare/auth"
+	 * @example "@emdash-cms/cloudflare/auth"
 	 */
 	entrypoint: string;
 

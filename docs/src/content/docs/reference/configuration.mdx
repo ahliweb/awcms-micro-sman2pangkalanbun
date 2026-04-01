@@ -49,7 +49,7 @@ database: libsql({
 	authToken: process.env.LIBSQL_AUTH_TOKEN,
 });
 
-// Cloudflare D1 (import from @emdashcms/cloudflare)
+// Cloudflare D1 (import from @emdash-cms/cloudflare)
 database: d1({ binding: "DB" });
 ```
 
@@ -90,7 +90,7 @@ See [Storage Options](/deployment/storage/) for details.
 **Optional.** Array of EmDash plugins.
 
 ```js
-import seoPlugin from "@emdashcms/plugin-seo";
+import seoPlugin from "@emdash-cms/plugin-seo";
 
 plugins: [seoPlugin()];
 ```
@@ -258,7 +258,7 @@ postgres({ connectionString: process.env.DATABASE_URL });
 
 ### `d1(config)`
 
-Cloudflare D1 database. Import from `@emdashcms/cloudflare`.
+Cloudflare D1 database. Import from `@emdash-cms/cloudflare`.
 
 | Option           | Type     | Default              | Description                                         |
 | ---------------- | -------- | -------------------- | --------------------------------------------------- |
@@ -417,7 +417,7 @@ EmDash generates types in `.emdash/types.ts`. Add to your `tsconfig.json`:
 {
 	"compilerOptions": {
 		"paths": {
-			"@emdashcms/types": ["./.emdash/types.ts"]
+			"@emdash-cms/types": ["./.emdash/types.ts"]
 		}
 	}
 }

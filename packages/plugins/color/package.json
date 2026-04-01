@@ -1,5 +1,5 @@
 {
-	"name": "@emdashcms/plugin-color",
+	"name": "@emdash-cms/plugin-color",
 	"version": "0.0.1",
 	"description": "Color picker field widget for EmDash CMS",
 	"type": "module",

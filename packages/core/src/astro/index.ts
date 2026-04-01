@@ -4,7 +4,7 @@
  * Astro integration for EmDash CMS (build-time only)
  *
  * For runtime APIs (loader, query functions, dialects), import from "emdash" directly.
- * For Cloudflare-specific adapters (d1, r2, access), import from "@emdashcms/cloudflare".
+ * For Cloudflare-specific adapters (d1, r2, access), import from "@emdash-cms/cloudflare".
  */
 
 // Locals types (for typing Astro.locals in API routes)
@@ -17,7 +17,7 @@ export type {
 } from "./types.js";
 
 // Storage adapters (for integration config)
-// Note: For R2 bindings, use `r2()` from `@emdashcms/cloudflare`
+// Note: For R2 bindings, use `r2()` from `@emdash-cms/cloudflare`
 export { local, s3 } from "./storage/index.js";
 export type { StorageDescriptor, LocalStorageConfig, S3StorageConfig } from "./storage/index.js";
 

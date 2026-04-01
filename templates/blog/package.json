@@ -1,5 +1,5 @@
 {
-  "name": "@emdashcms/template-blog",
+  "name": "@emdash-cms/template-blog",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -18,7 +18,7 @@
   "dependencies": {
     "@astrojs/node": "catalog:",
     "@astrojs/react": "catalog:",
-    "@emdashcms/plugin-audit-log": "workspace:*",
+    "@emdash-cms/plugin-audit-log": "workspace:*",
     "astro": "catalog:",
     "better-sqlite3": "catalog:",
     "emdash": "workspace:*",

@@ -29,7 +29,7 @@ import { runMigrations } from "#db/migrations/runner.js";
 const DEV_USER_EMAIL = "dev@emdash.local";
 const DEV_USER_NAME = "Dev Admin";
 
-// RBAC role levels (matching @emdashcms/auth)
+// RBAC role levels (matching @emdash-cms/auth)
 const ROLE_ADMIN = 50;
 
 async function handleDevBypass(context: Parameters<APIRoute>[0]): Promise<Response> {
@@ -49,7 +49,7 @@ async function handleDevBypass(context: Parameters<APIRoute>[0]): Promise<Respon
 		// Ensure migrations are run
 		await runMigrations(emdash.db);
 
-		// Find or create dev user (direct DB access to avoid @emdashcms/auth import issues in dev)
+		// Find or create dev user (direct DB access to avoid @emdash-cms/auth import issues in dev)
 		const existingUser = await emdash.db
 			.selectFrom("users")
 			.selectAll()

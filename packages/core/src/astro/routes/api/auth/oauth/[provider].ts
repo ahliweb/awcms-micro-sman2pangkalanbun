@@ -8,7 +8,7 @@ import type { APIRoute } from "astro";
 
 export const prerender = false;
 
-import { createAuthorizationUrl, type OAuthConsumerConfig } from "@emdashcms/auth";
+import { createAuthorizationUrl, type OAuthConsumerConfig } from "@emdash-cms/auth";
 
 import { createOAuthStateStore } from "#auth/oauth-state-store.js";
 

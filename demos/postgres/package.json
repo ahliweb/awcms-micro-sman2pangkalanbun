@@ -1,5 +1,5 @@
 {
-	"name": "@emdashcms/demo-postgres",
+	"name": "@emdash-cms/demo-postgres",
 	"version": "0.0.1",
 	"private": true,
 	"type": "module",

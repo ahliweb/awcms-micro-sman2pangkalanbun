@@ -1,5 +1,5 @@
 /**
- * Server-safe exports for @emdashcms/blocks.
+ * Server-safe exports for @emdash-cms/blocks.
  *
  * Use this entry point in plugin route handlers and other server-side code
  * that doesn't have React available. Provides builders, validation, and types

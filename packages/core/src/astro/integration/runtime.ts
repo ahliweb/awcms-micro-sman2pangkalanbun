@@ -67,7 +67,7 @@ export interface PluginDescriptor<TOptions = Record<string, unknown>> {
 	id: string;
 	/** Plugin version (semver) */
 	version: string;
-	/** Module specifier to import (e.g., "@emdashcms/plugin-api-test") */
+	/** Module specifier to import (e.g., "@emdash-cms/plugin-api-test") */
 	entrypoint: string;
 	/**
 	 * Options to pass to createPlugin(). Native format only.
@@ -87,7 +87,7 @@ export interface PluginDescriptor<TOptions = Record<string, unknown>> {
 	 *
 	 */
 	format?: "standard" | "native";
-	/** Admin UI module specifier (e.g., "@emdashcms/plugin-audit-log/admin") */
+	/** Admin UI module specifier (e.g., "@emdash-cms/plugin-audit-log/admin") */
 	adminEntry?: string;
 	/** Module specifier for site-side Astro rendering components (must export `blockComponents`) */
 	componentsEntry?: string;
@@ -153,8 +153,8 @@ export interface EmDashConfig {
 	 *
 	 * @example
 	 * ```ts
-	 * import { auditLogPlugin } from "@emdashcms/plugin-audit-log";
-	 * import { webhookNotifierPlugin } from "@emdashcms/plugin-webhook-notifier";
+	 * import { auditLogPlugin } from "@emdash-cms/plugin-audit-log";
+	 * import { webhookNotifierPlugin } from "@emdash-cms/plugin-webhook-notifier";
 	 *
 	 * emdash({
 	 *   plugins: [
@@ -178,7 +178,7 @@ export interface EmDashConfig {
 	 * emdash({
 	 *   plugins: [trustedPlugin()],     // runs in host
 	 *   sandboxed: [untrustedPlugin()], // runs in isolate
-	 *   sandboxRunner: "@emdashcms/sandbox-cloudflare",
+	 *   sandboxRunner: "@emdash-cms/sandbox-cloudflare",
 	 * })
 	 * ```
 	 */
@@ -190,7 +190,7 @@ export interface EmDashConfig {
 	 * @example
 	 * ```ts
 	 * emdash({
-	 *   sandboxRunner: "@emdashcms/sandbox-cloudflare",
+	 *   sandboxRunner: "@emdash-cms/sandbox-cloudflare",
 	 * })
 	 * ```
 	 */
@@ -200,13 +200,13 @@ export interface EmDashConfig {
 	 * Authentication configuration
 	 *
 	 * Use an auth adapter function from a platform package:
-	 * - `access({ teamDomain: "..." })` from `@emdashcms/cloudflare`
+	 * - `access({ teamDomain: "..." })` from `@emdash-cms/cloudflare`
 	 *
 	 * When an external auth provider is configured, passkey auth is disabled.
 	 *
 	 * @example
 	 * ```ts
-	 * import { access } from "@emdashcms/cloudflare";
+	 * import { access } from "@emdash-cms/cloudflare";
 	 *
 	 * emdash({
 	 *   auth: access({
@@ -256,7 +256,7 @@ export interface EmDashConfig {
 	 * ```ts
 	 * emdash({
 	 *   marketplace: "https://marketplace.emdashcms.com",
-	 *   sandboxRunner: "@emdashcms/sandbox-cloudflare",
+	 *   sandboxRunner: "@emdash-cms/sandbox-cloudflare",
 	 * })
 	 * ```
 	 */
@@ -273,7 +273,7 @@ export interface EmDashConfig {
 	 *
 	 * Setup and auth middleware are skipped (the playground handles both).
 	 *
-	 * Requires `@emdashcms/cloudflare` as a dependency and a DO binding
+	 * Requires `@emdash-cms/cloudflare` as a dependency and a DO binding
 	 * in wrangler.jsonc.
 	 *
 	 * @example
@@ -281,7 +281,7 @@ export interface EmDashConfig {
 	 * emdash({
 	 *   database: playgroundDatabase({ binding: "PLAYGROUND_DB" }),
 	 *   playground: {
-	 *     middlewareEntrypoint: "@emdashcms/cloudflare/db/playground-middleware",
+	 *     middlewareEntrypoint: "@emdash-cms/cloudflare/db/playground-middleware",
 	 *   },
 	 * })
 	 * ```
@@ -300,8 +300,8 @@ export interface EmDashConfig {
 	 *
 	 * @example
 	 * ```ts
-	 * import { cloudflareImages, cloudflareStream } from "@emdashcms/cloudflare";
-	 * import { unsplash } from "@emdashcms/provider-unsplash";
+	 * import { cloudflareImages, cloudflareStream } from "@emdash-cms/cloudflare";
+	 * import { unsplash } from "@emdash-cms/provider-unsplash";
 	 *
 	 * emdash({
 	 *   mediaProviders: [

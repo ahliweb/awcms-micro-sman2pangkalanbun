@@ -1,6 +1,6 @@
 import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
-import { playgroundDatabase } from "@emdashcms/cloudflare";
+import { playgroundDatabase } from "@emdash-cms/cloudflare";
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
 
@@ -20,7 +20,7 @@ export default defineConfig({
 			// Playground mode: injects playground middleware before runtime init,
 			// skips setup/auth (handled by playground middleware)
 			playground: {
-				middlewareEntrypoint: "@emdashcms/cloudflare/db/playground-middleware",
+				middlewareEntrypoint: "@emdash-cms/cloudflare/db/playground-middleware",
 			},
 		}),
 	],

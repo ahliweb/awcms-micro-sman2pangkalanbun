@@ -6,7 +6,7 @@
  * role and reject disabled users.
  */
 
-import { toRoleLevel, type RoleLevel } from "@emdashcms/auth";
+import { toRoleLevel, type RoleLevel } from "@emdash-cms/auth";
 import type { Kysely } from "kysely";
 
 import type { Database } from "../../database/types.js";

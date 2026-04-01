@@ -5,7 +5,7 @@
  * POST /_emdash/api/admin/api-tokens — Create a new token
  */
 
-import { Role } from "@emdashcms/auth";
+import { Role } from "@emdash-cms/auth";
 import type { APIRoute } from "astro";
 import { z } from "zod";
 

@@ -24,7 +24,7 @@
  * });
  * ```
  *
- * For Cloudflare R2 bindings, use `r2()` from `@emdashcms/cloudflare`.
+ * For Cloudflare R2 bindings, use `r2()` from `@emdash-cms/cloudflare`.
  */
 
 import type { StorageDescriptor, S3StorageConfig, LocalStorageConfig } from "./types.js";

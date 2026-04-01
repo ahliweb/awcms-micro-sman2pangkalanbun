@@ -1,7 +1,7 @@
 /**
  * API token generation and hashing utilities.
  *
- * Re-exports from @emdashcms/auth which owns the implementations.
+ * Re-exports from @emdash-cms/auth which owns the implementations.
  * Uses Oslo.js (@oslojs/crypto, @oslojs/encoding) for all crypto.
  *
  * Token format: `ec_pat_<base64url>` (Personal Access Tokens)
@@ -22,4 +22,4 @@ export {
 	hasScope,
 	computeS256Challenge,
 	type ApiTokenScope,
-} from "@emdashcms/auth";
+} from "@emdash-cms/auth";

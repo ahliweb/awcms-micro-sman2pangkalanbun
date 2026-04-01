@@ -1,5 +1,5 @@
 {
-	"name": "@emdashcms/theme-scaffold",
+	"name": "@emdash-cms/theme-scaffold",
 	"type": "module",
 	"version": "0.0.1",
 	"private": true,

@@ -1,5 +1,5 @@
-import type { AuthAdapter, EmailSendFn } from "@emdashcms/auth";
-import type { EmailMessage } from "@emdashcms/auth";
+import type { AuthAdapter, EmailSendFn } from "@emdash-cms/auth";
+import type { EmailMessage } from "@emdash-cms/auth";
 import {
 	Role,
 	createInvite,
@@ -9,8 +9,8 @@ import {
 	InviteError,
 	escapeHtml,
 	generateToken,
-} from "@emdashcms/auth";
-import { createKyselyAdapter } from "@emdashcms/auth/adapters/kysely";
+} from "@emdash-cms/auth";
+import { createKyselyAdapter } from "@emdash-cms/auth/adapters/kysely";
 import type { Kysely } from "kysely";
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 

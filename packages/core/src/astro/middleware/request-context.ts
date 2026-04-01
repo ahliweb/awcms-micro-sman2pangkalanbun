@@ -46,7 +46,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 	const { user } = context.locals;
 	const isEditor = !!user && user.role >= 30;
 
-	// Playground mode: the playground middleware (from @emdashcms/cloudflare) stashes
+	// Playground mode: the playground middleware (from @emdash-cms/cloudflare) stashes
 	// the per-session DO database on locals.__playgroundDb. We set it via ALS here
 	// (same module instance as the loader) so getDb() picks it up correctly.
 	const playgroundDb = context.locals.__playgroundDb;

@@ -10,7 +10,7 @@
  * @example Direct usage (if you need to customize)
  * ```astro
  * ---
- * import { YouTube } from "@emdashcms/plugin-embeds/astro";
+ * import { YouTube } from "@emdash-cms/plugin-embeds/astro";
  * ---
  * <YouTube value={{ id: "dQw4w9WgXcQ", _type: "youtube", _key: "1" }} />
  * ```

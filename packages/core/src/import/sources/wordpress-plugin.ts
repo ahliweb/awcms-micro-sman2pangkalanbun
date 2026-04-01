@@ -5,7 +5,7 @@
  * Provides full access to all content including drafts, custom post types, and ACF fields.
  */
 
-import { gutenbergToPortableText } from "@emdashcms/gutenberg-to-portable-text";
+import { gutenbergToPortableText } from "@emdash-cms/gutenberg-to-portable-text";
 
 import { encodeBase64 } from "../../utils/base64.js";
 import { ssrfSafeFetch, validateExternalUrl } from "../ssrf.js";

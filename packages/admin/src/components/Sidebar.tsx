@@ -28,7 +28,7 @@ import { cn } from "../lib/utils";
 // Re-export for Shell.tsx and Header.tsx
 export { KumoSidebar as Sidebar, useSidebar };
 
-// Role levels (matching @emdashcms/auth)
+// Role levels (matching @emdash-cms/auth)
 const ROLE_ADMIN = 50;
 const ROLE_EDITOR = 40;
 

@@ -8,8 +8,8 @@ import type { APIRoute } from "astro";
 
 export const prerender = false;
 
-import { createKyselyAdapter } from "@emdashcms/auth/adapters/kysely";
-import { verifyRegistrationResponse, registerPasskey } from "@emdashcms/auth/passkey";
+import { createKyselyAdapter } from "@emdash-cms/auth/adapters/kysely";
+import { verifyRegistrationResponse, registerPasskey } from "@emdash-cms/auth/passkey";
 
 import { apiError, apiSuccess } from "#api/error.js";
 import { isParseError, parseBody } from "#api/parse.js";

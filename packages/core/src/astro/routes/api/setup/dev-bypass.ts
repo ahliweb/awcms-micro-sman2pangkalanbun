@@ -31,7 +31,7 @@ import { applySeed } from "#seed/apply.js";
 import { loadSeed } from "#seed/load.js";
 import { validateSeed } from "#seed/validate.js";
 
-// RBAC role levels (matching @emdashcms/auth)
+// RBAC role levels (matching @emdash-cms/auth)
 const ROLE_ADMIN = 50;
 
 const DEV_USER_EMAIL = "dev@emdash.local";
@@ -72,7 +72,7 @@ async function handleDevBypass(context: Parameters<APIRoute>[0]): Promise<Respon
 
 		const options = new OptionsRepository(emdash.db);
 
-		// Find or create dev user (direct DB access to avoid @emdashcms/auth import issues in dev)
+		// Find or create dev user (direct DB access to avoid @emdash-cms/auth import issues in dev)
 		const existingUser = await emdash.db
 			.selectFrom("users")
 			.selectAll()

@@ -5,8 +5,8 @@
  * PUT /_emdash/api/admin/users/:id - Update user
  */
 
-import { Role } from "@emdashcms/auth";
-import { createKyselyAdapter } from "@emdashcms/auth/adapters/kysely";
+import { Role } from "@emdash-cms/auth";
+import { createKyselyAdapter } from "@emdash-cms/auth/adapters/kysely";
 import type { APIRoute } from "astro";
 
 import { apiError, apiSuccess, handleError } from "#api/error.js";

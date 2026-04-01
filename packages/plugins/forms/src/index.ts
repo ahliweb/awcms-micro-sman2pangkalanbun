@@ -10,7 +10,7 @@
  * @example
  * ```typescript
  * // live.config.ts
- * import { formsPlugin } from "@emdashcms/plugin-forms";
+ * import { formsPlugin } from "@emdash-cms/plugin-forms";
  *
  * export default defineConfig({
  *   plugins: [formsPlugin()],
@@ -67,9 +67,9 @@ export function formsPlugin(
 	return {
 		id: "emdash-forms",
 		version: "0.0.1",
-		entrypoint: "@emdashcms/plugin-forms",
-		adminEntry: "@emdashcms/plugin-forms/admin",
-		componentsEntry: "@emdashcms/plugin-forms/astro",
+		entrypoint: "@emdash-cms/plugin-forms",
+		adminEntry: "@emdash-cms/plugin-forms/admin",
+		componentsEntry: "@emdash-cms/plugin-forms/astro",
 		options,
 		capabilities: ["email:send", "write:media", "network:fetch"],
 		allowedHosts: ["*"],

@@ -5,7 +5,7 @@
  * This avoids the AWS SDK overhead and works with the native R2 API.
  *
  * This module imports directly from cloudflare:workers to access R2 bindings.
- * Do NOT import this at config time - use { r2 } from "@emdashcms/cloudflare" instead.
+ * Do NOT import this at config time - use { r2 } from "@emdash-cms/cloudflare" instead.
  *
  * For Astro 6 / Cloudflare adapter v13+:
  * - Bindings are accessed via `import { env } from 'cloudflare:workers'`

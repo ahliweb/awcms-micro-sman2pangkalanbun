@@ -43,19 +43,19 @@ Templates in `templates/` are workspace members and can be run directly:
 
 ```bash
 # First time: set up database and seed content
-pnpm --filter @emdashcms/template-portfolio bootstrap
+pnpm --filter @emdash-cms/template-portfolio bootstrap
 
 # Run the dev server
-pnpm --filter @emdashcms/template-portfolio dev
+pnpm --filter @emdash-cms/template-portfolio dev
 ```
 
 Available templates:
 
 | Template  | Filter Name                    |
 | --------- | ------------------------------ |
-| Blog      | `@emdashcms/template-blog`      |
-| Portfolio | `@emdashcms/template-portfolio` |
-| Marketing | `@emdashcms/template-marketing` |
+| Blog      | `@emdash-cms/template-blog`      |
+| Portfolio | `@emdash-cms/template-portfolio` |
+| Marketing | `@emdash-cms/template-marketing` |
 
 Edit files in `templates/{name}/src/` and changes hot reload.
 
@@ -73,7 +73,7 @@ To start fresh, delete the database and re-bootstrap:
 
 ```bash
 rm templates/portfolio/data.db
-pnpm --filter @emdashcms/template-portfolio bootstrap
+pnpm --filter @emdash-cms/template-portfolio bootstrap
 ```
 
 ## Development Workflow
@@ -123,9 +123,9 @@ Tests use real in-memory SQLite — no mocking. Each test gets a fresh database.
 emdash/
 ├── packages/
 │   ├── core/              # emdash — the main package (Astro integration + APIs + admin)
-│   ├── auth/              # @emdashcms/auth — passkeys, OAuth, magic links
-│   ├── admin/             # @emdashcms/admin — React admin SPA
-│   ├── cloudflare/        # @emdashcms/cloudflare — CF adapter + plugin sandbox
+│   ├── auth/              # @emdash-cms/auth — passkeys, OAuth, magic links
+│   ├── admin/             # @emdash-cms/admin — React admin SPA
+│   ├── cloudflare/        # @emdash-cms/cloudflare — CF adapter + plugin sandbox
 │   ├── create-emdash/   # create-emdash — project scaffolder
 │   ├── gutenberg-to-portable-text/  # WP block → Portable Text converter
 │   └── plugins/           # first-party plugins (each dir = package)

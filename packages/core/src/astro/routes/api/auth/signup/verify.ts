@@ -9,8 +9,8 @@ import type { APIRoute } from "astro";
 
 export const prerender = false;
 
-import { validateSignupToken, SignupError, roleFromLevel } from "@emdashcms/auth";
-import { createKyselyAdapter } from "@emdashcms/auth/adapters/kysely";
+import { validateSignupToken, SignupError, roleFromLevel } from "@emdash-cms/auth";
+import { createKyselyAdapter } from "@emdash-cms/auth/adapters/kysely";
 
 import { apiError, apiSuccess, handleError } from "#api/error.js";
 

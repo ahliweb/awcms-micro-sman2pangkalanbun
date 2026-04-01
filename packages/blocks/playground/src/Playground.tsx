@@ -1,6 +1,6 @@
 import { Sun, Moon, Share, Check, Trash, CaretDown, Warning, Plus } from "@phosphor-icons/react";
-import { BlockRenderer, validateBlocks } from "@emdashcms/blocks";
-import type { Block, BlockInteraction } from "@emdashcms/blocks";
+import { BlockRenderer, validateBlocks } from "@emdash-cms/blocks";
+import type { Block, BlockInteraction } from "@emdash-cms/blocks";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { blockCatalog } from "./block-defaults";

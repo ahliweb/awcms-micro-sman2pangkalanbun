@@ -9,7 +9,7 @@
  * rest still run. Failures are logged but never surface to callers.
  */
 
-import { createKyselyAdapter, type AuthTables } from "@emdashcms/auth/adapters/kysely";
+import { createKyselyAdapter, type AuthTables } from "@emdash-cms/auth/adapters/kysely";
 import { sql, type Kysely } from "kysely";
 
 import { cleanupExpiredChallenges } from "./auth/challenge-store.js";

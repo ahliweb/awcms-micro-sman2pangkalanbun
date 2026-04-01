@@ -4,8 +4,8 @@
  * Tests the full device flow lifecycle against a real in-memory SQLite database.
  */
 
-import { Role } from "@emdashcms/auth";
-import type { RoleLevel } from "@emdashcms/auth";
+import { Role } from "@emdash-cms/auth";
+import type { RoleLevel } from "@emdash-cms/auth";
 import type { Kysely } from "kysely";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 

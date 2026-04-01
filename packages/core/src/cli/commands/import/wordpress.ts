@@ -10,7 +10,7 @@ import { createReadStream } from "node:fs";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 
-import { gutenbergToPortableText } from "@emdashcms/gutenberg-to-portable-text";
+import { gutenbergToPortableText } from "@emdash-cms/gutenberg-to-portable-text";
 import pc from "picocolors";
 
 import { slugify } from "#utils/slugify.js";

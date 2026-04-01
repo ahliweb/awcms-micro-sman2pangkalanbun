@@ -7,7 +7,7 @@
  * Created once per worker lifetime, cached and reused across requests.
  */
 
-import type { Element } from "@emdashcms/blocks";
+import type { Element } from "@emdash-cms/blocks";
 import { Kysely, sql, type Dialect } from "kysely";
 
 import { validateRev } from "./api/rev.js";

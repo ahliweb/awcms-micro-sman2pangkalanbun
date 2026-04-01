@@ -69,7 +69,7 @@ import { SaveButton } from "./SaveButton";
 import { SeoPanel } from "./SeoPanel";
 import { TaxonomySidebar } from "./TaxonomySidebar";
 
-// Editor role level (40) from @emdashcms/auth
+// Editor role level (40) from @emdash-cms/auth
 const ROLE_EDITOR = 40;
 
 export interface FieldDescriptor {

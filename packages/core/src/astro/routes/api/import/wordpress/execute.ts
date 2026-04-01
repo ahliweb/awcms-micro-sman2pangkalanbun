@@ -6,7 +6,7 @@
  * Accepts WXR file and import configuration, imports content into the database.
  */
 
-import { gutenbergToPortableText } from "@emdashcms/gutenberg-to-portable-text";
+import { gutenbergToPortableText } from "@emdash-cms/gutenberg-to-portable-text";
 import type { APIRoute } from "astro";
 import {
 	parseWxrString,

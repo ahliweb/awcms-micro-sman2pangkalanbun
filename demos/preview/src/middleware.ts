@@ -5,7 +5,7 @@
  * populates snapshots, and overrides the request-context DB.
  */
 
-import { createPreviewMiddleware } from "@emdashcms/cloudflare/db/do";
+import { createPreviewMiddleware } from "@emdash-cms/cloudflare/db/do";
 import { sequence } from "astro:middleware";
 
 const preview = createPreviewMiddleware({

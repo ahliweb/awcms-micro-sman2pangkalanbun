@@ -28,7 +28,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { apiFetch } from "../lib/api/client";
 import { useCurrentUser } from "../lib/api/current-user";
 
-// Role levels (matching @emdashcms/auth)
+// Role levels (matching @emdash-cms/auth)
 const ROLE_ADMIN = 50;
 const ROLE_EDITOR = 40;
 

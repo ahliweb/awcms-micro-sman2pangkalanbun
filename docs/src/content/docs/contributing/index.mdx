@@ -15,9 +15,9 @@ EmDash is a **pnpm monorepo** with multiple packages:
 emdash/
 ├── packages/
 │   ├── core/              # emdash — Astro integration, APIs, admin (main package)
-│   ├── auth/              # @emdashcms/auth — Authentication (passkeys, OAuth, magic links)
-│   ├── cloudflare/        # @emdashcms/cloudflare — Cloudflare adapter + sandbox runner
-│   ├── admin/             # @emdashcms/admin — Admin React SPA
+│   ├── auth/              # @emdash-cms/auth — Authentication (passkeys, OAuth, magic links)
+│   ├── cloudflare/        # @emdash-cms/cloudflare — Cloudflare adapter + sandbox runner
+│   ├── admin/             # @emdash-cms/admin — Admin React SPA
 │   ├── create-emdash/   # create-emdash — project scaffolder
 │   ├── gutenberg-to-portable-text/ # WordPress block → Portable Text converter
 │   └── plugins/           # First-party plugins (each subdirectory is its own package)
@@ -279,7 +279,7 @@ Route files live in `packages/core/src/astro/routes/api/`. Follow these conventi
 ```ts
 // packages/core/src/astro/routes/api/my-resource.ts
 import type { APIRoute } from "astro";
-import type { User } from "@emdashcms/auth";
+import type { User } from "@emdash-cms/auth";
 import { apiError, handleError } from "#api/error.js";
 import { requirePerm } from "#api/authorize.js";
 import { parseBody } from "#api/parse.js";
@@ -398,7 +398,7 @@ Use `import type` for type-only imports:
 
 ```ts
 import type { Kysely } from "kysely";
-import type { User } from "@emdashcms/auth";
+import type { User } from "@emdash-cms/auth";
 ```
 
 ### Error Handling

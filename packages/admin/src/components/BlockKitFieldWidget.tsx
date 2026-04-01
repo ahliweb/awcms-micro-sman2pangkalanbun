@@ -1,5 +1,5 @@
 import { Input, Switch } from "@cloudflare/kumo";
-import type { Element } from "@emdashcms/blocks";
+import type { Element } from "@emdash-cms/blocks";
 import * as React from "react";
 
 interface BlockKitFieldWidgetProps {

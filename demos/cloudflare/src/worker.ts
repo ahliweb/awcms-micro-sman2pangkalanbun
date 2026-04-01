@@ -10,7 +10,7 @@ import handler from "@astrojs/cloudflare/entrypoints/server";
 
 // Re-export PluginBridge from the cloudflare sandbox runtime
 // This makes it available via ctx.exports.PluginBridge
-export { PluginBridge } from "@emdashcms/cloudflare/sandbox";
+export { PluginBridge } from "@emdash-cms/cloudflare/sandbox";
 
 /**
  * Default export - just re-export the Astro handler

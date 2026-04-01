@@ -5,7 +5,7 @@
  * This wraps the existing WXR parsing and analysis logic.
  */
 
-import { gutenbergToPortableText } from "@emdashcms/gutenberg-to-portable-text";
+import { gutenbergToPortableText } from "@emdash-cms/gutenberg-to-portable-text";
 
 import { parseWxrString, type WxrData, type WxrPost } from "../../cli/wxr/parser.js";
 import type {

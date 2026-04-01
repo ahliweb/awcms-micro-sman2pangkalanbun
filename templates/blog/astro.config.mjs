@@ -1,6 +1,6 @@
 import node from "@astrojs/node";
 import react from "@astrojs/react";
-import { auditLogPlugin } from "@emdashcms/plugin-audit-log";
+import { auditLogPlugin } from "@emdash-cms/plugin-audit-log";
 import { defineConfig } from "astro/config";
 import emdash, { local } from "emdash/astro";
 import { sqlite } from "emdash/db";

@@ -5,8 +5,8 @@
 	"dependencies": {
 		"@astrojs/node": "catalog:",
 		"@astrojs/react": "catalog:",
-		"@emdashcms/auth": "workspace:*",
-		"@emdashcms/plugin-color": "workspace:*",
+		"@emdash-cms/auth": "workspace:*",
+		"@emdash-cms/plugin-color": "workspace:*",
 		"astro": "catalog:",
 		"better-sqlite3": "catalog:",
 		"emdash": "workspace:*",

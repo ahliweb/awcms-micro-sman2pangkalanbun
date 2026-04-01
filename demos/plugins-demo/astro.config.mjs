@@ -1,9 +1,9 @@
 import node from "@astrojs/node";
 import react from "@astrojs/react";
-import { apiTestPlugin } from "@emdashcms/plugin-api-test";
-import { auditLogPlugin } from "@emdashcms/plugin-audit-log";
-import { embedsPlugin } from "@emdashcms/plugin-embeds";
-import { webhookNotifierPlugin } from "@emdashcms/plugin-webhook-notifier";
+import { apiTestPlugin } from "@emdash-cms/plugin-api-test";
+import { auditLogPlugin } from "@emdash-cms/plugin-audit-log";
+import { embedsPlugin } from "@emdash-cms/plugin-embeds";
+import { webhookNotifierPlugin } from "@emdash-cms/plugin-webhook-notifier";
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
 import { sqlite } from "emdash/db";

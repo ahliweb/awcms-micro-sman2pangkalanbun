@@ -1,5 +1,5 @@
 /**
- * Kysely database adapter for @emdashcms/auth
+ * Kysely database adapter for @emdash-cms/auth
  */
 
 import type { Kysely, Insertable, Selectable, Updateable } from "kysely";

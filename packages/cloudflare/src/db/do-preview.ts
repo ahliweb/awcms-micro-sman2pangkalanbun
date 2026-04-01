@@ -11,7 +11,7 @@
  * @example
  * ```ts
  * // src/middleware.ts (in the preview Worker)
- * import { createPreviewMiddleware } from "@emdashcms/cloudflare/db/do";
+ * import { createPreviewMiddleware } from "@emdash-cms/cloudflare/db/do";
  *
  * export const onRequest = createPreviewMiddleware({
  *   binding: "PREVIEW_DB",

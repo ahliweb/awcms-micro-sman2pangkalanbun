@@ -9,8 +9,8 @@ import type { APIRoute } from "astro";
 
 export const prerender = false;
 
-import { verifyMagicLink, MagicLinkError } from "@emdashcms/auth";
-import { createKyselyAdapter } from "@emdashcms/auth/adapters/kysely";
+import { verifyMagicLink, MagicLinkError } from "@emdash-cms/auth";
+import { createKyselyAdapter } from "@emdash-cms/auth/adapters/kysely";
 
 import { apiError } from "#api/error.js";
 import { isSafeRedirect } from "#api/redirect.js";

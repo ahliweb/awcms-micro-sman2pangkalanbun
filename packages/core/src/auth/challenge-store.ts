@@ -4,7 +4,7 @@
  * Stores WebAuthn challenges in a dedicated table with automatic expiration.
  */
 
-import type { ChallengeStore, ChallengeData } from "@emdashcms/auth/passkey";
+import type { ChallengeStore, ChallengeData } from "@emdash-cms/auth/passkey";
 import type { Kysely } from "kysely";
 
 import type { Database } from "../database/types.js";

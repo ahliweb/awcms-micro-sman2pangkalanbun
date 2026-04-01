@@ -11,8 +11,8 @@
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { McpError, ErrorCode } from "@modelcontextprotocol/sdk/types.js";
-import type { Permission, RoleLevel } from "@emdashcms/auth";
-import { canActOnOwn, Role } from "@emdashcms/auth";
+import type { Permission, RoleLevel } from "@emdash-cms/auth";
+import { canActOnOwn, Role } from "@emdash-cms/auth";
 import { z } from "zod";
 
 import type { EmDashHandlers } from "../astro/types.js";

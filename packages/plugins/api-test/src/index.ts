@@ -50,9 +50,9 @@ export function apiTestPlugin(
 	return {
 		id: "api-test",
 		version: "0.0.1",
-		entrypoint: "@emdashcms/plugin-api-test",
+		entrypoint: "@emdash-cms/plugin-api-test",
 		options,
-		adminEntry: "@emdashcms/plugin-api-test/admin",
+		adminEntry: "@emdash-cms/plugin-api-test/admin",
 		adminPages: [{ path: "/test", label: "API Tests", icon: "code" }],
 		adminWidgets: [{ id: "api-status", title: "API Status", size: "half" }],
 	};
@@ -84,7 +84,7 @@ export function createPlugin(_options: ApiTestPluginOptions = {}): ResolvedPlugi
 
 		// Admin configuration
 		admin: {
-			entry: "@emdashcms/plugin-api-test/admin",
+			entry: "@emdash-cms/plugin-api-test/admin",
 			pages: [{ path: "/test", label: "API Tests", icon: "code" }],
 			widgets: [{ id: "api-status", title: "API Status", size: "half" }],
 		},

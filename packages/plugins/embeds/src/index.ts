@@ -15,7 +15,7 @@
  * @example
  * ```typescript
  * // live.config.ts
- * import { embedsPlugin } from "@emdashcms/plugin-embeds";
+ * import { embedsPlugin } from "@emdash-cms/plugin-embeds";
  *
  * export default defineConfig({
  *   plugins: [embedsPlugin()],
@@ -40,7 +40,7 @@
  * ```
  */
 
-import type { Element } from "@emdashcms/blocks";
+import type { Element } from "@emdash-cms/blocks";
 import type { PluginDescriptor, ResolvedPlugin } from "emdash";
 import { definePlugin } from "emdash";
 
@@ -139,8 +139,8 @@ export function embedsPlugin(
 	return {
 		id: "embeds",
 		version: "0.0.1",
-		entrypoint: "@emdashcms/plugin-embeds",
-		componentsEntry: "@emdashcms/plugin-embeds/astro",
+		entrypoint: "@emdash-cms/plugin-embeds",
+		componentsEntry: "@emdash-cms/plugin-embeds/astro",
 		options,
 	};
 }

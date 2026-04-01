@@ -1,5 +1,5 @@
 /**
- * Configuration schema for @emdashcms/auth
+ * Configuration schema for @emdash-cms/auth
  */
 
 import { z } from "zod";

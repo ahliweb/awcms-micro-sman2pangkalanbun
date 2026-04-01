@@ -1,5 +1,5 @@
 {
-  "name": "@emdashcms/blocks",
+  "name": "@emdash-cms/blocks",
   "version": "0.0.0",
   "description": "Declarative plugin UI blocks for EmDash CMS",
   "type": "module",

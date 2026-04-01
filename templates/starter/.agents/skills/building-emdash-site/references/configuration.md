@@ -37,7 +37,7 @@ export default defineConfig({
 ```javascript
 import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
-import { d1, r2 } from "@emdashcms/cloudflare";
+import { d1, r2 } from "@emdash-cms/cloudflare";
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
 
@@ -88,7 +88,7 @@ Requires a `wrangler.jsonc` with D1 and R2 bindings:
 Register plugins in `astro.config.mjs`:
 
 ```javascript
-import { auditLogPlugin } from "@emdashcms/plugin-audit-log";
+import { auditLogPlugin } from "@emdash-cms/plugin-audit-log";
 
 emdash({
 	database: sqlite({ url: "file:./data.db" }),
@@ -181,7 +181,7 @@ Key dependencies for a Node.js site:
 }
 ```
 
-For Cloudflare, replace `@astrojs/node` with `@astrojs/cloudflare` and add `@emdashcms/cloudflare`.
+For Cloudflare, replace `@astrojs/node` with `@astrojs/cloudflare` and add `@emdash-cms/cloudflare`.
 
 ## Dev Server
 

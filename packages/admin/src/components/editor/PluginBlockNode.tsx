@@ -24,7 +24,7 @@ import {
 	Cube,
 	ListBullets,
 } from "@phosphor-icons/react";
-import type { Element } from "@emdashcms/blocks";
+import type { Element } from "@emdash-cms/blocks";
 import { Node, mergeAttributes } from "@tiptap/core";
 import type { NodeViewProps } from "@tiptap/react";
 import { ReactNodeViewRenderer, NodeViewWrapper } from "@tiptap/react";

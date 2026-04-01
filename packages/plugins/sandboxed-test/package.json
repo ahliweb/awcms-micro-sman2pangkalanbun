@@ -1,5 +1,5 @@
 {
-  "name": "@emdashcms/plugin-sandboxed-test",
+  "name": "@emdash-cms/plugin-sandboxed-test",
   "private": true,
   "version": "0.0.1",
   "description": "Test plugin for sandboxed plugin system",

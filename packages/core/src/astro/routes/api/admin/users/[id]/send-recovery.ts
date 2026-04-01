@@ -6,8 +6,8 @@
  * Admin-initiated account recovery — sends a recovery magic link to the user's email.
  */
 
-import { Role, sendMagicLink, type MagicLinkConfig } from "@emdashcms/auth";
-import { createKyselyAdapter } from "@emdashcms/auth/adapters/kysely";
+import { Role, sendMagicLink, type MagicLinkConfig } from "@emdash-cms/auth";
+import { createKyselyAdapter } from "@emdash-cms/auth/adapters/kysely";
 import type { APIRoute } from "astro";
 
 import { apiError, apiSuccess, handleError } from "#api/error.js";

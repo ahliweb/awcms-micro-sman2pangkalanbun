@@ -204,8 +204,8 @@ Plugins can extend the admin with pages and dashboard widgets. The integration g
 
 ```ts
 // virtual:emdash/plugin-admins (generated)
-import * as pluginAdmin0 from "@emdashcms/plugin-seo/admin";
-import * as pluginAdmin1 from "@emdashcms/plugin-analytics/admin";
+import * as pluginAdmin0 from "@emdash-cms/plugin-seo/admin";
+import * as pluginAdmin1 from "@emdash-cms/plugin-analytics/admin";
 
 export const pluginAdmins = {
 	seo: pluginAdmin0,
@@ -218,7 +218,7 @@ export const pluginAdmins = {
 Plugin pages mount under `/_emdash/admin/plugins/:pluginId/*`:
 
 ```tsx
-// @emdashcms/plugin-seo/src/admin.tsx
+// @emdash-cms/plugin-seo/src/admin.tsx
 export const pages = [
 	{
 		path: "settings",

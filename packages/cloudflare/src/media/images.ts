@@ -79,7 +79,7 @@ const IMAGES_ICON = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http:/
  *
  * @example
  * ```ts
- * import { cloudflareImages } from "@emdashcms/cloudflare";
+ * import { cloudflareImages } from "@emdash-cms/cloudflare";
  *
  * emdash({
  *   mediaProviders: [
@@ -102,7 +102,7 @@ export function cloudflareImages(
 		id: "cloudflare-images",
 		name: "Cloudflare Images",
 		icon: IMAGES_ICON,
-		entrypoint: "@emdashcms/cloudflare/media/images-runtime",
+		entrypoint: "@emdash-cms/cloudflare/media/images-runtime",
 		capabilities: {
 			browse: true,
 			search: false, // Images API doesn't support search

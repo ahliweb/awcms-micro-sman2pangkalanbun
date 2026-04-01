@@ -51,7 +51,7 @@ React components. Use `usePluginAPI()` to call plugin routes.
 ```typescript
 // src/components/SettingsPage.tsx
 import { useState, useEffect } from "react";
-import { usePluginAPI } from "@emdashcms/admin";
+import { usePluginAPI } from "@emdash-cms/admin";
 
 export function SettingsPage() {
 	const api = usePluginAPI();
@@ -94,7 +94,7 @@ Dashboard cards with at-a-glance info.
 ```typescript
 // src/components/StatusWidget.tsx
 import { useState, useEffect } from "react";
-import { usePluginAPI } from "@emdashcms/admin";
+import { usePluginAPI } from "@emdash-cms/admin";
 
 export function StatusWidget() {
 	const api = usePluginAPI();
@@ -134,10 +134,10 @@ const result = await api.get("history?limit=50"); // Query params
 
 ## Admin Components
 
-Pre-built components from `@emdashcms/admin`:
+Pre-built components from `@emdash-cms/admin`:
 
 ```typescript
-import { Card, Button, Input, Select, Toggle, Table, Loading, Alert } from "@emdashcms/admin";
+import { Card, Button, Input, Select, Toggle, Table, Loading, Alert } from "@emdash-cms/admin";
 ```
 
 ## Auto-Generated Settings
@@ -166,11 +166,11 @@ export default {
 	},
 	format: "esm",
 	dts: true,
-	external: ["react", "react-dom", "emdash", "@emdashcms/admin"],
+	external: ["react", "react-dom", "emdash", "@emdash-cms/admin"],
 };
 ```
 
-Keep React and `@emdashcms/admin` as externals to avoid bundling duplicates.
+Keep React and `@emdash-cms/admin` as externals to avoid bundling duplicates.
 
 ## Plugin Descriptor
 

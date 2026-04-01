@@ -179,13 +179,13 @@ importers:
       '@astrojs/react':
         specifier: 'catalog:'
         version: 5.0.0(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(yaml@2.8.2)
-      '@emdashcms/cloudflare':
+      '@emdash-cms/cloudflare':
         specifier: workspace:*
         version: link:../../packages/cloudflare
-      '@emdashcms/plugin-forms':
+      '@emdash-cms/plugin-forms':
         specifier: workspace:*
         version: link:../../packages/plugins/forms
-      '@emdashcms/plugin-webhook-notifier':
+      '@emdash-cms/plugin-webhook-notifier':
         specifier: workspace:*
         version: link:../../packages/plugins/webhook-notifier
       '@tanstack/react-query':
@@ -228,7 +228,7 @@ importers:
       '@astrojs/react':
         specifier: 'catalog:'
         version: 5.0.0(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(yaml@2.8.2)
-      '@emdashcms/cloudflare':
+      '@emdash-cms/cloudflare':
         specifier: workspace:*
         version: link:../../packages/cloudflare
       astro:
@@ -262,16 +262,16 @@ importers:
       '@astrojs/react':
         specifier: 'catalog:'
         version: 5.0.0(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(yaml@2.8.2)
-      '@emdashcms/plugin-api-test':
+      '@emdash-cms/plugin-api-test':
         specifier: workspace:*
         version: link:../../packages/plugins/api-test
-      '@emdashcms/plugin-audit-log':
+      '@emdash-cms/plugin-audit-log':
         specifier: workspace:*
         version: link:../../packages/plugins/audit-log
-      '@emdashcms/plugin-embeds':
+      '@emdash-cms/plugin-embeds':
         specifier: workspace:*
         version: link:../../packages/plugins/embeds
-      '@emdashcms/plugin-webhook-notifier':
+      '@emdash-cms/plugin-webhook-notifier':
         specifier: workspace:*
         version: link:../../packages/plugins/webhook-notifier
       '@tanstack/react-query':
@@ -342,7 +342,7 @@ importers:
       '@astrojs/react':
         specifier: 'catalog:'
         version: 5.0.0(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(yaml@2.8.2)
-      '@emdashcms/cloudflare':
+      '@emdash-cms/cloudflare':
         specifier: workspace:*
         version: link:../../packages/cloudflare
       '@tanstack/react-query':
@@ -385,10 +385,10 @@ importers:
       '@astrojs/react':
         specifier: 'catalog:'
         version: 5.0.0(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(yaml@2.8.2)
-      '@emdashcms/plugin-audit-log':
+      '@emdash-cms/plugin-audit-log':
         specifier: workspace:*
         version: link:../../packages/plugins/audit-log
-      '@emdashcms/plugin-color':
+      '@emdash-cms/plugin-color':
         specifier: workspace:*
         version: link:../../packages/plugins/color
       astro:
@@ -443,10 +443,10 @@ importers:
       '@astrojs/react':
         specifier: 'catalog:'
         version: 5.0.0(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(yaml@2.8.2)
-      '@emdashcms/auth':
+      '@emdash-cms/auth':
         specifier: workspace:*
         version: link:../../packages/auth
-      '@emdashcms/plugin-color':
+      '@emdash-cms/plugin-color':
         specifier: workspace:*
         version: link:../../packages/plugins/color
       astro:
@@ -479,7 +479,7 @@ importers:
       '@dnd-kit/utilities':
         specifier: ^3.2.2
         version: 3.2.2(react@19.2.4)
-      '@emdashcms/blocks':
+      '@emdash-cms/blocks':
         specifier: workspace:*
         version: link:../blocks
       '@floating-ui/react':
@@ -722,7 +722,7 @@ importers:
       '@cloudflare/kumo':
         specifier: ^1.1.0
         version: 1.10.0(@phosphor-icons/react@2.1.10(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react@19.2.14)(echarts@6.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(zod@4.3.6)
-      '@emdashcms/blocks':
+      '@emdash-cms/blocks':
         specifier: workspace:*
         version: link:..
       '@phosphor-icons/react':
@@ -805,13 +805,13 @@ importers:
       '@astrojs/react':
         specifier: '>=5.0.0-beta.0'
         version: 5.0.0-beta.4(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(yaml@2.8.2)
-      '@emdashcms/admin':
+      '@emdash-cms/admin':
         specifier: workspace:*
         version: link:../admin
-      '@emdashcms/auth':
+      '@emdash-cms/auth':
         specifier: workspace:*
         version: link:../auth
-      '@emdashcms/gutenberg-to-portable-text':
+      '@emdash-cms/gutenberg-to-portable-text':
         specifier: workspace:*
         version: link:../gutenberg-to-portable-text
       '@floating-ui/react':
@@ -938,7 +938,7 @@ importers:
       '@arethetypeswrong/cli':
         specifier: 'catalog:'
         version: 0.18.2
-      '@emdashcms/blocks':
+      '@emdash-cms/blocks':
         specifier: workspace:*
         version: link:../blocks
       '@types/better-sqlite3':
@@ -1128,7 +1128,7 @@ importers:
 
   packages/plugins/embeds:
     dependencies:
-      '@emdashcms/blocks':
+      '@emdash-cms/blocks':
         specifier: workspace:*
         version: link:../../blocks
       astro:
@@ -1262,7 +1262,7 @@ importers:
       '@astrojs/react':
         specifier: 'catalog:'
         version: 5.0.0(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(yaml@2.8.2)
-      '@emdashcms/plugin-audit-log':
+      '@emdash-cms/plugin-audit-log':
         specifier: workspace:*
         version: link:../../packages/plugins/audit-log
       astro:
@@ -1293,13 +1293,13 @@ importers:
       '@astrojs/react':
         specifier: 'catalog:'
         version: 5.0.0(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(yaml@2.8.2)
-      '@emdashcms/cloudflare':
+      '@emdash-cms/cloudflare':
         specifier: workspace:*
         version: link:../../packages/cloudflare
-      '@emdashcms/plugin-forms':
+      '@emdash-cms/plugin-forms':
         specifier: workspace:*
         version: link:../../packages/plugins/forms
-      '@emdashcms/plugin-webhook-notifier':
+      '@emdash-cms/plugin-webhook-notifier':
         specifier: workspace:*
         version: link:../../packages/plugins/webhook-notifier
       astro:
@@ -1361,7 +1361,7 @@ importers:
       '@astrojs/react':
         specifier: 'catalog:'
         version: 5.0.0(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(yaml@2.8.2)
-      '@emdashcms/cloudflare':
+      '@emdash-cms/cloudflare':
         specifier: workspace:*
         version: link:../../packages/cloudflare
       astro:
@@ -1423,7 +1423,7 @@ importers:
       '@astrojs/react':
         specifier: 'catalog:'
         version: 5.0.0(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(yaml@2.8.2)
-      '@emdashcms/cloudflare':
+      '@emdash-cms/cloudflare':
         specifier: workspace:*
         version: link:../../packages/cloudflare
       astro:
@@ -1485,7 +1485,7 @@ importers:
       '@astrojs/react':
         specifier: 'catalog:'
         version: 5.0.0(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(yaml@2.8.2)
-      '@emdashcms/cloudflare':
+      '@emdash-cms/cloudflare':
         specifier: workspace:*
         version: link:../../packages/cloudflare
       astro:

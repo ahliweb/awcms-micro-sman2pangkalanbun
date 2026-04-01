@@ -1,8 +1,8 @@
 import cloudflare from "@astrojs/cloudflare";
 import react from "@astrojs/react";
-import { d1, r2, sandbox } from "@emdashcms/cloudflare";
-import { formsPlugin } from "@emdashcms/plugin-forms";
-import { webhookNotifierPlugin } from "@emdashcms/plugin-webhook-notifier";
+import { d1, r2, sandbox } from "@emdash-cms/cloudflare";
+import { formsPlugin } from "@emdash-cms/plugin-forms";
+import { webhookNotifierPlugin } from "@emdash-cms/plugin-webhook-notifier";
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
 

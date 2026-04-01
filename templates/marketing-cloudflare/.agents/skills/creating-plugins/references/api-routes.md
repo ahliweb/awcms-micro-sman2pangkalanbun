@@ -245,7 +245,7 @@ definePlugin({
 ## Calling from Admin UI
 
 ```typescript
-import { usePluginAPI } from "@emdashcms/admin";
+import { usePluginAPI } from "@emdash-cms/admin";
 
 const api = usePluginAPI();
 const data = await api.get("status");

@@ -1,4 +1,4 @@
-import type { Block } from "@emdashcms/blocks";
+import type { Block } from "@emdash-cms/blocks";
 
 interface BlockCatalogEntry {
 	type: Block["type"];

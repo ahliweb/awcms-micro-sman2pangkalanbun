@@ -55,19 +55,19 @@ import {
  */
 function resolveAdminDist(): string {
 	const require = createRequire(import.meta.url);
-	const adminPath = require.resolve("@emdashcms/admin");
+	const adminPath = require.resolve("@emdash-cms/admin");
 	// Return the directory containing the built package (dist/)
 	return dirname(adminPath);
 }
 
 /**
  * Resolve path to the admin package source directory.
- * In dev mode, we alias @emdashcms/admin to the source so Vite processes it
+ * In dev mode, we alias @emdash-cms/admin to the source so Vite processes it
  * directly — giving instant HMR instead of requiring a rebuild + restart.
  */
 function resolveAdminSource(): string | undefined {
 	const require = createRequire(import.meta.url);
-	const adminPath = require.resolve("@emdashcms/admin");
+	const adminPath = require.resolve("@emdash-cms/admin");
 	// dist/index.js -> go up to package root, then into src/
 	const packageRoot = resolve(dirname(adminPath), "..");
 	const srcEntry = resolve(packageRoot, "src", "index.ts");
@@ -244,16 +244,16 @@ export function createViteConfig(
 
 	return {
 		resolve: {
-			dedupe: ["@emdashcms/admin", "react", "react-dom"],
+			dedupe: ["@emdash-cms/admin", "react", "react-dom"],
 			// Array form so more-specific entries are checked first.
 			// The styles.css alias must come before the package alias, otherwise
-			// Vite's prefix matching on "@emdashcms/admin" would resolve
-			// "@emdashcms/admin/styles.css" through the source directory.
+			// Vite's prefix matching on "@emdash-cms/admin" would resolve
+			// "@emdash-cms/admin/styles.css" through the source directory.
 			alias: [
 				// CSS: always dist (pre-compiled by @tailwindcss/cli)
-				{ find: "@emdashcms/admin/styles.css", replacement: resolve(adminDistPath, "styles.css") },
+				{ find: "@emdash-cms/admin/styles.css", replacement: resolve(adminDistPath, "styles.css") },
 				// JS: source in dev (HMR), dist in build
-				{ find: "@emdashcms/admin", replacement: useSource ? adminSourcePath : adminDistPath },
+				{ find: "@emdash-cms/admin", replacement: useSource ? adminSourcePath : adminDistPath },
 			],
 		},
 		// eslint-disable-next-line typescript-eslint(no-unsafe-type-assertion) -- Monorepo has both vite 6 (docs) and vite 7 (core). tsgo resolves correctly.
@@ -264,7 +264,7 @@ export function createViteConfig(
 		// ssr.external conflicts with @cloudflare/vite-plugin's resolve.external validation.
 		ssr: cloudflare
 			? {
-					noExternal: ["emdash", "@emdashcms/admin"],
+					noExternal: ["emdash", "@emdash-cms/admin"],
 					// Pre-bundle EmDash's runtime deps for workerd. Without this,
 					// Vite discovers them one-by-one on first request, causing workerd
 					// to enter "worker cancelled" state on cold cache.
@@ -288,10 +288,10 @@ export function createViteConfig(
 							"emdash > sax",
 							// Deeper transitive deps
 							"emdash > sanitize-html > parse5",
-							"emdash > @emdashcms/gutenberg-to-portable-text > @wordpress/block-serialization-default-parser",
-							"emdash > @emdashcms/auth > @oslojs/crypto/ecdsa",
-							"emdash > @emdashcms/auth > @oslojs/crypto/sha2",
-							"emdash > @emdashcms/auth > @oslojs/webauthn",
+							"emdash > @emdash-cms/gutenberg-to-portable-text > @wordpress/block-serialization-default-parser",
+							"emdash > @emdash-cms/auth > @oslojs/crypto/ecdsa",
+							"emdash > @emdash-cms/auth > @oslojs/crypto/sha2",
+							"emdash > @emdash-cms/auth > @oslojs/webauthn",
 							// React (commonly used, may be hoisted)
 							"react",
 							"react/jsx-dev-runtime",
@@ -301,7 +301,7 @@ export function createViteConfig(
 							// Top-level deps (use astro > path for pnpm compat)
 							"astro > zod/v4",
 							"astro > zod/v4/core",
-							"@emdashcms/cloudflare > kysely-d1",
+							"@emdash-cms/cloudflare > kysely-d1",
 							// Astro internal deps not covered by @astrojs/cloudflare adapter
 							"astro/virtual-modules/middleware.js",
 							"astro/virtual-modules/live-config",
@@ -314,14 +314,14 @@ export function createViteConfig(
 				}
 			: {
 					external: NODE_NATIVE_EXTERNALS,
-					noExternal: ["emdash", "@emdashcms/admin"],
+					noExternal: ["emdash", "@emdash-cms/admin"],
 				},
 		optimizeDeps: {
 			// When using source, don't pre-bundle JS — let Vite transform on the fly for HMR.
 			// When using dist, pre-bundle to avoid re-optimization on first hydration.
 			include: useSource
 				? ["@astrojs/react/client.js"]
-				: ["@emdashcms/admin", "@astrojs/react/client.js"],
+				: ["@emdash-cms/admin", "@astrojs/react/client.js"],
 			exclude: cloudflare ? [] : NODE_NATIVE_EXTERNALS,
 		},
 	};

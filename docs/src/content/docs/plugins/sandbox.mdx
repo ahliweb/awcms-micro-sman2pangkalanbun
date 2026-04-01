@@ -23,7 +23,7 @@ EmDash supports running plugins in two execution modes: **trusted** and **sandbo
 Trusted plugins run in the same process as your Astro site. They are loaded from npm packages or local files and configured in `astro.config.mjs`:
 
 ```typescript title="astro.config.mjs"
-import myPlugin from "@emdashcms/plugin-analytics";
+import myPlugin from "@emdash-cms/plugin-analytics";
 
 export default defineConfig({
 	integrations: [
@@ -54,7 +54,7 @@ To enable sandboxing, configure the sandbox runner in your Astro config:
 export default defineConfig({
 	integrations: [
 		emdash({
-			sandboxRunner: "@emdashcms/cloudflare/sandbox",
+			sandboxRunner: "@emdash-cms/cloudflare/sandbox",
 			sandboxed: [
 				{
 					manifest: seoPluginManifest,

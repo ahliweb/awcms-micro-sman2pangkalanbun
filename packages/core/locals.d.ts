@@ -5,7 +5,7 @@
  * Referenced via triple-slash directive in the generated emdash-env.d.ts.
  */
 
-import type { User } from "@emdashcms/auth";
+import type { User } from "@emdash-cms/auth";
 
 import type { EmDashHandlers, EmDashManifest } from "./dist/types.d.mts";
 
@@ -30,7 +30,7 @@ declare global {
 			/**
 			 * Per-session Durable Object database for playground mode.
 			 *
-			 * Set by the playground middleware (@emdashcms/cloudflare). Read by
+			 * Set by the playground middleware (@emdash-cms/cloudflare). Read by
 			 * the runtime middleware and request-context middleware to set the
 			 * database in ALS for the current request.
 			 *

@@ -1,5 +1,5 @@
 /**
- * @emdashcms/cloudflare
+ * @emdash-cms/cloudflare
  *
  * Cloudflare adapters for EmDash:
  * - D1 database adapter
@@ -12,13 +12,13 @@
  *
  * For runtime exports (PluginBridge, authenticate), import from the specific
  * runtime entrypoints:
- * - @emdashcms/cloudflare/sandbox (PluginBridge, createSandboxRunner)
- * - @emdashcms/cloudflare/auth (authenticate)
+ * - @emdash-cms/cloudflare/sandbox (PluginBridge, createSandboxRunner)
+ * - @emdash-cms/cloudflare/auth (authenticate)
  *
  * @example
  * ```ts
  * import emdash from "emdash/astro";
- * import { d1, r2, access, sandbox } from "@emdashcms/cloudflare";
+ * import { d1, r2, access, sandbox } from "@emdash-cms/cloudflare";
  *
  * export default defineConfig({
  *   integrations: [
@@ -160,7 +160,7 @@ export interface AccessConfig {
  */
 export function d1(config: D1Config): DatabaseDescriptor {
 	return {
-		entrypoint: "@emdashcms/cloudflare/db/d1",
+		entrypoint: "@emdash-cms/cloudflare/db/d1",
 		config,
 		type: "sqlite",
 	};
@@ -183,7 +183,7 @@ export type { PreviewDOConfig } from "./db/do-types.js";
  */
 export function previewDatabase(config: PreviewDOConfig): DatabaseDescriptor {
 	return {
-		entrypoint: "@emdashcms/cloudflare/db/do",
+		entrypoint: "@emdash-cms/cloudflare/db/do",
 		config,
 		type: "sqlite",
 	};
@@ -205,7 +205,7 @@ export function previewDatabase(config: PreviewDOConfig): DatabaseDescriptor {
  */
 export function playgroundDatabase(config: PreviewDOConfig): DatabaseDescriptor {
 	return {
-		entrypoint: "@emdashcms/cloudflare/db/playground",
+		entrypoint: "@emdash-cms/cloudflare/db/playground",
 		config,
 		type: "sqlite",
 	};
@@ -231,7 +231,7 @@ export function playgroundDatabase(config: PreviewDOConfig): DatabaseDescriptor 
  */
 export function r2(config: R2StorageConfig): StorageDescriptor {
 	return {
-		entrypoint: "@emdashcms/cloudflare/storage/r2",
+		entrypoint: "@emdash-cms/cloudflare/storage/r2",
 		config: { binding: config.binding, publicUrl: config.publicUrl },
 	};
 }
@@ -257,7 +257,7 @@ export function r2(config: R2StorageConfig): StorageDescriptor {
 export function access(config: AccessConfig): AuthDescriptor {
 	return {
 		type: "cloudflare-access",
-		entrypoint: "@emdashcms/cloudflare/auth",
+		entrypoint: "@emdash-cms/cloudflare/auth",
 		config,
 	};
 }
@@ -274,7 +274,7 @@ export function access(config: AccessConfig): AuthDescriptor {
  * ```
  */
 export function sandbox(): string {
-	return "@emdashcms/cloudflare/sandbox";
+	return "@emdash-cms/cloudflare/sandbox";
 }
 
 // Re-export media providers (config-time)

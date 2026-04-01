@@ -42,7 +42,7 @@ export function auditLogPlugin(): PluginDescriptor {
 		id: "audit-log",
 		version: "0.1.0",
 		format: "standard",
-		entrypoint: "@emdashcms/plugin-audit-log/sandbox",
+		entrypoint: "@emdash-cms/plugin-audit-log/sandbox",
 		capabilities: ["read:content"],
 		storage: {
 			entries: { indexes: ["timestamp", "action", "resourceType", "collection"] },

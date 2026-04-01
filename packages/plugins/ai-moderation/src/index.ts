@@ -56,7 +56,7 @@ export function createPlugin(options: AIModerationOptions = {}): ResolvedPlugin 
 		allowedHosts: [],
 
 		admin: {
-			entry: "@emdashcms/plugin-ai-moderation/admin",
+			entry: "@emdash-cms/plugin-ai-moderation/admin",
 			pages: [{ path: "/settings", label: "AI Moderation", icon: "shield" }],
 			widgets: [{ id: "status", title: "AI Moderation", size: "third" }],
 		},

@@ -1,5 +1,5 @@
 {
-	"name": "@emdashcms/template-marketing-cloudflare",
+	"name": "@emdash-cms/template-marketing-cloudflare",
 	"version": "0.0.1",
 	"private": true,
 	"type": "module",
@@ -15,7 +15,7 @@
 	"dependencies": {
 		"@astrojs/cloudflare": "catalog:",
 		"@astrojs/react": "catalog:",
-		"@emdashcms/cloudflare": "workspace:*",
+		"@emdash-cms/cloudflare": "workspace:*",
 		"astro": "catalog:",
 		"emdash": "workspace:*",
 		"react": "catalog:",

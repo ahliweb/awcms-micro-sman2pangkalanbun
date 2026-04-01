@@ -469,7 +469,7 @@ const contentEditRoute = createRoute({
 	component: ContentEditPage,
 });
 
-// Editor role level from @emdashcms/auth
+// Editor role level from @emdash-cms/auth
 const ROLE_EDITOR = 40;
 
 function ContentEditPage() {
@@ -889,7 +889,7 @@ const commentsRoute = createRoute({
 	component: CommentsPage,
 });
 
-// Admin role level from @emdashcms/auth
+// Admin role level from @emdash-cms/auth
 const ROLE_ADMIN = 50;
 
 function CommentsPage() {

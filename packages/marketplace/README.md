@@ -1,4 +1,4 @@
-# @emdashcms/marketplace
+# @emdash-cms/marketplace
 
 Standalone Cloudflare Worker that hosts the EmDash plugin marketplace — discovery, publishing, and moderation.
 

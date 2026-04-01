@@ -4,8 +4,8 @@
  * Import reusable blocks from WordPress WXR exports as EmDash sections.
  */
 
-import type { PortableTextBlock } from "@emdashcms/gutenberg-to-portable-text";
-import { gutenbergToPortableText } from "@emdashcms/gutenberg-to-portable-text";
+import type { PortableTextBlock } from "@emdash-cms/gutenberg-to-portable-text";
+import { gutenbergToPortableText } from "@emdash-cms/gutenberg-to-portable-text";
 import type { Kysely } from "kysely";
 import { ulid } from "ulidx";
 

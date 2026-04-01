@@ -1,5 +1,5 @@
 {
-  "name": "@emdashcms/plugin-api-test",
+  "name": "@emdash-cms/plugin-api-test",
   "private": true,
   "version": "0.0.1",
   "description": "Test plugin that exercises all EmDash plugin APIs",

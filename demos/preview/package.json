@@ -1,12 +1,12 @@
 {
-  "name": "@emdashcms/demo-preview",
+  "name": "@emdash-cms/demo-preview",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "build:all": "pnpm run --filter @emdashcms/demo-preview... build",
+    "build:all": "pnpm run --filter @emdash-cms/demo-preview... build",
     "preview": "astro preview",
     "deploy": "pnpm build:all && wrangler deploy",
     "typecheck": "astro check"
@@ -14,7 +14,7 @@
   "dependencies": {
     "@astrojs/cloudflare": "catalog:",
     "@astrojs/react": "catalog:",
-    "@emdashcms/cloudflare": "workspace:*",
+    "@emdash-cms/cloudflare": "workspace:*",
     "@tanstack/react-query": "catalog:",
     "@tanstack/react-router": "catalog:",
     "astro": "catalog:",

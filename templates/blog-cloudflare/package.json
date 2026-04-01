@@ -1,5 +1,5 @@
 {
-	"name": "@emdashcms/template-blog-cloudflare",
+	"name": "@emdash-cms/template-blog-cloudflare",
 	"version": "0.0.1",
 	"private": true,
 	"type": "module",
@@ -15,9 +15,9 @@
 	"dependencies": {
 		"@astrojs/cloudflare": "catalog:",
 		"@astrojs/react": "catalog:",
-		"@emdashcms/cloudflare": "workspace:*",
-		"@emdashcms/plugin-forms": "workspace:*",
-		"@emdashcms/plugin-webhook-notifier": "workspace:*",
+		"@emdash-cms/cloudflare": "workspace:*",
+		"@emdash-cms/plugin-forms": "workspace:*",
+		"@emdash-cms/plugin-webhook-notifier": "workspace:*",
 		"astro": "catalog:",
 		"emdash": "workspace:*",
 		"react": "catalog:",

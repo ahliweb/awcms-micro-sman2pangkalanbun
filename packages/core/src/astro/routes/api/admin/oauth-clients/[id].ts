@@ -6,7 +6,7 @@
  * DELETE /_emdash/api/admin/oauth-clients/:id — Delete a client
  */
 
-import { Role } from "@emdashcms/auth";
+import { Role } from "@emdash-cms/auth";
 import type { APIRoute } from "astro";
 import { z } from "zod";
 

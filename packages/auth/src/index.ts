@@ -1,5 +1,5 @@
 /**
- * @emdashcms/auth - Passkey-first authentication for EmDash
+ * @emdash-cms/auth - Passkey-first authentication for EmDash
  *
  * Email is now handled by the plugin email pipeline (see PLUGIN-EMAIL.md).
  * Auth functions accept an optional `email` send function instead of a
@@ -8,7 +8,7 @@
  *
  * @example
  * ```ts
- * import { auth } from '@emdashcms/auth'
+ * import { auth } from '@emdash-cms/auth'
  *
  * export default defineConfig({
  *   integrations: [

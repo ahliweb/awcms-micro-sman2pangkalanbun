@@ -1,12 +1,12 @@
 /**
  * Authorization helpers for API routes
  *
- * Thin wrappers around @emdashcms/auth RBAC that return HTTP responses.
+ * Thin wrappers around @emdash-cms/auth RBAC that return HTTP responses.
  * Auth middleware handles authentication; these handle authorization.
  */
 
-import type { Permission, RoleLevel } from "@emdashcms/auth";
-import { hasPermission, canActOnOwn } from "@emdashcms/auth";
+import type { Permission, RoleLevel } from "@emdash-cms/auth";
+import { hasPermission, canActOnOwn } from "@emdash-cms/auth";
 
 import { apiError } from "./error.js";
 

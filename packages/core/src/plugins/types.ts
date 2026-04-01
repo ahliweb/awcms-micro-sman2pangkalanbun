@@ -9,7 +9,7 @@
  *
  */
 
-import type { Element } from "@emdashcms/blocks";
+import type { Element } from "@emdash-cms/blocks";
 import type { JSX } from "astro/jsx-runtime";
 import type { z } from "astro/zod";
 
@@ -1046,8 +1046,8 @@ export type SettingField =
 
 /**
  * Block Kit element for block editing fields.
- * This is the `Element` discriminated union from `@emdashcms/blocks`.
- * Plugin authors should use `@emdashcms/blocks` builder functions to create these.
+ * This is the `Element` discriminated union from `@emdash-cms/blocks`.
+ * Plugin authors should use `@emdash-cms/blocks` builder functions to create these.
  */
 export type PortableTextBlockField = Element;
 
@@ -1089,7 +1089,7 @@ export interface FieldWidgetConfig {
  * Admin configuration
  */
 export interface PluginAdminConfig {
-	/** Module specifier for admin UI exports (e.g., "@emdashcms/plugin-audit-log/admin") */
+	/** Module specifier for admin UI exports (e.g., "@emdash-cms/plugin-audit-log/admin") */
 	entry?: string;
 	/** Settings schema for auto-generated UI */
 	settingsSchema?: Record<string, SettingField>;

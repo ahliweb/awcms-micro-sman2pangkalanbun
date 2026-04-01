@@ -6,7 +6,7 @@
  * DELETE /_emdash/api/content/{collection}/{id} - Delete content
  */
 
-import { hasPermission, type Permission } from "@emdashcms/auth";
+import { hasPermission, type Permission } from "@emdash-cms/auth";
 import type { APIRoute } from "astro";
 
 import { requirePerm, requireOwnerPerm } from "#api/authorize.js";

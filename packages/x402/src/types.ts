@@ -18,7 +18,7 @@ export type Price =
  *
  * @example
  * ```ts
- * import { x402 } from "@emdashcms/x402";
+ * import { x402 } from "@emdash-cms/x402";
  *
  * export default defineConfig({
  *   integrations: [

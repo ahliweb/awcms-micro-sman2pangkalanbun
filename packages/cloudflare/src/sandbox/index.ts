@@ -4,7 +4,7 @@
  * This module is loaded at runtime when plugins need to be sandboxed.
  * It imports cloudflare:workers and should NOT be imported at config time.
  *
- * For config-time usage, import { sandbox } from "@emdashcms/cloudflare" instead.
+ * For config-time usage, import { sandbox } from "@emdash-cms/cloudflare" instead.
  *
  */
 

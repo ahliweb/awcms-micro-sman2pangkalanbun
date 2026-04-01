@@ -6,11 +6,11 @@
  * The user opens a browser, logs in, enters the code, and the CLI gets
  * an access + refresh token pair.
  *
- * Uses arctic for code generation and @emdashcms/auth for token utilities.
+ * Uses arctic for code generation and @emdash-cms/auth for token utilities.
  */
 
-import { clampScopes } from "@emdashcms/auth";
-import type { RoleLevel } from "@emdashcms/auth";
+import { clampScopes } from "@emdash-cms/auth";
+import type { RoleLevel } from "@emdash-cms/auth";
 import { generateCodeVerifier } from "arctic";
 import type { Kysely } from "kysely";
 

@@ -6,7 +6,7 @@
  */
 import node from "@astrojs/node";
 import react from "@astrojs/react";
-import { colorPlugin } from "@emdashcms/plugin-color";
+import { colorPlugin } from "@emdash-cms/plugin-color";
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
 import { sqlite } from "emdash/db";

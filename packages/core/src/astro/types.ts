@@ -5,7 +5,7 @@
  * the locals interface that the middleware provides.
  */
 
-import type { Element } from "@emdashcms/blocks";
+import type { Element } from "@emdash-cms/blocks";
 import type { Kysely } from "kysely";
 
 // Re-export core types
@@ -45,7 +45,7 @@ export interface ManifestCollection {
  */
 export interface ManifestPlugin {
 	version?: string;
-	/** Package name for dynamic import (e.g., "@emdashcms/plugin-audit-log") */
+	/** Package name for dynamic import (e.g., "@emdash-cms/plugin-audit-log") */
 	package?: string;
 	/** Whether the plugin is currently enabled */
 	enabled?: boolean;

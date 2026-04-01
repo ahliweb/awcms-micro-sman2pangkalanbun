@@ -1,4 +1,4 @@
-import { Role } from "@emdashcms/auth";
+import { Role } from "@emdash-cms/auth";
 import type { APIRoute } from "astro";
 
 import { requirePerm } from "#api/authorize.js";

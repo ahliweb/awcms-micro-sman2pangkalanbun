@@ -7,7 +7,7 @@
  *
  * This module imports directly from cloudflare:workers to access
  * the LOADER binding and PluginBridge export. It's only loaded
- * when the user configures `sandboxRunner: "@emdashcms/cloudflare/sandbox"`.
+ * when the user configures `sandboxRunner: "@emdash-cms/cloudflare/sandbox"`.
  *
  */
 

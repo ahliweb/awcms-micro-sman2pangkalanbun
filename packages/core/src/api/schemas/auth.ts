@@ -3,7 +3,7 @@ import { z } from "zod";
 import { roleLevel } from "./common.js";
 
 // ---------------------------------------------------------------------------
-// WebAuthn credential schemas (matching @emdashcms/auth/passkey types)
+// WebAuthn credential schemas (matching @emdash-cms/auth/passkey types)
 // ---------------------------------------------------------------------------
 
 const authenticatorTransport = z.enum(["usb", "nfc", "ble", "internal", "hybrid"]);

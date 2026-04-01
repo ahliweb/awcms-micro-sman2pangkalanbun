@@ -5,7 +5,7 @@
  * Uses the existing table but with type="oauth" to distinguish from WebAuthn challenges.
  */
 
-import type { StateStore, OAuthState } from "@emdashcms/auth";
+import type { StateStore, OAuthState } from "@emdash-cms/auth";
 import type { Kysely } from "kysely";
 
 import type { Database } from "../database/types.js";

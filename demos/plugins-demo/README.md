@@ -4,7 +4,7 @@ This demo showcases EmDash's plugin system with plugins that demonstrate the hoo
 
 ## Plugins Included
 
-### 1. Audit Log Plugin (`@emdashcms/plugin-audit-log`)
+### 1. Audit Log Plugin (`@emdash-cms/plugin-audit-log`)
 
 Tracks all content changes for compliance.
 
@@ -18,7 +18,7 @@ Tracks all content changes for compliance.
   - Before/after state comparison
   - Admin history page
 
-### 2. Webhook Notifier Plugin (`@emdashcms/plugin-webhook-notifier`)
+### 2. Webhook Notifier Plugin (`@emdash-cms/plugin-webhook-notifier`)
 
 Posts JSON payloads to external webhook URLs on content/media events.
 
@@ -29,7 +29,7 @@ Posts JSON payloads to external webhook URLs on content/media events.
   - SSRF protection
   - Delivery tracking
 
-### 3. Embeds Plugin (`@emdashcms/plugin-embeds`)
+### 3. Embeds Plugin (`@emdash-cms/plugin-embeds`)
 
 Provides Portable Text block types for embedding external content.
 
@@ -38,7 +38,7 @@ Provides Portable Text block types for embedding external content.
   - Link previews (Open Graph)
   - GitHub Gist embeds
 
-### 4. API Test Plugin (`@emdashcms/plugin-api-test`)
+### 4. API Test Plugin (`@emdash-cms/plugin-api-test`)
 
 Exercises all v2 plugin APIs for testing.
 

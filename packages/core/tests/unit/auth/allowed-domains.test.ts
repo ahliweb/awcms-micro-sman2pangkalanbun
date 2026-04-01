@@ -1,6 +1,6 @@
-import type { AuthAdapter } from "@emdashcms/auth";
-import { Role } from "@emdashcms/auth";
-import { createKyselyAdapter } from "@emdashcms/auth/adapters/kysely";
+import type { AuthAdapter } from "@emdash-cms/auth";
+import { Role } from "@emdash-cms/auth";
+import { createKyselyAdapter } from "@emdash-cms/auth/adapters/kysely";
 import type { Kysely } from "kysely";
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 

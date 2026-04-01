@@ -1,5 +1,5 @@
 {
-  "name": "@emdashcms/plugin-embeds",
+  "name": "@emdash-cms/plugin-embeds",
   "version": "0.0.1",
   "description": "Embed blocks for EmDash CMS - YouTube, Vimeo, Twitter, Bluesky, Mastodon, and more",
   "type": "module",
@@ -28,7 +28,7 @@
     "emdash": "workspace:*"
   },
   "dependencies": {
-    "@emdashcms/blocks": "workspace:*",
+    "@emdash-cms/blocks": "workspace:*",
     "astro-embed": "^0.12.0"
   },
   "scripts": {

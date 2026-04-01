@@ -160,11 +160,11 @@ export interface SandboxRunner {
 
 /**
  * Factory function type for creating sandbox runners.
- * Exported by platform adapters (e.g., @emdashcms/adapter-cloudflare/sandbox).
+ * Exported by platform adapters (e.g., @emdash-cms/adapter-cloudflare/sandbox).
  *
  * @example
  * ```typescript
- * // In @emdashcms/adapter-cloudflare/sandbox.ts
+ * // In @emdash-cms/adapter-cloudflare/sandbox.ts
  * export const createSandboxRunner: SandboxRunnerFactory = (options) => {
  *   return new CloudflareSandboxRunner(options);
  * };

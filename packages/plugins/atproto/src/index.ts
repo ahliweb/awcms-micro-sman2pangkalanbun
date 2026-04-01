@@ -30,7 +30,7 @@ export function atprotoPlugin(): PluginDescriptor {
 		id: "atproto",
 		version: "0.1.0",
 		format: "standard",
-		entrypoint: "@emdashcms/plugin-atproto/sandbox",
+		entrypoint: "@emdash-cms/plugin-atproto/sandbox",
 		capabilities: ["read:content", "network:fetch:any"],
 		storage: {
 			publications: { indexes: ["contentId", "platform", "publishedAt"] },

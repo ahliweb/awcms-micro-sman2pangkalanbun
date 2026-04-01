@@ -148,7 +148,7 @@ The `id` field must follow these rules:
 // Valid IDs
 "seo";
 "audit-log";
-"@emdashcms/plugin-forms";
+"@emdash-cms/plugin-forms";
 
 // Invalid IDs
 "MyPlugin"; // No uppercase
@@ -445,7 +445,7 @@ export function myPlugin(options = {}): PluginDescriptor {
 Plugin block components are automatically merged into `<PortableText>` — site authors don't need to import anything. User-provided components take precedence over plugin defaults.
 
 <Aside type="tip">
-	The embeds plugin (`@emdashcms/plugin-embeds`) is a complete example of this pattern. It provides
+	The embeds plugin (`@emdash-cms/plugin-embeds`) is a complete example of this pattern. It provides
 	YouTube, Vimeo, Tweet, Bluesky, Mastodon, Gist, and Link Preview block types with both admin
 	editing fields and site-side Astro rendering components.
 </Aside>

@@ -41,7 +41,7 @@ async function ensureBuilt(): Promise<void> {
 /**
  * Ensure all e2e fixture dependencies are built.
  * The CI build filter (--filter emdash...) only builds emdash and its deps,
- * not the fixture's plugin dependencies like @emdashcms/plugin-color.
+ * not the fixture's plugin dependencies like @emdash-cms/plugin-color.
  */
 async function ensureFixtureDepsBuilt(): Promise<void> {
 	const colorDist = join(ROOT, "packages/plugins/color/dist/index.mjs");

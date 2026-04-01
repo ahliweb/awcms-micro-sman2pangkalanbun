@@ -26,7 +26,7 @@ export function createPlugin() {
 		version: "0.0.1",
 
 		admin: {
-			entry: "@emdashcms/plugin-color/admin",
+			entry: "@emdash-cms/plugin-color/admin",
 			fieldWidgets: [
 				{
 					name: "picker",
@@ -47,8 +47,8 @@ export function colorPlugin(): PluginDescriptor {
 	return {
 		id: "color",
 		version: "0.0.1",
-		entrypoint: "@emdashcms/plugin-color",
+		entrypoint: "@emdash-cms/plugin-color",
 		options: {},
-		adminEntry: "@emdashcms/plugin-color/admin",
+		adminEntry: "@emdash-cms/plugin-color/admin",
 	};
 }

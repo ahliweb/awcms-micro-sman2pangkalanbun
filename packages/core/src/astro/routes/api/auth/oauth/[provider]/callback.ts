@@ -14,8 +14,8 @@ import {
 	Role,
 	type OAuthConsumerConfig,
 	type RoleLevel,
-} from "@emdashcms/auth";
-import { createKyselyAdapter } from "@emdashcms/auth/adapters/kysely";
+} from "@emdash-cms/auth";
+import { createKyselyAdapter } from "@emdash-cms/auth/adapters/kysely";
 
 import { createOAuthStateStore } from "#auth/oauth-state-store.js";
 

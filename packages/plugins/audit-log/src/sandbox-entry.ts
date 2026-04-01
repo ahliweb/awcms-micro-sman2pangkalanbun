@@ -203,7 +203,7 @@ export default definePlugin({
 	},
 
 	routes: {
-		// Block Kit admin handler -- returns plain block objects (no @emdashcms/blocks import needed)
+		// Block Kit admin handler -- returns plain block objects (no @emdash-cms/blocks import needed)
 		admin: {
 			handler: async (
 				routeCtx: { input: unknown; request: { url: string } },
@@ -288,7 +288,7 @@ export default definePlugin({
 	},
 });
 
-// ── Block Kit helpers (plain objects, no @emdashcms/blocks import) ──
+// ── Block Kit helpers (plain objects, no @emdash-cms/blocks import) ──
 
 async function buildHistoryBlocks(ctx: PluginContext, cursor?: string) {
 	try {

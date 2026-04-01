@@ -1,5 +1,5 @@
 {
-	"name": "@emdashcms/plugin-forms",
+	"name": "@emdash-cms/plugin-forms",
 	"version": "0.0.1",
 	"description": "Forms plugin for EmDash CMS - build forms, collect submissions, send notifications",
 	"type": "module",

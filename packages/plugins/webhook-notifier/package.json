@@ -1,5 +1,5 @@
 {
-  "name": "@emdashcms/plugin-webhook-notifier",
+  "name": "@emdash-cms/plugin-webhook-notifier",
   "version": "0.0.1",
   "description": "Webhook notification plugin for EmDash CMS - posts to external URLs on content changes",
   "type": "module",

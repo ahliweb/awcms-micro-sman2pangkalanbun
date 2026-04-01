@@ -329,10 +329,10 @@ Show/hide fields based on other field values. Evaluated client-side, no round-tr
 
 ## Builder Helpers
 
-`@emdashcms/blocks` provides TypeScript helpers:
+`@emdash-cms/blocks` provides TypeScript helpers:
 
 ```typescript
-import { blocks, elements } from "@emdashcms/blocks";
+import { blocks, elements } from "@emdash-cms/blocks";
 
 const { header, form, section, stats, timeseriesChart, customChart, banner: bannerBlock } = blocks;
 const { textInput, toggle, select, button } = elements;

@@ -320,7 +320,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
 	// Stash the DO database and user on locals so downstream middleware
 	// (runtime init, request-context) can use them. We can't use ALS directly
-	// because this middleware is in @emdashcms/cloudflare and resolves to a
+	// because this middleware is in @emdash-cms/cloudflare and resolves to a
 	// different AsyncLocalStorage instance than the emdash core package
 	// (workerd loads dist modules separately from Vite's source modules).
 	// The request-context middleware (same module context as the loader)
