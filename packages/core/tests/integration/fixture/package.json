@@ -1,0 +1,16 @@
+{
+	"name": "emdash-integration-fixture",
+	"private": true,
+	"type": "module",
+	"dependencies": {
+		"@astrojs/node": "catalog:",
+		"@astrojs/react": "catalog:",
+		"@emdashcms/auth": "workspace:*",
+		"@emdashcms/plugin-color": "workspace:*",
+		"astro": "catalog:",
+		"better-sqlite3": "^11.10.0",
+		"emdash": "workspace:*",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0"
+	}
+}

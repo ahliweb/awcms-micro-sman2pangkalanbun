@@ -1,0 +1,382 @@
+---
+title: Hook Reference
+description: Plugin hooks for extending EmDash functionality.
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+Hooks allow plugins to intercept and modify EmDash behavior at specific points in the content and media lifecycle.
+
+## Hook Overview
+
+| Hook                   | Trigger                        | Can Modify    |
+| ---------------------- | ------------------------------ | ------------- |
+| `content:beforeSave`   | Before content is saved        | Content data  |
+| `content:afterSave`    | After content is saved         | Nothing       |
+| `content:beforeDelete` | Before content is deleted      | Can cancel    |
+| `content:afterDelete`  | After content is deleted       | Nothing       |
+| `media:beforeUpload`   | Before file is uploaded        | File metadata |
+| `media:afterUpload`    | After file is uploaded         | Nothing       |
+| `plugin:install`       | When plugin is first installed | Nothing       |
+| `plugin:activate`      | When plugin is enabled         | Nothing       |
+| `plugin:deactivate`    | When plugin is disabled        | Nothing       |
+| `plugin:uninstall`     | When plugin is removed         | Nothing       |
+
+## Content Hooks
+
+### `content:beforeSave`
+
+Runs before content is saved to the database. Use to validate, transform, or enrich content.
+
+```ts
+import { definePlugin } from "emdash";
+
+export default definePlugin({
+	id: "my-plugin",
+	version: "1.0.0",
+	hooks: {
+		"content:beforeSave": async (event, ctx) => {
+			const { content, collection, isNew } = event;
+
+			// Add timestamps
+			if (isNew) {
+				content.createdBy = "system";
+			}
+			content.modifiedAt = new Date().toISOString();
+
+			// Return modified content
+			return content;
+		},
+	},
+});
+```
+
+#### Event
+
+```ts
+interface ContentHookEvent {
+	content: Record<string, unknown>; // Content data
+	collection: string; // Collection slug
+	isNew: boolean; // True for creates, false for updates
+}
+```
+
+#### Return Value
+
+- Return modified content object to apply changes
+- Return `void` to pass through unchanged
+
+### `content:afterSave`
+
+Runs after content is saved. Use for side effects like notifications, cache invalidation, or external syncing.
+
+```ts
+hooks: {
+  "content:afterSave": async (event, ctx) => {
+    const { content, collection, isNew } = event;
+
+    if (collection === "posts" && content.status === "published") {
+      // Notify external service
+      await ctx.http?.fetch("https://api.example.com/notify", {
+        method: "POST",
+        body: JSON.stringify({ postId: content.id }),
+      });
+    }
+  },
+}
+```
+
+#### Return Value
+
+No return value expected.
+
+### `content:beforeDelete`
+
+Runs before content is deleted. Use to validate deletion or prevent it.
+
+```ts
+hooks: {
+  "content:beforeDelete": async (event, ctx) => {
+    const { id, collection } = event;
+
+    // Prevent deletion of protected content
+    const item = await ctx.content?.get(collection, id);
+    if (item?.data.protected) {
+      return false; // Cancel deletion
+    }
+
+    // Allow deletion
+    return true;
+  },
+}
+```
+
+#### Event
+
+```ts
+interface ContentDeleteEvent {
+	id: string; // Entry ID
+	collection: string; // Collection slug
+}
+```
+
+#### Return Value
+
+- Return `false` to cancel deletion
+- Return `true` or `void` to allow
+
+### `content:afterDelete`
+
+Runs after content is deleted. Use for cleanup tasks.
+
+```ts
+hooks: {
+  "content:afterDelete": async (event, ctx) => {
+    const { id, collection } = event;
+
+    // Clean up related data
+    await ctx.storage.relatedItems.delete(`${collection}:${id}`);
+  },
+}
+```
+
+## Media Hooks
+
+### `media:beforeUpload`
+
+Runs before a file is uploaded. Use to validate, rename, or reject files.
+
+```ts
+hooks: {
+  "media:beforeUpload": async (event, ctx) => {
+    const { file } = event;
+
+    // Reject files over 10MB
+    if (file.size > 10 * 1024 * 1024) {
+      throw new Error("File too large");
+    }
+
+    // Rename file
+    return {
+      name: `${Date.now()}-${file.name}`,
+      type: file.type,
+      size: file.size,
+    };
+  },
+}
+```
+
+#### Event
+
+```ts
+interface MediaUploadEvent {
+	file: {
+		name: string; // Original filename
+		type: string; // MIME type
+		size: number; // Size in bytes
+	};
+}
+```
+
+#### Return Value
+
+- Return modified file metadata to apply changes
+- Return `void` to pass through unchanged
+- Throw to reject the upload
+
+### `media:afterUpload`
+
+Runs after a file is uploaded. Use for processing, thumbnails, or metadata extraction.
+
+```ts
+hooks: {
+  "media:afterUpload": async (event, ctx) => {
+    const { media } = event;
+
+    if (media.mimeType.startsWith("image/")) {
+      // Store image metadata
+      await ctx.kv.set(`media:${media.id}:analyzed`, {
+        processedAt: new Date().toISOString(),
+      });
+    }
+  },
+}
+```
+
+#### Event
+
+```ts
+interface MediaAfterUploadEvent {
+	media: {
+		id: string;
+		filename: string;
+		mimeType: string;
+		size: number | null;
+		url: string;
+		createdAt: string;
+	};
+}
+```
+
+## Lifecycle Hooks
+
+### `plugin:install`
+
+Runs when a plugin is first installed. Use for initial setup, creating storage collections, or seeding data.
+
+```ts
+hooks: {
+  "plugin:install": async (event, ctx) => {
+    // Initialize default settings
+    await ctx.kv.set("settings:enabled", true);
+    await ctx.kv.set("settings:threshold", 100);
+
+    ctx.log.info("Plugin installed successfully");
+  },
+}
+```
+
+### `plugin:activate`
+
+Runs when a plugin is enabled (after install or re-enable).
+
+```ts
+hooks: {
+  "plugin:activate": async (event, ctx) => {
+    ctx.log.info("Plugin activated");
+  },
+}
+```
+
+### `plugin:deactivate`
+
+Runs when a plugin is disabled.
+
+```ts
+hooks: {
+  "plugin:deactivate": async (event, ctx) => {
+    ctx.log.info("Plugin deactivated");
+  },
+}
+```
+
+### `plugin:uninstall`
+
+Runs when a plugin is removed. Use for cleanup.
+
+```ts
+hooks: {
+  "plugin:uninstall": async (event, ctx) => {
+    const { deleteData } = event;
+
+    if (deleteData) {
+      // Clean up all plugin data
+      const items = await ctx.kv.list("settings:");
+      for (const { key } of items) {
+        await ctx.kv.delete(key);
+      }
+    }
+
+    ctx.log.info("Plugin uninstalled");
+  },
+}
+```
+
+#### Event
+
+```ts
+interface UninstallEvent {
+	deleteData: boolean; // User chose to delete data
+}
+```
+
+## Hook Configuration
+
+Hooks accept either a handler function or a configuration object:
+
+```ts
+hooks: {
+  // Simple handler
+  "content:afterSave": async (event, ctx) => { ... },
+
+  // With configuration
+  "content:beforeSave": {
+    priority: 50,        // Lower runs first (default: 100)
+    timeout: 10000,      // Max execution time in ms (default: 5000)
+    dependencies: [],    // Run after these plugins
+    errorPolicy: "abort", // "continue" or "abort" (default)
+    handler: async (event, ctx) => { ... },
+  },
+}
+```
+
+### Configuration Options
+
+| Option         | Type       | Default   | Description                        |
+| -------------- | ---------- | --------- | ---------------------------------- |
+| `priority`     | `number`   | `100`     | Execution order (lower = earlier)  |
+| `timeout`      | `number`   | `5000`    | Max execution time in milliseconds |
+| `dependencies` | `string[]` | `[]`      | Plugin IDs that must run first     |
+| `errorPolicy`  | `string`   | `"abort"` | `"continue"` to ignore errors      |
+
+## Plugin Context
+
+All hooks receive a context object with access to plugin APIs:
+
+```ts
+interface PluginContext {
+	plugin: { id: string; version: string };
+	storage: PluginStorage; // Declared storage collections
+	kv: KVAccess; // Key-value store
+	content?: ContentAccess; // If read:content or write:content capability
+	media?: MediaAccess; // If read:media or write:media capability
+	http?: HttpAccess; // If network:fetch capability
+	log: LogAccess; // Always available
+}
+```
+
+<Aside>
+	Context APIs are gated by plugin capabilities. Declare required capabilities in the plugin
+	definition.
+</Aside>
+
+## Error Handling
+
+Errors in hooks are logged and handled based on `errorPolicy`:
+
+- `"abort"` (default) — Stop execution, rollback transaction if applicable
+- `"continue"` — Log error and continue to next hook
+
+```ts
+hooks: {
+  "content:beforeSave": {
+    errorPolicy: "continue", // Don't block save if this fails
+    handler: async (event, ctx) => {
+      try {
+        await ctx.http?.fetch("https://api.example.com/validate");
+      } catch (error) {
+        ctx.log.warn("Validation service unavailable", error);
+      }
+    },
+  },
+}
+```
+
+## Execution Order
+
+Hooks run in this order:
+
+1. Sorted by `priority` (ascending)
+2. Plugins with `dependencies` run after their dependencies
+3. Within same priority, order is deterministic but unspecified
+
+```ts
+// This runs first (priority 10)
+{ priority: 10, handler: ... }
+
+// This runs second (priority 50)
+{ priority: 50, handler: ... }
+
+// This runs last (default priority 100)
+{ handler: ... }
+```

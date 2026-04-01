@@ -1,0 +1,23 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "my-marketing-site",
+	"compatibility_date": "2026-02-24",
+	"compatibility_flags": ["nodejs_compat"],
+	"assets": {
+		"directory": "./dist",
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "my-marketing-site",
+			// Run `wrangler d1 create my-marketing-site` and paste the ID here
+			"database_id": "",
+		},
+	],
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "my-marketing-media",
+		},
+	],
+}

@@ -1,0 +1,74 @@
+---
+import { getMenu } from "emdash";
+import {
+	WidgetArea,
+	EmDashHead,
+	EmDashBodyStart,
+	EmDashBodyEnd,
+} from "emdash/ui";
+import { createPublicPageContext } from "emdash/page";
+import LiveSearch from "emdash/ui/search";
+
+interface Props {
+	title: string;
+	description?: string | null;
+	image?: string | null;
+	canonical?: string | null;
+	/** Pass content reference for plugin page contributions on content pages */
+	content?: { collection: string; id: string; slug?: string | null };
+}
+
+const { title, description, image, canonical, content } = Astro.props;
+
+const menu = await getMenu("primary");
+
+const pageCtx = createPublicPageContext({
+	Astro,
+	kind: content ? "content" : "custom",
+	pageType: "website",
+	title,
+	description,
+	canonical,
+	image,
+	content,
+});
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{title}</title>
+		{description && <meta name="description" content={description} />}
+		{canonical && <link rel="canonical" href={canonical} />}
+		<EmDashHead page={pageCtx} />
+	</head>
+	<body>
+		<EmDashBodyStart page={pageCtx} />
+
+		<header>
+			<nav>
+				<a href="/">{title}</a>
+				{
+					menu?.items.map((item) => (
+						<a href={item.url} target={item.target}>
+							{item.label}
+						</a>
+					))
+				}
+				<LiveSearch placeholder="Search..." collections={["posts", "pages"]} />
+			</nav>
+		</header>
+
+		<main>
+			<slot />
+		</main>
+
+		<footer>
+			<WidgetArea name="sidebar" />
+		</footer>
+
+		<EmDashBodyEnd page={pageCtx} />
+	</body>
+</html>

@@ -1,0 +1,413 @@
+/**
+ * Sections library page component
+ *
+ * Browse, create, and manage reusable content sections (block patterns).
+ */
+
+import { Button, Dialog, Input, InputArea, Toast } from "@cloudflare/kumo";
+import {
+	Plus,
+	MagnifyingGlass,
+	Trash,
+	PencilSimple,
+	Copy,
+	FolderOpen,
+	Globe,
+	User,
+	FileArrowDown,
+} from "@phosphor-icons/react";
+import { X } from "@phosphor-icons/react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
+import * as React from "react";
+
+import {
+	fetchSections,
+	createSection,
+	deleteSection,
+	type Section,
+	type SectionSource,
+} from "../lib/api";
+import { slugify } from "../lib/utils";
+import { ConfirmDialog } from "./ConfirmDialog.js";
+import { DialogError, getMutationError } from "./DialogError.js";
+
+const sourceIcons: Record<SectionSource, React.ElementType> = {
+	theme: Globe,
+	user: User,
+	import: FileArrowDown,
+};
+
+const sourceLabels: Record<SectionSource, string> = {
+	theme: "Theme",
+	user: "Custom",
+	import: "Imported",
+};
+
+export function Sections() {
+	const navigate = useNavigate();
+	const queryClient = useQueryClient();
+	const toastManager = Toast.useToastManager();
+	const [isCreateOpen, setIsCreateOpen] = React.useState(false);
+	const [deleteSlug, setDeleteSlug] = React.useState<string | null>(null);
+	const [searchQuery, setSearchQuery] = React.useState("");
+	const [selectedSource, setSelectedSource] = React.useState<SectionSource | null>(null);
+
+	// Create form state
+	const [createTitle, setCreateTitle] = React.useState("");
+	const [createSlug, setCreateSlug] = React.useState("");
+	const [createDescription, setCreateDescription] = React.useState("");
+	const [slugTouched, setSlugTouched] = React.useState(false);
+	const [createError, setCreateError] = React.useState<string | null>(null);
+
+	// Reset form when dialog closes
+	React.useEffect(() => {
+		if (!isCreateOpen) {
+			setCreateTitle("");
+			setCreateSlug("");
+			setCreateDescription("");
+			setSlugTouched(false);
+			setCreateError(null);
+		}
+	}, [isCreateOpen]);
+
+	const { data: sectionsData, isLoading: sectionsLoading } = useQuery({
+		queryKey: ["sections", { source: selectedSource, search: searchQuery }],
+		queryFn: () =>
+			fetchSections({
+				source: selectedSource || undefined,
+				search: searchQuery || undefined,
+			}),
+	});
+	const sections = sectionsData?.items ?? [];
+
+	const createMutation = useMutation({
+		mutationFn: createSection,
+		onSuccess: (section) => {
+			void queryClient.invalidateQueries({ queryKey: ["sections"] });
+			setIsCreateOpen(false);
+			toastManager.add({ title: "Section created" });
+			// Navigate to edit the new section
+			void navigate({ to: "/sections/$slug", params: { slug: section.slug } });
+		},
+		onError: (error: Error) => {
+			setCreateError(error.message);
+		},
+	});
+
+	const deleteMutation = useMutation({
+		mutationFn: deleteSection,
+		onSuccess: () => {
+			void queryClient.invalidateQueries({ queryKey: ["sections"] });
+			setDeleteSlug(null);
+			toastManager.add({ title: "Section deleted" });
+		},
+	});
+
+	const handleCreate = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		setCreateError(null);
+		createMutation.mutate({
+			slug: createSlug,
+			title: createTitle,
+			description: createDescription || undefined,
+			content: [], // Start with empty content
+		});
+	};
+
+	const handleCopySlug = (slug: string) => {
+		void navigator.clipboard.writeText(slug);
+		toastManager.add({ title: "Slug copied to clipboard" });
+	};
+
+	const sectionToDelete = sections.find((s) => s.slug === deleteSlug);
+
+	return (
+		<div className="space-y-6">
+			{/* Header */}
+			<div className="flex items-center justify-between">
+				<div>
+					<h1 className="text-3xl font-bold">Sections</h1>
+					<p className="text-kumo-subtle">
+						Reusable content blocks you can insert into any content
+					</p>
+				</div>
+				<Dialog.Root open={isCreateOpen} onOpenChange={setIsCreateOpen}>
+					<Dialog.Trigger
+						render={(props) => (
+							<Button {...props} icon={<Plus />}>
+								New Section
+							</Button>
+						)}
+					/>
+					<Dialog className="p-6" size="lg">
+						<div className="flex items-start justify-between gap-4 mb-4">
+							<Dialog.Title className="text-lg font-semibold leading-none tracking-tight">
+								Create Section
+							</Dialog.Title>
+							<Dialog.Close
+								aria-label="Close"
+								render={(props) => (
+									<Button
+										{...props}
+										variant="ghost"
+										shape="square"
+										aria-label="Close"
+										className="absolute right-4 top-4"
+									>
+										<X className="h-4 w-4" />
+										<span className="sr-only">Close</span>
+									</Button>
+								)}
+							/>
+						</div>
+						<form onSubmit={handleCreate} className="space-y-4">
+							<Input
+								label="Title"
+								value={createTitle}
+								onChange={(e) => {
+									const title = e.target.value;
+									setCreateTitle(title);
+									if (!slugTouched && title) {
+										setCreateSlug(slugify(title));
+									}
+								}}
+								required
+								placeholder="Hero Banner"
+							/>
+							<div>
+								<Input
+									label="Slug"
+									value={createSlug}
+									onChange={(e) => {
+										setCreateSlug(e.target.value);
+										setSlugTouched(true);
+									}}
+									required
+									placeholder="hero-banner"
+									pattern="[a-z0-9-]+"
+									title="Lowercase letters, numbers, and hyphens only"
+								/>
+								<p className="text-xs text-kumo-subtle mt-1">
+									Used to identify this section. Lowercase letters, numbers, and hyphens only.
+								</p>
+							</div>
+							<InputArea
+								label="Description"
+								value={createDescription}
+								onChange={(e) => setCreateDescription(e.target.value)}
+								placeholder="A full-width hero banner with heading, text, and CTA button"
+								rows={3}
+							/>
+							<DialogError message={createError || getMutationError(createMutation.error)} />
+							<div className="flex justify-end gap-2">
+								<Button type="button" variant="outline" onClick={() => setIsCreateOpen(false)}>
+									Cancel
+								</Button>
+								<Button type="submit" disabled={createMutation.isPending}>
+									{createMutation.isPending ? "Creating..." : "Create"}
+								</Button>
+							</div>
+						</form>
+					</Dialog>
+				</Dialog.Root>
+			</div>
+
+			{/* Filters */}
+			<div className="flex items-center gap-4">
+				{/* Search */}
+				<div className="relative flex-1 max-w-md">
+					<MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-kumo-subtle" />
+					<Input
+						placeholder="Search sections..."
+						value={searchQuery}
+						onChange={(e) => setSearchQuery(e.target.value)}
+						className="pl-10"
+					/>
+				</div>
+
+				{/* Source filter */}
+				<select
+					value={selectedSource || ""}
+					onChange={(e) => {
+						const val = e.target.value;
+						setSelectedSource(val === "theme" || val === "user" || val === "import" ? val : null);
+					}}
+					className="h-10 rounded-md border border-kumo-line bg-kumo-base px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-kumo-ring focus:ring-offset-2"
+				>
+					<option value="">All Sources</option>
+					<option value="theme">Theme</option>
+					<option value="user">Custom</option>
+					<option value="import">Imported</option>
+				</select>
+			</div>
+
+			{/* Section Grid */}
+			{sectionsLoading ? (
+				<div className="flex items-center justify-center h-64">
+					<div className="text-kumo-subtle">Loading sections...</div>
+				</div>
+			) : sections.length === 0 ? (
+				<div className="rounded-lg border bg-kumo-base p-12 text-center">
+					{searchQuery || selectedSource ? (
+						<>
+							<MagnifyingGlass className="mx-auto h-12 w-12 text-kumo-subtle" />
+							<h3 className="mt-4 text-lg font-semibold">No sections found</h3>
+							<p className="mt-2 text-kumo-subtle">Try adjusting your search or filters.</p>
+						</>
+					) : (
+						<>
+							<FolderOpen className="mx-auto h-12 w-12 text-kumo-subtle" />
+							<h3 className="mt-4 text-lg font-semibold">No sections yet</h3>
+							<p className="mt-2 text-kumo-subtle">
+								Create your first reusable content section to get started.
+							</p>
+							<Button className="mt-4" icon={<Plus />} onClick={() => setIsCreateOpen(true)}>
+								Create Section
+							</Button>
+						</>
+					)}
+				</div>
+			) : (
+				<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+					{sections.map((section) => (
+						<SectionCard
+							key={section.id}
+							section={section}
+							onEdit={() => navigate({ to: "/sections/$slug", params: { slug: section.slug } })}
+							onDelete={() => setDeleteSlug(section.slug)}
+							onCopySlug={() => handleCopySlug(section.slug)}
+						/>
+					))}
+				</div>
+			)}
+
+			{/* Delete confirmation */}
+			<ConfirmDialog
+				open={!!deleteSlug}
+				onClose={() => {
+					setDeleteSlug(null);
+					deleteMutation.reset();
+				}}
+				title="Delete Section?"
+				description={
+					sectionToDelete?.source === "theme" ? (
+						<>
+							Theme-provided sections cannot be deleted. Edit the section to create a custom copy,
+							then delete that.
+						</>
+					) : (
+						<>
+							This will permanently delete "{sectionToDelete?.title}". This action cannot be undone.
+						</>
+					)
+				}
+				confirmLabel="Delete"
+				pendingLabel="Deleting..."
+				isPending={deleteMutation.isPending}
+				error={deleteMutation.error}
+				onConfirm={() => deleteSlug && deleteMutation.mutate(deleteSlug)}
+			/>
+		</div>
+	);
+}
+
+function SectionCard({
+	section,
+	onEdit,
+	onDelete,
+	onCopySlug,
+}: {
+	section: Section;
+	onEdit: () => void;
+	onDelete: () => void;
+	onCopySlug: () => void;
+}) {
+	const SourceIcon = sourceIcons[section.source];
+
+	return (
+		<div className="rounded-lg border bg-kumo-base overflow-hidden">
+			{/* Preview area */}
+			<div className="aspect-video bg-kumo-tint flex items-center justify-center">
+				{section.previewUrl ? (
+					<img
+						src={section.previewUrl}
+						alt={section.title}
+						className="w-full h-full object-cover"
+					/>
+				) : (
+					<div className="text-kumo-subtle text-sm">No preview</div>
+				)}
+			</div>
+
+			{/* Content */}
+			<div className="p-4">
+				<div className="flex items-start justify-between gap-2">
+					<div className="flex-1 min-w-0">
+						<h3 className="font-semibold truncate">{section.title}</h3>
+						<p className="text-sm text-kumo-subtle truncate">{section.slug}</p>
+					</div>
+					<div
+						className="flex items-center gap-1 text-xs text-kumo-subtle"
+						title={sourceLabels[section.source]}
+					>
+						<SourceIcon className="h-3 w-3" />
+						<span>{sourceLabels[section.source]}</span>
+					</div>
+				</div>
+
+				{section.description && (
+					<p className="mt-2 text-sm text-kumo-subtle line-clamp-2">{section.description}</p>
+				)}
+
+				{section.keywords.length > 0 && (
+					<div className="mt-2 flex flex-wrap gap-1">
+						{section.keywords.slice(0, 3).map((keyword) => (
+							<span
+								key={keyword}
+								className="inline-flex items-center rounded bg-kumo-tint px-1.5 py-0.5 text-xs text-kumo-subtle"
+							>
+								{keyword}
+							</span>
+						))}
+						{section.keywords.length > 3 && (
+							<span className="text-xs text-kumo-subtle">+{section.keywords.length - 3} more</span>
+						)}
+					</div>
+				)}
+
+				{/* Actions */}
+				<div className="mt-4 flex items-center gap-2">
+					<Button
+						variant="outline"
+						size="sm"
+						icon={<PencilSimple />}
+						onClick={onEdit}
+						className="flex-1"
+					>
+						Edit
+					</Button>
+					<Button
+						variant="ghost"
+						size="sm"
+						onClick={onCopySlug}
+						title="Copy slug"
+						aria-label={`Copy ${section.slug} to clipboard`}
+					>
+						<Copy className="h-4 w-4" />
+					</Button>
+					<Button
+						variant="ghost"
+						size="sm"
+						onClick={onDelete}
+						title={section.source === "theme" ? "Cannot delete theme sections" : "Delete"}
+						aria-label={`Delete ${section.title}`}
+						disabled={section.source === "theme"}
+					>
+						<Trash className="h-4 w-4" />
+					</Button>
+				</div>
+			</div>
+		</div>
+	);
+}

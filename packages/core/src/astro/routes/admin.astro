@@ -1,0 +1,81 @@
+---
+/**
+ * Admin shell route - injected by EmDash integration
+ *
+ * This page serves the EmDash admin React SPA.
+ * AdminWrapper imports plugin admin modules and passes them to AdminApp.
+ */
+import "@emdashcms/admin/styles.css";
+// Use package-qualified import so Astro generates a proper module URL
+// (relative imports resolve to absolute paths which break client hydration)
+import AdminWrapper from "emdash/routes/PluginRegistry";
+
+export const prerender = false;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="icon"
+			href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%AB%3C/text%3E%3C/svg%3E"
+		/>
+		<title>EmDash Admin</title>
+	</head>
+	<body>
+		<div id="admin-root" class="min-h-screen">
+			<div id="emdash-boot-loader">
+				<style>
+					#emdash-boot-loader {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						min-height: 100vh;
+						color-scheme: light dark;
+						background: light-dark(hsl(0 0% 100%), hsl(222.2 84% 4.9%));
+					}
+					#emdash-boot-loader .loader-inner {
+						text-align: center;
+					}
+					#emdash-boot-loader .spinner {
+						width: 24px;
+						height: 24px;
+						margin: 0 auto;
+						border: 2.5px solid
+							light-dark(
+								hsl(215.4 16.3% 46.9% / 0.3),
+								hsl(215 20.2% 65.1% / 0.3)
+							);
+						border-top-color: light-dark(
+							hsl(215.4 16.3% 46.9%),
+							hsl(215 20.2% 65.1%)
+						);
+						border-radius: 50%;
+						animation: emdash-spin 0.8s linear infinite;
+					}
+					#emdash-boot-loader p {
+						margin-top: 1rem;
+						font-family:
+							system-ui,
+							-apple-system,
+							sans-serif;
+						font-size: 0.875rem;
+						color: light-dark(hsl(215.4 16.3% 46.9%), hsl(215 20.2% 65.1%));
+					}
+					@keyframes emdash-spin {
+						to {
+							transform: rotate(360deg);
+						}
+					}
+				</style>
+				<div class="loader-inner">
+					<div class="spinner"></div>
+					<p>Loading EmDash...</p>
+				</div>
+			</div>
+			<AdminWrapper client:only="react" />
+		</div>
+	</body>
+</html>
