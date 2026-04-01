@@ -1,6 +1,7 @@
 {
   "name": "@emdash-cms/marketplace",
   "version": "0.0.1",
+  "private": true,
   "description": "Plugin marketplace Worker for EmDash CMS",
   "type": "module",
   "main": "src/index.ts",
