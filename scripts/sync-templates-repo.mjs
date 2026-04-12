@@ -301,6 +301,8 @@ try {
 				"create",
 				"--repo",
 				REPO,
+				"--head",
+				branch,
 				"--title",
 				`chore: sync templates from emdash v${emdashVersion}`,
 				"--body",
