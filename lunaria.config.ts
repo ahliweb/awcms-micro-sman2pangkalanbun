@@ -19,8 +19,16 @@ export default defineConfig({
 			lang: "fr",
 		},
 		{
+			lang: "pt-BR",
+			label: "Português (Brasil)",
+		},
+		{
 			label: "العربية",
 			lang: "ar",
+		},
+		{
+			label: "简体中文",
+			lang: "zh-CN",
 		},
 	],
 	files: [
