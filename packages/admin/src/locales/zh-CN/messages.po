@@ -70,7 +70,7 @@ msgstr "API 令牌"
 
 #: packages/admin/src/components/WelcomeModal.tsx:53
 msgid "As an administrator, you can invite other users from the Users section."
-msgstr "作为管理员，您可以从"用户"部分邀请其他用户。"
+msgstr "作为管理员，您可以从\"用户\"部分邀请其他用户。"
 
 #: packages/admin/src/components/LoginPage.tsx:253
 msgid "Authentication error: {error}"
@@ -367,6 +367,7 @@ msgid "Insert an image"
 msgstr "插入图片"
 
 #: packages/admin/src/components/Settings.tsx:129
+#: packages/admin/src/components/Settings.tsx:134
 msgid "Language"
 msgstr "语言"
 
