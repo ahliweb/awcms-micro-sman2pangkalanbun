@@ -209,6 +209,7 @@ msgstr "Create Token"
 msgid "Create, update, delete content"
 msgstr "Create, update, delete content"
 
+#. placeholder {0}: new Date(token.createdAt).toLocaleDateString()
 #: packages/admin/src/components/settings/ApiTokenSettings.tsx:290
 msgid "Created {0}"
 msgstr "Created {0}"
@@ -267,6 +268,7 @@ msgstr "Email"
 msgid "Email address"
 msgstr "Email address"
 
+#. placeholder {0}: block.label
 #: packages/admin/src/components/PortableTextEditor.tsx:1443
 msgid "Embed a {0}"
 msgstr "Embed a {0}"
@@ -279,6 +281,7 @@ msgstr "Embeds"
 msgid "Enable full-text search on this collection"
 msgstr "Enable full-text search on this collection"
 
+#. placeholder {0}: new Date(token.expiresAt).toLocaleDateString()
 #: packages/admin/src/components/settings/ApiTokenSettings.tsx:280
 msgid "Expires {0}"
 msgstr "Expires {0}"
@@ -372,6 +375,7 @@ msgstr "Language"
 msgid "Large section heading"
 msgstr "Large section heading"
 
+#. placeholder {0}: new Date(token.lastUsedAt).toLocaleDateString()
 #: packages/admin/src/components/settings/ApiTokenSettings.tsx:285
 msgid "Last used {0}"
 msgstr "Last used {0}"
@@ -530,6 +534,7 @@ msgstr "Schema Write"
 msgid "Scopes"
 msgstr "Scopes"
 
+#. placeholder {0}: token.scopes.join(", ")
 #: packages/admin/src/components/settings/ApiTokenSettings.tsx:277
 msgid "Scopes: {0}"
 msgstr "Scopes: {0}"
@@ -648,6 +653,7 @@ msgstr "to close"
 msgid "to select"
 msgstr "to select"
 
+#. placeholder {0}: newToken.info.name
 #: packages/admin/src/components/settings/ApiTokenSettings.tsx:190
 msgid "Token created: {0}"
 msgstr "Token created: {0}"
