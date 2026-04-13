@@ -1325,7 +1325,7 @@ interface ImageFieldRendererProps {
 	label: string;
 	description?: string;
 	value: ImageFieldValue | string | undefined;
-	onChange: (value: ImageFieldValue | undefined) => void;
+	onChange: (value: ImageFieldValue | null) => void;
 	required?: boolean;
 }
 
@@ -1367,7 +1367,7 @@ function ImageFieldRenderer({
 	};
 
 	const handleRemove = () => {
-		onChange(undefined);
+		onChange(null);
 	};
 
 	return (
