@@ -451,12 +451,13 @@ export function createMediaAccessWithWrite(
 				);
 			}
 
-			const mediaId = ulid();
+			// Generate a storage key with a unique prefix
+			const keyPrefix = ulid();
 			// Extract extension from basename (ignore path separators)
 			const basename = filename.split("/").pop() ?? filename;
 			const dotIdx = basename.lastIndexOf(".");
 			const ext = dotIdx > 0 ? basename.slice(dotIdx).toLowerCase() : "";
-			const storageKey = `${mediaId}${ext}`;
+			const storageKey = `${keyPrefix}${ext}`;
 
 			// Upload to storage first
 			await storage.upload({
@@ -466,8 +467,9 @@ export function createMediaAccessWithWrite(
 			});
 
 			// Create DB record — clean up storage on failure
+			let media;
 			try {
-				await mediaRepo.create({
+				media = await mediaRepo.create({
 					filename: basename,
 					mimeType: contentType,
 					size: bytes.byteLength,
@@ -484,7 +486,7 @@ export function createMediaAccessWithWrite(
 			}
 
 			return {
-				mediaId,
+				mediaId: media.id,
 				storageKey,
 				url: `/_emdash/api/media/file/${storageKey}`,
 			};
