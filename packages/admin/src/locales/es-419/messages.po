@@ -158,7 +158,7 @@ msgstr "{0} ha sido desactivado"
 #. placeholder {0}: plugin.name
 #: packages/admin/src/components/PluginManager.tsx:260
 msgid "{0} has been removed"
-msgstr "{0} ha sido eliminado" 
+msgstr "{0} ha sido eliminado"
 
 #. placeholder {0}: plugin.installCount.toLocaleString()
 #: packages/admin/src/components/MarketplacePluginDetail.tsx:213
