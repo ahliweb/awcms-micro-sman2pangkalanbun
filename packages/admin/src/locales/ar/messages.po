@@ -416,7 +416,7 @@ msgstr "الحساب"
 msgid "Account exists"
 msgstr "الحساب موجود"
 
-#: packages/admin/src/components/users/UserDetail.tsx:224
+#: packages/admin/src/components/users/UserDetail.tsx:216
 msgid "Account Info"
 msgstr "معلومات الحساب"
 
@@ -429,7 +429,7 @@ msgstr "معلومات الحساب"
 msgid "Actions"
 msgstr "الإجراءات"
 
-#: packages/admin/src/components/users/UserDetail.tsx:214
+#: packages/admin/src/components/users/UserDetail.tsx:206
 msgid "Active"
 msgstr "نشط"
 
@@ -603,7 +603,7 @@ msgstr "كذلك حذف بيانات تخزين الإضافة"
 
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:298
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:463
-#: packages/admin/src/components/MediaDetailPanel.tsx:203
+#: packages/admin/src/components/MediaDetailPanel.tsx:202
 msgid "Alt Text"
 msgstr "النص البديل"
 
@@ -862,7 +862,7 @@ msgstr "يمكنه عرض المحتوى"
 #: packages/admin/src/components/ContentPickerModal.tsx:253
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:516
 #: packages/admin/src/components/FieldEditor.tsx:635
-#: packages/admin/src/components/MediaDetailPanel.tsx:235
+#: packages/admin/src/components/MediaDetailPanel.tsx:234
 #: packages/admin/src/components/MediaPickerModal.tsx:581
 #: packages/admin/src/components/MenuEditor.tsx:294
 #: packages/admin/src/components/MenuEditor.tsx:439
@@ -905,7 +905,7 @@ msgstr "الموافقة على الصلاحية"
 
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:306
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:471
-#: packages/admin/src/components/MediaDetailPanel.tsx:211
+#: packages/admin/src/components/MediaDetailPanel.tsx:210
 msgid "Caption"
 msgstr "التسمية التوضيحية"
 
@@ -986,8 +986,8 @@ msgstr "إضغط على الرابط في البريد الإلكتروني لت
 #: packages/admin/src/components/FieldEditor.tsx:332
 #: packages/admin/src/components/FieldEditor.tsx:336
 #: packages/admin/src/components/MarketplacePluginDetail.tsx:447
-#: packages/admin/src/components/MediaDetailPanel.tsx:132
-#: packages/admin/src/components/MediaDetailPanel.tsx:134
+#: packages/admin/src/components/MediaDetailPanel.tsx:131
+#: packages/admin/src/components/MediaDetailPanel.tsx:133
 #: packages/admin/src/components/MediaPickerModal.tsx:349
 #: packages/admin/src/components/MediaPickerModal.tsx:355
 #: packages/admin/src/components/MediaPickerModal.tsx:359
@@ -1025,7 +1025,7 @@ msgstr "إضغط على الرابط في البريد الإلكتروني لت
 msgid "Close"
 msgstr "إغلاق"
 
-#: packages/admin/src/components/users/UserDetail.tsx:130
+#: packages/admin/src/components/users/UserDetail.tsx:121
 msgid "Close panel"
 msgstr "إغلاق اللوحة"
 
@@ -1107,7 +1107,7 @@ msgid "Connect with WordPress"
 msgstr "الاتصال بـ WordPress"
 
 #. placeholder {0}: new Date(account.createdAt).toLocaleDateString()
-#: packages/admin/src/components/users/UserDetail.tsx:292
+#: packages/admin/src/components/users/UserDetail.tsx:286
 msgid "Connected {0}"
 msgstr "متصل {0}"
 
@@ -1352,14 +1352,14 @@ msgstr "إنشاء مفتاح مرور خاص بك"
 msgid "Create, update, delete content"
 msgstr "إنشاء، تحديث، حذف المحتوى"
 
-#: packages/admin/src/components/users/UserDetail.tsx:227
+#: packages/admin/src/components/users/UserDetail.tsx:219
 msgid "Created"
 msgstr "تم الإنشاء"
 
 #. placeholder {0}: new Date(cred.createdAt).toLocaleDateString()
 #. placeholder {0}: new Date(token.createdAt).toLocaleDateString()
 #: packages/admin/src/components/settings/ApiTokenSettings.tsx:290
-#: packages/admin/src/components/users/UserDetail.tsx:266
+#: packages/admin/src/components/users/UserDetail.tsx:260
 msgid "Created {0}"
 msgstr "تم إنشاء {0}"
 
@@ -1463,8 +1463,8 @@ msgstr "حدد هيكل محتواك"
 #: packages/admin/src/components/comments/CommentInbox.tsx:274
 #: packages/admin/src/components/comments/CommentInbox.tsx:414
 #: packages/admin/src/components/ContentTypeList.tsx:148
-#: packages/admin/src/components/MediaDetailPanel.tsx:231
-#: packages/admin/src/components/MediaDetailPanel.tsx:256
+#: packages/admin/src/components/MediaDetailPanel.tsx:230
+#: packages/admin/src/components/MediaDetailPanel.tsx:255
 #: packages/admin/src/components/MenuEditor.tsx:372
 #: packages/admin/src/components/MenuList.tsx:209
 #: packages/admin/src/components/Redirects.tsx:559
@@ -1475,7 +1475,7 @@ msgid "Delete"
 msgstr "حذف"
 
 #. placeholder {0}: item.filename
-#: packages/admin/src/components/MediaDetailPanel.tsx:255
+#: packages/admin/src/components/MediaDetailPanel.tsx:254
 msgid "Delete \"{0}\"? This cannot be undone."
 msgstr "حذف \"{0}\"؟ لا يمكن التراجع عن هذا الإجراء."
 
@@ -1507,7 +1507,7 @@ msgstr "حذف التعليق؟"
 msgid "Delete Content Type?"
 msgstr "حذف نوع المحتوى؟"
 
-#: packages/admin/src/components/MediaDetailPanel.tsx:254
+#: packages/admin/src/components/MediaDetailPanel.tsx:253
 msgid "Delete Media?"
 msgstr "حذف الوسائط؟"
 
@@ -1551,8 +1551,8 @@ msgstr "محذوف"
 
 #: packages/admin/src/components/comments/CommentInbox.tsx:415
 #: packages/admin/src/components/ContentTypeList.tsx:149
-#: packages/admin/src/components/MediaDetailPanel.tsx:231
-#: packages/admin/src/components/MediaDetailPanel.tsx:257
+#: packages/admin/src/components/MediaDetailPanel.tsx:230
+#: packages/admin/src/components/MediaDetailPanel.tsx:256
 #: packages/admin/src/components/MenuList.tsx:210
 #: packages/admin/src/components/Redirects.tsx:560
 #: packages/admin/src/components/Sections.tsx:307
@@ -1571,7 +1571,7 @@ msgstr "رفض"
 
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:301
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:466
-#: packages/admin/src/components/MediaDetailPanel.tsx:206
+#: packages/admin/src/components/MediaDetailPanel.tsx:205
 msgid "Describe this image for accessibility"
 msgstr "قم بوصف هذه الصورة لإمكانية الوصول"
 
@@ -1608,7 +1608,7 @@ msgstr "تم تفويض الجهاز"
 msgid "Device code"
 msgstr "رمز الجهاز"
 
-#: packages/admin/src/components/users/UserDetail.tsx:262
+#: packages/admin/src/components/users/UserDetail.tsx:256
 msgid "Device-bound"
 msgstr "مرتبط بالجهاز"
 
@@ -1620,11 +1620,11 @@ msgstr "مفتاح مرور مرتبط بالجهاز"
 msgid "Didn't receive the email?"
 msgstr "لم تتلقى البريد الإلكتروني؟"
 
-#: packages/admin/src/components/MediaDetailPanel.tsx:177
+#: packages/admin/src/components/MediaDetailPanel.tsx:176
 msgid "Dimensions:"
 msgstr "الأبعاد:"
 
-#: packages/admin/src/components/users/UserDetail.tsx:325
+#: packages/admin/src/components/users/UserDetail.tsx:319
 msgid "Disable"
 msgstr "تعطيل"
 
@@ -1638,7 +1638,7 @@ msgstr "تعطيل إعادة التوجيه"
 
 #: packages/admin/src/components/PluginManager.tsx:308
 #: packages/admin/src/components/Redirects.tsx:397
-#: packages/admin/src/components/users/UserDetail.tsx:209
+#: packages/admin/src/components/users/UserDetail.tsx:201
 msgid "Disabled"
 msgstr "معطل"
 
@@ -1828,7 +1828,7 @@ msgstr "محرر"
 
 #: packages/admin/src/components/Settings.tsx:115
 #: packages/admin/src/components/SignupPage.tsx:196
-#: packages/admin/src/components/users/UserDetail.tsx:162
+#: packages/admin/src/components/users/UserDetail.tsx:154
 msgid "Email"
 msgstr "البريد الإلكتروني"
 
@@ -1864,7 +1864,7 @@ msgstr "مزود البريد الإلكتروني نشط"
 msgid "Email Settings"
 msgstr "إعدادات البريد الإلكتروني"
 
-#: packages/admin/src/components/users/UserDetail.tsx:241
+#: packages/admin/src/components/users/UserDetail.tsx:235
 msgid "Email verified"
 msgstr "تم التحقق من البريد الإلكتروني"
 
@@ -1889,7 +1889,7 @@ msgstr "مُصدّر EmDash"
 msgid "EmDash Exporter plugin detected! You can import directly."
 msgstr "تم اكتشاف إضافة مُصدّر EmDash. يمكنك استيرادها مباشرة."
 
-#: packages/admin/src/components/users/UserDetail.tsx:325
+#: packages/admin/src/components/users/UserDetail.tsx:319
 msgid "Enable"
 msgstr "تفعيل"
 
@@ -1928,7 +1928,7 @@ msgstr "إدخال بيانات الاعتماد يدويًا"
 msgid "Enter distraction-free mode"
 msgstr "الدخول إلى وضع الخلو من التشتت"
 
-#: packages/admin/src/components/users/UserDetail.tsx:166
+#: packages/admin/src/components/users/UserDetail.tsx:158
 msgid "Enter email"
 msgstr "أدخل البريد الإلكتروني"
 
@@ -1936,7 +1936,7 @@ msgstr "أدخل البريد الإلكتروني"
 msgid "Enter markdown content..."
 msgstr "أدخل محتوى Markdown..."
 
-#: packages/admin/src/components/users/UserDetail.tsx:159
+#: packages/admin/src/components/users/UserDetail.tsx:151
 msgid "Enter name"
 msgstr "أدخل الاسم"
 
@@ -2154,12 +2154,12 @@ msgstr "الملف {0}"
 msgid "File from media library"
 msgstr "ملف من مكتبة الوسائط"
 
-#: packages/admin/src/components/MediaDetailPanel.tsx:193
+#: packages/admin/src/components/MediaDetailPanel.tsx:192
 #: packages/admin/src/components/MediaLibrary.tsx:416
 msgid "Filename"
 msgstr "اسم الملف"
 
-#: packages/admin/src/components/MediaDetailPanel.tsx:197
+#: packages/admin/src/components/MediaDetailPanel.tsx:196
 msgid "Filename cannot be changed after upload"
 msgstr "لا يمكن تغيير اسم الملف بعد الرفع"
 
@@ -2564,7 +2564,7 @@ msgstr "عنوان قسم كبير"
 msgid "Last enabled:"
 msgstr "آخر تفعيل:"
 
-#: packages/admin/src/components/users/UserDetail.tsx:235
+#: packages/admin/src/components/users/UserDetail.tsx:227
 msgid "Last login"
 msgstr "آخر تسجيل دخول"
 
@@ -2572,7 +2572,7 @@ msgstr "آخر تسجيل دخول"
 msgid "Last seen"
 msgstr "آخر ظهور"
 
-#: packages/admin/src/components/users/UserDetail.tsx:231
+#: packages/admin/src/components/users/UserDetail.tsx:223
 msgid "Last updated"
 msgstr "آخر تحديث"
 
@@ -2583,7 +2583,7 @@ msgstr "آخر استخدام"
 #. placeholder {0}: new Date(cred.lastUsedAt).toLocaleDateString()
 #. placeholder {0}: new Date(token.lastUsedAt).toLocaleDateString()
 #: packages/admin/src/components/settings/ApiTokenSettings.tsx:285
-#: packages/admin/src/components/users/UserDetail.tsx:268
+#: packages/admin/src/components/users/UserDetail.tsx:262
 msgid "Last used {0}"
 msgstr "آخر استخدام في {0}"
 
@@ -2620,7 +2620,7 @@ msgid "Link to another content item"
 msgstr "الربط مع عنصر محتوى آخر"
 
 #. placeholder {0}: user.oauthAccounts.length
-#: packages/admin/src/components/users/UserDetail.tsx:282
+#: packages/admin/src/components/users/UserDetail.tsx:276
 msgid "Linked Accounts ({0})"
 msgstr "الحسابات المربوطة ({0})"
 
@@ -2817,7 +2817,7 @@ msgstr "القيمة القصوى"
 msgid "Media"
 msgstr "وسائط"
 
-#: packages/admin/src/components/MediaDetailPanel.tsx:131
+#: packages/admin/src/components/MediaDetailPanel.tsx:130
 msgid "Media Details"
 msgstr "تفاصيل الوسائط"
 
@@ -2991,7 +2991,7 @@ msgstr "مدونتي الرائعة"
 #: packages/admin/src/components/TaxonomyManager.tsx:241
 #: packages/admin/src/components/TaxonomyManager.tsx:464
 #: packages/admin/src/components/TaxonomyManager.tsx:617
-#: packages/admin/src/components/users/UserDetail.tsx:156
+#: packages/admin/src/components/users/UserDetail.tsx:148
 msgid "Name"
 msgstr "الاسم"
 
@@ -3007,7 +3007,7 @@ msgstr "يجب أن يبدأ الاسم بحرف ويحتوي فقط على أح
 msgid "Navigation"
 msgstr "التنقل"
 
-#: packages/admin/src/components/users/UserDetail.tsx:237
+#: packages/admin/src/components/users/UserDetail.tsx:231
 msgid "Never"
 msgstr "أبدًا"
 
@@ -3064,7 +3064,7 @@ msgstr "الصفحة التالية"
 msgid "Next screenshot"
 msgstr "لقطة الشاشة التالية"
 
-#: packages/admin/src/components/users/UserDetail.tsx:242
+#: packages/admin/src/components/users/UserDetail.tsx:236
 msgid "No"
 msgstr "لا"
 
@@ -3204,7 +3204,7 @@ msgstr "لا توجد قوائم بعد"
 msgid "No minimum"
 msgstr "بدون حد أدنى"
 
-#: packages/admin/src/components/users/UserDetail.tsx:254
+#: packages/admin/src/components/users/UserDetail.tsx:248
 msgid "No passkeys registered"
 msgstr "لم يتم تسجيل مفاتيح مرور"
 
@@ -3334,7 +3334,7 @@ msgstr "فتح ملف WordPress الشخصي"
 msgid "Optional caption displayed below the image"
 msgstr "تسمية توضيحية اختيارية تُعرض أسفل الصورة"
 
-#: packages/admin/src/components/MediaDetailPanel.tsx:214
+#: packages/admin/src/components/MediaDetailPanel.tsx:213
 msgid "Optional caption for display"
 msgstr "تسمية توضيحية اختيارية للعرض"
 
@@ -3451,7 +3451,7 @@ msgid "Passkeys"
 msgstr "مفاتيح المرور"
 
 #. placeholder {0}: user.credentials.length
-#: packages/admin/src/components/users/UserDetail.tsx:251
+#: packages/admin/src/components/users/UserDetail.tsx:245
 msgid "Passkeys ({0})"
 msgstr "مفاتيح المرور ({0})"
 
@@ -3698,7 +3698,7 @@ msgid "Recipient email"
 msgstr "بريد المستلم"
 
 #. placeholder {0}: user.email
-#: packages/admin/src/components/users/UserDetail.tsx:342
+#: packages/admin/src/components/users/UserDetail.tsx:336
 msgid "Recovery link sent to {0}"
 msgstr "تم إرسال رابط الاستعادة إلى {0}"
 
@@ -3954,8 +3954,8 @@ msgid "Risk score: {0}/100"
 msgstr "درجة المخاطرة: {0}/100"
 
 #: packages/admin/src/components/users/InviteUserModal.tsx:166
-#: packages/admin/src/components/users/UserDetail.tsx:177
-#: packages/admin/src/components/users/UserDetail.tsx:189
+#: packages/admin/src/components/users/UserDetail.tsx:169
+#: packages/admin/src/components/users/UserDetail.tsx:181
 msgid "Role"
 msgstr "الدور"
 
@@ -3977,14 +3977,14 @@ msgstr "نفس النافذة"
 #: packages/admin/src/components/ContentEditor.tsx:1777
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:349
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:519
-#: packages/admin/src/components/MediaDetailPanel.tsx:242
+#: packages/admin/src/components/MediaDetailPanel.tsx:241
 #: packages/admin/src/components/MenuEditor.tsx:442
 #: packages/admin/src/components/Redirects.tsx:184
 #: packages/admin/src/components/SaveButton.tsx:42
 msgid "Save"
 msgstr "حفظ"
 
-#: packages/admin/src/components/users/UserDetail.tsx:317
+#: packages/admin/src/components/users/UserDetail.tsx:311
 msgid "Save Changes"
 msgstr "حفظ التغييرات"
 
@@ -4016,7 +4016,7 @@ msgstr "تم الحفظ"
 #: packages/admin/src/components/ContentEditor.tsx:546
 #: packages/admin/src/components/ContentEditor.tsx:1777
 #: packages/admin/src/components/FieldEditor.tsx:646
-#: packages/admin/src/components/MediaDetailPanel.tsx:242
+#: packages/admin/src/components/MediaDetailPanel.tsx:241
 #: packages/admin/src/components/MenuEditor.tsx:442
 #: packages/admin/src/components/Redirects.tsx:181
 #: packages/admin/src/components/SaveButton.tsx:42
@@ -4024,7 +4024,7 @@ msgstr "تم الحفظ"
 #: packages/admin/src/components/settings/SeoSettings.tsx:164
 #: packages/admin/src/components/settings/SocialSettings.tsx:169
 #: packages/admin/src/components/TaxonomyManager.tsx:308
-#: packages/admin/src/components/users/UserDetail.tsx:317
+#: packages/admin/src/components/users/UserDetail.tsx:311
 msgid "Saving..."
 msgstr "جاري الحفظ..."
 
@@ -4344,7 +4344,7 @@ msgstr "إرسال الدعوة"
 msgid "Send magic link"
 msgstr "إرسال رابط سحري"
 
-#: packages/admin/src/components/users/UserDetail.tsx:338
+#: packages/admin/src/components/users/UserDetail.tsx:332
 msgid "Send Recovery Link"
 msgstr "إرسال رابط الاسترداد"
 
@@ -4361,7 +4361,7 @@ msgstr "إرسال بريد إلكتروني تجريبي"
 #: packages/admin/src/components/SignupPage.tsx:87
 #: packages/admin/src/components/SignupPage.tsx:150
 #: packages/admin/src/components/users/InviteUserModal.tsx:203
-#: packages/admin/src/components/users/UserDetail.tsx:338
+#: packages/admin/src/components/users/UserDetail.tsx:332
 msgid "Sending..."
 msgstr "جاري الإرسال..."
 
@@ -4511,7 +4511,7 @@ msgstr "رابط الموقع"
 msgid "Size"
 msgstr "الحجم"
 
-#: packages/admin/src/components/MediaDetailPanel.tsx:171
+#: packages/admin/src/components/MediaDetailPanel.tsx:170
 msgid "Size:"
 msgstr "الحجم:"
 
@@ -4630,7 +4630,7 @@ msgstr "الحقول الفرعية"
 msgid "Subscriber"
 msgstr "مشترك"
 
-#: packages/admin/src/components/users/UserDetail.tsx:262
+#: packages/admin/src/components/users/UserDetail.tsx:256
 msgid "Synced"
 msgstr "متزامن"
 
@@ -5027,7 +5027,7 @@ msgid "Unlock aspect ratio"
 msgstr "إلغاء تثبيت نسبة العرض إلى الارتفاع"
 
 #: packages/admin/src/components/settings/PasskeyItem.tsx:152
-#: packages/admin/src/components/users/UserDetail.tsx:260
+#: packages/admin/src/components/users/UserDetail.tsx:254
 msgid "Unnamed passkey"
 msgstr "مفتاح مرور بدون اسم"
 
@@ -5154,7 +5154,7 @@ msgstr "رفع إلى {0}"
 msgid "Upload WordPress export file"
 msgstr "رفع ملف تصدير WordPress"
 
-#: packages/admin/src/components/MediaDetailPanel.tsx:185
+#: packages/admin/src/components/MediaDetailPanel.tsx:184
 msgid "Uploaded:"
 msgstr "تم الرفع:"
 
@@ -5207,7 +5207,7 @@ msgstr "يُستخدم كمعرف. أحرف صغيرة وأرقام وشرطات
 msgid "Used as the main visual for this post on listing pages and at the top of the post"
 msgstr "يُستخدم كالصورة الرئيسية لهذا المنشور في صفحات القائمة وأعلى المنشور"
 
-#: packages/admin/src/components/MediaDetailPanel.tsx:207
+#: packages/admin/src/components/MediaDetailPanel.tsx:206
 msgid "Used by screen readers and when image fails to load"
 msgstr "يُستخدم بواسطة قارئات الشاشة وعند فشل تحميل الصورة"
 
@@ -5227,11 +5227,11 @@ msgstr "المستخدم"
 msgid "User access is managed by an external provider ({0}). Self-signup domain settings are not available when using external authentication."
 msgstr "تتم إدارة وصول المستخدمين بواسطة مزود خارجي ({0}). إعدادات نطاق التسجيل الذاتي غير متاحة عند استخدام المصادقة الخارجية."
 
-#: packages/admin/src/components/users/UserDetail.tsx:128
+#: packages/admin/src/components/users/UserDetail.tsx:116
 msgid "User Details"
 msgstr "تفاصيل المستخدم"
 
-#: packages/admin/src/components/users/UserDetail.tsx:302
+#: packages/admin/src/components/users/UserDetail.tsx:296
 msgid "User not found"
 msgstr "لم يتم العثور على المستخدم"
 
@@ -5397,7 +5397,7 @@ msgstr "اسم مستخدم WordPress"
 msgid "WXR File"
 msgstr "ملف WXR"
 
-#: packages/admin/src/components/users/UserDetail.tsx:242
+#: packages/admin/src/components/users/UserDetail.tsx:236
 msgid "Yes"
 msgstr "نعم"
 
@@ -5417,7 +5417,7 @@ msgstr "يمكنك إدارة المحتوى، الوسائط، القوائم،
 msgid "You can view and contribute to the site."
 msgstr "يمكنك الاطلاع والمساهمة في الموقع."
 
-#: packages/admin/src/components/users/UserDetail.tsx:183
+#: packages/admin/src/components/users/UserDetail.tsx:175
 msgid "You cannot change your own role"
 msgstr "لا يمكنك تغيير دورك الخاص"
 
