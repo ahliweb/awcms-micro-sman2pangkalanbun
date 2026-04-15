@@ -2547,6 +2547,7 @@ msgstr "关键词"
 msgid "Label"
 msgstr "标签"
 
+#: packages/admin/src/components/LoginPage.tsx:371
 #: packages/admin/src/components/Settings.tsx:129
 #: packages/admin/src/components/Settings.tsx:134
 msgid "Language"

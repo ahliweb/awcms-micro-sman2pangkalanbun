@@ -2551,6 +2551,7 @@ msgstr "الكلمات المفتاحية"
 msgid "Label"
 msgstr "التسمية"
 
+#: packages/admin/src/components/LoginPage.tsx:371
 #: packages/admin/src/components/Settings.tsx:129
 #: packages/admin/src/components/Settings.tsx:134
 msgid "Language"

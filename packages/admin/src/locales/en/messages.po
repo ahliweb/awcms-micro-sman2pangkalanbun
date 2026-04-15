@@ -2547,6 +2547,7 @@ msgstr "Keywords"
 msgid "Label"
 msgstr "Label"
 
+#: packages/admin/src/components/LoginPage.tsx:371
 #: packages/admin/src/components/Settings.tsx:129
 #: packages/admin/src/components/Settings.tsx:134
 msgid "Language"
