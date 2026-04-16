@@ -7,6 +7,11 @@ msgstr ""
 "X-Generator: @lingui/cli\n"
 "Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 
 #: packages/admin/src/components/ContentEditor.tsx:926
 #: packages/admin/src/components/LocaleSwitcher.tsx:72
@@ -428,10 +433,11 @@ msgstr "활성"
 #: packages/admin/src/components/MenuEditor.tsx:297
 #: packages/admin/src/components/TaxonomyManager.tsx:214
 #: packages/admin/src/components/TaxonomyManager.tsx:610
+#: packages/admin/src/components/TaxonomySidebar.tsx:430
 msgid "Add"
 msgstr "추가"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:204
+#: packages/admin/src/components/TaxonomySidebar.tsx:238
 msgid "Add {label}"
 msgstr "{label} 추가"
 
@@ -488,6 +494,11 @@ msgstr "탐색 메뉴에 링크를 추가하여 구성하세요."
 msgid "Add New"
 msgstr "추가"
 
+#. placeholder {0}: (taxonomy.labelSingular || taxonomy.label).toLowerCase()
+#: packages/admin/src/components/TaxonomySidebar.tsx:440
+msgid "Add new {0}"
+msgstr ""
+
 #: packages/admin/src/components/SeoPanel.tsx:187
 msgid "Add noindex meta tag"
 msgstr "noindex 메타 태그 추가"
@@ -504,7 +515,7 @@ msgstr "EmDash 기능을 확장하려면 astro.config.mjs에 플러그인을 추
 msgid "Add Sub-Field"
 msgstr "하위 필드 추가"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:203
+#: packages/admin/src/components/TaxonomySidebar.tsx:237
 msgid "Add tags..."
 msgstr "태그 추가..."
 
@@ -2014,6 +2025,10 @@ msgstr "바이라인을 추가하지 못했습니다."
 msgid "Failed to create some collections"
 msgstr "일부 컬렉션을 생성하지 못했습니다."
 
+#: packages/admin/src/components/TaxonomySidebar.tsx:447
+msgid "Failed to create term"
+msgstr ""
+
 #: packages/admin/src/components/PluginManager.tsx:108
 msgid "Failed to disable plugin"
 msgstr "플러그인을 비활성화하지 못했습니다."
@@ -2542,6 +2557,7 @@ msgstr "키워드"
 msgid "Label"
 msgstr "라벨"
 
+#: packages/admin/src/components/LoginPage.tsx:371
 #: packages/admin/src/components/Settings.tsx:129
 #: packages/admin/src/components/Settings.tsx:134
 msgid "Language"
@@ -3006,6 +3022,11 @@ msgstr "없음"
 msgid "NEW"
 msgstr "NEW"
 
+#. placeholder {0}: (taxonomy.labelSingular || taxonomy.label).toLowerCase()
+#: packages/admin/src/components/TaxonomySidebar.tsx:418
+msgid "New {0}"
+msgstr ""
+
 #: packages/admin/src/components/ContentEditor.tsx:526
 msgid "New {collectionLabel}"
 msgstr "새 {collectionLabel}"
@@ -3060,7 +3081,7 @@ msgid "No"
 msgstr "아니오"
 
 #. placeholder {0}: taxonomy.label.toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:311
+#: packages/admin/src/components/TaxonomySidebar.tsx:388
 msgid "No {0} available."
 msgstr "사용 가능한 {0}이 없습니다."
 
@@ -3740,7 +3761,7 @@ msgstr "제거"
 #. placeholder {0}: passkey.name
 #. placeholder {0}: term.label
 #: packages/admin/src/components/settings/PasskeyItem.tsx:188
-#: packages/admin/src/components/TaxonomySidebar.tsx:189
+#: packages/admin/src/components/TaxonomySidebar.tsx:222
 msgid "Remove {0}"
 msgstr "{0} 삭제"
 
@@ -4656,7 +4677,7 @@ msgstr "태그를 가져옵니다."
 msgid "Target"
 msgstr "열기 방식"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:357
+#: packages/admin/src/components/TaxonomySidebar.tsx:486
 msgid "Taxonomies"
 msgstr "분류"
 
