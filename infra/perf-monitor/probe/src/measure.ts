@@ -16,13 +16,25 @@ export interface RouteResult {
 	path: string;
 	label: string;
 	coldTtfbMs: number;
-	warmTtfbMs: number;
-	p95TtfbMs: number;
+	/**
+	 * Median warm-request TTFB. Null if warmRequests was 0 and no warm
+	 * samples were taken — caller should fall back to coldTtfbMs in that case.
+	 */
+	warmTtfbMs: number | null;
+	/** p95 warm-request TTFB. Null when no warm samples were taken. */
+	p95TtfbMs: number | null;
 	statusCode: number;
 	cfColo: string | null;
 	cfPlacement: string | null;
 	/** Parsed from the cold response. Null if header absent or unparseable. */
 	coldServerTimings: ServerTimings | null;
+	/**
+	 * Median of each Server-Timing metric across all warm requests.
+	 * Null if no warm responses carried the header or no warm requests
+	 * were issued. Use this to isolate steady-state render/middleware/
+	 * runtime cost, independent of cold-start.
+	 */
+	warmServerTimings: ServerTimings | null;
 }
 
 export interface MeasureResponse {
@@ -141,25 +153,58 @@ export async function measureRoutes(req: MeasureRequest): Promise<RouteResult[]>
 		const coldUrl = url + (url.includes("?") ? "&" : "?") + `_perf_cold=${Date.now()}`;
 		const cold = await measureTtfb(coldUrl);
 
-		// Warm requests
+		// Warm requests — keep per-metric samples so we can median each one.
 		const warmTimings: number[] = [];
+		const warmMetricSamples: Record<string, { durs: number[]; desc?: string }> = {};
 		let lastStatusCode = cold.statusCode;
 		for (let i = 0; i < req.warmRequests; i++) {
 			const warm = await measureTtfb(url);
 			warmTimings.push(warm.ttfbMs);
 			lastStatusCode = warm.statusCode;
+			if (warm.serverTimings) {
+				for (const [name, entry] of Object.entries(warm.serverTimings)) {
+					const acc = warmMetricSamples[name] ?? { durs: [], desc: entry.desc };
+					acc.durs.push(entry.dur);
+					if (!acc.desc && entry.desc) acc.desc = entry.desc;
+					warmMetricSamples[name] = acc;
+				}
+			}
 		}
+
+		// Collapse per-metric samples into medians so the stored shape
+		// mirrors coldServerTimings.
+		const warmServerTimings: ServerTimings | null = Object.keys(warmMetricSamples).length
+			? Object.fromEntries(
+					Object.entries(warmMetricSamples).map(([name, { durs, desc }]) => {
+						const entry: { dur: number; desc?: string } = {
+							dur: Math.round(median(durs) * 100) / 100,
+						};
+						if (desc) entry.desc = desc;
+						return [name, entry];
+					}),
+				)
+			: null;
+
+		// Handle the (uncommon) warmRequests=0 case: without warm samples,
+		// median/p95 would compute against an empty array and produce NaN.
+		// Report the cold TTFB in both slots so the row remains valid;
+		// warm timings are reported as null so downstream code knows there's
+		// no warm breakdown to render.
+		const hasWarm = warmTimings.length > 0;
+		const warmTtfbMs = hasWarm ? Math.round(median(warmTimings) * 100) / 100 : null;
+		const p95TtfbMs = hasWarm ? Math.round(p95(warmTimings) * 100) / 100 : null;
 
 		results.push({
 			path: route.path,
 			label: route.label,
 			coldTtfbMs: Math.round(cold.ttfbMs * 100) / 100,
-			warmTtfbMs: Math.round(median(warmTimings) * 100) / 100,
-			p95TtfbMs: Math.round(p95(warmTimings) * 100) / 100,
+			warmTtfbMs,
+			p95TtfbMs,
 			statusCode: lastStatusCode,
 			cfColo: cold.cfColo,
 			cfPlacement: cold.cfPlacement,
 			coldServerTimings: cold.serverTimings,
+			warmServerTimings,
 		});
 	}
 
