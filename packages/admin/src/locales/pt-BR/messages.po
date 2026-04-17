@@ -628,6 +628,7 @@ msgstr "Alternativamente, você pode exportar do WordPress (Ferramentas → Expo
 #: packages/admin/src/components/PluginManager.tsx:109
 #: packages/admin/src/components/TaxonomySidebar.tsx:321
 #: packages/admin/src/components/ThemeMarketplaceBrowse.tsx:116
+#: packages/admin/src/router.tsx:1534
 msgid "An error occurred"
 msgstr "Ocorreu um erro"
 
@@ -2096,6 +2097,10 @@ msgstr "Falha ao remover chave de acesso"
 #: packages/admin/src/components/settings/SecuritySettings.tsx:66
 msgid "Failed to rename passkey"
 msgstr "Falha ao renomear chave de acesso"
+
+#: packages/admin/src/router.tsx:1533
+msgid "Failed to save"
+msgstr ""
 
 #: packages/admin/src/components/settings/GeneralSettings.tsx:64
 #: packages/admin/src/components/settings/SeoSettings.tsx:58

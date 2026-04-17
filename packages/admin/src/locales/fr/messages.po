@@ -628,6 +628,7 @@ msgstr "Alternativement, vous pouvez exporter depuis WordPress (Outils → Expor
 #: packages/admin/src/components/PluginManager.tsx:109
 #: packages/admin/src/components/TaxonomySidebar.tsx:321
 #: packages/admin/src/components/ThemeMarketplaceBrowse.tsx:116
+#: packages/admin/src/router.tsx:1534
 msgid "An error occurred"
 msgstr "Une erreur s'est produite"
 
@@ -2096,6 +2097,10 @@ msgstr "Échec de la suppression de la clé d'accès"
 #: packages/admin/src/components/settings/SecuritySettings.tsx:66
 msgid "Failed to rename passkey"
 msgstr "Échec du renommage de la clé d'accès"
+
+#: packages/admin/src/router.tsx:1533
+msgid "Failed to save"
+msgstr ""
 
 #: packages/admin/src/components/settings/GeneralSettings.tsx:64
 #: packages/admin/src/components/settings/SeoSettings.tsx:58
