@@ -197,6 +197,11 @@ msgstr "{0} plugins"
 msgid "{0} preview"
 msgstr "{0} vista previa"
 
+#. placeholder {0}: taxonomy.label
+#: packages/admin/src/components/TaxonomySidebar.tsx:316
+msgid "{0} updated"
+msgstr ""
+
 #. placeholder {0}: plugin.name
 #. placeholder {1}: updateInfo?.latest
 #: packages/admin/src/components/PluginManager.tsx:247
@@ -433,7 +438,7 @@ msgstr "Activo"
 #: packages/admin/src/components/MenuEditor.tsx:297
 #: packages/admin/src/components/TaxonomyManager.tsx:214
 #: packages/admin/src/components/TaxonomyManager.tsx:610
-#: packages/admin/src/components/TaxonomySidebar.tsx:430
+#: packages/admin/src/components/TaxonomySidebar.tsx:439
 msgid "Add"
 msgstr "Agregar"
 
@@ -495,7 +500,7 @@ msgid "Add New"
 msgstr "Agregar nuevo"
 
 #. placeholder {0}: (taxonomy.labelSingular || taxonomy.label).toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:440
+#: packages/admin/src/components/TaxonomySidebar.tsx:449
 msgid "Add new {0}"
 msgstr ""
 
@@ -621,6 +626,7 @@ msgstr "Alternativamente, puede exportar desde WordPress (Herramientas → Expor
 #: packages/admin/src/components/MarketplaceBrowse.tsx:138
 #: packages/admin/src/components/PluginManager.tsx:90
 #: packages/admin/src/components/PluginManager.tsx:109
+#: packages/admin/src/components/TaxonomySidebar.tsx:321
 #: packages/admin/src/components/ThemeMarketplaceBrowse.tsx:116
 msgid "An error occurred"
 msgstr "Se produjo un error"
@@ -2025,7 +2031,7 @@ msgstr "No se pudo crear la firma"
 msgid "Failed to create some collections"
 msgstr "No se pudieron crear algunas colecciones."
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:447
+#: packages/admin/src/components/TaxonomySidebar.tsx:456
 msgid "Failed to create term"
 msgstr ""
 
@@ -2105,6 +2111,11 @@ msgstr "No se pudo enviar el enlace mágico"
 #: packages/admin/src/components/settings/EmailSettings.tsx:62
 msgid "Failed to send test email"
 msgstr "No se pudo enviar el correo electrónico de prueba"
+
+#. placeholder {0}: taxonomy.label.toLowerCase()
+#: packages/admin/src/components/TaxonomySidebar.tsx:320
+msgid "Failed to update {0}"
+msgstr ""
 
 #: packages/admin/src/components/ContentEditor.tsx:1771
 msgid "Failed to update byline"
@@ -3023,7 +3034,7 @@ msgid "NEW"
 msgstr "NUEVO"
 
 #. placeholder {0}: (taxonomy.labelSingular || taxonomy.label).toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:418
+#: packages/admin/src/components/TaxonomySidebar.tsx:427
 msgid "New {0}"
 msgstr ""
 
@@ -3081,7 +3092,7 @@ msgid "No"
 msgstr "No"
 
 #. placeholder {0}: taxonomy.label.toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:388
+#: packages/admin/src/components/TaxonomySidebar.tsx:397
 msgid "No {0} available."
 msgstr "No hay {0} disponible."
 
@@ -4677,7 +4688,7 @@ msgstr "Las etiquetas serán importadas"
 msgid "Target"
 msgstr "Objetivo"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:486
+#: packages/admin/src/components/TaxonomySidebar.tsx:495
 msgid "Taxonomies"
 msgstr "Taxonomías"
 

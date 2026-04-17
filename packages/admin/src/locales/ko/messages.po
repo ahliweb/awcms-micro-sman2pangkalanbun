@@ -197,6 +197,11 @@ msgstr "{0} 플러그인"
 msgid "{0} preview"
 msgstr "{0} 미리보기"
 
+#. placeholder {0}: taxonomy.label
+#: packages/admin/src/components/TaxonomySidebar.tsx:316
+msgid "{0} updated"
+msgstr ""
+
 #. placeholder {0}: plugin.name
 #. placeholder {1}: updateInfo?.latest
 #: packages/admin/src/components/PluginManager.tsx:247
@@ -433,7 +438,7 @@ msgstr "활성"
 #: packages/admin/src/components/MenuEditor.tsx:297
 #: packages/admin/src/components/TaxonomyManager.tsx:214
 #: packages/admin/src/components/TaxonomyManager.tsx:610
-#: packages/admin/src/components/TaxonomySidebar.tsx:430
+#: packages/admin/src/components/TaxonomySidebar.tsx:439
 msgid "Add"
 msgstr "추가"
 
@@ -495,7 +500,7 @@ msgid "Add New"
 msgstr "추가"
 
 #. placeholder {0}: (taxonomy.labelSingular || taxonomy.label).toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:440
+#: packages/admin/src/components/TaxonomySidebar.tsx:449
 msgid "Add new {0}"
 msgstr ""
 
@@ -621,6 +626,7 @@ msgstr "또는 WordPress(도구 → 내보내기)에서 내보내고 파일을 �
 #: packages/admin/src/components/MarketplaceBrowse.tsx:138
 #: packages/admin/src/components/PluginManager.tsx:90
 #: packages/admin/src/components/PluginManager.tsx:109
+#: packages/admin/src/components/TaxonomySidebar.tsx:321
 #: packages/admin/src/components/ThemeMarketplaceBrowse.tsx:116
 msgid "An error occurred"
 msgstr "오류가 발생했습니다"
@@ -2025,7 +2031,7 @@ msgstr "바이라인을 추가하지 못했습니다."
 msgid "Failed to create some collections"
 msgstr "일부 컬렉션을 생성하지 못했습니다."
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:447
+#: packages/admin/src/components/TaxonomySidebar.tsx:456
 msgid "Failed to create term"
 msgstr ""
 
@@ -2105,6 +2111,11 @@ msgstr "매직 링크를 보내지 못했습니다."
 #: packages/admin/src/components/settings/EmailSettings.tsx:62
 msgid "Failed to send test email"
 msgstr "테스트 이메일을 보내지 못했습니다."
+
+#. placeholder {0}: taxonomy.label.toLowerCase()
+#: packages/admin/src/components/TaxonomySidebar.tsx:320
+msgid "Failed to update {0}"
+msgstr ""
 
 #: packages/admin/src/components/ContentEditor.tsx:1771
 msgid "Failed to update byline"
@@ -3023,7 +3034,7 @@ msgid "NEW"
 msgstr "NEW"
 
 #. placeholder {0}: (taxonomy.labelSingular || taxonomy.label).toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:418
+#: packages/admin/src/components/TaxonomySidebar.tsx:427
 msgid "New {0}"
 msgstr ""
 
@@ -3081,7 +3092,7 @@ msgid "No"
 msgstr "아니오"
 
 #. placeholder {0}: taxonomy.label.toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:388
+#: packages/admin/src/components/TaxonomySidebar.tsx:397
 msgid "No {0} available."
 msgstr "사용 가능한 {0}이 없습니다."
 
@@ -4677,7 +4688,7 @@ msgstr "태그를 가져옵니다."
 msgid "Target"
 msgstr "열기 방식"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:486
+#: packages/admin/src/components/TaxonomySidebar.tsx:495
 msgid "Taxonomies"
 msgstr "분류"
 
