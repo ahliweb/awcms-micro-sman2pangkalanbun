@@ -538,12 +538,12 @@ msgid "Additional data to import."
 msgstr "Dados adicionais para importar."
 
 #: packages/admin/src/components/settings/ApiTokenSettings.tsx:84
-#: packages/admin/src/components/Sidebar.tsx:426
+#: packages/admin/src/components/Sidebar.tsx:438
 #: packages/admin/src/components/users/roleDefinitions.ts:42
 msgid "Admin"
 msgstr "Admin"
 
-#: packages/admin/src/components/Sidebar.tsx:373
+#: packages/admin/src/components/Sidebar.tsx:378
 msgid "Admin navigation"
 msgstr "Navegação administrativa"
 
@@ -839,7 +839,7 @@ msgid "Bullet List"
 msgstr "Lista com marcadores"
 
 #: packages/admin/src/components/ContentEditor.tsx:928
-#: packages/admin/src/components/Sidebar.tsx:201
+#: packages/admin/src/components/Sidebar.tsx:206
 msgid "Bylines"
 msgstr "Créditos"
 
@@ -1086,7 +1086,7 @@ msgid "Comment Detail"
 msgstr "Detalhes do comentário"
 
 #: packages/admin/src/components/comments/CommentInbox.tsx:153
-#: packages/admin/src/components/Sidebar.tsx:185
+#: packages/admin/src/components/Sidebar.tsx:190
 msgid "Comments"
 msgstr "Comentários"
 
@@ -1126,7 +1126,7 @@ msgstr "{0} conectado"
 #: packages/admin/src/components/Dashboard.tsx:164
 #: packages/admin/src/components/PortableTextEditor.tsx:1431
 #: packages/admin/src/components/SectionEditor.tsx:174
-#: packages/admin/src/components/Sidebar.tsx:400
+#: packages/admin/src/components/Sidebar.tsx:412
 msgid "Content"
 msgstr "Conteúdo"
 
@@ -1169,7 +1169,7 @@ msgstr "Conteúdo para importar"
 
 #: packages/admin/src/components/AdminCommandPalette.tsx:185
 #: packages/admin/src/components/ContentTypeList.tsx:39
-#: packages/admin/src/components/Sidebar.tsx:205
+#: packages/admin/src/components/Sidebar.tsx:210
 msgid "Content Types"
 msgstr "Tipos de conteúdo"
 
@@ -1336,7 +1336,7 @@ msgstr "Criar taxonomia"
 msgid "Create Token"
 msgstr "Criar token"
 
-#: packages/admin/src/components/SetupWizard.tsx:495
+#: packages/admin/src/components/SetupWizard.tsx:505
 msgid "Create your account"
 msgstr "Crie sua conta"
 
@@ -1425,8 +1425,8 @@ msgstr "Escuro"
 #: packages/admin/src/components/AdminCommandPalette.tsx:131
 #: packages/admin/src/components/ContentTypeList.tsx:246
 #: packages/admin/src/components/Dashboard.tsx:42
-#: packages/admin/src/components/Sidebar.tsx:171
-#: packages/admin/src/components/Sidebar.tsx:389
+#: packages/admin/src/components/Sidebar.tsx:176
+#: packages/admin/src/components/Sidebar.tsx:401
 msgid "Dashboard"
 msgstr "Painel"
 
@@ -1716,7 +1716,7 @@ msgstr "Domínio removido"
 msgid "Domain updated"
 msgstr "Domínio atualizado"
 
-#: packages/admin/src/components/LoginPage.tsx:358
+#: packages/admin/src/components/LoginPage.tsx:366
 msgid "Don't have an account? <0>Sign up</0>"
 msgstr "Não tem uma conta? <0>Cadastre-se</0>"
 
@@ -1967,7 +1967,7 @@ msgstr "Digite a URL do seu site WordPress"
 
 #: packages/admin/src/components/MenuEditor.tsx:83
 #: packages/admin/src/components/MenuEditor.tsx:122
-#: packages/admin/src/components/SetupWizard.tsx:478
+#: packages/admin/src/components/SetupWizard.tsx:484
 msgid "Error"
 msgstr "Erro"
 
@@ -2081,7 +2081,7 @@ msgstr "Falha ao carregar Plugins: {0}"
 msgid "Failed to load revisions"
 msgstr "Falha ao carregar revisões"
 
-#: packages/admin/src/components/SetupWizard.tsx:480
+#: packages/admin/src/components/SetupWizard.tsx:486
 msgid "Failed to load setup"
 msgstr "Falha ao carregar configuração"
 
@@ -2351,7 +2351,7 @@ msgid "image URLs updated in"
 msgstr "URLs de imagem atualizadas em"
 
 #: packages/admin/src/components/AdminCommandPalette.tsx:227
-#: packages/admin/src/components/Sidebar.tsx:223
+#: packages/admin/src/components/Sidebar.tsx:228
 msgid "Import"
 msgstr "Importar"
 
@@ -2577,7 +2577,7 @@ msgstr "Palavras-chave"
 msgid "Label"
 msgstr "Rótulo"
 
-#: packages/admin/src/components/LoginPage.tsx:371
+#: packages/admin/src/components/LoginPage.tsx:379
 #: packages/admin/src/components/Settings.tsx:129
 #: packages/admin/src/components/Settings.tsx:134
 msgid "Language"
@@ -2717,7 +2717,7 @@ msgstr "Carregando seções..."
 msgid "Loading settings..."
 msgstr "Carregando configurações..."
 
-#: packages/admin/src/components/SetupWizard.tsx:467
+#: packages/admin/src/components/SetupWizard.tsx:473
 msgid "Loading setup..."
 msgstr "Carregando configuração..."
 
@@ -2777,7 +2777,7 @@ msgstr "Apenas letras minúsculas, números e hífens"
 msgid "Lowercase letters, numbers, and underscores only, starting with a letter"
 msgstr "Apenas letras minúsculas, números e underlines, começando com uma letra"
 
-#: packages/admin/src/components/Sidebar.tsx:414
+#: packages/admin/src/components/Sidebar.tsx:426
 msgid "Manage"
 msgstr "Gerenciar"
 
@@ -2822,7 +2822,7 @@ msgstr "marketplace"
 #: packages/admin/src/components/MarketplaceBrowse.tsx:86
 #: packages/admin/src/components/PluginManager.tsx:161
 #: packages/admin/src/components/PluginManager.tsx:309
-#: packages/admin/src/components/Sidebar.tsx:214
+#: packages/admin/src/components/Sidebar.tsx:219
 msgid "Marketplace"
 msgstr "Marketplace"
 
@@ -2839,7 +2839,7 @@ msgid "Max Value"
 msgstr "Valor máximo"
 
 #: packages/admin/src/components/PortableTextEditor.tsx:1417
-#: packages/admin/src/components/Sidebar.tsx:180
+#: packages/admin/src/components/Sidebar.tsx:185
 #: packages/admin/src/components/WordPressImport.tsx:1164
 msgid "Media"
 msgstr "Mídia"
@@ -2921,7 +2921,7 @@ msgstr "A ordem do menu foi atualizada."
 
 #: packages/admin/src/components/AdminCommandPalette.tsx:161
 #: packages/admin/src/components/MenuList.tsx:84
-#: packages/admin/src/components/Sidebar.tsx:190
+#: packages/admin/src/components/Sidebar.tsx:195
 msgid "Menus"
 msgstr "Menus"
 
@@ -3391,7 +3391,7 @@ msgstr "ou escolha na biblioteca"
 msgid "Or click to browse. Accepts .xml files exported from WordPress."
 msgstr "Ou clique para navegar. Aceita arquivos .xml exportados do WordPress."
 
-#: packages/admin/src/components/LoginPage.tsx:313
+#: packages/admin/src/components/LoginPage.tsx:321
 msgid "Or continue with"
 msgstr "Ou continue com"
 
@@ -3599,8 +3599,8 @@ msgstr "Plugin atualizado"
 #: packages/admin/src/components/PluginManager.tsx:125
 #: packages/admin/src/components/PluginManager.tsx:134
 #: packages/admin/src/components/PluginManager.tsx:143
-#: packages/admin/src/components/Sidebar.tsx:207
-#: packages/admin/src/components/Sidebar.tsx:438
+#: packages/admin/src/components/Sidebar.tsx:212
+#: packages/admin/src/components/Sidebar.tsx:450
 msgid "Plugins"
 msgstr "Plugins"
 
@@ -3744,7 +3744,7 @@ msgstr "Redirecionando para o acesso..."
 
 #: packages/admin/src/components/Redirects.tsx:333
 #: packages/admin/src/components/Redirects.tsx:352
-#: packages/admin/src/components/Sidebar.tsx:191
+#: packages/admin/src/components/Sidebar.tsx:196
 msgid "Redirects"
 msgstr "Redirecionamentos"
 
@@ -4239,7 +4239,7 @@ msgstr "Título da seção"
 
 #: packages/admin/src/components/AdminCommandPalette.tsx:177
 #: packages/admin/src/components/Sections.tsx:132
-#: packages/admin/src/components/Sidebar.tsx:193
+#: packages/admin/src/components/Sidebar.tsx:198
 msgid "Sections"
 msgstr "Seções"
 
@@ -4248,7 +4248,7 @@ msgstr "Seções"
 msgid "secure context"
 msgstr "contexto seguro"
 
-#: packages/admin/src/components/SetupWizard.tsx:496
+#: packages/admin/src/components/SetupWizard.tsx:506
 msgid "Secure your account"
 msgstr "Proteja sua conta"
 
@@ -4428,7 +4428,7 @@ msgstr "Defina um tamanho de exibição personalizado para esta instância da im
 msgid "Set up your passkey"
 msgstr "Configure sua chave de acesso"
 
-#: packages/admin/src/components/SetupWizard.tsx:494
+#: packages/admin/src/components/SetupWizard.tsx:504
 msgid "Set up your site"
 msgstr "Configure seu site"
 
@@ -4441,7 +4441,7 @@ msgstr "Configurando..."
 #: packages/admin/src/components/PluginManager.tsx:378
 #: packages/admin/src/components/PluginManager.tsx:380
 #: packages/admin/src/components/Settings.tsx:62
-#: packages/admin/src/components/Sidebar.tsx:224
+#: packages/admin/src/components/Sidebar.tsx:229
 #: packages/admin/src/components/WordPressImport.tsx:1655
 msgid "Settings"
 msgstr "Configurações"
@@ -4476,20 +4476,20 @@ msgstr "Acessar"
 msgid "Sign in instead"
 msgstr "Acessar em vez disso"
 
-#: packages/admin/src/components/LoginPage.tsx:283
+#: packages/admin/src/components/LoginPage.tsx:291
 msgid "Sign in to your site"
 msgstr "Acesse seu site"
 
-#: packages/admin/src/components/LoginPage.tsx:284
+#: packages/admin/src/components/LoginPage.tsx:292
 msgid "Sign in with email"
 msgstr "Acesse com e-mail"
 
-#: packages/admin/src/components/LoginPage.tsx:340
+#: packages/admin/src/components/LoginPage.tsx:348
 msgid "Sign in with email link"
 msgstr "Acesse com link de e-mail"
 
 #: packages/admin/src/components/auth/PasskeyLogin.tsx:136
-#: packages/admin/src/components/LoginPage.tsx:304
+#: packages/admin/src/components/LoginPage.tsx:312
 msgid "Sign in with Passkey"
 msgstr "Acesse com chave de acesso"
 
@@ -4792,7 +4792,7 @@ msgstr "Seções fornecidas pelo tema não podem ser excluídas. Edite a seção
 msgid "Theme: {label}"
 msgstr "Tema: {label}"
 
-#: packages/admin/src/components/Sidebar.tsx:218
+#: packages/admin/src/components/Sidebar.tsx:223
 #: packages/admin/src/components/ThemeMarketplaceBrowse.tsx:75
 msgid "Themes"
 msgstr "Temas"
@@ -5229,7 +5229,7 @@ msgstr "Use [param] ou [...rest] nos caminhos para correspondência de padrão."
 msgid "Use your device's biometric authentication, security key, or PIN to sign in."
 msgstr "Use a autenticação biométrica, chave de segurança ou PIN do seu dispositivo para acessar."
 
-#: packages/admin/src/components/LoginPage.tsx:351
+#: packages/admin/src/components/LoginPage.tsx:359
 msgid "Use your registered passkey to sign in securely."
 msgstr "Use sua chave de acesso cadastrada para acessar com segurança."
 
@@ -5270,7 +5270,7 @@ msgid "User not found"
 msgstr "Usuário não encontrado"
 
 #: packages/admin/src/components/AdminCommandPalette.tsx:211
-#: packages/admin/src/components/Sidebar.tsx:206
+#: packages/admin/src/components/Sidebar.tsx:211
 msgid "Users"
 msgstr "Usuários"
 
@@ -5347,7 +5347,7 @@ msgstr "Não foi possível conectar a um site WordPress em {0}. Isso pode signif
 msgid "We'll check what import options are available for your site."
 msgstr "Verificaremos quais opções de importação estão disponíveis para o seu site."
 
-#: packages/admin/src/components/LoginPage.tsx:352
+#: packages/admin/src/components/LoginPage.tsx:360
 msgid "We'll send you a link to sign in without a password."
 msgstr "Enviaremos um link para você acessar sem senha."
 
@@ -5406,7 +5406,7 @@ msgstr "Número inteiro"
 
 #: packages/admin/src/components/AdminCommandPalette.tsx:169
 #: packages/admin/src/components/PluginManager.tsx:333
-#: packages/admin/src/components/Sidebar.tsx:192
+#: packages/admin/src/components/Sidebar.tsx:197
 msgid "Widgets"
 msgstr "Widgets"
 
@@ -5484,7 +5484,7 @@ msgstr "Você será redirecionado ao WordPress para autorizar a conexão."
 msgid "You'll be signing up as"
 msgstr "Você se registrará como"
 
-#: packages/admin/src/components/SetupWizard.tsx:499
+#: packages/admin/src/components/SetupWizard.tsx:509
 msgid "You're signed in via Cloudflare Access"
 msgstr "Você está conectado via Cloudflare Access"
 
