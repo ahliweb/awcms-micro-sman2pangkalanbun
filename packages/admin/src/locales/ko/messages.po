@@ -198,7 +198,7 @@ msgid "{0} preview"
 msgstr "{0} 미리보기"
 
 #. placeholder {0}: taxonomy.label
-#: packages/admin/src/components/TaxonomySidebar.tsx:316
+#: packages/admin/src/components/TaxonomySidebar.tsx:313
 msgid "{0} updated"
 msgstr ""
 
@@ -438,11 +438,11 @@ msgstr "활성"
 #: packages/admin/src/components/MenuEditor.tsx:297
 #: packages/admin/src/components/TaxonomyManager.tsx:214
 #: packages/admin/src/components/TaxonomyManager.tsx:610
-#: packages/admin/src/components/TaxonomySidebar.tsx:439
+#: packages/admin/src/components/TaxonomySidebar.tsx:436
 msgid "Add"
 msgstr "추가"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:238
+#: packages/admin/src/components/TaxonomySidebar.tsx:235
 msgid "Add {label}"
 msgstr "{label} 추가"
 
@@ -500,7 +500,7 @@ msgid "Add New"
 msgstr "추가"
 
 #. placeholder {0}: (taxonomy.labelSingular || taxonomy.label).toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:449
+#: packages/admin/src/components/TaxonomySidebar.tsx:446
 msgid "Add new {0}"
 msgstr ""
 
@@ -520,7 +520,7 @@ msgstr "EmDash 기능을 확장하려면 astro.config.mjs에 플러그인을 추
 msgid "Add Sub-Field"
 msgstr "하위 필드 추가"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:237
+#: packages/admin/src/components/TaxonomySidebar.tsx:234
 msgid "Add tags..."
 msgstr "태그 추가..."
 
@@ -626,7 +626,7 @@ msgstr "또는 WordPress(도구 → 내보내기)에서 내보내고 파일을 �
 #: packages/admin/src/components/MarketplaceBrowse.tsx:138
 #: packages/admin/src/components/PluginManager.tsx:90
 #: packages/admin/src/components/PluginManager.tsx:109
-#: packages/admin/src/components/TaxonomySidebar.tsx:321
+#: packages/admin/src/components/TaxonomySidebar.tsx:318
 #: packages/admin/src/components/ThemeMarketplaceBrowse.tsx:116
 #: packages/admin/src/router.tsx:1520
 msgid "An error occurred"
@@ -2036,7 +2036,7 @@ msgstr "바이라인을 추가하지 못했습니다."
 msgid "Failed to create some collections"
 msgstr "일부 컬렉션을 생성하지 못했습니다."
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:456
+#: packages/admin/src/components/TaxonomySidebar.tsx:453
 msgid "Failed to create term"
 msgstr ""
 
@@ -2122,7 +2122,7 @@ msgid "Failed to send test email"
 msgstr "테스트 이메일을 보내지 못했습니다."
 
 #. placeholder {0}: taxonomy.label.toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:320
+#: packages/admin/src/components/TaxonomySidebar.tsx:317
 msgid "Failed to update {0}"
 msgstr ""
 
@@ -3043,7 +3043,7 @@ msgid "NEW"
 msgstr "NEW"
 
 #. placeholder {0}: (taxonomy.labelSingular || taxonomy.label).toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:427
+#: packages/admin/src/components/TaxonomySidebar.tsx:424
 msgid "New {0}"
 msgstr ""
 
@@ -3101,7 +3101,7 @@ msgid "No"
 msgstr "아니오"
 
 #. placeholder {0}: taxonomy.label.toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:397
+#: packages/admin/src/components/TaxonomySidebar.tsx:394
 msgid "No {0} available."
 msgstr "사용 가능한 {0}이 없습니다."
 
@@ -3781,7 +3781,7 @@ msgstr "제거"
 #. placeholder {0}: passkey.name
 #. placeholder {0}: term.label
 #: packages/admin/src/components/settings/PasskeyItem.tsx:188
-#: packages/admin/src/components/TaxonomySidebar.tsx:222
+#: packages/admin/src/components/TaxonomySidebar.tsx:219
 msgid "Remove {0}"
 msgstr "{0} 삭제"
 
@@ -4697,7 +4697,7 @@ msgstr "태그를 가져옵니다."
 msgid "Target"
 msgstr "열기 방식"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:495
+#: packages/admin/src/components/TaxonomySidebar.tsx:492
 msgid "Taxonomies"
 msgstr "분류"
 

@@ -198,7 +198,7 @@ msgid "{0} preview"
 msgstr ""
 
 #. placeholder {0}: taxonomy.label
-#: packages/admin/src/components/TaxonomySidebar.tsx:316
+#: packages/admin/src/components/TaxonomySidebar.tsx:313
 msgid "{0} updated"
 msgstr ""
 
@@ -438,11 +438,11 @@ msgstr ""
 #: packages/admin/src/components/MenuEditor.tsx:297
 #: packages/admin/src/components/TaxonomyManager.tsx:214
 #: packages/admin/src/components/TaxonomyManager.tsx:610
-#: packages/admin/src/components/TaxonomySidebar.tsx:439
+#: packages/admin/src/components/TaxonomySidebar.tsx:436
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:238
+#: packages/admin/src/components/TaxonomySidebar.tsx:235
 msgid "Add {label}"
 msgstr ""
 
@@ -500,7 +500,7 @@ msgid "Add New"
 msgstr "Neu hinzufügen"
 
 #. placeholder {0}: (taxonomy.labelSingular || taxonomy.label).toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:449
+#: packages/admin/src/components/TaxonomySidebar.tsx:446
 msgid "Add new {0}"
 msgstr ""
 
@@ -520,7 +520,7 @@ msgstr ""
 msgid "Add Sub-Field"
 msgstr ""
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:237
+#: packages/admin/src/components/TaxonomySidebar.tsx:234
 msgid "Add tags..."
 msgstr ""
 
@@ -626,7 +626,7 @@ msgstr ""
 #: packages/admin/src/components/MarketplaceBrowse.tsx:138
 #: packages/admin/src/components/PluginManager.tsx:90
 #: packages/admin/src/components/PluginManager.tsx:109
-#: packages/admin/src/components/TaxonomySidebar.tsx:321
+#: packages/admin/src/components/TaxonomySidebar.tsx:318
 #: packages/admin/src/components/ThemeMarketplaceBrowse.tsx:116
 #: packages/admin/src/router.tsx:1520
 msgid "An error occurred"
@@ -2036,7 +2036,7 @@ msgstr "Autorenzeile konnte nicht erstellt werden"
 msgid "Failed to create some collections"
 msgstr ""
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:456
+#: packages/admin/src/components/TaxonomySidebar.tsx:453
 msgid "Failed to create term"
 msgstr ""
 
@@ -2122,7 +2122,7 @@ msgid "Failed to send test email"
 msgstr ""
 
 #. placeholder {0}: taxonomy.label.toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:320
+#: packages/admin/src/components/TaxonomySidebar.tsx:317
 msgid "Failed to update {0}"
 msgstr ""
 
@@ -3043,7 +3043,7 @@ msgid "NEW"
 msgstr ""
 
 #. placeholder {0}: (taxonomy.labelSingular || taxonomy.label).toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:427
+#: packages/admin/src/components/TaxonomySidebar.tsx:424
 msgid "New {0}"
 msgstr ""
 
@@ -3101,7 +3101,7 @@ msgid "No"
 msgstr ""
 
 #. placeholder {0}: taxonomy.label.toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:397
+#: packages/admin/src/components/TaxonomySidebar.tsx:394
 msgid "No {0} available."
 msgstr ""
 
@@ -3781,7 +3781,7 @@ msgstr "Entfernen"
 #. placeholder {0}: passkey.name
 #. placeholder {0}: term.label
 #: packages/admin/src/components/settings/PasskeyItem.tsx:188
-#: packages/admin/src/components/TaxonomySidebar.tsx:222
+#: packages/admin/src/components/TaxonomySidebar.tsx:219
 msgid "Remove {0}"
 msgstr ""
 
@@ -4697,7 +4697,7 @@ msgstr ""
 msgid "Target"
 msgstr ""
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:495
+#: packages/admin/src/components/TaxonomySidebar.tsx:492
 msgid "Taxonomies"
 msgstr ""
 

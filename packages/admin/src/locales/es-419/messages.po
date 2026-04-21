@@ -198,7 +198,7 @@ msgid "{0} preview"
 msgstr "{0} vista previa"
 
 #. placeholder {0}: taxonomy.label
-#: packages/admin/src/components/TaxonomySidebar.tsx:316
+#: packages/admin/src/components/TaxonomySidebar.tsx:313
 msgid "{0} updated"
 msgstr ""
 
@@ -438,11 +438,11 @@ msgstr "Activo"
 #: packages/admin/src/components/MenuEditor.tsx:297
 #: packages/admin/src/components/TaxonomyManager.tsx:214
 #: packages/admin/src/components/TaxonomyManager.tsx:610
-#: packages/admin/src/components/TaxonomySidebar.tsx:439
+#: packages/admin/src/components/TaxonomySidebar.tsx:436
 msgid "Add"
 msgstr "Agregar"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:238
+#: packages/admin/src/components/TaxonomySidebar.tsx:235
 msgid "Add {label}"
 msgstr "Añadir {label}"
 
@@ -500,7 +500,7 @@ msgid "Add New"
 msgstr "Agregar nuevo"
 
 #. placeholder {0}: (taxonomy.labelSingular || taxonomy.label).toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:449
+#: packages/admin/src/components/TaxonomySidebar.tsx:446
 msgid "Add new {0}"
 msgstr ""
 
@@ -520,7 +520,7 @@ msgstr "Agregue plugins a su astro.config.mjs para ampliar la funcionalidad de E
 msgid "Add Sub-Field"
 msgstr "Agregar subcampo"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:237
+#: packages/admin/src/components/TaxonomySidebar.tsx:234
 msgid "Add tags..."
 msgstr "Añadir etiquetas..."
 
@@ -626,7 +626,7 @@ msgstr "Alternativamente, puede exportar desde WordPress (Herramientas → Expor
 #: packages/admin/src/components/MarketplaceBrowse.tsx:138
 #: packages/admin/src/components/PluginManager.tsx:90
 #: packages/admin/src/components/PluginManager.tsx:109
-#: packages/admin/src/components/TaxonomySidebar.tsx:321
+#: packages/admin/src/components/TaxonomySidebar.tsx:318
 #: packages/admin/src/components/ThemeMarketplaceBrowse.tsx:116
 #: packages/admin/src/router.tsx:1520
 msgid "An error occurred"
@@ -2036,7 +2036,7 @@ msgstr "No se pudo crear la firma"
 msgid "Failed to create some collections"
 msgstr "No se pudieron crear algunas colecciones."
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:456
+#: packages/admin/src/components/TaxonomySidebar.tsx:453
 msgid "Failed to create term"
 msgstr ""
 
@@ -2122,7 +2122,7 @@ msgid "Failed to send test email"
 msgstr "No se pudo enviar el correo electrónico de prueba"
 
 #. placeholder {0}: taxonomy.label.toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:320
+#: packages/admin/src/components/TaxonomySidebar.tsx:317
 msgid "Failed to update {0}"
 msgstr ""
 
@@ -3043,7 +3043,7 @@ msgid "NEW"
 msgstr "NUEVO"
 
 #. placeholder {0}: (taxonomy.labelSingular || taxonomy.label).toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:427
+#: packages/admin/src/components/TaxonomySidebar.tsx:424
 msgid "New {0}"
 msgstr ""
 
@@ -3101,7 +3101,7 @@ msgid "No"
 msgstr "No"
 
 #. placeholder {0}: taxonomy.label.toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:397
+#: packages/admin/src/components/TaxonomySidebar.tsx:394
 msgid "No {0} available."
 msgstr "No hay {0} disponible."
 
@@ -3781,7 +3781,7 @@ msgstr "Eliminar"
 #. placeholder {0}: passkey.name
 #. placeholder {0}: term.label
 #: packages/admin/src/components/settings/PasskeyItem.tsx:188
-#: packages/admin/src/components/TaxonomySidebar.tsx:222
+#: packages/admin/src/components/TaxonomySidebar.tsx:219
 msgid "Remove {0}"
 msgstr "Eliminar {0}"
 
@@ -4697,7 +4697,7 @@ msgstr "Las etiquetas serán importadas"
 msgid "Target"
 msgstr "Objetivo"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:495
+#: packages/admin/src/components/TaxonomySidebar.tsx:492
 msgid "Taxonomies"
 msgstr "Taxonomías"
 

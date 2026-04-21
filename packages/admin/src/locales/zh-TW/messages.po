@@ -198,7 +198,7 @@ msgid "{0} preview"
 msgstr "{0} 預覽"
 
 #. placeholder {0}: taxonomy.label
-#: packages/admin/src/components/TaxonomySidebar.tsx:316
+#: packages/admin/src/components/TaxonomySidebar.tsx:313
 msgid "{0} updated"
 msgstr "{0} 已更新"
 
@@ -438,11 +438,11 @@ msgstr "活躍"
 #: packages/admin/src/components/MenuEditor.tsx:297
 #: packages/admin/src/components/TaxonomyManager.tsx:214
 #: packages/admin/src/components/TaxonomyManager.tsx:610
-#: packages/admin/src/components/TaxonomySidebar.tsx:439
+#: packages/admin/src/components/TaxonomySidebar.tsx:436
 msgid "Add"
 msgstr "添加"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:238
+#: packages/admin/src/components/TaxonomySidebar.tsx:235
 msgid "Add {label}"
 msgstr "添加 {label}"
 
@@ -500,7 +500,7 @@ msgid "Add New"
 msgstr "添加新內容"
 
 #. placeholder {0}: (taxonomy.labelSingular || taxonomy.label).toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:449
+#: packages/admin/src/components/TaxonomySidebar.tsx:446
 msgid "Add new {0}"
 msgstr "添加新{0}"
 
@@ -520,7 +520,7 @@ msgstr "在 astro.config.mjs 中添加插件以擴展 EmDash 功能。"
 msgid "Add Sub-Field"
 msgstr "添加子字段"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:237
+#: packages/admin/src/components/TaxonomySidebar.tsx:234
 msgid "Add tags..."
 msgstr "添加標籤..."
 
@@ -626,7 +626,7 @@ msgstr "或者，您可以從 WordPress 導出（工具 → 導出）並上傳�
 #: packages/admin/src/components/MarketplaceBrowse.tsx:138
 #: packages/admin/src/components/PluginManager.tsx:90
 #: packages/admin/src/components/PluginManager.tsx:109
-#: packages/admin/src/components/TaxonomySidebar.tsx:321
+#: packages/admin/src/components/TaxonomySidebar.tsx:318
 #: packages/admin/src/components/ThemeMarketplaceBrowse.tsx:116
 #: packages/admin/src/router.tsx:1520
 msgid "An error occurred"
@@ -2036,7 +2036,7 @@ msgstr "創建署名失敗"
 msgid "Failed to create some collections"
 msgstr "創建部分合集失敗"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:456
+#: packages/admin/src/components/TaxonomySidebar.tsx:453
 msgid "Failed to create term"
 msgstr "創建分類項失敗"
 
@@ -2122,7 +2122,7 @@ msgid "Failed to send test email"
 msgstr "發送測試郵件失敗"
 
 #. placeholder {0}: taxonomy.label.toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:320
+#: packages/admin/src/components/TaxonomySidebar.tsx:317
 msgid "Failed to update {0}"
 msgstr "更新 {0} 失敗"
 
@@ -3043,7 +3043,7 @@ msgid "NEW"
 msgstr "新"
 
 #. placeholder {0}: (taxonomy.labelSingular || taxonomy.label).toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:427
+#: packages/admin/src/components/TaxonomySidebar.tsx:424
 msgid "New {0}"
 msgstr "新{0}"
 
@@ -3101,7 +3101,7 @@ msgid "No"
 msgstr "否"
 
 #. placeholder {0}: taxonomy.label.toLowerCase()
-#: packages/admin/src/components/TaxonomySidebar.tsx:397
+#: packages/admin/src/components/TaxonomySidebar.tsx:394
 msgid "No {0} available."
 msgstr "暫無{0}。"
 
@@ -3781,7 +3781,7 @@ msgstr "移除"
 #. placeholder {0}: passkey.name
 #. placeholder {0}: term.label
 #: packages/admin/src/components/settings/PasskeyItem.tsx:188
-#: packages/admin/src/components/TaxonomySidebar.tsx:222
+#: packages/admin/src/components/TaxonomySidebar.tsx:219
 msgid "Remove {0}"
 msgstr "移除 {0}"
 
@@ -4697,7 +4697,7 @@ msgstr "標籤將被導入"
 msgid "Target"
 msgstr "目標"
 
-#: packages/admin/src/components/TaxonomySidebar.tsx:495
+#: packages/admin/src/components/TaxonomySidebar.tsx:492
 msgid "Taxonomies"
 msgstr "分類"
 
