@@ -79,6 +79,16 @@ export const POST: APIRoute = async ({ params, request, locals, cache }) => {
 		if (translationDenied) return translationDenied;
 	}
 
+	// Only EDITOR+ can write publishedAt / createdAt directly — incl. clearing to null.
+	const hasDateOverride = body.publishedAt !== undefined || body.createdAt !== undefined;
+	if (hasDateOverride && !hasPermission(user, "content:publish_any")) {
+		return apiError(
+			"FORBIDDEN",
+			"Writing publishedAt or createdAt requires content:publish_any permission",
+			403,
+		);
+	}
+
 	// Auto-set authorId to current user when creating content
 	const result = await emdash.handleContentCreate(collection, {
 		...body,
