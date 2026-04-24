@@ -2889,7 +2889,7 @@ msgstr "Menu"
 #. placeholder {0}: menu.label
 #: packages/admin/src/components/MenuList.tsx:40
 msgid "Menu \"{0}\" has been created."
-msgstr “Menu „{0}” zostało utworzone.”
+msgstr "msgstr “Menu „{0}” zostało utworzone.”"
 
 #: packages/admin/src/components/MenuList.tsx:39
 msgid "Menu created"
@@ -2972,7 +2972,7 @@ msgstr "Modyfikuj schematy kolekcji"
 
 #: packages/admin/src/components/ContentList.tsx:439
 msgid "Move \"{title}\" to trash? You can restore it later."
-msgstr “Przenieść „{title}” do kosza? Można przywrócić później.”
+msgstr "msgstr “Przenieść „{title}” do kosza? Można przywrócić później.”"
 
 #: packages/admin/src/components/ContentList.tsx:430
 msgid "Move {title} to trash"
@@ -3271,11 +3271,11 @@ msgstr "Brak wyników"
 #: packages/admin/src/components/MarketplaceBrowse.tsx:177
 #: packages/admin/src/components/ThemeMarketplaceBrowse.tsx:150
 msgid "No results for \"{debouncedQuery}\". Try a different search term."
-msgstr “Brak wyników dla „{debouncedQuery}”. Spróbuj innego zapytania.”
+msgstr "msgstr “Brak wyników dla „{debouncedQuery}”. Spróbuj innego zapytania.”"
 
 #: packages/admin/src/components/ContentList.tsx:226
 msgid "No results for \"{searchQuery}\""
-msgstr “Brak wyników dla „{searchQuery}””
+msgstr "msgstr “Brak wyników dla „{searchQuery}””"
 
 #: packages/admin/src/components/AdminCommandPalette.tsx:452
 msgid "No results found"
@@ -3536,7 +3536,7 @@ msgstr "Oczekujące zmiany"
 
 #: packages/admin/src/components/ContentList.tsx:510
 msgid "Permanently delete \"{title}\"? This cannot be undone."
-msgstr “Trwale usunąć „{title}”? Tej operacji nie można cofnąć.”
+msgstr "msgstr “Trwale usunąć „{title}”? Tej operacji nie można cofnąć.”"
 
 #: packages/admin/src/components/ContentList.tsx:499
 msgid "Permanently delete {title}"
@@ -5558,3 +5558,4 @@ msgstr "ID kanału lub nazwa YouTube"
 
 #: packages/admin/src/components/settings/SocialSettings.tsx:158
 msgid "YouTube"
+msgstr ""
