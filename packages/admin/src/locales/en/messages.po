@@ -537,7 +537,7 @@ msgstr "Adding..."
 msgid "Additional data to import."
 msgstr "Additional data to import."
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:84
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:94
 #: packages/admin/src/components/Sidebar.tsx:438
 #: packages/admin/src/components/users/roleDefinitions.ts:42
 msgid "Admin"
@@ -641,7 +641,7 @@ msgid "Analyzing WordPress site..."
 msgstr "Analyzing WordPress site..."
 
 #: packages/admin/src/components/Settings.tsx:109
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:176
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:186
 msgid "API Tokens"
 msgstr "API Tokens"
 
@@ -781,7 +781,7 @@ msgid "Back to sections"
 msgstr "Back to sections"
 
 #: packages/admin/src/components/settings/AllowedDomainsSettings.tsx:168
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:171
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:181
 #: packages/admin/src/components/settings/EmailSettings.tsx:86
 #: packages/admin/src/components/settings/EmailSettings.tsx:105
 #: packages/admin/src/components/settings/GeneralSettings.tsx:107
@@ -882,8 +882,8 @@ msgstr "Can view content"
 #: packages/admin/src/components/Sections.tsx:207
 #: packages/admin/src/components/settings/AllowedDomainsSettings.tsx:318
 #: packages/admin/src/components/settings/AllowedDomainsSettings.tsx:428
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:318
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:446
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:328
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:456
 #: packages/admin/src/components/settings/SecuritySettings.tsx:210
 #: packages/admin/src/components/TaxonomyManager.tsx:304
 #: packages/admin/src/components/TaxonomyManager.tsx:523
@@ -1098,7 +1098,7 @@ msgstr "Complete signup"
 msgid "Configure Field"
 msgstr "Configure Field"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:308
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:318
 msgid "Confirm"
 msgstr "Confirm"
 
@@ -1199,7 +1199,7 @@ msgstr "Continue Import"
 msgid "Contributor"
 msgstr "Contributor"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:218
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:228
 #: packages/admin/src/components/users/InviteUserModal.tsx:134
 msgid "Copied to clipboard"
 msgstr "Copied to clipboard"
@@ -1217,11 +1217,11 @@ msgstr "Copy invite link"
 msgid "Copy slug"
 msgstr "Copy slug"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:193
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:203
 msgid "Copy this token now — it won't be shown again."
 msgstr "Copy this token now — it won't be shown again."
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:211
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:221
 msgid "Copy token"
 msgstr "Copy token"
 
@@ -1283,7 +1283,7 @@ msgstr "Create Menu"
 msgid "Create New Menu"
 msgstr "Create New Menu"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:389
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:399
 msgid "Create New Token"
 msgstr "Create New Token"
 
@@ -1296,7 +1296,7 @@ msgid "Create Passkey"
 msgstr "Create Passkey"
 
 #: packages/admin/src/components/Settings.tsx:110
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:178
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:188
 msgid "Create personal access tokens for programmatic API access"
 msgstr "Create personal access tokens for programmatic API access"
 
@@ -1331,8 +1331,8 @@ msgstr "Create sections in the Sections library to use them here"
 msgid "Create Taxonomy"
 msgstr "Create Taxonomy"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:251
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:443
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:261
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:453
 msgid "Create Token"
 msgstr "Create Token"
 
@@ -1357,6 +1357,14 @@ msgstr "Create your first reusable content section to get started."
 msgid "Create your passkey"
 msgstr "Create your passkey"
 
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:90
+msgid "Create, update, and delete navigation menus"
+msgstr "Create, update, and delete navigation menus"
+
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:85
+msgid "Create, update, and delete taxonomy terms"
+msgstr "Create, update, and delete taxonomy terms"
+
 #: packages/admin/src/components/settings/ApiTokenSettings.tsx:60
 msgid "Create, update, delete content"
 msgstr "Create, update, delete content"
@@ -1367,7 +1375,7 @@ msgstr "Created"
 
 #. placeholder {0}: new Date(cred.createdAt).toLocaleDateString()
 #. placeholder {0}: new Date(token.createdAt).toLocaleDateString()
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:290
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:300
 #: packages/admin/src/components/users/UserDetail.tsx:260
 msgid "Created {0}"
 msgstr "Created {0}"
@@ -1389,7 +1397,7 @@ msgstr "Creating collections and fields..."
 #: packages/admin/src/components/MenuList.tsx:146
 #: packages/admin/src/components/Redirects.tsx:182
 #: packages/admin/src/components/Sections.tsx:210
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:443
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:453
 #: packages/admin/src/components/TaxonomyManager.tsx:526
 msgid "Creating..."
 msgstr "Creating..."
@@ -1664,8 +1672,8 @@ msgstr "Discard changes"
 msgid "Discard draft changes?"
 msgstr "Discard draft changes?"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:226
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:228
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:236
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:238
 msgid "Dismiss"
 msgstr "Dismiss"
 
@@ -1763,7 +1771,7 @@ msgstr "Drop your WordPress export file here"
 msgid "Duplicate {title}"
 msgstr "Duplicate {title}"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:403
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:413
 msgid "e.g., CI/CD Pipeline"
 msgstr "e.g., CI/CD Pipeline"
 
@@ -1992,11 +2000,11 @@ msgid "Expand details"
 msgstr "Expand details"
 
 #. placeholder {0}: new Date(token.expiresAt).toLocaleDateString()
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:280
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:290
 msgid "Expires {0}"
 msgstr "Expires {0}"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:429
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:439
 msgid "Expiry"
 msgstr "Expiry"
 
@@ -2213,7 +2221,7 @@ msgstr "For the best import experience, install the"
 msgid "Full access"
 msgstr "Full access"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:85
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:95
 msgid "Full admin access"
 msgstr "Full admin access"
 
@@ -2278,7 +2286,7 @@ msgstr "Height"
 msgid "Hide from search engines"
 msgstr "Hide from search engines"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:203
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:213
 msgid "Hide token"
 msgstr "Hide token"
 
@@ -2609,7 +2617,7 @@ msgstr "Last used"
 
 #. placeholder {0}: new Date(cred.lastUsedAt).toLocaleDateString()
 #. placeholder {0}: new Date(token.lastUsedAt).toLocaleDateString()
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:285
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:295
 #: packages/admin/src/components/users/UserDetail.tsx:262
 msgid "Last used {0}"
 msgstr "Last used {0}"
@@ -2930,6 +2938,10 @@ msgstr "Menus"
 msgid "Menus ({0})"
 msgstr "Menus ({0})"
 
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:89
+msgid "Menus Manage"
+msgstr "Menus Manage"
+
 #: packages/admin/src/components/SeoPanel.tsx:161
 msgid "Meta Description"
 msgstr "Meta Description"
@@ -3124,7 +3136,7 @@ msgstr "No 404 errors recorded yet."
 msgid "No alt text"
 msgstr "No alt text"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:263
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:273
 msgid "No API tokens yet. Create one to get started."
 msgstr "No API tokens yet. Create one to get started."
 
@@ -3956,15 +3968,15 @@ msgstr "Revision restored"
 msgid "Revisions"
 msgstr "Revisions"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:326
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:336
 msgid "Revoke token"
 msgstr "Revoke token"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:301
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:311
 msgid "Revoke?"
 msgstr "Revoke?"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:308
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:318
 msgid "Revoking..."
 msgstr "Revoking..."
 
@@ -4101,12 +4113,12 @@ msgstr "Schema Read"
 msgid "Schema Write"
 msgstr "Schema Write"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:409
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:419
 msgid "Scopes"
 msgstr "Scopes"
 
 #. placeholder {0}: token.scopes.join(", ")
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:277
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:287
 msgid "Scopes: {0}"
 msgstr "Scopes: {0}"
 
@@ -4459,7 +4471,7 @@ msgstr "Share this link with the invited user"
 msgid "Short Text"
 msgstr "Short Text"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:203
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:213
 msgid "Show token"
 msgstr "Show token"
 
@@ -4701,6 +4713,10 @@ msgstr "Target"
 msgid "Taxonomies"
 msgstr "Taxonomies"
 
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:84
+msgid "Taxonomies Manage"
+msgstr "Taxonomies Manage"
+
 #: packages/admin/src/components/TaxonomyManager.tsx:668
 msgid "Taxonomy created"
 msgstr "Taxonomy created"
@@ -4913,11 +4929,11 @@ msgid "Toggle theme (current: {label})"
 msgstr "Toggle theme (current: {label})"
 
 #. placeholder {0}: newToken.info.name
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:190
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:200
 msgid "Token created: {0}"
 msgstr "Token created: {0}"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:400
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:410
 msgid "Token Name"
 msgstr "Token Name"
 

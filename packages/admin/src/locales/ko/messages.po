@@ -537,7 +537,7 @@ msgstr "추가 중..."
 msgid "Additional data to import."
 msgstr "가져올 추가 데이터입니다."
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:84
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:94
 #: packages/admin/src/components/Sidebar.tsx:438
 #: packages/admin/src/components/users/roleDefinitions.ts:42
 msgid "Admin"
@@ -641,7 +641,7 @@ msgid "Analyzing WordPress site..."
 msgstr "WordPress 사이트 분석 중..."
 
 #: packages/admin/src/components/Settings.tsx:109
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:176
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:186
 msgid "API Tokens"
 msgstr "API 토큰"
 
@@ -781,7 +781,7 @@ msgid "Back to sections"
 msgstr "섹션으로 돌아가기"
 
 #: packages/admin/src/components/settings/AllowedDomainsSettings.tsx:168
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:171
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:181
 #: packages/admin/src/components/settings/EmailSettings.tsx:86
 #: packages/admin/src/components/settings/EmailSettings.tsx:105
 #: packages/admin/src/components/settings/GeneralSettings.tsx:107
@@ -882,8 +882,8 @@ msgstr "콘텐츠 조회 가능"
 #: packages/admin/src/components/Sections.tsx:207
 #: packages/admin/src/components/settings/AllowedDomainsSettings.tsx:318
 #: packages/admin/src/components/settings/AllowedDomainsSettings.tsx:428
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:318
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:446
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:328
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:456
 #: packages/admin/src/components/settings/SecuritySettings.tsx:210
 #: packages/admin/src/components/TaxonomyManager.tsx:304
 #: packages/admin/src/components/TaxonomyManager.tsx:523
@@ -1098,7 +1098,7 @@ msgstr "회원가입 완료"
 msgid "Configure Field"
 msgstr "필드 설정"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:308
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:318
 msgid "Confirm"
 msgstr "확인"
 
@@ -1199,7 +1199,7 @@ msgstr "계속 가져오기"
 msgid "Contributor"
 msgstr "기여자"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:218
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:228
 #: packages/admin/src/components/users/InviteUserModal.tsx:134
 msgid "Copied to clipboard"
 msgstr "클립보드에 복사됨"
@@ -1217,11 +1217,11 @@ msgstr "초대 링크 복사"
 msgid "Copy slug"
 msgstr "슬러그 복사"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:193
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:203
 msgid "Copy this token now — it won't be shown again."
 msgstr "지금 이 토큰을 복사하세요. 다시 표시되지 않습니다."
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:211
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:221
 msgid "Copy token"
 msgstr "토큰 복사"
 
@@ -1283,7 +1283,7 @@ msgstr "메뉴 만들기"
 msgid "Create New Menu"
 msgstr "새 메뉴 만들기"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:389
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:399
 msgid "Create New Token"
 msgstr "새 토큰 만들기"
 
@@ -1296,7 +1296,7 @@ msgid "Create Passkey"
 msgstr "패스키 생성"
 
 #: packages/admin/src/components/Settings.tsx:110
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:178
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:188
 msgid "Create personal access tokens for programmatic API access"
 msgstr "프로그래밍 방식의 API 액세스를 위한 개인 액세스 토큰 만들기"
 
@@ -1331,8 +1331,8 @@ msgstr "여기에서 사용하려면 섹션 라이브러리에 섹션을 만드�
 msgid "Create Taxonomy"
 msgstr "분류 만들기"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:251
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:443
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:261
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:453
 msgid "Create Token"
 msgstr "토큰 만들기"
 
@@ -1357,6 +1357,14 @@ msgstr "시작하려면 첫 번째 재사용 가능한 콘텐츠 섹션을 만�
 msgid "Create your passkey"
 msgstr "패스키 만들기"
 
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:90
+msgid "Create, update, and delete navigation menus"
+msgstr ""
+
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:85
+msgid "Create, update, and delete taxonomy terms"
+msgstr ""
+
 #: packages/admin/src/components/settings/ApiTokenSettings.tsx:60
 msgid "Create, update, delete content"
 msgstr "콘텐츠 생성, 업데이트, 삭제"
@@ -1367,7 +1375,7 @@ msgstr "생성됨"
 
 #. placeholder {0}: new Date(cred.createdAt).toLocaleDateString()
 #. placeholder {0}: new Date(token.createdAt).toLocaleDateString()
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:290
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:300
 #: packages/admin/src/components/users/UserDetail.tsx:260
 msgid "Created {0}"
 msgstr "{0} 생성됨"
@@ -1389,7 +1397,7 @@ msgstr "컬렉션 및 필드 생성 중..."
 #: packages/admin/src/components/MenuList.tsx:146
 #: packages/admin/src/components/Redirects.tsx:182
 #: packages/admin/src/components/Sections.tsx:210
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:443
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:453
 #: packages/admin/src/components/TaxonomyManager.tsx:526
 msgid "Creating..."
 msgstr "생성 중..."
@@ -1664,8 +1672,8 @@ msgstr "변경사항 버리기"
 msgid "Discard draft changes?"
 msgstr "초안 변경사항을 버리시겠습니까?"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:226
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:228
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:236
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:238
 msgid "Dismiss"
 msgstr "무시"
 
@@ -1763,7 +1771,7 @@ msgstr "WordPress 내보내기 파일을 여기에 드롭하세요."
 msgid "Duplicate {title}"
 msgstr "{title} 복제"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:403
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:413
 msgid "e.g., CI/CD Pipeline"
 msgstr "예: CI/CD 파이프라인"
 
@@ -1992,11 +2000,11 @@ msgid "Expand details"
 msgstr "세부정보 펼치기"
 
 #. placeholder {0}: new Date(token.expiresAt).toLocaleDateString()
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:280
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:290
 msgid "Expires {0}"
 msgstr "만료: {0}"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:429
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:439
 msgid "Expiry"
 msgstr "만료"
 
@@ -2213,7 +2221,7 @@ msgstr "더 원활하게 가져오려면 다음 플러그인을 설치하세요.
 msgid "Full access"
 msgstr "전체 권한"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:85
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:95
 msgid "Full admin access"
 msgstr "관리자 전체 권한"
 
@@ -2278,7 +2286,7 @@ msgstr "높이"
 msgid "Hide from search engines"
 msgstr "검색에서 숨기기"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:203
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:213
 msgid "Hide token"
 msgstr "토큰 숨기기"
 
@@ -2609,7 +2617,7 @@ msgstr "마지막으로 사용됨"
 
 #. placeholder {0}: new Date(cred.lastUsedAt).toLocaleDateString()
 #. placeholder {0}: new Date(token.lastUsedAt).toLocaleDateString()
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:285
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:295
 #: packages/admin/src/components/users/UserDetail.tsx:262
 msgid "Last used {0}"
 msgstr "마지막 사용: {0}"
@@ -2930,6 +2938,10 @@ msgstr "메뉴"
 msgid "Menus ({0})"
 msgstr "메뉴({0})"
 
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:89
+msgid "Menus Manage"
+msgstr ""
+
 #: packages/admin/src/components/SeoPanel.tsx:161
 msgid "Meta Description"
 msgstr "메타 설명"
@@ -3124,7 +3136,7 @@ msgstr "아직 404 오류가 기록되지 않았습니다."
 msgid "No alt text"
 msgstr "대체 텍스트 없음"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:263
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:273
 msgid "No API tokens yet. Create one to get started."
 msgstr "아직 API 토큰이 없습니다. 하나를 생성하여 시작하세요."
 
@@ -3956,15 +3968,15 @@ msgstr "버전이 복원되었습니다."
 msgid "Revisions"
 msgstr "버전 기록"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:326
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:336
 msgid "Revoke token"
 msgstr "토큰 취소"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:301
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:311
 msgid "Revoke?"
 msgstr "취소?"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:308
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:318
 msgid "Revoking..."
 msgstr "취소 중..."
 
@@ -4101,12 +4113,12 @@ msgstr "스키마 읽기"
 msgid "Schema Write"
 msgstr "스키마 쓰기"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:409
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:419
 msgid "Scopes"
 msgstr "권한 범위"
 
 #. placeholder {0}: token.scopes.join(", ")
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:277
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:287
 msgid "Scopes: {0}"
 msgstr "권한 범위: {0}"
 
@@ -4459,7 +4471,7 @@ msgstr "초대된 사용자와 이 링크를 공유하세요"
 msgid "Short Text"
 msgstr "짧은 텍스트"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:203
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:213
 msgid "Show token"
 msgstr "토큰 표시"
 
@@ -4701,6 +4713,10 @@ msgstr "열기 방식"
 msgid "Taxonomies"
 msgstr "분류"
 
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:84
+msgid "Taxonomies Manage"
+msgstr ""
+
 #: packages/admin/src/components/TaxonomyManager.tsx:668
 msgid "Taxonomy created"
 msgstr "분류가 생성되었습니다."
@@ -4913,11 +4929,11 @@ msgid "Toggle theme (current: {label})"
 msgstr "테마 전환(현재: {label})"
 
 #. placeholder {0}: newToken.info.name
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:190
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:200
 msgid "Token created: {0}"
 msgstr "생성된 토큰: {0}"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:400
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:410
 msgid "Token Name"
 msgstr "토큰 이름"
 

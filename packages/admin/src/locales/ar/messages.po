@@ -541,7 +541,7 @@ msgstr "جاري الإضافة..."
 msgid "Additional data to import."
 msgstr "بيانات إضافية للاستيراد."
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:84
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:94
 #: packages/admin/src/components/Sidebar.tsx:438
 #: packages/admin/src/components/users/roleDefinitions.ts:42
 msgid "Admin"
@@ -645,7 +645,7 @@ msgid "Analyzing WordPress site..."
 msgstr "جاري تحليل موقع WordPress..."
 
 #: packages/admin/src/components/Settings.tsx:109
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:176
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:186
 msgid "API Tokens"
 msgstr "رموز API"
 
@@ -785,7 +785,7 @@ msgid "Back to sections"
 msgstr "العودة إلى الأقسام"
 
 #: packages/admin/src/components/settings/AllowedDomainsSettings.tsx:168
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:171
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:181
 #: packages/admin/src/components/settings/EmailSettings.tsx:86
 #: packages/admin/src/components/settings/EmailSettings.tsx:105
 #: packages/admin/src/components/settings/GeneralSettings.tsx:107
@@ -886,8 +886,8 @@ msgstr "يمكنه عرض المحتوى"
 #: packages/admin/src/components/Sections.tsx:207
 #: packages/admin/src/components/settings/AllowedDomainsSettings.tsx:318
 #: packages/admin/src/components/settings/AllowedDomainsSettings.tsx:428
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:318
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:446
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:328
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:456
 #: packages/admin/src/components/settings/SecuritySettings.tsx:210
 #: packages/admin/src/components/TaxonomyManager.tsx:304
 #: packages/admin/src/components/TaxonomyManager.tsx:523
@@ -1102,7 +1102,7 @@ msgstr "إكمال التسجيل"
 msgid "Configure Field"
 msgstr "تهيئة الحقل"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:308
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:318
 msgid "Confirm"
 msgstr "تأكيد"
 
@@ -1203,7 +1203,7 @@ msgstr "متابعة الاستيراد"
 msgid "Contributor"
 msgstr "مساهم"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:218
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:228
 #: packages/admin/src/components/users/InviteUserModal.tsx:134
 msgid "Copied to clipboard"
 msgstr "تم النسخ إلى الحافظة"
@@ -1221,11 +1221,11 @@ msgstr "نسخ رابط الدعوة"
 msgid "Copy slug"
 msgstr "نسخ الاسم اللطيف"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:193
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:203
 msgid "Copy this token now — it won't be shown again."
 msgstr "قم بنسخ هذا الرمز الآن — لن يظهر لاحقًا"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:211
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:221
 msgid "Copy token"
 msgstr "نسخ الرمز"
 
@@ -1287,7 +1287,7 @@ msgstr "إنشاء قائمة"
 msgid "Create New Menu"
 msgstr "إنشاء قائمة جديدة"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:389
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:399
 msgid "Create New Token"
 msgstr "إنشاء رمز جديد"
 
@@ -1300,7 +1300,7 @@ msgid "Create Passkey"
 msgstr "إنشاء مفتاح مرور"
 
 #: packages/admin/src/components/Settings.tsx:110
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:178
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:188
 msgid "Create personal access tokens for programmatic API access"
 msgstr "إنشاء رمز وصول شخصي للوصول إلى API برمجيًا"
 
@@ -1335,8 +1335,8 @@ msgstr "قم بإنشاء أقسام في مكتبة الأقسام لاستخد
 msgid "Create Taxonomy"
 msgstr "إنشاء تصنيف"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:251
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:443
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:261
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:453
 msgid "Create Token"
 msgstr "إنشاء رمز"
 
@@ -1361,6 +1361,14 @@ msgstr "أنشئ أول قسم محتوى قابل لإعادة الاستخدا
 msgid "Create your passkey"
 msgstr "إنشاء مفتاح مرور خاص بك"
 
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:90
+msgid "Create, update, and delete navigation menus"
+msgstr ""
+
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:85
+msgid "Create, update, and delete taxonomy terms"
+msgstr ""
+
 #: packages/admin/src/components/settings/ApiTokenSettings.tsx:60
 msgid "Create, update, delete content"
 msgstr "إنشاء، تحديث، حذف المحتوى"
@@ -1371,7 +1379,7 @@ msgstr "تم الإنشاء"
 
 #. placeholder {0}: new Date(cred.createdAt).toLocaleDateString()
 #. placeholder {0}: new Date(token.createdAt).toLocaleDateString()
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:290
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:300
 #: packages/admin/src/components/users/UserDetail.tsx:260
 msgid "Created {0}"
 msgstr "تم إنشاء {0}"
@@ -1393,7 +1401,7 @@ msgstr "جاري إنشاء المجموعات والحقول..."
 #: packages/admin/src/components/MenuList.tsx:146
 #: packages/admin/src/components/Redirects.tsx:182
 #: packages/admin/src/components/Sections.tsx:210
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:443
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:453
 #: packages/admin/src/components/TaxonomyManager.tsx:526
 msgid "Creating..."
 msgstr "جاري الإنشاء..."
@@ -1668,8 +1676,8 @@ msgstr "التخلي عن التغييرات"
 msgid "Discard draft changes?"
 msgstr "التخلي عن تغييرات المسودة؟"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:226
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:228
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:236
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:238
 msgid "Dismiss"
 msgstr "إخفاء"
 
@@ -1767,7 +1775,7 @@ msgstr "قم بإفلات ملف تصدير WordPress الخاص بك هنا"
 msgid "Duplicate {title}"
 msgstr "استنساخ {title}"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:403
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:413
 msgid "e.g., CI/CD Pipeline"
 msgstr "على سبيل المثال، خط CI/CD"
 
@@ -1996,11 +2004,11 @@ msgid "Expand details"
 msgstr "توسيع التفاصيل"
 
 #. placeholder {0}: new Date(token.expiresAt).toLocaleDateString()
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:280
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:290
 msgid "Expires {0}"
 msgstr "ينتهي في {0}"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:429
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:439
 msgid "Expiry"
 msgstr "الإنتهاء"
 
@@ -2217,7 +2225,7 @@ msgstr "للحصول على أفضل تجربة استيراد، قم بتثبي
 msgid "Full access"
 msgstr "الوصول الكامل"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:85
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:95
 msgid "Full admin access"
 msgstr "وصول التحكم الكامل"
 
@@ -2282,7 +2290,7 @@ msgstr "الارتفاع"
 msgid "Hide from search engines"
 msgstr "إخفاء من محركات البحث"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:203
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:213
 msgid "Hide token"
 msgstr "إخفاء الرمز"
 
@@ -2613,7 +2621,7 @@ msgstr "آخر استخدام"
 
 #. placeholder {0}: new Date(cred.lastUsedAt).toLocaleDateString()
 #. placeholder {0}: new Date(token.lastUsedAt).toLocaleDateString()
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:285
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:295
 #: packages/admin/src/components/users/UserDetail.tsx:262
 msgid "Last used {0}"
 msgstr "آخر استخدام في {0}"
@@ -2934,6 +2942,10 @@ msgstr "القوائم"
 msgid "Menus ({0})"
 msgstr "القوائم ({0})"
 
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:89
+msgid "Menus Manage"
+msgstr ""
+
 #: packages/admin/src/components/SeoPanel.tsx:161
 msgid "Meta Description"
 msgstr "الوصف التعريفي"
@@ -3128,7 +3140,7 @@ msgstr "لم يتم تسجيل أخطاء 404 بعد."
 msgid "No alt text"
 msgstr "لا يوجد نص بديل"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:263
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:273
 msgid "No API tokens yet. Create one to get started."
 msgstr "لا يوجد رموز API بعد. قم بإنشاء أحدها للبدء."
 
@@ -3960,15 +3972,15 @@ msgstr "تم استعادة المراجعة"
 msgid "Revisions"
 msgstr "المراجعات"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:326
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:336
 msgid "Revoke token"
 msgstr "إبطال الرمز"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:301
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:311
 msgid "Revoke?"
 msgstr "إبطال؟"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:308
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:318
 msgid "Revoking..."
 msgstr "جاري الإبطال..."
 
@@ -4105,12 +4117,12 @@ msgstr "قراءة المخطط"
 msgid "Schema Write"
 msgstr "كتابة المخطط"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:409
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:419
 msgid "Scopes"
 msgstr "النطاقات"
 
 #. placeholder {0}: token.scopes.join(", ")
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:277
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:287
 msgid "Scopes: {0}"
 msgstr "النطاقات: {0}"
 
@@ -4463,7 +4475,7 @@ msgstr "شارك هذا الرابط مع المستخدم المدعو"
 msgid "Short Text"
 msgstr "نص قصير"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:203
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:213
 msgid "Show token"
 msgstr "عرض الرمز"
 
@@ -4705,6 +4717,10 @@ msgstr "الهدف"
 msgid "Taxonomies"
 msgstr "التصنيفات"
 
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:84
+msgid "Taxonomies Manage"
+msgstr ""
+
 #: packages/admin/src/components/TaxonomyManager.tsx:668
 msgid "Taxonomy created"
 msgstr "تم إنشاء التصنيف"
@@ -4917,11 +4933,11 @@ msgid "Toggle theme (current: {label})"
 msgstr "تبديل المظهر (الحالي: {label})"
 
 #. placeholder {0}: newToken.info.name
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:190
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:200
 msgid "Token created: {0}"
 msgstr "تم إنشاء الرمز: {0}"
 
-#: packages/admin/src/components/settings/ApiTokenSettings.tsx:400
+#: packages/admin/src/components/settings/ApiTokenSettings.tsx:410
 msgid "Token Name"
 msgstr "اسم الرمز"
 
