@@ -767,7 +767,7 @@ msgstr "返回到 {collectionLabel} 列表"
 
 #: packages/admin/src/components/LoginPage.tsx:117
 #: packages/admin/src/components/LoginPage.tsx:153
-#: packages/admin/src/components/LoginPage.tsx:319
+#: packages/admin/src/components/LoginPage.tsx:311
 #: packages/admin/src/components/SignupPage.tsx:280
 msgid "Back to login"
 msgstr "返回登錄"
@@ -1730,7 +1730,7 @@ msgstr "域名已移除"
 msgid "Domain updated"
 msgstr "域名已更新"
 
-#: packages/admin/src/components/LoginPage.tsx:340
+#: packages/admin/src/components/LoginPage.tsx:332
 msgid "Don't have an account? <0>Sign up</0>"
 msgstr "還沒有帳號？<0>立即註冊</0>"
 
@@ -1971,7 +1971,7 @@ msgstr "輸入名稱"
 msgid "Enter the code from your terminal"
 msgstr "輸入終端中的代碼"
 
-#: packages/admin/src/components/LoginPage.tsx:333
+#: packages/admin/src/components/LoginPage.tsx:325
 msgid "Enter your handle to sign in."
 msgstr ""
 
@@ -2595,7 +2595,7 @@ msgstr "關鍵詞"
 msgid "Label"
 msgstr "標籤"
 
-#: packages/admin/src/components/LoginPage.tsx:353
+#: packages/admin/src/components/LoginPage.tsx:345
 #: packages/admin/src/components/Settings.tsx:129
 #: packages/admin/src/components/Settings.tsx:134
 msgid "Language"
@@ -3413,7 +3413,7 @@ msgstr "或從庫中選擇"
 msgid "Or click to browse. Accepts .xml files exported from WordPress."
 msgstr "或點擊瀏覽。接受從 WordPress 導出的 .xml 文件。"
 
-#: packages/admin/src/components/LoginPage.tsx:269
+#: packages/admin/src/components/LoginPage.tsx:261
 msgid "Or continue with"
 msgstr "或繼續使用"
 
@@ -4506,27 +4506,27 @@ msgstr ""
 msgid "Sign in instead"
 msgstr "改爲登錄"
 
-#: packages/admin/src/components/LoginPage.tsx:240
+#: packages/admin/src/components/LoginPage.tsx:232
 msgid "Sign in to your site"
 msgstr "登錄到您的網站"
 
 #. placeholder {0}: authProviderList.find((p) => p.id === activeProvider)?.label ?? activeProvider
 #. placeholder {0}: provider.label
-#: packages/admin/src/components/LoginPage.tsx:239
+#: packages/admin/src/components/LoginPage.tsx:231
 #: packages/admin/src/components/SetupWizard.tsx:291
 msgid "Sign in with {0}"
 msgstr ""
 
-#: packages/admin/src/components/LoginPage.tsx:237
+#: packages/admin/src/components/LoginPage.tsx:229
 msgid "Sign in with email"
 msgstr "使用郵箱登錄"
 
-#: packages/admin/src/components/LoginPage.tsx:298
+#: packages/admin/src/components/LoginPage.tsx:290
 msgid "Sign in with email link"
 msgstr "使用郵箱鏈接登錄"
 
 #: packages/admin/src/components/auth/PasskeyLogin.tsx:136
-#: packages/admin/src/components/LoginPage.tsx:260
+#: packages/admin/src/components/LoginPage.tsx:252
 msgid "Sign in with Passkey"
 msgstr "使用通行密鑰登錄"
 
@@ -5274,7 +5274,7 @@ msgstr "在路徑中使用 [param] 或 [...rest] 進行模式匹配。"
 msgid "Use your device's biometric authentication, security key, or PIN to sign in."
 msgstr "使用設備的生物識別認證、安全密鑰或 PIN 碼登錄。"
 
-#: packages/admin/src/components/LoginPage.tsx:334
+#: packages/admin/src/components/LoginPage.tsx:326
 msgid "Use your registered passkey to sign in securely."
 msgstr "使用您註冊的通行密鑰安全登錄。"
 
@@ -5392,7 +5392,7 @@ msgstr "我們無法連接到位於 {0} 的 WordPress 站點。這可能意味�
 msgid "We'll check what import options are available for your site."
 msgstr "我們將檢查您的站點有哪些導入選項可用。"
 
-#: packages/admin/src/components/LoginPage.tsx:331
+#: packages/admin/src/components/LoginPage.tsx:323
 msgid "We'll send you a link to sign in without a password."
 msgstr "我們將向您發送一個無需密碼即可登錄的鏈接。"
 

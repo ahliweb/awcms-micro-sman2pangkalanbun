@@ -769,7 +769,7 @@ msgstr "بازگشت به لیست {collectionLabel}"
 
 #: packages/admin/src/components/LoginPage.tsx:117
 #: packages/admin/src/components/LoginPage.tsx:153
-#: packages/admin/src/components/LoginPage.tsx:319
+#: packages/admin/src/components/LoginPage.tsx:311
 #: packages/admin/src/components/SignupPage.tsx:280
 msgid "Back to login"
 msgstr "بازگشت به ورود"
@@ -1732,7 +1732,7 @@ msgstr "دامنه حذف شد"
 msgid "Domain updated"
 msgstr "دامنه به‌روزرسانی شد"
 
-#: packages/admin/src/components/LoginPage.tsx:340
+#: packages/admin/src/components/LoginPage.tsx:332
 msgid "Don't have an account? <0>Sign up</0>"
 msgstr "حساب کاربری ندارید؟ <0>ثبت‌نام</0>"
 
@@ -1973,7 +1973,7 @@ msgstr "نام را وارد کنید"
 msgid "Enter the code from your terminal"
 msgstr "کد ترمینال خود را وارد کنید"
 
-#: packages/admin/src/components/LoginPage.tsx:333
+#: packages/admin/src/components/LoginPage.tsx:325
 msgid "Enter your handle to sign in."
 msgstr ""
 
@@ -2597,7 +2597,7 @@ msgstr "کلمات کلیدی"
 msgid "Label"
 msgstr "برچسب"
 
-#: packages/admin/src/components/LoginPage.tsx:353
+#: packages/admin/src/components/LoginPage.tsx:345
 #: packages/admin/src/components/Settings.tsx:129
 #: packages/admin/src/components/Settings.tsx:134
 msgid "Language"
@@ -3415,7 +3415,7 @@ msgstr "یا از کتابخانه انتخاب کنید"
 msgid "Or click to browse. Accepts .xml files exported from WordPress."
 msgstr "یا برای مرور کلیک کنید. فایل‌های .xml برون‌ریزی‌شده از وردپرس پذیرفته می‌شوند."
 
-#: packages/admin/src/components/LoginPage.tsx:269
+#: packages/admin/src/components/LoginPage.tsx:261
 msgid "Or continue with"
 msgstr "یا ادامه با"
 
@@ -4508,27 +4508,27 @@ msgstr ""
 msgid "Sign in instead"
 msgstr "یا، وارد شوید"
 
-#: packages/admin/src/components/LoginPage.tsx:240
+#: packages/admin/src/components/LoginPage.tsx:232
 msgid "Sign in to your site"
 msgstr "وارد وبسایت خود شوید"
 
 #. placeholder {0}: authProviderList.find((p) => p.id === activeProvider)?.label ?? activeProvider
 #. placeholder {0}: provider.label
-#: packages/admin/src/components/LoginPage.tsx:239
+#: packages/admin/src/components/LoginPage.tsx:231
 #: packages/admin/src/components/SetupWizard.tsx:291
 msgid "Sign in with {0}"
 msgstr ""
 
-#: packages/admin/src/components/LoginPage.tsx:237
+#: packages/admin/src/components/LoginPage.tsx:229
 msgid "Sign in with email"
 msgstr "ورود با ایمیل"
 
-#: packages/admin/src/components/LoginPage.tsx:298
+#: packages/admin/src/components/LoginPage.tsx:290
 msgid "Sign in with email link"
 msgstr "ورود با ارسال لینک به ایمیل"
 
 #: packages/admin/src/components/auth/PasskeyLogin.tsx:136
-#: packages/admin/src/components/LoginPage.tsx:260
+#: packages/admin/src/components/LoginPage.tsx:252
 msgid "Sign in with Passkey"
 msgstr "ورود با شاه‌کلید"
 
@@ -5276,7 +5276,7 @@ msgstr "از [param] یا [...rest] در مسیرها برای تطبیق الگ
 msgid "Use your device's biometric authentication, security key, or PIN to sign in."
 msgstr "از احراز هویت بیومتریک، کلید امنیتی یا پین دستگاه خود برای ورود استفاده کنید."
 
-#: packages/admin/src/components/LoginPage.tsx:334
+#: packages/admin/src/components/LoginPage.tsx:326
 msgid "Use your registered passkey to sign in securely."
 msgstr "از شاه‌کلید ثبت‌شده خود برای ورود امن استفاده کنید."
 
@@ -5394,7 +5394,7 @@ msgstr "نتوانستیم به وبسایت وردپرس در {0} متصل شو
 msgid "We'll check what import options are available for your site."
 msgstr "بررسی خواهیم کرد چه گزینه‌های درون‌ریزی برای وبسایت شما موجود است."
 
-#: packages/admin/src/components/LoginPage.tsx:331
+#: packages/admin/src/components/LoginPage.tsx:323
 msgid "We'll send you a link to sign in without a password."
 msgstr "لینکی برای ورود بدون گذرواژه برای شما ارسال خواهیم کرد."
 

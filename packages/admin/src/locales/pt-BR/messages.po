@@ -767,7 +767,7 @@ msgstr "Voltar para a lista de {collectionLabel}"
 
 #: packages/admin/src/components/LoginPage.tsx:117
 #: packages/admin/src/components/LoginPage.tsx:153
-#: packages/admin/src/components/LoginPage.tsx:319
+#: packages/admin/src/components/LoginPage.tsx:311
 #: packages/admin/src/components/SignupPage.tsx:280
 msgid "Back to login"
 msgstr "Voltar ao acesso"
@@ -1730,7 +1730,7 @@ msgstr "Domínio removido"
 msgid "Domain updated"
 msgstr "Domínio atualizado"
 
-#: packages/admin/src/components/LoginPage.tsx:340
+#: packages/admin/src/components/LoginPage.tsx:332
 msgid "Don't have an account? <0>Sign up</0>"
 msgstr "Não tem uma conta? <0>Cadastre-se</0>"
 
@@ -1971,7 +1971,7 @@ msgstr "Digite o nome"
 msgid "Enter the code from your terminal"
 msgstr "Digite o código do seu terminal"
 
-#: packages/admin/src/components/LoginPage.tsx:333
+#: packages/admin/src/components/LoginPage.tsx:325
 msgid "Enter your handle to sign in."
 msgstr ""
 
@@ -2595,7 +2595,7 @@ msgstr "Palavras-chave"
 msgid "Label"
 msgstr "Rótulo"
 
-#: packages/admin/src/components/LoginPage.tsx:353
+#: packages/admin/src/components/LoginPage.tsx:345
 #: packages/admin/src/components/Settings.tsx:129
 #: packages/admin/src/components/Settings.tsx:134
 msgid "Language"
@@ -3413,7 +3413,7 @@ msgstr "ou escolha na biblioteca"
 msgid "Or click to browse. Accepts .xml files exported from WordPress."
 msgstr "Ou clique para navegar. Aceita arquivos .xml exportados do WordPress."
 
-#: packages/admin/src/components/LoginPage.tsx:269
+#: packages/admin/src/components/LoginPage.tsx:261
 msgid "Or continue with"
 msgstr "Ou continue com"
 
@@ -4506,27 +4506,27 @@ msgstr ""
 msgid "Sign in instead"
 msgstr "Acessar em vez disso"
 
-#: packages/admin/src/components/LoginPage.tsx:240
+#: packages/admin/src/components/LoginPage.tsx:232
 msgid "Sign in to your site"
 msgstr "Acesse seu site"
 
 #. placeholder {0}: authProviderList.find((p) => p.id === activeProvider)?.label ?? activeProvider
 #. placeholder {0}: provider.label
-#: packages/admin/src/components/LoginPage.tsx:239
+#: packages/admin/src/components/LoginPage.tsx:231
 #: packages/admin/src/components/SetupWizard.tsx:291
 msgid "Sign in with {0}"
 msgstr ""
 
-#: packages/admin/src/components/LoginPage.tsx:237
+#: packages/admin/src/components/LoginPage.tsx:229
 msgid "Sign in with email"
 msgstr "Acesse com e-mail"
 
-#: packages/admin/src/components/LoginPage.tsx:298
+#: packages/admin/src/components/LoginPage.tsx:290
 msgid "Sign in with email link"
 msgstr "Acesse com link de e-mail"
 
 #: packages/admin/src/components/auth/PasskeyLogin.tsx:136
-#: packages/admin/src/components/LoginPage.tsx:260
+#: packages/admin/src/components/LoginPage.tsx:252
 msgid "Sign in with Passkey"
 msgstr "Acesse com chave de acesso"
 
@@ -5274,7 +5274,7 @@ msgstr "Use [param] ou [...rest] nos caminhos para correspondência de padrão."
 msgid "Use your device's biometric authentication, security key, or PIN to sign in."
 msgstr "Use a autenticação biométrica, chave de segurança ou PIN do seu dispositivo para acessar."
 
-#: packages/admin/src/components/LoginPage.tsx:334
+#: packages/admin/src/components/LoginPage.tsx:326
 msgid "Use your registered passkey to sign in securely."
 msgstr "Use sua chave de acesso cadastrada para acessar com segurança."
 
@@ -5392,7 +5392,7 @@ msgstr "Não foi possível conectar a um site WordPress em {0}. Isso pode signif
 msgid "We'll check what import options are available for your site."
 msgstr "Verificaremos quais opções de importação estão disponíveis para o seu site."
 
-#: packages/admin/src/components/LoginPage.tsx:331
+#: packages/admin/src/components/LoginPage.tsx:323
 msgid "We'll send you a link to sign in without a password."
 msgstr "Enviaremos um link para você acessar sem senha."
 
