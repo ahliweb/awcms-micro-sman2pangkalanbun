@@ -59,7 +59,7 @@ msgid "{0, plural, one {(# item)} other {(# items)}}"
 msgstr ""
 
 #. placeholder {0}: seedInfo.collections
-#: packages/admin/src/components/SetupWizard.tsx:183
+#: packages/admin/src/components/SetupWizard.tsx:185
 msgid "{0, plural, one {# collection} other {# collections}}"
 msgstr ""
 
@@ -315,9 +315,9 @@ msgstr ""
 msgid "• URLs in your content are updated automatically"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:252
-#: packages/admin/src/components/SetupWizard.tsx:304
-#: packages/admin/src/components/SetupWizard.tsx:359
+#: packages/admin/src/components/SetupWizard.tsx:254
+#: packages/admin/src/components/SetupWizard.tsx:306
+#: packages/admin/src/components/SetupWizard.tsx:361
 #: packages/admin/src/components/WordPressImport.tsx:1431
 msgid "← Back"
 msgstr ""
@@ -410,7 +410,7 @@ msgstr ""
 msgid "Accept & Update"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:381
+#: packages/admin/src/components/SetupWizard.tsx:383
 msgid "Account"
 msgstr ""
 
@@ -973,7 +973,7 @@ msgstr ""
 msgid "Checking authentication..."
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:315
+#: packages/admin/src/components/SetupWizard.tsx:317
 msgid "Choose how to sign in"
 msgstr ""
 
@@ -1191,8 +1191,8 @@ msgstr "Edukia idatzi"
 msgid "Continue"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:177
-#: packages/admin/src/components/SetupWizard.tsx:260
+#: packages/admin/src/components/SetupWizard.tsx:179
+#: packages/admin/src/components/SetupWizard.tsx:262
 msgid "Continue →"
 msgstr ""
 
@@ -1297,7 +1297,7 @@ msgstr "Sortu token berria"
 msgid "Create one in WordPress: Users → Profile → Application Passwords"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:325
+#: packages/admin/src/components/SetupWizard.tsx:327
 msgid "Create Passkey"
 msgstr ""
 
@@ -1342,7 +1342,7 @@ msgstr ""
 msgid "Create Token"
 msgstr "Sortu tokena"
 
-#: packages/admin/src/components/SetupWizard.tsx:571
+#: packages/admin/src/components/SetupWizard.tsx:573
 msgid "Create your account"
 msgstr ""
 
@@ -1865,7 +1865,7 @@ msgstr ""
 msgid "Email address"
 msgstr "Emaila"
 
-#: packages/admin/src/components/SetupWizard.tsx:206
+#: packages/admin/src/components/SetupWizard.tsx:208
 #: packages/admin/src/components/SignupPage.tsx:48
 msgid "Email is required"
 msgstr ""
@@ -1985,7 +1985,7 @@ msgstr ""
 
 #: packages/admin/src/components/MenuEditor.tsx:83
 #: packages/admin/src/components/MenuEditor.tsx:122
-#: packages/admin/src/components/SetupWizard.tsx:550
+#: packages/admin/src/components/SetupWizard.tsx:552
 msgid "Error"
 msgstr ""
 
@@ -2099,7 +2099,7 @@ msgstr ""
 msgid "Failed to load revisions"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:552
+#: packages/admin/src/components/SetupWizard.tsx:554
 msgid "Failed to load setup"
 msgstr ""
 
@@ -2458,7 +2458,7 @@ msgstr ""
 msgid "Importing Media"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:165
+#: packages/admin/src/components/SetupWizard.tsx:167
 msgid "Include sample content (recommended for new sites)"
 msgstr ""
 
@@ -2571,7 +2571,7 @@ msgstr ""
 msgid "Item updated"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:240
+#: packages/admin/src/components/SetupWizard.tsx:242
 #: packages/admin/src/components/SignupPage.tsx:204
 msgid "Jane Doe"
 msgstr ""
@@ -2735,7 +2735,7 @@ msgstr ""
 msgid "Loading settings..."
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:539
+#: packages/admin/src/components/SetupWizard.tsx:541
 msgid "Loading setup..."
 msgstr ""
 
@@ -3031,7 +3031,7 @@ msgstr ""
 msgid "Multiple choices from options"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:147
+#: packages/admin/src/components/SetupWizard.tsx:149
 msgid "My Awesome Blog"
 msgstr ""
 
@@ -3560,7 +3560,7 @@ msgstr ""
 msgid "Permissions"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:317
+#: packages/admin/src/components/SetupWizard.tsx:319
 msgid "Pick any method to create your admin account."
 msgstr ""
 
@@ -3569,7 +3569,7 @@ msgstr ""
 msgid "Plain"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:208
+#: packages/admin/src/components/SetupWizard.tsx:210
 msgid "Please enter a valid email"
 msgstr ""
 
@@ -3643,7 +3643,7 @@ msgid "Preparing to download files from WordPress..."
 msgstr ""
 
 #: packages/admin/src/components/auth/PasskeyLogin.tsx:166
-#: packages/admin/src/components/SetupWizard.tsx:260
+#: packages/admin/src/components/SetupWizard.tsx:262
 msgid "Preparing..."
 msgstr ""
 
@@ -4270,7 +4270,7 @@ msgstr "Atalak"
 msgid "secure context"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:572
+#: packages/admin/src/components/SetupWizard.tsx:574
 msgid "Secure your account"
 msgstr ""
 
@@ -4446,11 +4446,11 @@ msgstr ""
 msgid "Set a custom display size for this image instance."
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:570
+#: packages/admin/src/components/SetupWizard.tsx:572
 msgid "Set up your site"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:177
+#: packages/admin/src/components/SetupWizard.tsx:179
 msgid "Setting up..."
 msgstr ""
 
@@ -4498,7 +4498,7 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:382
+#: packages/admin/src/components/SetupWizard.tsx:384
 msgid "Sign In"
 msgstr ""
 
@@ -4513,7 +4513,7 @@ msgstr "Sartu zure webgunera"
 #. placeholder {0}: authProviderList.find((p) => p.id === activeProvider)?.label ?? activeProvider
 #. placeholder {0}: provider.label
 #: packages/admin/src/components/LoginPage.tsx:231
-#: packages/admin/src/components/SetupWizard.tsx:291
+#: packages/admin/src/components/SetupWizard.tsx:293
 msgid "Sign in with {0}"
 msgstr ""
 
@@ -4543,7 +4543,7 @@ msgstr ""
 msgid "Single line text input"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:380
+#: packages/admin/src/components/SetupWizard.tsx:382
 msgid "Site"
 msgstr ""
 
@@ -4555,12 +4555,12 @@ msgstr ""
 msgid "Site identity, logo, favicon, and reading preferences"
 msgstr "Webgunearen identitatea, logoa, faviconak eta irakurtzeko hobespenak"
 
-#: packages/admin/src/components/SetupWizard.tsx:378
+#: packages/admin/src/components/SetupWizard.tsx:380
 msgid "Site Settings"
 msgstr ""
 
 #: packages/admin/src/components/settings/GeneralSettings.tsx:156
-#: packages/admin/src/components/SetupWizard.tsx:143
+#: packages/admin/src/components/SetupWizard.tsx:145
 msgid "Site Title"
 msgstr ""
 
@@ -4568,7 +4568,7 @@ msgstr ""
 msgid "Site title & tagline"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:127
+#: packages/admin/src/components/SetupWizard.tsx:129
 msgid "Site title is required"
 msgstr ""
 
@@ -4712,7 +4712,7 @@ msgid "System ({resolvedLabel})"
 msgstr ""
 
 #: packages/admin/src/components/settings/GeneralSettings.tsx:162
-#: packages/admin/src/components/SetupWizard.tsx:154
+#: packages/admin/src/components/SetupWizard.tsx:156
 msgid "Tagline"
 msgstr ""
 
@@ -4750,7 +4750,7 @@ msgstr ""
 msgid "Taxonomy not found:"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:182
+#: packages/admin/src/components/SetupWizard.tsx:184
 msgid "Template:"
 msgstr ""
 
@@ -4908,7 +4908,7 @@ msgstr ""
 msgid "This will revert to the published version. Your draft changes will be lost."
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:158
+#: packages/admin/src/components/SetupWizard.tsx:160
 msgid "Thoughts, tutorials, and more"
 msgstr ""
 
@@ -5529,7 +5529,7 @@ msgstr ""
 msgid "You'll be signing up as"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:575
+#: packages/admin/src/components/SetupWizard.tsx:577
 msgid "You're signed in via Cloudflare Access"
 msgstr ""
 
@@ -5538,7 +5538,7 @@ msgid "you@company.com"
 msgstr ""
 
 #: packages/admin/src/components/auth/PasskeyLogin.tsx:336
-#: packages/admin/src/components/SetupWizard.tsx:228
+#: packages/admin/src/components/SetupWizard.tsx:230
 msgid "you@example.com"
 msgstr ""
 
@@ -5556,7 +5556,7 @@ msgstr ""
 msgid "Your device doesn't support the required security features."
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:224
+#: packages/admin/src/components/SetupWizard.tsx:226
 msgid "Your Email"
 msgstr ""
 
@@ -5576,7 +5576,7 @@ msgstr ""
 msgid "Your LinkedIn profile username"
 msgstr ""
 
-#: packages/admin/src/components/SetupWizard.tsx:236
+#: packages/admin/src/components/SetupWizard.tsx:238
 msgid "Your Name"
 msgstr ""
 

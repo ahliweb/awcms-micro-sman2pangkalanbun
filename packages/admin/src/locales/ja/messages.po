@@ -59,7 +59,7 @@ msgid "{0, plural, one {(# item)} other {(# items)}}"
 msgstr "{0, plural, one {（#件）} other {（#件）}}"
 
 #. placeholder {0}: seedInfo.collections
-#: packages/admin/src/components/SetupWizard.tsx:183
+#: packages/admin/src/components/SetupWizard.tsx:185
 msgid "{0, plural, one {# collection} other {# collections}}"
 msgstr "{0, plural, one {#個のコレクション} other {#個のコレクション}}"
 
@@ -315,9 +315,9 @@ msgstr "• EmDashのメディアストレージにアップロード"
 msgid "• URLs in your content are updated automatically"
 msgstr "• コンテンツ内のURLが自動的に更新されます"
 
-#: packages/admin/src/components/SetupWizard.tsx:252
-#: packages/admin/src/components/SetupWizard.tsx:304
-#: packages/admin/src/components/SetupWizard.tsx:359
+#: packages/admin/src/components/SetupWizard.tsx:254
+#: packages/admin/src/components/SetupWizard.tsx:306
+#: packages/admin/src/components/SetupWizard.tsx:361
 #: packages/admin/src/components/WordPressImport.tsx:1431
 msgid "← Back"
 msgstr "← 戻る"
@@ -410,7 +410,7 @@ msgstr "承認してインストール"
 msgid "Accept & Update"
 msgstr "承認して更新"
 
-#: packages/admin/src/components/SetupWizard.tsx:381
+#: packages/admin/src/components/SetupWizard.tsx:383
 msgid "Account"
 msgstr "アカウント"
 
@@ -973,7 +973,7 @@ msgstr "{urlInput}を確認中..."
 msgid "Checking authentication..."
 msgstr "認証を確認中..."
 
-#: packages/admin/src/components/SetupWizard.tsx:315
+#: packages/admin/src/components/SetupWizard.tsx:317
 msgid "Choose how to sign in"
 msgstr ""
 
@@ -1191,8 +1191,8 @@ msgstr "コンテンツ書き込み"
 msgid "Continue"
 msgstr "続行"
 
-#: packages/admin/src/components/SetupWizard.tsx:177
-#: packages/admin/src/components/SetupWizard.tsx:260
+#: packages/admin/src/components/SetupWizard.tsx:179
+#: packages/admin/src/components/SetupWizard.tsx:262
 msgid "Continue →"
 msgstr "続行 →"
 
@@ -1297,7 +1297,7 @@ msgstr "新しいトークンを作成"
 msgid "Create one in WordPress: Users → Profile → Application Passwords"
 msgstr "WordPressで作成: ユーザー → プロフィール → アプリケーションパスワード"
 
-#: packages/admin/src/components/SetupWizard.tsx:325
+#: packages/admin/src/components/SetupWizard.tsx:327
 msgid "Create Passkey"
 msgstr "パスキーを作成"
 
@@ -1342,7 +1342,7 @@ msgstr "タクソノミーを作成"
 msgid "Create Token"
 msgstr "トークンを作成"
 
-#: packages/admin/src/components/SetupWizard.tsx:571
+#: packages/admin/src/components/SetupWizard.tsx:573
 msgid "Create your account"
 msgstr "アカウントを作成"
 
@@ -1865,7 +1865,7 @@ msgstr "メール（任意）"
 msgid "Email address"
 msgstr "メールアドレス"
 
-#: packages/admin/src/components/SetupWizard.tsx:206
+#: packages/admin/src/components/SetupWizard.tsx:208
 #: packages/admin/src/components/SignupPage.tsx:48
 msgid "Email is required"
 msgstr "メールアドレスは必須です"
@@ -1985,7 +1985,7 @@ msgstr "WordPressサイトのURLを入力"
 
 #: packages/admin/src/components/MenuEditor.tsx:83
 #: packages/admin/src/components/MenuEditor.tsx:122
-#: packages/admin/src/components/SetupWizard.tsx:550
+#: packages/admin/src/components/SetupWizard.tsx:552
 msgid "Error"
 msgstr "エラー"
 
@@ -2099,7 +2099,7 @@ msgstr "プラグインの読み込みに失敗しました: {0}"
 msgid "Failed to load revisions"
 msgstr "リビジョンの読み込みに失敗しました"
 
-#: packages/admin/src/components/SetupWizard.tsx:552
+#: packages/admin/src/components/SetupWizard.tsx:554
 msgid "Failed to load setup"
 msgstr "セットアップの読み込みに失敗しました"
 
@@ -2458,7 +2458,7 @@ msgstr "コンテンツをインポート中..."
 msgid "Importing Media"
 msgstr "メディアをインポート中"
 
-#: packages/admin/src/components/SetupWizard.tsx:165
+#: packages/admin/src/components/SetupWizard.tsx:167
 msgid "Include sample content (recommended for new sites)"
 msgstr "サンプルコンテンツを含める（新しいサイトに推奨）"
 
@@ -2571,7 +2571,7 @@ msgstr "アイテムを削除しました"
 msgid "Item updated"
 msgstr "アイテムを更新しました"
 
-#: packages/admin/src/components/SetupWizard.tsx:240
+#: packages/admin/src/components/SetupWizard.tsx:242
 #: packages/admin/src/components/SignupPage.tsx:204
 msgid "Jane Doe"
 msgstr "山田太郎"
@@ -2735,7 +2735,7 @@ msgstr "セクションを読み込み中..."
 msgid "Loading settings..."
 msgstr "設定を読み込み中..."
 
-#: packages/admin/src/components/SetupWizard.tsx:539
+#: packages/admin/src/components/SetupWizard.tsx:541
 msgid "Loading setup..."
 msgstr "セットアップを読み込み中..."
 
@@ -3031,7 +3031,7 @@ msgstr "複数行プレーンテキスト"
 msgid "Multiple choices from options"
 msgstr "選択肢から複数選択"
 
-#: packages/admin/src/components/SetupWizard.tsx:147
+#: packages/admin/src/components/SetupWizard.tsx:149
 msgid "My Awesome Blog"
 msgstr "マイブログ"
 
@@ -3560,7 +3560,7 @@ msgstr "{title}を完全に削除"
 msgid "Permissions"
 msgstr "権限"
 
-#: packages/admin/src/components/SetupWizard.tsx:317
+#: packages/admin/src/components/SetupWizard.tsx:319
 msgid "Pick any method to create your admin account."
 msgstr ""
 
@@ -3569,7 +3569,7 @@ msgstr ""
 msgid "Plain"
 msgstr "プレーン"
 
-#: packages/admin/src/components/SetupWizard.tsx:208
+#: packages/admin/src/components/SetupWizard.tsx:210
 msgid "Please enter a valid email"
 msgstr "有効なメールアドレスを入力してください"
 
@@ -3643,7 +3643,7 @@ msgid "Preparing to download files from WordPress..."
 msgstr "WordPressからのファイルダウンロードを準備中..."
 
 #: packages/admin/src/components/auth/PasskeyLogin.tsx:166
-#: packages/admin/src/components/SetupWizard.tsx:260
+#: packages/admin/src/components/SetupWizard.tsx:262
 msgid "Preparing..."
 msgstr "準備中..."
 
@@ -4270,7 +4270,7 @@ msgstr "セクション"
 msgid "secure context"
 msgstr "セキュアコンテキスト"
 
-#: packages/admin/src/components/SetupWizard.tsx:572
+#: packages/admin/src/components/SetupWizard.tsx:574
 msgid "Secure your account"
 msgstr "アカウントを保護"
 
@@ -4446,11 +4446,11 @@ msgstr "SEOタイトル"
 msgid "Set a custom display size for this image instance."
 msgstr "この画像インスタンスのカスタム表示サイズを設定します。"
 
-#: packages/admin/src/components/SetupWizard.tsx:570
+#: packages/admin/src/components/SetupWizard.tsx:572
 msgid "Set up your site"
 msgstr "サイトをセットアップ"
 
-#: packages/admin/src/components/SetupWizard.tsx:177
+#: packages/admin/src/components/SetupWizard.tsx:179
 msgid "Setting up..."
 msgstr "セットアップ中..."
 
@@ -4498,7 +4498,7 @@ msgstr "画像にカーソルを合わせた時に表示されます。"
 msgid "Sign in"
 msgstr "サインイン"
 
-#: packages/admin/src/components/SetupWizard.tsx:382
+#: packages/admin/src/components/SetupWizard.tsx:384
 msgid "Sign In"
 msgstr ""
 
@@ -4513,7 +4513,7 @@ msgstr "サイトにサインイン"
 #. placeholder {0}: authProviderList.find((p) => p.id === activeProvider)?.label ?? activeProvider
 #. placeholder {0}: provider.label
 #: packages/admin/src/components/LoginPage.tsx:231
-#: packages/admin/src/components/SetupWizard.tsx:291
+#: packages/admin/src/components/SetupWizard.tsx:293
 msgid "Sign in with {0}"
 msgstr ""
 
@@ -4543,7 +4543,7 @@ msgstr "選択肢から1つ選択"
 msgid "Single line text input"
 msgstr "1行テキスト入力"
 
-#: packages/admin/src/components/SetupWizard.tsx:380
+#: packages/admin/src/components/SetupWizard.tsx:382
 msgid "Site"
 msgstr "サイト"
 
@@ -4555,12 +4555,12 @@ msgstr "サイト情報"
 msgid "Site identity, logo, favicon, and reading preferences"
 msgstr "サイト情報、ロゴ、ファビコン、閲覧設定"
 
-#: packages/admin/src/components/SetupWizard.tsx:378
+#: packages/admin/src/components/SetupWizard.tsx:380
 msgid "Site Settings"
 msgstr "サイト設定"
 
 #: packages/admin/src/components/settings/GeneralSettings.tsx:156
-#: packages/admin/src/components/SetupWizard.tsx:143
+#: packages/admin/src/components/SetupWizard.tsx:145
 msgid "Site Title"
 msgstr "サイトタイトル"
 
@@ -4568,7 +4568,7 @@ msgstr "サイトタイトル"
 msgid "Site title & tagline"
 msgstr "サイトタイトルとキャッチフレーズ"
 
-#: packages/admin/src/components/SetupWizard.tsx:127
+#: packages/admin/src/components/SetupWizard.tsx:129
 msgid "Site title is required"
 msgstr "サイトタイトルは必須です"
 
@@ -4712,7 +4712,7 @@ msgid "System ({resolvedLabel})"
 msgstr "システム ({resolvedLabel})"
 
 #: packages/admin/src/components/settings/GeneralSettings.tsx:162
-#: packages/admin/src/components/SetupWizard.tsx:154
+#: packages/admin/src/components/SetupWizard.tsx:156
 msgid "Tagline"
 msgstr "キャッチフレーズ"
 
@@ -4750,7 +4750,7 @@ msgstr "タクソノミーを作成しました"
 msgid "Taxonomy not found:"
 msgstr "タクソノミーが見つかりません:"
 
-#: packages/admin/src/components/SetupWizard.tsx:182
+#: packages/admin/src/components/SetupWizard.tsx:184
 msgid "Template:"
 msgstr "テンプレート:"
 
@@ -4908,7 +4908,7 @@ msgstr "プラグインとそのバンドルがサイトから削除されます
 msgid "This will revert to the published version. Your draft changes will be lost."
 msgstr "公開済みバージョンに戻ります。下書きの変更は失われます。"
 
-#: packages/admin/src/components/SetupWizard.tsx:158
+#: packages/admin/src/components/SetupWizard.tsx:160
 msgid "Thoughts, tutorials, and more"
 msgstr "記事、チュートリアルなど"
 
@@ -5529,7 +5529,7 @@ msgstr "接続を認可するためにWordPressにリダイレクトされます
 msgid "You'll be signing up as"
 msgstr "登録されるアカウント:"
 
-#: packages/admin/src/components/SetupWizard.tsx:575
+#: packages/admin/src/components/SetupWizard.tsx:577
 msgid "You're signed in via Cloudflare Access"
 msgstr "Cloudflare Accessでサインイン中です"
 
@@ -5538,7 +5538,7 @@ msgid "you@company.com"
 msgstr "you@company.com"
 
 #: packages/admin/src/components/auth/PasskeyLogin.tsx:336
-#: packages/admin/src/components/SetupWizard.tsx:228
+#: packages/admin/src/components/SetupWizard.tsx:230
 msgid "you@example.com"
 msgstr "you@example.com"
 
@@ -5556,7 +5556,7 @@ msgstr "お使いのブラウザはパスキーに対応していません。Chr
 msgid "Your device doesn't support the required security features."
 msgstr "お使いのデバイスは必要なセキュリティ機能に対応していません。"
 
-#: packages/admin/src/components/SetupWizard.tsx:224
+#: packages/admin/src/components/SetupWizard.tsx:226
 msgid "Your Email"
 msgstr "メールアドレス"
 
@@ -5576,7 +5576,7 @@ msgstr "Instagramのユーザー名"
 msgid "Your LinkedIn profile username"
 msgstr "LinkedInのプロフィールユーザー名"
 
-#: packages/admin/src/components/SetupWizard.tsx:236
+#: packages/admin/src/components/SetupWizard.tsx:238
 msgid "Your Name"
 msgstr "名前"
 

@@ -59,7 +59,7 @@ msgid "{0, plural, one {(# item)} other {(# items)}}"
 msgstr "{0, plural, one {(# 个项目)} other {(# 个项目)}}"
 
 #. placeholder {0}: seedInfo.collections
-#: packages/admin/src/components/SetupWizard.tsx:183
+#: packages/admin/src/components/SetupWizard.tsx:185
 msgid "{0, plural, one {# collection} other {# collections}}"
 msgstr "{0, plural, one {# 个合集} other {# 个合集}}"
 
@@ -315,9 +315,9 @@ msgstr "• 已上传到您的 EmDash 媒体存储"
 msgid "• URLs in your content are updated automatically"
 msgstr "• 您内容中的 URL 将自动更新"
 
-#: packages/admin/src/components/SetupWizard.tsx:252
-#: packages/admin/src/components/SetupWizard.tsx:304
-#: packages/admin/src/components/SetupWizard.tsx:359
+#: packages/admin/src/components/SetupWizard.tsx:254
+#: packages/admin/src/components/SetupWizard.tsx:306
+#: packages/admin/src/components/SetupWizard.tsx:361
 #: packages/admin/src/components/WordPressImport.tsx:1431
 msgid "← Back"
 msgstr "← 返回"
@@ -410,7 +410,7 @@ msgstr "接受并安装"
 msgid "Accept & Update"
 msgstr "接受并更新"
 
-#: packages/admin/src/components/SetupWizard.tsx:381
+#: packages/admin/src/components/SetupWizard.tsx:383
 msgid "Account"
 msgstr "账户"
 
@@ -973,7 +973,7 @@ msgstr "正在检查 {urlInput}..."
 msgid "Checking authentication..."
 msgstr "正在检查认证..."
 
-#: packages/admin/src/components/SetupWizard.tsx:315
+#: packages/admin/src/components/SetupWizard.tsx:317
 msgid "Choose how to sign in"
 msgstr ""
 
@@ -1191,8 +1191,8 @@ msgstr "内容写入"
 msgid "Continue"
 msgstr "继续"
 
-#: packages/admin/src/components/SetupWizard.tsx:177
-#: packages/admin/src/components/SetupWizard.tsx:260
+#: packages/admin/src/components/SetupWizard.tsx:179
+#: packages/admin/src/components/SetupWizard.tsx:262
 msgid "Continue →"
 msgstr "继续 →"
 
@@ -1297,7 +1297,7 @@ msgstr "创建新令牌"
 msgid "Create one in WordPress: Users → Profile → Application Passwords"
 msgstr "在 WordPress 中创建：用户 → 个人资料 → 应用程序密码"
 
-#: packages/admin/src/components/SetupWizard.tsx:325
+#: packages/admin/src/components/SetupWizard.tsx:327
 msgid "Create Passkey"
 msgstr "创建通行密钥"
 
@@ -1342,7 +1342,7 @@ msgstr "创建分类"
 msgid "Create Token"
 msgstr "创建令牌"
 
-#: packages/admin/src/components/SetupWizard.tsx:571
+#: packages/admin/src/components/SetupWizard.tsx:573
 msgid "Create your account"
 msgstr "创建您的账户"
 
@@ -1865,7 +1865,7 @@ msgstr "邮箱（可选）"
 msgid "Email address"
 msgstr "邮箱地址"
 
-#: packages/admin/src/components/SetupWizard.tsx:206
+#: packages/admin/src/components/SetupWizard.tsx:208
 #: packages/admin/src/components/SignupPage.tsx:48
 msgid "Email is required"
 msgstr "邮箱为必填项"
@@ -1985,7 +1985,7 @@ msgstr "输入您的 WordPress 站点 URL"
 
 #: packages/admin/src/components/MenuEditor.tsx:83
 #: packages/admin/src/components/MenuEditor.tsx:122
-#: packages/admin/src/components/SetupWizard.tsx:550
+#: packages/admin/src/components/SetupWizard.tsx:552
 msgid "Error"
 msgstr "错误"
 
@@ -2099,7 +2099,7 @@ msgstr "加载插件失败：{0}"
 msgid "Failed to load revisions"
 msgstr "加载修订历史失败"
 
-#: packages/admin/src/components/SetupWizard.tsx:552
+#: packages/admin/src/components/SetupWizard.tsx:554
 msgid "Failed to load setup"
 msgstr "加载设置失败"
 
@@ -2458,7 +2458,7 @@ msgstr "正在导入内容..."
 msgid "Importing Media"
 msgstr "正在导入媒体"
 
-#: packages/admin/src/components/SetupWizard.tsx:165
+#: packages/admin/src/components/SetupWizard.tsx:167
 msgid "Include sample content (recommended for new sites)"
 msgstr "包含示例内容（推荐新站点使用）"
 
@@ -2571,7 +2571,7 @@ msgstr "项目已删除"
 msgid "Item updated"
 msgstr "项目已更新"
 
-#: packages/admin/src/components/SetupWizard.tsx:240
+#: packages/admin/src/components/SetupWizard.tsx:242
 #: packages/admin/src/components/SignupPage.tsx:204
 msgid "Jane Doe"
 msgstr "张三"
@@ -2735,7 +2735,7 @@ msgstr "正在加载区块..."
 msgid "Loading settings..."
 msgstr "正在加载设置..."
 
-#: packages/admin/src/components/SetupWizard.tsx:539
+#: packages/admin/src/components/SetupWizard.tsx:541
 msgid "Loading setup..."
 msgstr "正在加载设置..."
 
@@ -3031,7 +3031,7 @@ msgstr "多行纯文本"
 msgid "Multiple choices from options"
 msgstr "从选项中选择多个"
 
-#: packages/admin/src/components/SetupWizard.tsx:147
+#: packages/admin/src/components/SetupWizard.tsx:149
 msgid "My Awesome Blog"
 msgstr "我的精彩博客"
 
@@ -3560,7 +3560,7 @@ msgstr "永久删除 {title}"
 msgid "Permissions"
 msgstr "权限"
 
-#: packages/admin/src/components/SetupWizard.tsx:317
+#: packages/admin/src/components/SetupWizard.tsx:319
 msgid "Pick any method to create your admin account."
 msgstr ""
 
@@ -3569,7 +3569,7 @@ msgstr ""
 msgid "Plain"
 msgstr "普通"
 
-#: packages/admin/src/components/SetupWizard.tsx:208
+#: packages/admin/src/components/SetupWizard.tsx:210
 msgid "Please enter a valid email"
 msgstr "请输入有效的邮箱"
 
@@ -3643,7 +3643,7 @@ msgid "Preparing to download files from WordPress..."
 msgstr "正在准备从 WordPress 下载文件..."
 
 #: packages/admin/src/components/auth/PasskeyLogin.tsx:166
-#: packages/admin/src/components/SetupWizard.tsx:260
+#: packages/admin/src/components/SetupWizard.tsx:262
 msgid "Preparing..."
 msgstr "正在准备..."
 
@@ -4270,7 +4270,7 @@ msgstr "区块"
 msgid "secure context"
 msgstr "安全上下文"
 
-#: packages/admin/src/components/SetupWizard.tsx:572
+#: packages/admin/src/components/SetupWizard.tsx:574
 msgid "Secure your account"
 msgstr "保护您的账户"
 
@@ -4446,11 +4446,11 @@ msgstr "SEO 标题"
 msgid "Set a custom display size for this image instance."
 msgstr "为此图片实例设置自定义显示尺寸。"
 
-#: packages/admin/src/components/SetupWizard.tsx:570
+#: packages/admin/src/components/SetupWizard.tsx:572
 msgid "Set up your site"
 msgstr "设置您的站点"
 
-#: packages/admin/src/components/SetupWizard.tsx:177
+#: packages/admin/src/components/SetupWizard.tsx:179
 msgid "Setting up..."
 msgstr "正在设置..."
 
@@ -4498,7 +4498,7 @@ msgstr "悬停在图片上时显示。"
 msgid "Sign in"
 msgstr "登录"
 
-#: packages/admin/src/components/SetupWizard.tsx:382
+#: packages/admin/src/components/SetupWizard.tsx:384
 msgid "Sign In"
 msgstr ""
 
@@ -4513,7 +4513,7 @@ msgstr "登录到您的网站"
 #. placeholder {0}: authProviderList.find((p) => p.id === activeProvider)?.label ?? activeProvider
 #. placeholder {0}: provider.label
 #: packages/admin/src/components/LoginPage.tsx:231
-#: packages/admin/src/components/SetupWizard.tsx:291
+#: packages/admin/src/components/SetupWizard.tsx:293
 msgid "Sign in with {0}"
 msgstr ""
 
@@ -4543,7 +4543,7 @@ msgstr "从选项中选择一个"
 msgid "Single line text input"
 msgstr "单行文本输入"
 
-#: packages/admin/src/components/SetupWizard.tsx:380
+#: packages/admin/src/components/SetupWizard.tsx:382
 msgid "Site"
 msgstr "站点"
 
@@ -4555,12 +4555,12 @@ msgstr "站点标识"
 msgid "Site identity, logo, favicon, and reading preferences"
 msgstr "网站标识、徽标、网站图标和阅读偏好"
 
-#: packages/admin/src/components/SetupWizard.tsx:378
+#: packages/admin/src/components/SetupWizard.tsx:380
 msgid "Site Settings"
 msgstr "站点设置"
 
 #: packages/admin/src/components/settings/GeneralSettings.tsx:156
-#: packages/admin/src/components/SetupWizard.tsx:143
+#: packages/admin/src/components/SetupWizard.tsx:145
 msgid "Site Title"
 msgstr "站点标题"
 
@@ -4568,7 +4568,7 @@ msgstr "站点标题"
 msgid "Site title & tagline"
 msgstr "站点标题和副标题"
 
-#: packages/admin/src/components/SetupWizard.tsx:127
+#: packages/admin/src/components/SetupWizard.tsx:129
 msgid "Site title is required"
 msgstr "站点标题为必填项"
 
@@ -4712,7 +4712,7 @@ msgid "System ({resolvedLabel})"
 msgstr "跟随系统（{resolvedLabel}）"
 
 #: packages/admin/src/components/settings/GeneralSettings.tsx:162
-#: packages/admin/src/components/SetupWizard.tsx:154
+#: packages/admin/src/components/SetupWizard.tsx:156
 msgid "Tagline"
 msgstr "副标题"
 
@@ -4750,7 +4750,7 @@ msgstr "分类已创建"
 msgid "Taxonomy not found:"
 msgstr "未找到分类："
 
-#: packages/admin/src/components/SetupWizard.tsx:182
+#: packages/admin/src/components/SetupWizard.tsx:184
 msgid "Template:"
 msgstr "模板："
 
@@ -4908,7 +4908,7 @@ msgstr "这将从您的站点移除插件及其包。"
 msgid "This will revert to the published version. Your draft changes will be lost."
 msgstr "这将恢复到已发布的版本。您的草稿更改将会丢失。"
 
-#: packages/admin/src/components/SetupWizard.tsx:158
+#: packages/admin/src/components/SetupWizard.tsx:160
 msgid "Thoughts, tutorials, and more"
 msgstr "想法、教程等"
 
@@ -5529,7 +5529,7 @@ msgstr "您将被重定向到 WordPress 以授权连接。"
 msgid "You'll be signing up as"
 msgstr "您将注册为"
 
-#: packages/admin/src/components/SetupWizard.tsx:575
+#: packages/admin/src/components/SetupWizard.tsx:577
 msgid "You're signed in via Cloudflare Access"
 msgstr "您已通过 Cloudflare Access 登录"
 
@@ -5538,7 +5538,7 @@ msgid "you@company.com"
 msgstr "you@company.com"
 
 #: packages/admin/src/components/auth/PasskeyLogin.tsx:336
-#: packages/admin/src/components/SetupWizard.tsx:228
+#: packages/admin/src/components/SetupWizard.tsx:230
 msgid "you@example.com"
 msgstr "you@example.com"
 
@@ -5556,7 +5556,7 @@ msgstr "您的浏览器不支持通行密钥。请使用现代浏览器，如 Ch
 msgid "Your device doesn't support the required security features."
 msgstr "您的设备不支持所需的安全功能。"
 
-#: packages/admin/src/components/SetupWizard.tsx:224
+#: packages/admin/src/components/SetupWizard.tsx:226
 msgid "Your Email"
 msgstr "您的邮箱"
 
@@ -5576,7 +5576,7 @@ msgstr "您的 Instagram 用户名"
 msgid "Your LinkedIn profile username"
 msgstr "您的 LinkedIn 个人资料用户名"
 
-#: packages/admin/src/components/SetupWizard.tsx:236
+#: packages/admin/src/components/SetupWizard.tsx:238
 msgid "Your Name"
 msgstr "您的姓名"
 
