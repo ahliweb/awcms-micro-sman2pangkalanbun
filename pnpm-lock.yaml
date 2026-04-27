@@ -24,6 +24,9 @@ catalogs:
     '@cloudflare/workers-types':
       specifier: ^4.20260305.1
       version: 4.20260305.1
+    '@iconify-json/ph':
+      specifier: ^1.2.2
+      version: 1.2.2
     '@lingui/babel-plugin-lingui-macro':
       specifier: ^5.9.4
       version: 5.9.5
@@ -111,6 +114,9 @@ catalogs:
     astro:
       specifier: ^6.0.1
       version: 6.0.1
+    astro-iconset:
+      specifier: ^0.0.4
+      version: 0.0.4
     better-sqlite3:
       specifier: ^12.8.0
       version: 12.8.0
@@ -234,43 +240,6 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.10.13
-      wrangler:
-        specifier: 'catalog:'
-        version: 4.80.0(@cloudflare/workers-types@4.20260305.1)
-
-  demos/my-site:
-    dependencies:
-      '@astrojs/cloudflare':
-        specifier: 'catalog:'
-        version: 13.1.7(@types/node@24.10.13)(astro@6.0.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.55.2)(tsx@4.21.0)(typescript@6.0.0-beta)(yaml@2.8.2))(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)(workerd@1.20260401.1)(wrangler@4.80.0(@cloudflare/workers-types@4.20260305.1))(yaml@2.8.2)
-      '@astrojs/react':
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(yaml@2.8.2)
-      '@emdash-cms/auth-atproto':
-        specifier: workspace:*
-        version: link:../../packages/auth-atproto
-      '@emdash-cms/cloudflare':
-        specifier: workspace:*
-        version: link:../../packages/cloudflare
-      astro:
-        specifier: 'catalog:'
-        version: 6.0.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.55.2)(tsx@4.21.0)(typescript@6.0.0-beta)(yaml@2.8.2)
-      emdash:
-        specifier: workspace:*
-        version: link:../../packages/core
-      react:
-        specifier: 'catalog:'
-        version: 19.2.4
-      react-dom:
-        specifier: 'catalog:'
-        version: 19.2.4(react@19.2.4)
-    devDependencies:
-      '@astrojs/check':
-        specifier: 'catalog:'
-        version: 0.9.7(prettier-plugin-astro@0.14.1)(prettier@3.8.1)(typescript@6.0.0-beta)
-      '@cloudflare/workers-types':
-        specifier: 'catalog:'
-        version: 4.20260305.1
       wrangler:
         specifier: 'catalog:'
         version: 4.80.0(@cloudflare/workers-types@4.20260305.1)
@@ -1628,9 +1597,15 @@ importers:
       '@astrojs/react':
         specifier: 'catalog:'
         version: 5.0.0(@types/node@24.10.13)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.31.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tsx@4.21.0)(yaml@2.8.2)
+      '@iconify-json/ph':
+        specifier: 'catalog:'
+        version: 1.2.2
       astro:
         specifier: 'catalog:'
         version: 6.0.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.55.2)(tsx@4.21.0)(typescript@6.0.0-beta)(yaml@2.8.2)
+      astro-iconset:
+        specifier: 'catalog:'
+        version: 0.0.4(astro@6.0.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.55.2)(tsx@4.21.0)(typescript@6.0.0-beta)(yaml@2.8.2))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       better-sqlite3:
         specifier: 'catalog:'
         version: 12.8.0
@@ -1659,9 +1634,15 @@ importers:
       '@emdash-cms/cloudflare':
         specifier: workspace:*
         version: link:../../packages/cloudflare
+      '@iconify-json/ph':
+        specifier: 'catalog:'
+        version: 1.2.2
       astro:
         specifier: 'catalog:'
         version: 6.0.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.55.2)(tsx@4.21.0)(typescript@6.0.0-beta)(yaml@2.8.2)
+      astro-iconset:
+        specifier: 'catalog:'
+        version: 0.0.4(astro@6.0.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.55.2)(tsx@4.21.0)(typescript@6.0.0-beta)(yaml@2.8.2))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       emdash:
         specifier: workspace:*
         version: link:../../packages/core
@@ -1813,6 +1794,9 @@ packages:
 
   '@andrewbranch/untar.js@1.0.3':
     resolution: {integrity: sha512-Jh15/qVmrLGhkKJBdXlK1+9tY4lZruYjsgkDFj08ZmDiWVBLJcqkok7Z0/R0In+i1rScBpJlSvrTS2Lm41Pbnw==}
+
+  '@antfu/install-pkg@1.1.0':
+    resolution: {integrity: sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ==}
 
   '@apidevtools/json-schema-ref-parser@14.0.1':
     resolution: {integrity: sha512-Oc96zvmxx1fqoSEdUmfmvvb59/KDOnUoJ7s2t7bISyAn0XEz57LCCw8k2Y4Pf3mwKaZLMciESALORLgfe2frCw==}
@@ -2472,6 +2456,9 @@ packages:
     resolution: {integrity: sha512-kzyuwOAQnXJNLS9PSyrk0CWk35nWJW/zl/6KvnTBMFK65gm7U1/Z5BqjxeapjZCIhQcM/DsrEmcbRwDyXyXK4A==}
     engines: {node: '>=14'}
 
+  '@cyberalien/svg-utils@1.2.13':
+    resolution: {integrity: sha512-/fEcy0VRnG/7Znmjx6ib4wSbb/ILRmEV6t4b1adFZyTHw64+K+DEAoWp8wKHUV0QmbZ18RFf9VeQtvQm83Fnyg==}
+
   '@date-fns/tz@1.4.1':
     resolution: {integrity: sha512-P5LUNhtbj6YfI3iJjw5EL9eUAG6OitD0W3fWQcpQjDRc/QIsL0tRNuO1PcDvPccWL1fSTXXdE1ds+l95DV/OFA==}
 
@@ -2888,6 +2875,18 @@ packages:
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: ^4
+
+  '@iconify-json/ph@1.2.2':
+    resolution: {integrity: sha512-PgkEZNtqa8hBGjHXQa4pMwZa93hmfu8FUSjs/nv4oUU6yLsgv+gh9nu28Kqi8Fz9CCVu4hj1MZs9/60J57IzFw==}
+
+  '@iconify/tools@5.0.11':
+    resolution: {integrity: sha512-zur/06/zTSflUSoPARK5FfHNZQ9UYsoloPDQHLAZHbQqWhs0/tXS+KB70uOAt94dUB1F94JOkSqIOT2R4Deixg==}
+
+  '@iconify/types@2.0.0':
+    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
+
+  '@iconify/utils@3.1.1':
+    resolution: {integrity: sha512-MwzoDtw9rO1x+qfgLTV/IVXsHDBqeYZoMIQC8SfxfYSlaSUG+oWiAcoiB1yajAda6mqblm4/1/w2E8tRu7a7Tw==}
 
   '@img/colour@1.0.0':
     resolution: {integrity: sha512-A5P/LfWGFSl6nsckYtjw9da+19jB8hkJ6ACTGcDfEJ0aE+l2n2El7dsVM7UVHZQ9s2lmYMWlrS21YLy2IR1LUw==}
@@ -5467,6 +5466,30 @@ packages:
     peerDependencies:
       astro: ^4.0.0-beta || ^5.0.0-beta || ^3.3.0 || ^6.0.0-beta
 
+  astro-iconset@0.0.4:
+    resolution: {integrity: sha512-r82jgt8FUzcT+swZrj16lCn4IYHIbEfY3mZpA2iDo52HFRr81Fdc5mJEctl+eLMEdNCsGV1HKxwY1/zVEH4sDw==}
+    peerDependencies:
+      astro: '>=3.5.0'
+      preact: '>=10.0.0'
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+      solid-js: '>=1.0.0'
+      svelte: '>=4.0.0'
+      vue: '>=3.0.0'
+    peerDependenciesMeta:
+      preact:
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+      solid-js:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+
   astro-portabletext@0.11.4:
     resolution: {integrity: sha512-2dOPJAZs6IiVotFaQB5Em0fYUNhX7cf2FfWf0dXfQ67wLmLXsUiQnRzb1BORrc9LS8YVQhXjhNXARB4kZwO+2w==}
     peerDependencies:
@@ -7235,8 +7258,15 @@ packages:
   mlly@1.8.0:
     resolution: {integrity: sha512-l8D9ODSRWLe2KHJSifWGwBqpTZXIXTeo8mlKjY+E2HAakaTeNpqAyBZ8GSqLzHgw4XmHmC8whvpjJNMbFZN7/g==}
 
+  mlly@1.8.2:
+    resolution: {integrity: sha512-d+ObxMQFmbt10sretNDytwt85VrbkhhUA/JBGm1MPaWJ65Cl4wOgLaB1NYvJSZ0Ef03MMEU/0xpPMXUIQ29UfA==}
+
   modern-tar@0.7.5:
     resolution: {integrity: sha512-YTefgdpKKFgoTDbEUqXqgUJct2OG6/4hs4XWLsxcHkDLj/x/V8WmKIRppPnXP5feQ7d1vuYWSp3qKkxfwaFaxA==}
+    engines: {node: '>=18.0.0'}
+
+  modern-tar@0.7.6:
+    resolution: {integrity: sha512-sweCIVXzx1aIGTCdzcMlSZt1h8k5Tmk08VNAuRk3IU28XamGiOH5ypi11g6De2CH7PhYqSSnGy2A/EFhbWnVKg==}
     engines: {node: '>=18.0.0'}
 
   module-replacements@2.11.0:
@@ -9191,6 +9221,11 @@ snapshots:
 
   '@andrewbranch/untar.js@1.0.3': {}
 
+  '@antfu/install-pkg@1.1.0':
+    dependencies:
+      package-manager-detector: 1.6.0
+      tinyexec: 1.0.4
+
   '@apidevtools/json-schema-ref-parser@14.0.1':
     dependencies:
       '@types/json-schema': 7.0.15
@@ -10370,6 +10405,10 @@ snapshots:
 
   '@ctrl/tinycolor@4.2.0': {}
 
+  '@cyberalien/svg-utils@1.2.13':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@date-fns/tz@1.4.1': {}
 
   '@dnd-kit/accessibility@3.1.1(react@19.2.4)':
@@ -10651,6 +10690,28 @@ snapshots:
   '@hono/node-server@1.19.9(hono@4.12.4)':
     dependencies:
       hono: 4.12.4
+
+  '@iconify-json/ph@1.2.2':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify/tools@5.0.11':
+    dependencies:
+      '@cyberalien/svg-utils': 1.2.13
+      '@iconify/types': 2.0.0
+      '@iconify/utils': 3.1.1
+      fflate: 0.8.2
+      modern-tar: 0.7.6
+      pathe: 2.0.3
+      svgo: 4.0.1
+
+  '@iconify/types@2.0.0': {}
+
+  '@iconify/utils@3.1.1':
+    dependencies:
+      '@antfu/install-pkg': 1.1.0
+      '@iconify/types': 2.0.0
+      mlly: 1.8.2
 
   '@img/colour@1.0.0': {}
 
@@ -13220,6 +13281,16 @@ snapshots:
     dependencies:
       astro: 6.1.3(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.55.2)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2)
       rehype-expressive-code: 0.41.6
+
+  astro-iconset@0.0.4(astro@6.0.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.55.2)(tsx@4.21.0)(typescript@6.0.0-beta)(yaml@2.8.2))(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+    dependencies:
+      '@iconify/tools': 5.0.11
+      '@iconify/types': 2.0.0
+      '@iconify/utils': 3.1.1
+      astro: 6.0.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.55.2)(tsx@4.21.0)(typescript@6.0.0-beta)(yaml@2.8.2)
+    optionalDependencies:
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
 
   astro-portabletext@0.11.4(astro@6.0.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(rollup@4.55.2)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2)):
     dependencies:
@@ -15795,7 +15866,16 @@ snapshots:
       pkg-types: 1.3.1
       ufo: 1.6.3
 
+  mlly@1.8.2:
+    dependencies:
+      acorn: 8.16.0
+      pathe: 2.0.3
+      pkg-types: 1.3.1
+      ufo: 1.6.3
+
   modern-tar@0.7.5: {}
+
+  modern-tar@0.7.6: {}
 
   module-replacements@2.11.0: {}
 
