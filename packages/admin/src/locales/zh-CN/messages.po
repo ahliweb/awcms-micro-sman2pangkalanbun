@@ -79,7 +79,7 @@ msgid "{0, plural, one {# content item imported} other {# content items imported
 msgstr "{0, plural, one {# 个内容项已导入} other {# 个内容项已导入}}"
 
 #. placeholder {0}: filteredItems.length
-#: packages/admin/src/components/ContentList.tsx:282
+#: packages/admin/src/components/ContentList.tsx:291
 msgid "{0, plural, one {# item matching \"{searchQuery}\"} other {# items matching \"{searchQuery}\"}}"
 msgstr "{0, plural, one {# 个匹配 \"{searchQuery}\" 的项目} other {# 个匹配 \"{searchQuery}\" 的项目}}"
 
@@ -141,7 +141,7 @@ msgstr "{0, plural, one {# 位用户} other {# 位用户}}"
 #. placeholder {0}: filteredItems.length
 #. placeholder {1}: hasMore ? "+" : ""
 #. placeholder {2}: hasMore ? "+" : ""
-#: packages/admin/src/components/ContentList.tsx:286
+#: packages/admin/src/components/ContentList.tsx:295
 msgid "{0, plural, one {#{1} item} other {#{2} items}}"
 msgstr "{0, plural, one {#{1} 个项目} other {#{2} 个项目}}"
 
@@ -424,7 +424,7 @@ msgstr "账户信息"
 
 #: packages/admin/src/components/comments/CommentInbox.tsx:299
 #: packages/admin/src/components/ContentList.tsx:235
-#: packages/admin/src/components/ContentList.tsx:340
+#: packages/admin/src/components/ContentList.tsx:349
 #: packages/admin/src/components/ContentTypeList.tsx:106
 #: packages/admin/src/components/MediaLibrary.tsx:419
 #: packages/admin/src/components/TaxonomyManager.tsx:619
@@ -677,7 +677,7 @@ msgstr "已批准"
 msgid "Arbitrary JSON data"
 msgstr "任意 JSON 数据"
 
-#: packages/admin/src/components/ContentList.tsx:654
+#: packages/admin/src/components/ContentList.tsx:672
 msgid "archived"
 msgstr "已归档"
 
@@ -877,8 +877,8 @@ msgstr "可以查看内容"
 #: packages/admin/src/components/ContentEditor.tsx:890
 #: packages/admin/src/components/ContentEditor.tsx:1818
 #: packages/admin/src/components/ContentEditor.tsx:1871
-#: packages/admin/src/components/ContentList.tsx:542
-#: packages/admin/src/components/ContentList.tsx:613
+#: packages/admin/src/components/ContentList.tsx:560
+#: packages/admin/src/components/ContentList.tsx:631
 #: packages/admin/src/components/ContentPickerModal.tsx:253
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:516
 #: packages/admin/src/components/FieldEditor.tsx:645
@@ -1359,7 +1359,7 @@ msgstr "创建您的账户"
 msgid "Create your first navigation menu to get started"
 msgstr "创建您的第一个导航菜单以开始使用"
 
-#: packages/admin/src/components/ContentList.tsx:250
+#: packages/admin/src/components/ContentList.tsx:259
 #: packages/admin/src/components/ContentTypeList.tsx:122
 msgid "Create your first one"
 msgstr "创建第一个内容"
@@ -1552,11 +1552,11 @@ msgid "Delete permanently"
 msgstr "永久删除"
 
 #: packages/admin/src/components/comments/CommentDetail.tsx:182
-#: packages/admin/src/components/ContentList.tsx:624
+#: packages/admin/src/components/ContentList.tsx:642
 msgid "Delete Permanently"
 msgstr "永久删除"
 
-#: packages/admin/src/components/ContentList.tsx:604
+#: packages/admin/src/components/ContentList.tsx:622
 msgid "Delete Permanently?"
 msgstr "永久删除？"
 
@@ -1577,7 +1577,7 @@ msgstr "删除重定向？"
 msgid "Delete Section?"
 msgstr "删除区块？"
 
-#: packages/admin/src/components/ContentList.tsx:337
+#: packages/admin/src/components/ContentList.tsx:346
 msgid "Deleted"
 msgstr "已删除"
 
@@ -1756,7 +1756,7 @@ msgstr "下移"
 msgid "Downloading"
 msgstr "下载中"
 
-#: packages/admin/src/components/ContentList.tsx:650
+#: packages/admin/src/components/ContentList.tsx:668
 msgid "draft"
 msgstr "草稿"
 
@@ -1786,7 +1786,7 @@ msgstr "拖动以重新排序"
 msgid "Drop your WordPress export file here"
 msgstr "将 WordPress 导出文件拖放到此处"
 
-#: packages/admin/src/components/ContentList.tsx:515
+#: packages/admin/src/components/ContentList.tsx:533
 msgid "Duplicate {title}"
 msgstr "复制 {title}"
 
@@ -1820,7 +1820,7 @@ msgstr "编辑 {0}"
 msgid "Edit {collectionLabel}"
 msgstr "编辑 {collectionLabel}"
 
-#: packages/admin/src/components/ContentList.tsx:507
+#: packages/admin/src/components/ContentList.tsx:525
 msgid "Edit {title}"
 msgstr "编辑 {title}"
 
@@ -2705,8 +2705,8 @@ msgstr "实时预览"
 msgid "Load more"
 msgstr "加载更多"
 
-#: packages/admin/src/components/ContentList.tsx:321
-#: packages/admin/src/components/ContentList.tsx:369
+#: packages/admin/src/components/ContentList.tsx:330
+#: packages/admin/src/components/ContentList.tsx:387
 msgid "Load More"
 msgstr "加载更多"
 
@@ -2757,8 +2757,10 @@ msgstr "正在加载设置..."
 msgid "Loading terms..."
 msgstr "正在加载词条..."
 
-#: packages/admin/src/components/ContentList.tsx:321
-#: packages/admin/src/components/ContentList.tsx:369
+#: packages/admin/src/components/ContentList.tsx:245
+#: packages/admin/src/components/ContentList.tsx:330
+#: packages/admin/src/components/ContentList.tsx:359
+#: packages/admin/src/components/ContentList.tsx:387
 #: packages/admin/src/components/ContentPickerModal.tsx:238
 #: packages/admin/src/components/MarketplaceBrowse.tsx:199
 #: packages/admin/src/components/settings/AllowedDomainsSettings.tsx:181
@@ -3006,11 +3008,11 @@ msgstr "已修改"
 msgid "Modify collection schemas"
 msgstr "修改合集模式"
 
-#: packages/admin/src/components/ContentList.tsx:536
+#: packages/admin/src/components/ContentList.tsx:554
 msgid "Move \"{title}\" to trash? You can restore it later."
 msgstr "将「{title}」移至回收站？您可以稍后恢复它。"
 
-#: packages/admin/src/components/ContentList.tsx:527
+#: packages/admin/src/components/ContentList.tsx:545
 msgid "Move {title} to trash"
 msgstr "将 {title} 移至回收站"
 
@@ -3020,12 +3022,12 @@ msgstr "下移"
 
 #: packages/admin/src/components/ContentEditor.tsx:875
 #: packages/admin/src/components/ContentEditor.tsx:897
-#: packages/admin/src/components/ContentList.tsx:549
+#: packages/admin/src/components/ContentList.tsx:567
 msgid "Move to Trash"
 msgstr "移至回收站"
 
 #: packages/admin/src/components/ContentEditor.tsx:881
-#: packages/admin/src/components/ContentList.tsx:534
+#: packages/admin/src/components/ContentList.tsx:552
 msgid "Move to Trash?"
 msgstr "移至回收站？"
 
@@ -3124,7 +3126,7 @@ msgid "Next"
 msgstr "下一步"
 
 #: packages/admin/src/components/comments/CommentInbox.tsx:371
-#: packages/admin/src/components/ContentList.tsx:309
+#: packages/admin/src/components/ContentList.tsx:318
 msgid "Next page"
 msgstr "下一页"
 
@@ -3142,7 +3144,7 @@ msgid "No {0} available."
 msgstr "暂无{0}。"
 
 #. placeholder {0}: collectionLabel.toLowerCase()
-#: packages/admin/src/components/ContentList.tsx:243
+#: packages/admin/src/components/ContentList.tsx:252
 msgid "No {0} yet."
 msgstr "暂无 {0}。"
 
@@ -3310,7 +3312,7 @@ msgstr "无结果"
 msgid "No results for \"{debouncedQuery}\". Try a different search term."
 msgstr "「{debouncedQuery}」无结果。请尝试其他搜索词。"
 
-#: packages/admin/src/components/ContentList.tsx:257
+#: packages/admin/src/components/ContentList.tsx:266
 msgid "No results for \"{searchQuery}\""
 msgstr "未找到匹配「{searchQuery}」的结果"
 
@@ -3551,7 +3553,7 @@ msgid "Pattern (Regex)"
 msgstr "模式（正则表达式）"
 
 #: packages/admin/src/components/comments/CommentDetail.tsx:196
-#: packages/admin/src/components/ContentList.tsx:673
+#: packages/admin/src/components/ContentList.tsx:691
 msgid "pending"
 msgstr "待处理"
 
@@ -3563,11 +3565,11 @@ msgstr "待处理"
 msgid "Pending changes"
 msgstr "待处理的更改"
 
-#: packages/admin/src/components/ContentList.tsx:607
+#: packages/admin/src/components/ContentList.tsx:625
 msgid "Permanently delete \"{title}\"? This cannot be undone."
 msgstr "永久删除「{title}」？此操作无法撤销。"
 
-#: packages/admin/src/components/ContentList.tsx:596
+#: packages/admin/src/components/ContentList.tsx:614
 msgid "Permanently delete {title}"
 msgstr "永久删除 {title}"
 
@@ -3681,7 +3683,7 @@ msgid "Previous"
 msgstr "上一步"
 
 #: packages/admin/src/components/comments/CommentInbox.tsx:352
-#: packages/admin/src/components/ContentList.tsx:297
+#: packages/admin/src/components/ContentList.tsx:306
 msgid "Previous page"
 msgstr "上一页"
 
@@ -3706,7 +3708,7 @@ msgstr "发布"
 msgid "Publish changes"
 msgstr "发布更改"
 
-#: packages/admin/src/components/ContentList.tsx:648
+#: packages/admin/src/components/ContentList.tsx:666
 msgid "published"
 msgstr "已发布"
 
@@ -3946,7 +3948,7 @@ msgstr "重置为原始"
 msgid "Restore"
 msgstr "恢复"
 
-#: packages/admin/src/components/ContentList.tsx:584
+#: packages/admin/src/components/ContentList.tsx:602
 msgid "Restore {title}"
 msgstr "恢复 {title}"
 
@@ -4110,7 +4112,7 @@ msgstr "定时发布于"
 msgid "Schedule for later"
 msgstr "稍后定时发布"
 
-#: packages/admin/src/components/ContentList.tsx:652
+#: packages/admin/src/components/ContentList.tsx:670
 msgid "scheduled"
 msgstr "已定时"
 
@@ -4937,7 +4939,7 @@ msgid "Timezone for displaying dates (e.g., America/New_York)"
 msgstr "用于显示日期的时区（例如：America/New_York）"
 
 #: packages/admin/src/components/ContentList.tsx:212
-#: packages/admin/src/components/ContentList.tsx:334
+#: packages/admin/src/components/ContentList.tsx:343
 #: packages/admin/src/components/SectionEditor.tsx:189
 #: packages/admin/src/components/Sections.tsx:168
 msgid "Title"
@@ -5006,7 +5008,7 @@ msgstr "回收站"
 msgid "Trash"
 msgstr "回收站"
 
-#: packages/admin/src/components/ContentList.tsx:348
+#: packages/admin/src/components/ContentList.tsx:366
 msgid "Trash is empty"
 msgstr "回收站为空"
 
@@ -5378,7 +5380,7 @@ msgstr "在市场查看"
 msgid "View mode"
 msgstr "查看模式"
 
-#: packages/admin/src/components/ContentList.tsx:498
+#: packages/admin/src/components/ContentList.tsx:516
 msgid "View published {title}"
 msgstr "查看已发布的 {title}"
 
