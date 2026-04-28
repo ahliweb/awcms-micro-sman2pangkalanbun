@@ -13,7 +13,6 @@ import {
 } from "@cloudflare/kumo";
 import { useLingui } from "@lingui/react/macro";
 import {
-	ArrowLeft,
 	Check,
 	Eye,
 	Image as ImageIcon,
@@ -40,6 +39,7 @@ import { getPreviewUrl, getDraftStatus } from "../lib/api";
 import { usePluginAdmins } from "../lib/plugin-context.js";
 import { contentUrl } from "../lib/url.js";
 import { cn, slugify } from "../lib/utils";
+import { ArrowPrev } from "./ArrowIcons.js";
 import { BlockKitFieldWidget } from "./BlockKitFieldWidget.js";
 import { DocumentOutline } from "./editor/DocumentOutline";
 import { PluginFieldErrorBoundary } from "./PluginFieldErrorBoundary.js";
@@ -539,7 +539,7 @@ export function ContentEditor({
 							aria-label={t`Back to ${collectionLabel} list`}
 							className={buttonVariants({ variant: "ghost", shape: "square" })}
 						>
-							<ArrowLeft className="h-5 w-5" aria-hidden="true" />
+							<ArrowPrev className="h-5 w-5" aria-hidden="true" />
 						</Link>
 					)}
 					{isDistractionFree && (
