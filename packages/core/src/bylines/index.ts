@@ -72,15 +72,11 @@ export async function getBylineBySlug(slug: string): Promise<BylineSummary | nul
  * but the entry has an `authorId`, falls back to the user-linked byline
  * (marked as source: "inferred").
  *
- * @example
- * ```ts
- * import { getEntryBylines } from "emdash";
- *
- * const bylines = await getEntryBylines("posts", post.data.id);
- * for (const credit of bylines) {
- *   console.log(credit.byline.displayName, credit.roleLabel);
- * }
- * ```
+ * Internal: not re-exported from the `emdash` package entry point. Every
+ * entry returned by `getEmDashCollection` / `getEmDashEntry` already has
+ * `data.bylines` populated by `hydrateEntryBylines` (which uses the batch
+ * helper `getBylinesForEntries` directly). Site code should read those
+ * fields rather than calling this function.
  */
 export async function getEntryBylines(
 	collection: string,
@@ -122,26 +118,15 @@ export interface BylineEntry {
 /**
  * Batch-fetch byline credits for multiple content entries in a single query.
  *
- * This is more efficient than calling getEntryBylines for each entry
- * when you need bylines for a list of entries (e.g., a blog index page).
+ * Internal: consumed by `hydrateEntryBylines` in `query.ts` so that every
+ * entry returned from `getEmDashCollection` / `getEmDashEntry` already has
+ * `data.bylines` populated. Site code should rely on that eager hydration
+ * rather than calling this directly -- this function is not re-exported
+ * from the `emdash` package entry point.
  *
  * @param collection - The collection slug (e.g., "posts")
  * @param entries - Entry id + authorId pairs (authorId is already on the row)
  * @returns Map from entry ID to array of byline credits
- *
- * @example
- * ```ts
- * import { getBylinesForEntries, getEmDashCollection } from "emdash";
- *
- * const { entries } = await getEmDashCollection("posts");
- * const refs = entries.map((e) => ({ id: e.data.id, authorId: e.data.authorId ?? null }));
- * const bylinesMap = await getBylinesForEntries("posts", refs);
- *
- * for (const entry of entries) {
- *   const bylines = bylinesMap.get(entry.data.id) ?? [];
- *   // render bylines
- * }
- * ```
  */
 export async function getBylinesForEntries(
 	collection: string,
