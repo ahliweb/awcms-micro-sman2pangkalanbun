@@ -126,6 +126,7 @@ jobs:
         with:
           model: ${{ steps.model.outputs.model }}
           mentions: "/review"
+          opencode_version: "1.4.11"
           permissions: write
           # NO_PUSH scopes the installation token to contents:read so the
           # reviewer cannot push, even if it tries to commit. Write tools

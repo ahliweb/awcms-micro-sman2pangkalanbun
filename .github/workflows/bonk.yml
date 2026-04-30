@@ -83,6 +83,7 @@ jobs:
         with:
           model: ${{ steps.model.outputs.model }}
           mentions: "/bonk,@ask-bonk"
+          opencode_version: "1.4.11"
           permissions: write
           # Custom prompt so the model knows its response will become a PR body
           # when an auto-PR is opened (issue → branch → PR flow). Without this,
