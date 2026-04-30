@@ -444,7 +444,7 @@ msgid "Add"
 msgstr "Adicionar"
 
 #. placeholder {0}: field.item_label
-#: packages/admin/src/components/PortableTextEditor.tsx:1322
+#: packages/admin/src/components/PortableTextEditor.tsx:1321
 msgid "Add {0}"
 msgstr ""
 
@@ -493,7 +493,7 @@ msgstr "Adicionar campos"
 msgid "Add First Item"
 msgstr "Adicionar primeiro item"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1322
+#: packages/admin/src/components/PortableTextEditor.tsx:1321
 msgid "Add item"
 msgstr ""
 
@@ -942,7 +942,7 @@ msgstr "Categorias ({0})"
 msgid "Categories will be imported"
 msgstr "Categorias serão importadas"
 
-#: packages/admin/src/components/BlockKitMediaPickerField.tsx:69
+#: packages/admin/src/components/BlockKitMediaPickerField.tsx:68
 #: packages/admin/src/components/ContentEditor.tsx:1575
 #: packages/admin/src/components/FieldEditor.tsx:391
 #: packages/admin/src/components/SeoImageField.tsx:47
@@ -1140,7 +1140,7 @@ msgstr "{0} conectado"
 #: packages/admin/src/components/comments/CommentDetail.tsx:103
 #: packages/admin/src/components/comments/CommentInbox.tsx:293
 #: packages/admin/src/components/Dashboard.tsx:164
-#: packages/admin/src/components/PortableTextEditor.tsx:1812
+#: packages/admin/src/components/PortableTextEditor.tsx:1811
 #: packages/admin/src/components/SectionEditor.tsx:174
 #: packages/admin/src/components/Sidebar.tsx:412
 msgid "Content"
@@ -1779,7 +1779,7 @@ msgstr "Rascunhos"
 msgid "Drag and drop or click to browse (.xml)"
 msgstr "Arraste e solte ou clique para navegar (.xml)"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1498
+#: packages/admin/src/components/PortableTextEditor.tsx:1497
 msgid "Drag to reorder"
 msgstr ""
 
@@ -1910,11 +1910,11 @@ msgid "Email verified!"
 msgstr "E-mail verificado!"
 
 #. placeholder {0}: block.label
-#: packages/admin/src/components/PortableTextEditor.tsx:1825
+#: packages/admin/src/components/PortableTextEditor.tsx:1824
 msgid "Embed a {0}"
 msgstr "Incorporar um {0}"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1828
+#: packages/admin/src/components/PortableTextEditor.tsx:1827
 msgid "Embeds"
 msgstr "Incorporações"
 
@@ -2357,7 +2357,7 @@ msgid "If an account exists for <0>{email}</0>, we've sent a sign-in link."
 msgstr "Se existir uma conta para <0>{email}</0>, enviamos um link de acesso."
 
 #: packages/admin/src/components/FieldEditor.tsx:200
-#: packages/admin/src/components/PortableTextEditor.tsx:1794
+#: packages/admin/src/components/PortableTextEditor.tsx:1793
 msgid "Image"
 msgstr "Imagem"
 
@@ -2497,11 +2497,11 @@ msgstr "Inserir um bloco de código"
 msgid "Insert a horizontal rule"
 msgstr "Inserir uma linha horizontal"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1809
+#: packages/admin/src/components/PortableTextEditor.tsx:1808
 msgid "Insert a reusable section"
 msgstr "Inserir uma seção reutilizável"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1795
+#: packages/admin/src/components/PortableTextEditor.tsx:1794
 msgid "Insert an image"
 msgstr "Inserir uma imagem"
 
@@ -2569,7 +2569,7 @@ msgid "Invite User"
 msgstr "Convidar usuário"
 
 #. placeholder {0}: index + 1
-#: packages/admin/src/components/PortableTextEditor.tsx:1484
+#: packages/admin/src/components/PortableTextEditor.tsx:1483
 #: packages/admin/src/components/RepeaterField.tsx:233
 msgid "Item {0}"
 msgstr "Item {0}"
@@ -2873,7 +2873,7 @@ msgstr "Comprimento máximo"
 msgid "Max Value"
 msgstr "Valor máximo"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1798
+#: packages/admin/src/components/PortableTextEditor.tsx:1797
 #: packages/admin/src/components/Sidebar.tsx:185
 #: packages/admin/src/components/WordPressImport.tsx:1164
 msgid "Media"
@@ -3231,7 +3231,7 @@ msgstr "Nenhum campo para comparar"
 msgid "No headings in document"
 msgstr "Nenhum cabeçalho no documento"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1407
+#: packages/admin/src/components/PortableTextEditor.tsx:1406
 #: packages/admin/src/components/RepeaterField.tsx:159
 msgid "No items yet"
 msgstr "Nenhum item ainda"
@@ -3809,7 +3809,7 @@ msgstr "Usuário cadastrado"
 msgid "Registration was cancelled or timed out. Please try again."
 msgstr "O registro foi cancelado ou expirou. Tente novamente."
 
-#: packages/admin/src/components/BlockKitMediaPickerField.tsx:77
+#: packages/admin/src/components/BlockKitMediaPickerField.tsx:76
 #: packages/admin/src/components/ContentEditor.tsx:1754
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:177
 #: packages/admin/src/components/settings/GeneralSettings.tsx:196
@@ -3849,7 +3849,7 @@ msgid "Remove Image?"
 msgstr "Remover imagem?"
 
 #. placeholder {0}: index + 1
-#: packages/admin/src/components/PortableTextEditor.tsx:1523
+#: packages/admin/src/components/PortableTextEditor.tsx:1522
 #: packages/admin/src/components/RepeaterField.tsx:269
 msgid "Remove item {0}"
 msgstr "Remover item {0}"
@@ -4247,7 +4247,7 @@ msgstr "Pesquisar..."
 msgid "Searchable"
 msgstr "Pesquisável"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1808
+#: packages/admin/src/components/PortableTextEditor.tsx:1807
 msgid "Section"
 msgstr "Seção"
 
@@ -4338,7 +4338,7 @@ msgstr "Configurações de segurança"
 msgid "Select"
 msgstr "Selecionar"
 
-#: packages/admin/src/components/BlockKitMediaPickerField.tsx:101
+#: packages/admin/src/components/BlockKitMediaPickerField.tsx:100
 #: packages/admin/src/components/ContentEditor.tsx:1607
 msgid "Select {label}"
 msgstr "Selecionar {label}"
@@ -4378,7 +4378,7 @@ msgstr "Selecionar imagem"
 msgid "Select Logo"
 msgstr "Selecionar logo"
 
-#: packages/admin/src/components/BlockKitMediaPickerField.tsx:92
+#: packages/admin/src/components/BlockKitMediaPickerField.tsx:91
 msgid "Select media"
 msgstr ""
 

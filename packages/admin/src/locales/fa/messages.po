@@ -446,7 +446,7 @@ msgid "Add"
 msgstr "افزودن"
 
 #. placeholder {0}: field.item_label
-#: packages/admin/src/components/PortableTextEditor.tsx:1322
+#: packages/admin/src/components/PortableTextEditor.tsx:1321
 msgid "Add {0}"
 msgstr ""
 
@@ -495,7 +495,7 @@ msgstr "افزودن فیلدها"
 msgid "Add First Item"
 msgstr "افزودن اولین مورد"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1322
+#: packages/admin/src/components/PortableTextEditor.tsx:1321
 msgid "Add item"
 msgstr ""
 
@@ -944,7 +944,7 @@ msgstr "دسته‌ها ({0})"
 msgid "Categories will be imported"
 msgstr "دسته‌ها درون‌ریزی خواهند شد"
 
-#: packages/admin/src/components/BlockKitMediaPickerField.tsx:69
+#: packages/admin/src/components/BlockKitMediaPickerField.tsx:68
 #: packages/admin/src/components/ContentEditor.tsx:1575
 #: packages/admin/src/components/FieldEditor.tsx:391
 #: packages/admin/src/components/SeoImageField.tsx:47
@@ -1142,7 +1142,7 @@ msgstr "متصل شده در {0}"
 #: packages/admin/src/components/comments/CommentDetail.tsx:103
 #: packages/admin/src/components/comments/CommentInbox.tsx:293
 #: packages/admin/src/components/Dashboard.tsx:164
-#: packages/admin/src/components/PortableTextEditor.tsx:1812
+#: packages/admin/src/components/PortableTextEditor.tsx:1811
 #: packages/admin/src/components/SectionEditor.tsx:174
 #: packages/admin/src/components/Sidebar.tsx:412
 msgid "Content"
@@ -1781,7 +1781,7 @@ msgstr "پیش‌نویس‌ها"
 msgid "Drag and drop or click to browse (.xml)"
 msgstr "بکشید و رها کنید یا برای مرور کلیک کنید (.xml)"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1498
+#: packages/admin/src/components/PortableTextEditor.tsx:1497
 msgid "Drag to reorder"
 msgstr ""
 
@@ -1912,11 +1912,11 @@ msgid "Email verified!"
 msgstr "ایمیل تأیید شد!"
 
 #. placeholder {0}: block.label
-#: packages/admin/src/components/PortableTextEditor.tsx:1825
+#: packages/admin/src/components/PortableTextEditor.tsx:1824
 msgid "Embed a {0}"
 msgstr "جاسازی {0}"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1828
+#: packages/admin/src/components/PortableTextEditor.tsx:1827
 msgid "Embeds"
 msgstr "جاسازی‌ها"
 
@@ -2359,7 +2359,7 @@ msgid "If an account exists for <0>{email}</0>, we've sent a sign-in link."
 msgstr "اگر حساب کاربری برای <0>{email}</0> وجود داشته باشد، لینک ورود ارسال شده است."
 
 #: packages/admin/src/components/FieldEditor.tsx:200
-#: packages/admin/src/components/PortableTextEditor.tsx:1794
+#: packages/admin/src/components/PortableTextEditor.tsx:1793
 msgid "Image"
 msgstr "تصویر"
 
@@ -2499,11 +2499,11 @@ msgstr "درج بلوک کد"
 msgid "Insert a horizontal rule"
 msgstr "درج خط افقی"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1809
+#: packages/admin/src/components/PortableTextEditor.tsx:1808
 msgid "Insert a reusable section"
 msgstr "درج بخش قابل استفاده مجدد"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1795
+#: packages/admin/src/components/PortableTextEditor.tsx:1794
 msgid "Insert an image"
 msgstr "درج تصویر"
 
@@ -2571,7 +2571,7 @@ msgid "Invite User"
 msgstr "دعوت کاربر"
 
 #. placeholder {0}: index + 1
-#: packages/admin/src/components/PortableTextEditor.tsx:1484
+#: packages/admin/src/components/PortableTextEditor.tsx:1483
 #: packages/admin/src/components/RepeaterField.tsx:233
 msgid "Item {0}"
 msgstr "مورد {0}"
@@ -2875,7 +2875,7 @@ msgstr "حداکثر طول"
 msgid "Max Value"
 msgstr "حداکثر مقدار"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1798
+#: packages/admin/src/components/PortableTextEditor.tsx:1797
 #: packages/admin/src/components/Sidebar.tsx:185
 #: packages/admin/src/components/WordPressImport.tsx:1164
 msgid "Media"
@@ -3233,7 +3233,7 @@ msgstr "فیلدی برای مقایسه وجود ندارد"
 msgid "No headings in document"
 msgstr "سرتیتری در سند نیست"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1407
+#: packages/admin/src/components/PortableTextEditor.tsx:1406
 #: packages/admin/src/components/RepeaterField.tsx:159
 msgid "No items yet"
 msgstr "هنوز موردی نیست"
@@ -3811,7 +3811,7 @@ msgstr "کاربر ثبت‌شده"
 msgid "Registration was cancelled or timed out. Please try again."
 msgstr "ثبت‌نام لغو شد یا زمان آن به پایان رسید. لطفاً دوباره تلاش کنید."
 
-#: packages/admin/src/components/BlockKitMediaPickerField.tsx:77
+#: packages/admin/src/components/BlockKitMediaPickerField.tsx:76
 #: packages/admin/src/components/ContentEditor.tsx:1754
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:177
 #: packages/admin/src/components/settings/GeneralSettings.tsx:196
@@ -3851,7 +3851,7 @@ msgid "Remove Image?"
 msgstr "حذف تصویر؟"
 
 #. placeholder {0}: index + 1
-#: packages/admin/src/components/PortableTextEditor.tsx:1523
+#: packages/admin/src/components/PortableTextEditor.tsx:1522
 #: packages/admin/src/components/RepeaterField.tsx:269
 msgid "Remove item {0}"
 msgstr "حذف مورد {0}"
@@ -4249,7 +4249,7 @@ msgstr "جستجو…"
 msgid "Searchable"
 msgstr "قابل جستجو"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1808
+#: packages/admin/src/components/PortableTextEditor.tsx:1807
 msgid "Section"
 msgstr "بخش"
 
@@ -4340,7 +4340,7 @@ msgstr "تنظیمات امنیتی"
 msgid "Select"
 msgstr "انتخاب"
 
-#: packages/admin/src/components/BlockKitMediaPickerField.tsx:101
+#: packages/admin/src/components/BlockKitMediaPickerField.tsx:100
 #: packages/admin/src/components/ContentEditor.tsx:1607
 msgid "Select {label}"
 msgstr "انتخاب {label}"
@@ -4380,7 +4380,7 @@ msgstr "انتخاب تصویر"
 msgid "Select Logo"
 msgstr "انتخاب لوگو"
 
-#: packages/admin/src/components/BlockKitMediaPickerField.tsx:92
+#: packages/admin/src/components/BlockKitMediaPickerField.tsx:91
 msgid "Select media"
 msgstr ""
 

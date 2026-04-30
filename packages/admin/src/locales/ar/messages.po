@@ -448,7 +448,7 @@ msgid "Add"
 msgstr "إضافة"
 
 #. placeholder {0}: field.item_label
-#: packages/admin/src/components/PortableTextEditor.tsx:1322
+#: packages/admin/src/components/PortableTextEditor.tsx:1321
 msgid "Add {0}"
 msgstr ""
 
@@ -497,7 +497,7 @@ msgstr "إضافة حقول"
 msgid "Add First Item"
 msgstr "إضافة أول عنصر"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1322
+#: packages/admin/src/components/PortableTextEditor.tsx:1321
 msgid "Add item"
 msgstr ""
 
@@ -946,7 +946,7 @@ msgstr "الفئات ({0})"
 msgid "Categories will be imported"
 msgstr "سيتم استيراد الفئات"
 
-#: packages/admin/src/components/BlockKitMediaPickerField.tsx:69
+#: packages/admin/src/components/BlockKitMediaPickerField.tsx:68
 #: packages/admin/src/components/ContentEditor.tsx:1575
 #: packages/admin/src/components/FieldEditor.tsx:391
 #: packages/admin/src/components/SeoImageField.tsx:47
@@ -1144,7 +1144,7 @@ msgstr "متصل {0}"
 #: packages/admin/src/components/comments/CommentDetail.tsx:103
 #: packages/admin/src/components/comments/CommentInbox.tsx:293
 #: packages/admin/src/components/Dashboard.tsx:164
-#: packages/admin/src/components/PortableTextEditor.tsx:1812
+#: packages/admin/src/components/PortableTextEditor.tsx:1811
 #: packages/admin/src/components/SectionEditor.tsx:174
 #: packages/admin/src/components/Sidebar.tsx:412
 msgid "Content"
@@ -1783,7 +1783,7 @@ msgstr "المسودات"
 msgid "Drag and drop or click to browse (.xml)"
 msgstr "اسحب وأفلت أو اضغط للتصفح (.xml)"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1498
+#: packages/admin/src/components/PortableTextEditor.tsx:1497
 msgid "Drag to reorder"
 msgstr ""
 
@@ -1914,11 +1914,11 @@ msgid "Email verified!"
 msgstr "تم التحقق من البريد الإلكتروني!"
 
 #. placeholder {0}: block.label
-#: packages/admin/src/components/PortableTextEditor.tsx:1825
+#: packages/admin/src/components/PortableTextEditor.tsx:1824
 msgid "Embed a {0}"
 msgstr "تضمين {0}"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1828
+#: packages/admin/src/components/PortableTextEditor.tsx:1827
 msgid "Embeds"
 msgstr "المضمنات"
 
@@ -2361,7 +2361,7 @@ msgid "If an account exists for <0>{email}</0>, we've sent a sign-in link."
 msgstr "إذا كان يوجد حساب لـ <0>{email}</0>، قمنا بإرسال رابط لتسجيل دخول."
 
 #: packages/admin/src/components/FieldEditor.tsx:200
-#: packages/admin/src/components/PortableTextEditor.tsx:1794
+#: packages/admin/src/components/PortableTextEditor.tsx:1793
 msgid "Image"
 msgstr "صورة"
 
@@ -2501,11 +2501,11 @@ msgstr "إدراج كتلة كود"
 msgid "Insert a horizontal rule"
 msgstr "إدراج فاصل أفقي"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1809
+#: packages/admin/src/components/PortableTextEditor.tsx:1808
 msgid "Insert a reusable section"
 msgstr "إدراج قسم قابل لإعادة الاستخدام"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1795
+#: packages/admin/src/components/PortableTextEditor.tsx:1794
 msgid "Insert an image"
 msgstr "إدراج صورة"
 
@@ -2573,7 +2573,7 @@ msgid "Invite User"
 msgstr "دعوة مستخدم"
 
 #. placeholder {0}: index + 1
-#: packages/admin/src/components/PortableTextEditor.tsx:1484
+#: packages/admin/src/components/PortableTextEditor.tsx:1483
 #: packages/admin/src/components/RepeaterField.tsx:233
 msgid "Item {0}"
 msgstr "العنصر {0}"
@@ -2877,7 +2877,7 @@ msgstr "الحد الأقصى للطول"
 msgid "Max Value"
 msgstr "القيمة القصوى"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1798
+#: packages/admin/src/components/PortableTextEditor.tsx:1797
 #: packages/admin/src/components/Sidebar.tsx:185
 #: packages/admin/src/components/WordPressImport.tsx:1164
 msgid "Media"
@@ -3235,7 +3235,7 @@ msgstr "لا توجد حقول للمقارنة"
 msgid "No headings in document"
 msgstr "لا يوجد عناوين في المستند"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1407
+#: packages/admin/src/components/PortableTextEditor.tsx:1406
 #: packages/admin/src/components/RepeaterField.tsx:159
 msgid "No items yet"
 msgstr "لا توجد عناصر بعد"
@@ -3813,7 +3813,7 @@ msgstr "مستخدم مسجل"
 msgid "Registration was cancelled or timed out. Please try again."
 msgstr "تم إلغاء التسجيل أو انتهت مهلته. يرجى المحاولة مجددًا."
 
-#: packages/admin/src/components/BlockKitMediaPickerField.tsx:77
+#: packages/admin/src/components/BlockKitMediaPickerField.tsx:76
 #: packages/admin/src/components/ContentEditor.tsx:1754
 #: packages/admin/src/components/editor/ImageDetailPanel.tsx:177
 #: packages/admin/src/components/settings/GeneralSettings.tsx:196
@@ -3853,7 +3853,7 @@ msgid "Remove Image?"
 msgstr "إزالة الصورة؟"
 
 #. placeholder {0}: index + 1
-#: packages/admin/src/components/PortableTextEditor.tsx:1523
+#: packages/admin/src/components/PortableTextEditor.tsx:1522
 #: packages/admin/src/components/RepeaterField.tsx:269
 msgid "Remove item {0}"
 msgstr "إزالة العنصر {0}"
@@ -4251,7 +4251,7 @@ msgstr "بحث..."
 msgid "Searchable"
 msgstr "قابل للبحث"
 
-#: packages/admin/src/components/PortableTextEditor.tsx:1808
+#: packages/admin/src/components/PortableTextEditor.tsx:1807
 msgid "Section"
 msgstr "قسم"
 
@@ -4342,7 +4342,7 @@ msgstr "إعدادات الأمن"
 msgid "Select"
 msgstr "اختيار"
 
-#: packages/admin/src/components/BlockKitMediaPickerField.tsx:101
+#: packages/admin/src/components/BlockKitMediaPickerField.tsx:100
 #: packages/admin/src/components/ContentEditor.tsx:1607
 msgid "Select {label}"
 msgstr "اختيار {label}"
@@ -4382,7 +4382,7 @@ msgstr "اختيار صورة"
 msgid "Select Logo"
 msgstr "اختيار الشعار"
 
-#: packages/admin/src/components/BlockKitMediaPickerField.tsx:92
+#: packages/admin/src/components/BlockKitMediaPickerField.tsx:91
 msgid "Select media"
 msgstr ""
 
