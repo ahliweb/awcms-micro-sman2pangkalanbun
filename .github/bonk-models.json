@@ -6,25 +6,6 @@
 			"id": "openai/gpt-5.5",
 			"registration": {
 				"id": "openai/gpt-5.5",
-				"name": "GPT-5.5",
-				"family": "gpt",
-				"attachment": true,
-				"reasoning": true,
-				"tool_call": true,
-				"temperature": false,
-				"release_date": "2026-03-12",
-				"modalities": {
-					"input": ["text", "image", "pdf"],
-					"output": ["text"]
-				},
-				"cost": {
-					"input": 1.25,
-					"output": 10
-				},
-				"limit": {
-					"context": 400000,
-					"output": 128000
-				},
 				"options": {
 					"reasoningEffort": "high",
 					"reasoningSummary": "auto"
@@ -35,27 +16,6 @@
 			"id": "anthropic/claude-opus-4-7",
 			"registration": {
 				"id": "anthropic/claude-opus-4-7",
-				"name": "Claude Opus 4.7",
-				"family": "claude-opus",
-				"attachment": true,
-				"reasoning": true,
-				"tool_call": true,
-				"temperature": false,
-				"release_date": "2026-04-16",
-				"modalities": {
-					"input": ["text", "image", "pdf"],
-					"output": ["text"]
-				},
-				"cost": {
-					"input": 5,
-					"output": 25,
-					"cache_read": 0.5,
-					"cache_write": 6.25
-				},
-				"limit": {
-					"context": 1000000,
-					"output": 128000
-				},
 				"options": {
 					"effort": "xhigh",
 					"thinking": {
@@ -68,25 +28,6 @@
 			"id": "google/gemini-3.1-pro",
 			"registration": {
 				"id": "google/gemini-3.1-pro",
-				"name": "Gemini 3.1 Pro",
-				"family": "gemini",
-				"attachment": true,
-				"reasoning": true,
-				"tool_call": true,
-				"temperature": true,
-				"release_date": "2026-02-25",
-				"modalities": {
-					"input": ["text", "image", "pdf", "audio", "video"],
-					"output": ["text"]
-				},
-				"cost": {
-					"input": 1.25,
-					"output": 10
-				},
-				"limit": {
-					"context": 2000000,
-					"output": 64000
-				},
 				"options": {
 					"thinkingConfig": {
 						"thinkingLevel": "high",
@@ -98,30 +39,7 @@
 		"kimi": {
 			"id": "workers-ai/@cf/moonshotai/kimi-k2.6",
 			"registration": {
-				"id": "workers-ai/@cf/moonshotai/kimi-k2.6",
-				"name": "Kimi K2.6",
-				"family": "kimi",
-				"attachment": true,
-				"reasoning": true,
-				"tool_call": true,
-				"interleaved": {
-					"field": "reasoning_content"
-				},
-				"temperature": true,
-				"release_date": "2026-04-20",
-				"modalities": {
-					"input": ["text", "image"],
-					"output": ["text"]
-				},
-				"cost": {
-					"input": 0.95,
-					"output": 4,
-					"cache_read": 0.16
-				},
-				"limit": {
-					"context": 256000,
-					"output": 256000
-				}
+				"id": "workers-ai/@cf/moonshotai/kimi-k2.6"
 			}
 		}
 	}
