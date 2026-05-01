@@ -6,6 +6,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: id\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
 #: packages/admin/src/components/ContentEditor.tsx:966
 #: packages/admin/src/components/LocaleSwitcher.tsx:72
@@ -784,8 +790,8 @@ msgstr "Kembali ke login"
 msgid "Back to marketplace"
 msgstr "Kembali ke marketplace"
 
-#: packages/admin/src/components/SectionEditor.tsx:70
-#: packages/admin/src/components/SectionEditor.tsx:156
+#: packages/admin/src/components/SectionEditor.tsx:71
+#: packages/admin/src/components/SectionEditor.tsx:172
 msgid "Back to sections"
 msgstr "Kembali ke bagian"
 
@@ -849,8 +855,8 @@ msgstr "Daftar Poin"
 
 #: packages/admin/src/components/ContentEditor.tsx:932
 #: packages/admin/src/components/Sidebar.tsx:206
-msgid "Kredit Penulis"
-msgstr "Kredit Penulis"
+msgid "Bylines"
+msgstr ""
 
 #: packages/admin/src/components/users/roleDefinitions.ts:25
 msgid "Can create content"
@@ -1086,7 +1092,7 @@ msgstr "Koleksi"
 msgid "Collections created:"
 msgstr "Koleksi dibuat:"
 
-#: packages/admin/src/components/SectionEditor.tsx:227
+#: packages/admin/src/components/SectionEditor.tsx:263
 msgid "Comma-separated keywords for search."
 msgstr "Kata kunci yang dipisahkan dengan koma untuk pencarian."
 
@@ -1139,7 +1145,7 @@ msgstr "Terhubung {0}"
 #: packages/admin/src/components/comments/CommentInbox.tsx:293
 #: packages/admin/src/components/Dashboard.tsx:164
 #: packages/admin/src/components/PortableTextEditor.tsx:1811
-#: packages/admin/src/components/SectionEditor.tsx:175
+#: packages/admin/src/components/SectionEditor.tsx:191
 #: packages/admin/src/components/Sidebar.tsx:412
 msgid "Content"
 msgstr "Konten"
@@ -1432,7 +1438,7 @@ msgstr "Kustom"
 msgid "Custom robots.txt content. Leave empty to use the default."
 msgstr "Konten robots.txt kustom. Kosongkan untuk menggunakan bawaan."
 
-#: packages/admin/src/components/SectionEditor.tsx:165
+#: packages/admin/src/components/SectionEditor.tsx:181
 msgid "Custom Section"
 msgstr "Bagian Kustom"
 
@@ -1610,11 +1616,11 @@ msgstr "Tolak"
 msgid "Describe this image for accessibility"
 msgstr "Deskripsikan gambar ini untuk aksesibilitas"
 
-#: packages/admin/src/components/SectionEditor.tsx:216
+#: packages/admin/src/components/SectionEditor.tsx:252
 msgid "Describe what this section is for..."
 msgstr "Deskripsikan kegunaan bagian ini..."
 
-#: packages/admin/src/components/SectionEditor.tsx:213
+#: packages/admin/src/components/SectionEditor.tsx:249
 #: packages/admin/src/components/Sections.tsx:198
 msgid "Description"
 msgstr "Deskripsi"
@@ -1828,8 +1834,8 @@ msgid "Edit {title}"
 msgstr "Edit {title}"
 
 #: packages/admin/src/components/ContentEditor.tsx:1860
-msgid "Edit kredit penulis"
-msgstr "Edit kredit penulis"
+msgid "Edit byline"
+msgstr ""
 
 #: packages/admin/src/components/settings/AllowedDomainsSettings.tsx:369
 msgid "Edit Domain"
@@ -2005,7 +2011,7 @@ msgstr "Masukkan URL situs WordPress Anda"
 msgid "Error"
 msgstr "Kesalahan"
 
-#: packages/admin/src/components/SectionEditor.tsx:50
+#: packages/admin/src/components/SectionEditor.tsx:51
 msgid "Error saving section"
 msgstr "Gagal menyimpan bagian"
 
@@ -2035,8 +2041,8 @@ msgid "Expiry"
 msgstr "Kedaluwarsa"
 
 #: packages/admin/src/components/WordPressImport.tsx:1103
-msgid "Export from WordPress secara manually"
-msgstr "Ekspor dari WordPress secara manual"
+msgid "Export from WordPress manually"
+msgstr ""
 
 #: packages/admin/src/components/WordPressImport.tsx:1227
 msgid "Export your content from WordPress to import everything including drafts."
@@ -2598,7 +2604,7 @@ msgid "JSON"
 msgstr "JSON"
 
 #: packages/admin/src/components/MarketplacePluginDetail.tsx:295
-#: packages/admin/src/components/SectionEditor.tsx:222
+#: packages/admin/src/components/SectionEditor.tsx:258
 #: packages/admin/src/components/ThemeMarketplaceDetail.tsx:193
 msgid "Keywords"
 msgstr "Kata Kunci"
@@ -4260,7 +4266,7 @@ msgstr "Dapat Dicari"
 msgid "Section"
 msgstr "Bagian"
 
-#: packages/admin/src/components/SectionEditor.tsx:78
+#: packages/admin/src/components/SectionEditor.tsx:79
 msgid "Section \"{slug}\" could not be found."
 msgstr "Bagian \"{slug}\" tidak dapat ditemukan."
 
@@ -4272,19 +4278,19 @@ msgstr "Bagian dibuat"
 msgid "Section deleted"
 msgstr "Bagian dihapus"
 
-#: packages/admin/src/components/SectionEditor.tsx:187
+#: packages/admin/src/components/SectionEditor.tsx:223
 msgid "Section Details"
 msgstr "Detail Bagian"
 
-#: packages/admin/src/components/SectionEditor.tsx:74
+#: packages/admin/src/components/SectionEditor.tsx:75
 msgid "Section Not Found"
 msgstr "Bagian Tidak Ditemukan"
 
-#: packages/admin/src/components/SectionEditor.tsx:42
+#: packages/admin/src/components/SectionEditor.tsx:43
 msgid "Section saved"
 msgstr "Bagian disimpan"
 
-#: packages/admin/src/components/SectionEditor.tsx:193
+#: packages/admin/src/components/SectionEditor.tsx:229
 msgid "Section title"
 msgstr "Judul bagian"
 
@@ -4633,7 +4639,7 @@ msgstr "Dilewati"
 #: packages/admin/src/components/ContentTypeList.tsx:97
 #: packages/admin/src/components/FieldEditor.tsx:224
 #: packages/admin/src/components/FieldEditor.tsx:407
-#: packages/admin/src/components/SectionEditor.tsx:198
+#: packages/admin/src/components/SectionEditor.tsx:234
 #: packages/admin/src/components/Sections.tsx:182
 #: packages/admin/src/components/TaxonomyManager.tsx:250
 msgid "Slug"
@@ -4687,7 +4693,7 @@ msgstr "Urutkan tema"
 #: packages/admin/src/components/MarketplacePluginDetail.tsx:216
 #: packages/admin/src/components/PluginManager.tsx:434
 #: packages/admin/src/components/Redirects.tsx:447
-#: packages/admin/src/components/SectionEditor.tsx:233
+#: packages/admin/src/components/SectionEditor.tsx:269
 msgid "Source"
 msgstr "Sumber"
 
@@ -4847,7 +4853,7 @@ msgid "Theme"
 msgstr "Tema"
 
 #. placeholder {0}: section.themeId
-#: packages/admin/src/components/SectionEditor.tsx:246
+#: packages/admin/src/components/SectionEditor.tsx:282
 msgid "Theme ID: {0}"
 msgstr "ID Tema: {0}"
 
@@ -4855,7 +4861,7 @@ msgstr "ID Tema: {0}"
 msgid "Theme not found"
 msgstr "Tema tidak ditemukan"
 
-#: packages/admin/src/components/SectionEditor.tsx:165
+#: packages/admin/src/components/SectionEditor.tsx:181
 msgid "Theme Section"
 msgstr "Bagian Tema"
 
@@ -4876,7 +4882,7 @@ msgstr "Tema"
 msgid "This field is required"
 msgstr "Field ini wajib diisi"
 
-#: packages/admin/src/components/SectionEditor.tsx:240
+#: packages/admin/src/components/SectionEditor.tsx:276
 msgid "This is a custom section."
 msgstr "Ini adalah bagian kustom."
 
@@ -4904,11 +4910,11 @@ msgstr "Plugin ini tidak memerlukan izin khusus."
 msgid "This redirect rule will be permanently removed."
 msgstr "Aturan pengalihan ini akan dihapus permanen."
 
-#: packages/admin/src/components/SectionEditor.tsx:237
+#: packages/admin/src/components/SectionEditor.tsx:273
 msgid "This section is provided by the theme. Editing will create a custom copy that overrides the theme version."
 msgstr "Bagian ini disediakan oleh tema. Mengedit akan membuat salinan kustom yang mengganti versi tema."
 
-#: packages/admin/src/components/SectionEditor.tsx:242
+#: packages/admin/src/components/SectionEditor.tsx:278
 msgid "This section was imported from another system."
 msgstr "Bagian ini diimpor dari sistem lain."
 
@@ -4956,7 +4962,7 @@ msgstr "Zona waktu untuk menampilkan tanggal (mis., Asia/Jakarta)"
 
 #: packages/admin/src/components/ContentList.tsx:212
 #: packages/admin/src/components/ContentList.tsx:343
-#: packages/admin/src/components/SectionEditor.tsx:190
+#: packages/admin/src/components/SectionEditor.tsx:226
 #: packages/admin/src/components/Sections.tsx:168
 msgid "Title"
 msgstr "Judul"
@@ -5324,7 +5330,7 @@ msgstr "Digunakan sebagai visual utama pos ini di halaman daftar dan di atas pos
 msgid "Used by screen readers and when image fails to load"
 msgstr "Digunakan oleh pembaca layar dan saat gambar gagal dimuat"
 
-#: packages/admin/src/components/SectionEditor.tsx:208
+#: packages/admin/src/components/SectionEditor.tsx:244
 #: packages/admin/src/components/Sections.tsx:194
 msgid "Used to identify this section. Lowercase letters, numbers, and hyphens only."
 msgstr "Digunakan untuk mengidentifikasi bagian ini. Hanya huruf kecil, angka, dan tanda hubung."
