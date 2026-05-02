@@ -192,6 +192,10 @@ pnpm format        # format with oxfmt
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contributor guide.
 
+## Project Customization Docs
+
+For the AI-native implementation plan of **Website SMAN 2 Pangkalanbun**, see `project-docs/README.md`.
+
 ## Repository Structure
 
 ```
