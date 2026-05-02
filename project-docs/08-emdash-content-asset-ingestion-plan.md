@@ -55,11 +55,44 @@ Ingest legacy website content/assets into EmDash so all ongoing management happe
    - Check SEO/meta and critical user journeys.
    - Finalize redirect strategy if slug changes occur.
 
+## Atomic Execution Backlog (Preparation)
+
+1. **Legacy content contract lock**
+   - Freeze canonical field mappings for each target EmDash collection.
+   - Record legacy-to-EmDash mapping table (source file -> collection -> field).
+   - Define fallback behavior for nullable/missing legacy values.
+
+2. **Owned vs external asset classification**
+   - Tag every referenced asset as one of: `owned-local`, `external-third-party`, `missing-source`.
+   - Reject hotlinked Unsplash/Pexels URLs for production unless policy exception is approved.
+   - Produce a missing-asset resolution list (replace, request source, or drop).
+
+3. **Media import manifest generation**
+   - Build deterministic manifest (source path, checksum, target media key, alt seed text).
+   - Batch manifests by domain (`staff`, `backgrounds`, `gallery`, `documents`).
+   - Verify idempotency (re-running does not duplicate media).
+
+4. **Content transform and locale split**
+   - Convert bilingual `id/en` fields into locale rows.
+   - Normalize HTML-rich fields to Portable Text-compatible structures.
+   - Resolve route slugs and parent-child relations for profile/service trees.
+
+5. **Admin-editability verification**
+   - Verify imported records are editable in EmDash admin.
+   - Verify media entries are reusable from admin UI.
+   - Validate no frontend rendering path depends on legacy JSON files.
+
 ## Asset Rules
 
 - Do not hotlink external Unsplash/Pexels URLs in production without explicit policy decision.
 - Prefer fully managed media in EmDash storage.
 - Keep file naming deterministic where possible and preserve attribution metadata when required.
+
+## Known Source Gaps to Resolve Before Cutover
+
+- Legacy JSON references include missing files in `/images/news/*`, `/images/alumni/*`, `/images/gallery/*`, and `/images/staff/*`.
+- Legacy finance JSON references `/documents/bos-tw1-2024.pdf`, `/documents/bos-tw2-2024.pdf`, `/documents/bos-tw3-2024.pdf` that are not present in the legacy repo path.
+- These references must be replaced with imported EmDash media IDs/URLs or intentionally removed.
 
 ## Verification Checklist
 

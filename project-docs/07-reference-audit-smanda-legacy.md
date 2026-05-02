@@ -60,6 +60,30 @@ Supplemental/asset source:
 - `images.json` includes Unsplash/Pexels links; these should be treated as external references, not assumed-owned assets.
 - Several content records reference files that are not yet verified in this repo (example patterns like `/documents/*.pdf`).
 
+### Current Inventory Snapshot
+
+- `public/images/**/*`: 72 files total
+  - `staff/*`: 55
+  - `backgrounds/*`: 14
+  - root logos/structure images: 3
+- `src/assets/foto-smandapbun/**/*`: 113 local photo assets
+- `src/assets/smandapbun-materi-web/*`: 7 files (PDF/DOCX/PNG)
+
+### Referenced But Missing in Legacy Repo
+
+Detected from structured JSON references:
+
+- 25 referenced `/images/...` files do not exist in `public/images`.
+- Missing groups include:
+  - `/images/news/*.jpg` (news thumbnails)
+  - `/images/alumni/*.jpg` (featured alumni portraits)
+  - `/images/gallery/*.jpg` (gallery category thumbnails)
+  - `/images/staff/*.jpg` (non-webp organization portraits)
+- Referenced documents missing from local path:
+  - `/documents/bos-tw1-2024.pdf`
+  - `/documents/bos-tw2-2024.pdf`
+  - `/documents/bos-tw3-2024.pdf`
+
 ## Data Quality Notes (for migration)
 
 - Some IDs are duplicated in legacy JSON (example: repeated blog id values), so EmDash import should use deterministic new IDs/slugs as source-of-truth keys.
@@ -78,5 +102,6 @@ Supplemental/asset source:
 - Copyright uncertainty for externally hosted imagery.
 - Inconsistent field shapes across legacy files.
 - Potential mismatch between old route slugs and new collection model.
+- Broken media/document links if missing references are imported verbatim.
 
 Mitigation: create a content contract and import staging workflow before full import.
