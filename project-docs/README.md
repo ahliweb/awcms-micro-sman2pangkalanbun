@@ -10,6 +10,8 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/04-plugin-strategy.md` - plugin roadmap, design rules, and extension lifecycle.
 - `project-docs/05-atomic-roadmap-and-issues.md` - atomic delivery plan plus issue definitions.
 - `project-docs/06-license-and-compliance.md` - AW Non-Commercial licensing and compliance operating guide.
+- `project-docs/07-reference-audit-smanda-legacy.md` - audit of legacy site content/assets and reuse boundaries.
+- `project-docs/08-emdash-content-asset-ingestion-plan.md` - migration plan to EmDash-managed content and media.
 
 ## Principles
 

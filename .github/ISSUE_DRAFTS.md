@@ -21,3 +21,23 @@ Create repeatable plugin conventions for settings, hooks, and API route safety.
 ## 5) [Atomic] Implement AW Non-Commercial compliance documentation
 
 Integrate license-safe release and contributor compliance checks.
+
+## 6) [Atomic] Inventory and classify legacy SMANDA assets
+
+Create a definitive inventory from `/home/data/dev_react/awcms-dev/awcms-public/smandapbun` and classify assets as owned/local vs external references.
+
+## 7) [Atomic] Define EmDash collection contracts for legacy content domains
+
+Map legacy JSON content domains to EmDash collection schemas with field-level contracts and locale strategy.
+
+## 8) [Atomic] Build first import batch: site profile + contact + navigation menus
+
+Ingest core profile/contact content and reconstruct menus directly in EmDash.
+
+## 9) [Atomic] Build second import batch: news, agenda, finance, and services
+
+Migrate operational content groups with normalized rich text and attachment mapping.
+
+## 10) [Atomic] Bind frontend pages to EmDash content and media queries
+
+Replace static/legacy data dependencies with EmDash queries for all primary public routes.
