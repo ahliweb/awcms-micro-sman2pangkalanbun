@@ -178,7 +178,7 @@ Run the demo (Node.js + SQLite, no Cloudflare account needed):
 
 ```bash
 pnpm --filter emdash-demo seed
-pnpm --filter emdash-demo dev
+pnpm dev:simple
 ```
 
 Open the admin at [http://localhost:4321/\_emdash/admin](http://localhost:4321/_emdash/admin).

@@ -27,10 +27,10 @@ Notes:
 
 ## Local Run
 
-Run from `demos/simple`:
+Canonical command from repository root:
 
 ```bash
-./node_modules/.bin/astro dev --host 127.0.0.1 --port 4330
+pnpm dev:simple --host 127.0.0.1 --port 4330
 ```
 
 Expected:
@@ -68,5 +68,5 @@ curl -i -b /tmp/opencode/smanda-cookie.txt -c /tmp/opencode/smanda-cookie.txt "h
 
 ## Operational Notes
 
-- The `pnpm --filter emdash-demo dev -- --host ...` form may not enforce the requested port reliably in this workspace. Use direct Astro binary invocation for deterministic port binding.
+- Use `pnpm dev:simple --host 127.0.0.1 --port 4330` for deterministic host/port binding in this workspace.
 - During first start, EmDash can auto-seed default collections and trigger type generation.
