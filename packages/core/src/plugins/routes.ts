@@ -9,6 +9,7 @@
  */
 
 import { PluginContextFactory, type PluginContextFactoryOptions } from "./context.js";
+import { logEvent } from "../observability/log.js";
 import { extractRequestMeta } from "./request-meta.js";
 import type { ResolvedPlugin, RouteContext, PluginRoute } from "./types.js";
 
@@ -127,7 +128,14 @@ export class PluginRouteHandler {
 			}
 
 			// Unknown error -- log internally, return generic message
-			console.error(`[plugin:${this.plugin.id}] Route handler failed:`, error);
+			logEvent("error", {
+				event: "plugin.route_handler_failed",
+				context: {
+					pluginId: this.plugin.id,
+					route: routeName,
+				},
+				error,
+			});
 			return {
 				success: false,
 				error: {

@@ -10,6 +10,7 @@ import { sql } from "kysely";
 import { isSqlite, tableExists as dialectTableExists } from "../database/dialect-helpers.js";
 import type { Database } from "../database/types.js";
 import { validateIdentifier } from "../database/validate.js";
+import { logEvent } from "../observability/log.js";
 import type { SearchConfig } from "./types.js";
 
 /**
@@ -451,7 +452,11 @@ export class FTSManager {
 				const wasRepaired = await this.verifyAndRepairIndex(slug);
 				if (wasRepaired) repaired++;
 			} catch (error) {
-				console.error(`Failed to verify/repair FTS index for "${slug}":`, error);
+				logEvent("error", {
+					event: "search.fts_verify_repair_failed",
+					context: { collectionSlug: slug },
+					error,
+				});
 			}
 		}
 

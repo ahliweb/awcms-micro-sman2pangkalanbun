@@ -10,6 +10,7 @@
  */
 
 import type { CronExecutor } from "../cron.js";
+import { logEvent } from "../../observability/log.js";
 import type { CronScheduler, SystemCleanupFn } from "./types.js";
 
 /** Minimum interval between tick attempts (ms) */
@@ -62,7 +63,10 @@ export class PiggybackScheduler implements CronScheduler {
 		void Promise.allSettled(tasks).then((results) => {
 			for (const r of results) {
 				if (r.status === "rejected") {
-					console.error("[cron:piggyback] Tick task failed:", r.reason);
+					logEvent("error", {
+						event: "cron.piggyback_tick_task_failed",
+						error: r.reason,
+					});
 				}
 			}
 			return undefined;

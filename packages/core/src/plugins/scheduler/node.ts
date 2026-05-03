@@ -10,6 +10,7 @@
  */
 
 import type { CronExecutor } from "../cron.js";
+import { logEvent } from "../../observability/log.js";
 import type { CronScheduler, SystemCleanupFn } from "./types.js";
 
 /** Minimum polling interval (ms) — prevents tight loops if next_run_at is in the past */
@@ -84,7 +85,10 @@ export class NodeCronScheduler implements CronScheduler {
 				return undefined;
 			})
 			.catch((error: unknown) => {
-				console.error("[cron:node] Failed to get next due time:", error);
+				logEvent("error", {
+					event: "cron.node_get_next_due_time_failed",
+					error,
+				});
 				// Retry after max interval
 				if (this.running) {
 					this.timer = setTimeout(() => this.arm(), MAX_INTERVAL_MS);
@@ -108,7 +112,10 @@ export class NodeCronScheduler implements CronScheduler {
 			.then((results) => {
 				for (const r of results) {
 					if (r.status === "rejected") {
-						console.error("[cron:node] Tick task failed:", r.reason);
+						logEvent("error", {
+							event: "cron.node_tick_task_failed",
+							error: r.reason,
+						});
 					}
 				}
 				return undefined;
