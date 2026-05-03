@@ -1,6 +1,6 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "emdash-demo",
+	"name": "sman2pangkalanbunweb",
 	"main": "./src/worker.ts",
 	"compatibility_date": "2026-01-14",
 	// disable_nodejs_process_v2 needed until unenv fix lands in Pages
@@ -9,8 +9,8 @@
 	// Static assets served from dist/
 	"routes": [
 		{
-			"pattern": "demo.emdashcms.com",
-			"zone_name": "demo.emdashcms.com",
+			"pattern": "sman2pangkalanbun.sch.id",
+			"zone_name": "sman2pangkalanbun.sch.id",
 			"custom_domain": true,
 		},
 	],
@@ -18,14 +18,14 @@
 	"d1_databases": [
 		{
 			"binding": "DB",
-			"database_name": "emdash_db",
+			"database_name": "sman2pangkalanbunweb",
 		},
 	],
 	// R2 bucket for media storage
 	"r2_buckets": [
 		{
 			"binding": "MEDIA",
-			"bucket_name": "emdash-media",
+			"bucket_name": "sman2pangkalanbunweb",
 		},
 	],
 	// Observability
