@@ -17,6 +17,7 @@
     "@astrojs/cloudflare": "catalog:",
     "@astrojs/react": "catalog:",
     "@emdash-cms/cloudflare": "workspace:*",
+    "@emdash-cms/plugin-academic-calendar": "workspace:*",
     "@emdash-cms/plugin-forms": "workspace:*",
     "@emdash-cms/plugin-kelulusan": "workspace:*",
     "@emdash-cms/plugin-webhook-notifier": "workspace:*",
