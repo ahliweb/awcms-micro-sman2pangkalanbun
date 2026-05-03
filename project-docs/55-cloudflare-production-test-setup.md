@@ -43,6 +43,28 @@ Optional, if using direct worker deployment with wrangler:
 - `CLOUDFLARE_API_TOKEN`
 - `CLOUDFLARE_ACCOUNT_ID`
 
+### Required API Token Scope (for Worker routes)
+
+When `wrangler deploy` updates custom-domain routing (`routes` in `wrangler.jsonc`),
+the token must include zone-scoped route permissions in addition to Workers account permissions.
+
+Minimum practical scope set for this project:
+
+- Account permissions:
+	- `Workers Scripts:Edit`
+	- `D1:Edit` (if migrations/remote DB ops are part of deploy flow)
+	- `Workers KV Storage:Edit` (if KV namespace operations are needed)
+	- `R2:Edit` (if bucket/object operations are needed)
+- Zone permissions (for `sman2pangkalanbun.sch.id`):
+	- `Workers Routes:Edit`
+
+Resource scoping:
+
+- Account resources: include the account that owns worker `sman2pangkalanbunweb`.
+- Zone resources: include `sman2pangkalanbun.sch.id`.
+
+Without `Zone > Workers Routes:Edit` on the correct zone, route mutation can fail with auth errors (including Cloudflare error code `10000`).
+
 ## Provisioning Commands
 
 Run from `demos/cloudflare` after auth is available:
@@ -72,6 +94,26 @@ pnpm exec wrangler deploy --config wrangler.jsonc
 5. workers.dev URL responds: `https://sman2pangkalanbunweb.ahliweb.workers.dev`
 6. (pending) custom domain `https://sman2pangkalanbun.sch.id` responds with TLS valid certificate
 7. Admin route loads on target host: `/_emdash/admin`
+
+Token and route validation commands:
+
+```bash
+# 1) Verify wrangler sees the token identity
+pnpm exec wrangler whoami
+
+# 2) Verify deploy including route mutation path
+pnpm exec wrangler deploy --config wrangler.jsonc
+
+# 3) Verify route binding exists for target domain
+pnpm exec wrangler deployments list --config wrangler.jsonc
+```
+
+If deploy still reports an auth failure around `/zones/.../workers/routes`:
+
+1. Confirm token belongs to the same Cloudflare account as the zone.
+2. Confirm token includes `Zone > Workers Routes:Edit` for `sman2pangkalanbun.sch.id`.
+3. Recreate token (same scopes) and retry in a fresh shell session.
+4. Re-run the three commands above and archive output in project docs/issue thread.
 
 ## Current Blocker
 
