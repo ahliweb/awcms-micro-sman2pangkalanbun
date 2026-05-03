@@ -8,8 +8,10 @@ import {
 	cloudflareImages,
 	cloudflareStream,
 } from "@emdash-cms/cloudflare";
+import { academicCalendarPlugin } from "@emdash-cms/plugin-academic-calendar";
 import { formsPlugin } from "@emdash-cms/plugin-forms";
 import { kelulusanPlugin } from "@emdash-cms/plugin-kelulusan";
+import { webhookNotifierPlugin } from "@emdash-cms/plugin-webhook-notifier";
 import { defineConfig, fontProviders } from "astro/config";
 import emdash from "emdash/astro";
 
@@ -18,14 +20,6 @@ export default defineConfig({
 	adapter: cloudflare({
 		imageService: "cloudflare",
 	}),
-	i18n: {
-		defaultLocale: "en",
-		locales: ["en", "fr", "es"],
-		fallback: {
-			fr: "en",
-			es: "en",
-		},
-	},
 	image: {
 		// Enable responsive images globally
 		layout: "constrained",
@@ -57,8 +51,10 @@ export default defineConfig({
 			],
 			// Trusted plugins (run in host worker)
 			plugins: [
+				academicCalendarPlugin(),
 				formsPlugin(),
 				kelulusanPlugin(),
+				webhookNotifierPlugin(),
 			],
 		}),
 	],
