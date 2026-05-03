@@ -1,5 +1,6 @@
 ---
 import { decodeSlug, getEmDashEntry } from "emdash";
+import type { MediaValue } from "emdash";
 import { Image, PortableText } from "emdash/ui";
 import Base from "../../layouts/Base.astro";
 
@@ -9,13 +10,24 @@ if (!slug) return Astro.redirect("/404");
 const { entry, cacheHint } = await getEmDashEntry("galleries", slug);
 if (!entry) return Astro.redirect("/404");
 Astro.cache.set(cacheHint);
+
+const data = entry.data as Record<string, unknown>;
+const title = typeof data.title === "string" ? data.title : "Galeri";
+const description =
+	typeof data.description === "string" ? data.description : null;
+const coverImage =
+	typeof data.cover_image === "string" ||
+	(typeof data.cover_image === "object" && data.cover_image !== null)
+		? (data.cover_image as MediaValue | string)
+		: null;
+const content = data.content;
 ---
 
-<Base title={entry.data.title} description={entry.data.description ?? "Galeri sekolah"}>
+<Base title={title} description={description ?? "Galeri sekolah"}>
 	<article class="content-page">
-		<h1>{entry.data.title}</h1>
-		{entry.data.cover_image && <Image image={entry.data.cover_image} />}
-		{entry.data.description && <p>{entry.data.description}</p>}
-		<PortableText value={entry.data.content} />
+		<h1>{title}</h1>
+		{coverImage && <Image image={coverImage} />}
+		{description && <p>{description}</p>}
+		<PortableText value={content} />
 	</article>
 </Base>
