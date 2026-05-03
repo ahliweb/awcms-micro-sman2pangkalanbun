@@ -21,8 +21,11 @@ This runbook configures a production-like environment for the SMAN 2 Pangkalanbu
 - `demos/cloudflare/wrangler.jsonc`
 	- Worker name: `sman2pangkalanbunweb`
 	- D1 database name: `sman2pangkalanbunweb`
+	- D1 database id: `24247c48-0dd9-472f-9d55-3098da8d799e`
 	- R2 bucket name: `sman2pangkalanbunweb`
-	- Custom route pattern: `sman2pangkalanbun.sch.id`
+	- KV binding `SESSION`:
+		- id: `b40b1549d5ed4cd289fb68292252bfae`
+		- preview_id: `37a3ede4864d4914aa136239640269b0`
 - `demos/cloudflare/astro.config.mjs`
 	- removed demo-specific Cloudflare Access dependency for portability
 - `demos/cloudflare/package.json`
@@ -66,8 +69,9 @@ pnpm exec wrangler deploy --config wrangler.jsonc
 2. D1 binding `DB` resolves at runtime
 3. R2 binding `MEDIA` resolves at runtime
 4. KV binding `SESSION` resolves at runtime
-5. `https://sman2pangkalanbun.sch.id` responds with TLS valid certificate
-6. Admin route loads: `https://sman2pangkalanbun.sch.id/_emdash/admin`
+5. workers.dev URL responds: `https://sman2pangkalanbunweb.ahliweb.workers.dev`
+6. (pending) custom domain `https://sman2pangkalanbun.sch.id` responds with TLS valid certificate
+7. Admin route loads on target host: `/_emdash/admin`
 
 ## Current Blocker
 
@@ -82,3 +86,11 @@ Tracked in:
 Once #57 is resolved, execute M13.1 (#54), M13.2 (#55), and R2 upload flow (#51).
 
 Also execute KV binding slice: #58.
+
+## Current Deploy Result
+
+- Worker successfully deployed on workers.dev:
+	- `https://sman2pangkalanbunweb.ahliweb.workers.dev`
+- Root response currently redirects to setup flow:
+	- `302 -> /_emdash/admin/setup`
+- Remaining domain binding permission gap is tracked in `#59`.

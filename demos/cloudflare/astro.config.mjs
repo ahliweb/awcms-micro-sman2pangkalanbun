@@ -4,13 +4,11 @@ import react from "@astrojs/react";
 import {
 	d1,
 	r2,
-	sandbox,
 	cloudflareCache,
 	cloudflareImages,
 	cloudflareStream,
 } from "@emdash-cms/cloudflare";
 import { formsPlugin } from "@emdash-cms/plugin-forms";
-import { webhookNotifierPlugin } from "@emdash-cms/plugin-webhook-notifier";
 import { defineConfig, fontProviders } from "astro/config";
 import emdash from "emdash/astro";
 
@@ -61,12 +59,6 @@ export default defineConfig({
 				// Test plugin that exercises all v2 APIs
 				formsPlugin(),
 			],
-			// Sandboxed plugins (run in isolated workers)
-			sandboxed: [webhookNotifierPlugin()],
-			// Sandbox runner for Cloudflare
-			sandboxRunner: sandbox(),
-			// Plugin marketplace
-			marketplace: "https://marketplace.emdashcms.com",
 		}),
 	],
 	experimental: {
