@@ -67,19 +67,6 @@
 			]
 		},
 		{
-			"slug": "announcements",
-			"label": "Announcements",
-			"labelSingular": "Announcement",
-			"supports": ["drafts", "revisions", "search"],
-			"fields": [
-				{ "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
-				{ "slug": "excerpt", "label": "Excerpt", "type": "text", "searchable": true },
-				{ "slug": "content", "label": "Content", "type": "portableText", "searchable": true },
-				{ "slug": "category", "label": "Category", "type": "string", "searchable": true },
-				{ "slug": "announcement_date", "label": "Announcement Date", "type": "datetime" }
-			]
-		},
-		{
 			"slug": "events",
 			"label": "Events",
 			"labelSingular": "Event",
@@ -183,7 +170,6 @@
 				{ "type": "custom", "label": "Beranda", "url": "/" },
 				{ "type": "custom", "label": "Profil Sekolah", "url": "/pages/profil-sekolah" },
 				{ "type": "custom", "label": "Blog", "url": "/posts" },
-				{ "type": "custom", "label": "Pengumuman", "url": "/announcements" },
 				{ "type": "custom", "label": "Agenda", "url": "/events" },
 				{ "type": "custom", "label": "Prestasi", "url": "/achievements" },
 				{ "type": "custom", "label": "Galeri", "url": "/galleries" },
@@ -201,7 +187,6 @@
 				{ "type": "custom", "label": "Sejarah", "url": "/pages/sejarah" },
 				{ "type": "custom", "label": "Visi & Misi", "url": "/pages/visi-misi" },
 				{ "type": "custom", "label": "Info Sekolah", "url": "/posts" },
-				{ "type": "custom", "label": "Pengumuman", "url": "/announcements" },
 				{ "type": "custom", "label": "Agenda", "url": "/events" },
 				{ "type": "custom", "label": "Unduhan", "url": "/downloads" },
 				{ "type": "custom", "label": "Kontak", "url": "/pages/kontak" }
@@ -947,32 +932,6 @@
 							]
 						}
 					]
-				}
-			}
-		],
-		"announcements": [
-			{
-				"id": "ann-1",
-				"slug": "pengumuman-libur-semester",
-				"status": "published",
-				"data": {
-					"title": "Pengumuman Libur Semester",
-					"excerpt": "Jadwal libur semester ganjil tahun ajaran 2026/2027.",
-					"category": "Akademik",
-					"announcement_date": "2026-12-19T08:00:00.000Z",
-					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Libur semester dimulai tanggal 21 Desember 2026 dan berakhir 2 Januari 2027." }] }]
-				}
-			},
-			{
-				"id": "ann-draft",
-				"slug": "pengumuman-draft-internal",
-				"status": "draft",
-				"data": {
-					"title": "Pengumuman Draft Internal",
-					"excerpt": "Draft pengumuman untuk review editorial.",
-					"category": "Internal",
-					"announcement_date": "2026-11-01T08:00:00.000Z",
-					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Konten ini belum dipublikasikan." }] }]
 				}
 			}
 		],

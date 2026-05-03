@@ -20,21 +20,6 @@ export interface Achievement {
   bylines?: ContentBylineCredit[];
 }
 
-export interface Announcement {
-  id: string;
-  slug: string | null;
-  status: string;
-  title: string;
-  excerpt?: string;
-  content?: PortableTextBlock[];
-  category?: string;
-  announcement_date?: string;
-  createdAt: Date;
-  updatedAt: Date;
-  publishedAt: Date | null;
-  bylines?: ContentBylineCredit[];
-}
-
 export interface Download {
   id: string;
   slug: string | null;
@@ -109,7 +94,6 @@ export interface Post {
 declare module "emdash" {
   interface EmDashCollections {
     achievements: Achievement;
-    announcements: Announcement;
     downloads: Download;
     events: Event;
     galleries: Gallery;
