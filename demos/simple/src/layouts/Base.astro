@@ -1,5 +1,5 @@
 ---
-import { getMenu, getEmDashCollection, getSiteSettings } from "emdash";
+import { getMenu, getSiteSettings } from "emdash";
 import {
 	WidgetArea,
 	EmDashHead,
@@ -52,8 +52,7 @@ const menu = await getMenu("primary");
 // just shows RSS, avoiding duplication with the "Navigate" column above.
 const socialMenu = await getMenu("social");
 
-// Fetch pages for footer
-const { entries: pages } = await getEmDashCollection("pages");
+const footerMenu = await getMenu("footer");
 
 // Build public page context for plugin contributions
 // SEO data is passed here and rendered securely by EmDashHead
@@ -157,16 +156,19 @@ const isLoggedIn = !!Astro.locals.user;
 					<div class="footer-nav">
 						<h4 class="footer-heading">Navigate</h4>
 						<ul class="footer-links">
-							<li><a href="/">Home</a></li>
-							<li><a href="/posts">All Posts</a></li>
 							{
-								pages.slice(0, 3).map((page) => (
-									<li>
-										<a href={`/pages/${page.data.slug || page.id}`}>
-											{page.data.title}
-										</a>
-									</li>
-								))
+								footerMenu?.items?.length
+									? footerMenu.items.map((item) => (
+										<li>
+											<a href={item.url} target={item.target}>{item.label}</a>
+										</li>
+									))
+									: (
+										<>
+											<li><a href="/">Home</a></li>
+											<li><a href="/posts">All Posts</a></li>
+										</>
+									)
 							}
 						</ul>
 					</div>
