@@ -11,6 +11,22 @@
  * methods natively.
  */
 
+export interface Base64Options {
+	alphabet: "base64" | "base64url";
+	omitPadding?: boolean;
+}
+
+declare global {
+	interface Uint8Array {
+		toBase64(options?: Base64Options): string;
+		toBase64(): string;
+	}
+	interface Uint8ArrayConstructor {
+		fromBase64(base64: string, options?: Base64Options): Uint8Array;
+		fromBase64(base64: string): Uint8Array;
+	}
+}
+
 const hasNative =
 	typeof Uint8Array.prototype.toBase64 === "function" &&
 	typeof Uint8Array.fromBase64 === "function";

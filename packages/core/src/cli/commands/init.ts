@@ -63,7 +63,7 @@ async function runSqlFile(db: ReturnType<typeof createDatabase>, filePath: strin
 			sql: statement,
 			parameters: [],
 			query: { kind: "RawNode", sqlFragments: [statement], parameters: [] },
-		});
+		} as any);
 	}
 }
 
