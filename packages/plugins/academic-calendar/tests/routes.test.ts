@@ -17,7 +17,7 @@ function makeCollection() {
 			map.delete(id);
 		},
 		async query({ orderBy, limit }: { orderBy?: Record<string, "asc" | "desc">; limit?: number }) {
-			let items: Stored[] = [...map.entries()].map(([id, data]) => ({ id, data }));
+			let items: Stored[] = Array.from(map.entries(), ([id, data]) => ({ id, data }));
 			const firstKey = orderBy ? Object.keys(orderBy)[0] : undefined;
 			if (firstKey) {
 				items = items.toSorted((a, b) => {
