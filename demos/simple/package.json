@@ -22,6 +22,7 @@
     "@emdash-cms/plugin-atproto": "workspace:*",
     "@emdash-cms/plugin-audit-log": "workspace:*",
     "@emdash-cms/plugin-color": "workspace:*",
+    "@emdash-cms/plugin-kelulusan": "workspace:*",
     "astro": "catalog:",
     "better-sqlite3": "catalog:",
     "emdash": "workspace:*",

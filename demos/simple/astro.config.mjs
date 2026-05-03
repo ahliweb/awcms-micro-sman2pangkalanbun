@@ -1,6 +1,7 @@
 import node from "@astrojs/node";
 import react from "@astrojs/react";
 import { auditLogPlugin } from "@emdash-cms/plugin-audit-log";
+import { kelulusanPlugin } from "@emdash-cms/plugin-kelulusan";
 import { defineConfig, fontProviders } from "astro/config";
 import emdash, { local } from "emdash/astro";
 import { sqlite } from "emdash/db";
@@ -16,14 +17,14 @@ export default defineConfig({
 	},
 	integrations: [
 		react(),
-		emdash({
+			emdash({
 			database: sqlite({ url: "file:./data.db" }),
 			storage: local({
 				directory: "./uploads",
 				baseUrl: "/_emdash/api/media/file",
 			}),
-			plugins: [auditLogPlugin()],
-		}),
+				plugins: [auditLogPlugin(), kelulusanPlugin()],
+			}),
 	],
 	fonts: [
 		{
