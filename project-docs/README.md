@@ -12,6 +12,9 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/06-license-and-compliance.md` - AW Non-Commercial licensing and compliance operating guide.
 - `project-docs/07-reference-audit-smanda-legacy.md` - audit of legacy site content/assets and reuse boundaries.
 - `project-docs/08-emdash-content-asset-ingestion-plan.md` - migration plan to EmDash-managed content and media.
+- `project-docs/09-wave1-bootstrap-baseline.md` - validated local bootstrap, run path, and dev bypass checks.
+- `project-docs/10-wave1-information-architecture.md` - Wave 1 IA/menu tree and section ownership mapping.
+- `project-docs/11-wave1-visual-identity-plan.md` - visual identity baseline plan for Wave 1 implementation.
 
 ## Principles
 
