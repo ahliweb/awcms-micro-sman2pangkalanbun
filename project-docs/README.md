@@ -36,6 +36,7 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/04-05-06-content-chain-implementation.md` - implementation evidence for core/secondary collections and public search/filtering.
 - `project-docs/35-observability-error-reporting-baseline.md` - structured logging baseline, diagnostics checklist, and Workers verification path.
 - `project-docs/37-production-log-query-playbook.md` - operator query/verification playbook for Node and Cloudflare Workers logs.
+- `project-docs/38-log-safety-ci-guard.md` - CI guard rules, remediation, and suppression process for sensitive logging regressions.
 
 ## Principles
 

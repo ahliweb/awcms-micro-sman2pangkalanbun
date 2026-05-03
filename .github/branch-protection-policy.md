@@ -8,6 +8,7 @@ Protect `main` with required checks from repository workflows:
 
 - `CI / Typecheck`
 - `CI / Lint`
+- `CI / Log Safety`
 - `CI / Version Check`
 - `CI / Tests`
 - `CI / Validate Plugins`
