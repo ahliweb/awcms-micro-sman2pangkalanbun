@@ -7,6 +7,7 @@
 import node from "@astrojs/node";
 import react from "@astrojs/react";
 import { colorPlugin } from "@emdash-cms/plugin-color";
+import { kelulusanPlugin } from "@emdash-cms/plugin-kelulusan";
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
 import { sqlite } from "emdash/db";
@@ -19,10 +20,10 @@ export default defineConfig({
 	adapter: node({ mode: "standalone" }),
 	integrations: [
 		react(),
-		emdash({
-			database: sqlite({ url: dbUrl }),
-			plugins: [colorPlugin()],
-			marketplace: marketplaceUrl,
+			emdash({
+				database: sqlite({ url: dbUrl }),
+				plugins: [colorPlugin(), kelulusanPlugin()],
+				marketplace: marketplaceUrl,
 			sandboxRunner: marketplaceUrl ? "./noop-sandbox.mjs" : undefined,
 		}),
 	],

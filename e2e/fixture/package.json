@@ -7,6 +7,7 @@
 		"@astrojs/react": "catalog:",
 		"@emdash-cms/auth": "workspace:*",
 		"@emdash-cms/plugin-color": "workspace:*",
+		"@emdash-cms/plugin-kelulusan": "workspace:*",
 		"astro": "catalog:",
 		"better-sqlite3": "catalog:",
 		"emdash": "workspace:*",
