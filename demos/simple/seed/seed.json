@@ -67,19 +67,6 @@
 			]
 		},
 		{
-			"slug": "events",
-			"label": "Events",
-			"labelSingular": "Event",
-			"supports": ["drafts", "revisions", "search"],
-			"fields": [
-				{ "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
-				{ "slug": "description", "label": "Description", "type": "text", "searchable": true },
-				{ "slug": "content", "label": "Content", "type": "portableText", "searchable": true },
-				{ "slug": "starts_at", "label": "Starts At", "type": "datetime" },
-				{ "slug": "location", "label": "Location", "type": "string", "searchable": true }
-			]
-		},
-		{
 			"slug": "galleries",
 			"label": "Galleries",
 			"labelSingular": "Gallery",
@@ -157,7 +144,6 @@
 				{ "type": "custom", "label": "Beranda", "url": "/" },
 				{ "type": "custom", "label": "Profil Sekolah", "url": "/pages/profil-sekolah" },
 				{ "type": "custom", "label": "Blog", "url": "/posts" },
-				{ "type": "custom", "label": "Agenda", "url": "/events" },
 				{ "type": "custom", "label": "Galeri", "url": "/galleries" },
 				{ "type": "custom", "label": "Unduhan", "url": "/downloads" },
 				{ "type": "custom", "label": "Profil Alumni", "url": "/pages/profil-alumni" },
@@ -173,7 +159,6 @@
 				{ "type": "custom", "label": "Sejarah", "url": "/pages/sejarah" },
 				{ "type": "custom", "label": "Visi & Misi", "url": "/pages/visi-misi" },
 				{ "type": "custom", "label": "Info Sekolah", "url": "/posts" },
-				{ "type": "custom", "label": "Agenda", "url": "/events" },
 				{ "type": "custom", "label": "Unduhan", "url": "/downloads" },
 				{ "type": "custom", "label": "Kontak", "url": "/pages/kontak" }
 			]
@@ -918,20 +903,6 @@
 							]
 						}
 					]
-				}
-			}
-		],
-		"events": [
-			{
-				"id": "evt-1",
-				"slug": "expo-siswa-2026",
-				"status": "published",
-				"data": {
-					"title": "Expo Siswa 2026",
-					"description": "Pameran karya siswa dan presentasi ekstrakurikuler.",
-					"location": "Aula SMAN 2 Pangkalan Bun",
-					"starts_at": "2026-08-10T08:00:00.000Z",
-					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Kegiatan terbuka untuk orang tua dan masyarakat." }] }]
 				}
 			}
 		],
