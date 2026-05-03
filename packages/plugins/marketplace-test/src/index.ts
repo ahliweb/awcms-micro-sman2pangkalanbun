@@ -23,7 +23,7 @@ export function marketplaceTestPlugin(): PluginDescriptor {
 		version: "0.1.0",
 		format: "standard",
 		entrypoint: "@emdash-cms/plugin-marketplace-test/sandbox",
-		capabilities: ["read:content", "write:content"],
+		capabilities: ["content:read", "content:write"],
 		allowedHosts: [],
 		storage: {
 			events: { indexes: ["timestamp", "type"] },

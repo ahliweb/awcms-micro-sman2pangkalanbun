@@ -38,6 +38,7 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/37-production-log-query-playbook.md` - operator query/verification playbook for Node and Cloudflare Workers logs.
 - `project-docs/38-log-safety-ci-guard.md` - CI guard rules, remediation, and suppression process for sensitive logging regressions.
 - `project-docs/42-plugin-scaffold-smoke.md` - reproducible build/validate smoke commands for the scaffold sample plugin package.
+- `project-docs/44-academic-calendar-model-contract.md` - D2.1 contract for calendar entities, validation rules, and upcoming-query behavior.
 
 ## Principles
 

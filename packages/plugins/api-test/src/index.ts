@@ -67,7 +67,13 @@ export function createPlugin(_options: ApiTestPluginOptions = {}): ResolvedPlugi
 		version: "0.0.1",
 
 		// Declare ALL capabilities to test everything
-		capabilities: ["read:content", "write:content", "read:media", "write:media", "network:fetch"],
+		capabilities: [
+			"content:read",
+			"content:write",
+			"media:read",
+			"media:write",
+			"network:request",
+		],
 
 		// Allowed hosts for fetch testing
 		allowedHosts: ["httpbin.org", "*.httpbin.org", "jsonplaceholder.typicode.com"],
@@ -221,7 +227,7 @@ export function createPlugin(_options: ApiTestPluginOptions = {}): ResolvedPlugi
 			},
 
 			// =================================================================
-			// Content Access (requires read:content, write:content)
+			// Content Access (requires content:read, content:write)
 			// =================================================================
 			"content/list": {
 				handler: async (ctx) => {
@@ -299,7 +305,7 @@ export function createPlugin(_options: ApiTestPluginOptions = {}): ResolvedPlugi
 			},
 
 			// =================================================================
-			// Media Access (requires read:media, write:media)
+			// Media Access (requires media:read, media:write)
 			// =================================================================
 			"media/list": {
 				handler: async (ctx) => {
@@ -343,7 +349,7 @@ export function createPlugin(_options: ApiTestPluginOptions = {}): ResolvedPlugi
 			},
 
 			// =================================================================
-			// HTTP Fetch (requires network:fetch)
+			// HTTP Fetch (requires network:request)
 			// =================================================================
 			"http/fetch": {
 				handler: async (ctx) => {
