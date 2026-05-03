@@ -1,0 +1,42 @@
+[
+	{
+		"method": "GET",
+		"path": "/",
+		"group": "core"
+	},
+	{
+		"method": "GET",
+		"path": "/posts",
+		"group": "content"
+	},
+	{
+		"method": "GET",
+		"path": "/posts/building-for-the-long-term",
+		"group": "content"
+	},
+	{
+		"method": "GET",
+		"path": "/pages/about",
+		"group": "pages"
+	},
+	{
+		"method": "GET",
+		"path": "/category/development",
+		"group": "taxonomy"
+	},
+	{
+		"method": "GET",
+		"path": "/tag/webdev",
+		"group": "taxonomy"
+	},
+	{
+		"method": "GET",
+		"path": "/rss.xml",
+		"group": "feeds"
+	},
+	{
+		"method": "GET",
+		"path": "/search?q=static",
+		"group": "search"
+	}
+]

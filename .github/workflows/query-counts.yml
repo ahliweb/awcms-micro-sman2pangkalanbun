@@ -28,6 +28,11 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
 
+      - name: Capture baseline snapshots
+        run: |
+          cp scripts/query-counts.snapshot.sqlite.json /tmp/query-counts.before.sqlite.json
+          cp scripts/query-counts.snapshot.d1.json /tmp/query-counts.before.d1.json
+
       - name: Regenerate snapshots
         run: |
           node scripts/query-counts.mjs --target sqlite --update
@@ -49,6 +54,11 @@ jobs:
             echo "Drift detected — uploading artifact for the Apply workflow."
             cat query-counts-out/snapshots.diff
           fi
+
+      - name: Enforce regression thresholds
+        run: |
+          node scripts/query-counts-regression-check.mjs --before /tmp/query-counts.before.sqlite.json --after scripts/query-counts.snapshot.sqlite.json
+          node scripts/query-counts-regression-check.mjs --before /tmp/query-counts.before.d1.json --after scripts/query-counts.snapshot.d1.json
 
       - name: Upload snapshot artifact
         if: steps.drift.outputs.changed == 'true'

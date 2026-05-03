@@ -26,6 +26,8 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/21-wave2-import-runner.md` - idempotent import runner dry-run behavior and evidence outputs.
 - `project-docs/29-wave2-verification-matrix.md` - Wave 2 matrix for routes, media, locale, editability, and source isolation.
 - `project-docs/17-wave2-editability-source-isolation.md` - focused #17 verification report for EmDash editability and legacy isolation.
+- `project-docs/33-query-count-critical-routes.md` - canonical route-set lock for query-count baseline measurement.
+- `project-docs/23-query-count-baseline-policy.md` - regression threshold policy and CI guard behavior for query counts.
 
 ## Principles
 
