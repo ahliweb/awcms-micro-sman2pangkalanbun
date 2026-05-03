@@ -66,7 +66,7 @@ A visual portfolio for showcasing creative work.
 - Case study pages
 - RSS feed
 - Dark / light mode
-<br /><br />
+
 </td>
 </tr>
 </table>
@@ -198,8 +198,7 @@ For the AI-native implementation plan of **Website SMAN 2 Pangkalanbun**, see `p
 
 ## Repository Structure
 
-```
-packages/
+```text
   core/           Astro integration, APIs, admin UI, CLI
   auth/           Authentication library
   blocks/         Portable Text block definitions
