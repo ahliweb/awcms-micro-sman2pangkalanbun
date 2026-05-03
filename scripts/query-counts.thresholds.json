@@ -1,0 +1,9 @@
+{
+	"default": {
+		"maxIncrease": 0
+	},
+	"overrides": {
+		"GET /rss.xml (cold)": { "maxIncrease": 0 },
+		"GET /rss.xml (warm)": { "maxIncrease": 0 }
+	}
+}

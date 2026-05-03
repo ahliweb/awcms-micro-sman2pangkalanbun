@@ -54,21 +54,13 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, "..");
 const fixtureDir = resolve(repoRoot, "fixtures/perf-site");
+const routesConfigPath = resolve(__dirname, "query-counts.routes.json");
 
 const HOST = "127.0.0.1";
 const PORT = 14321;
 const BASE = `http://${HOST}:${PORT}`;
 
-const ROUTES = [
-	["GET", "/"],
-	["GET", "/posts"],
-	["GET", "/posts/building-for-the-long-term"],
-	["GET", "/pages/about"],
-	["GET", "/category/development"],
-	["GET", "/tag/webdev"],
-	["GET", "/rss.xml"],
-	["GET", "/search?q=static"],
-];
+const ROUTES = JSON.parse(readFileSync(routesConfigPath, "utf8")).map((route) => [route.method, route.path]);
 
 const TRACKED_PHASES = new Set(["cold", "warm"]);
 const VALID_TARGETS = new Set(["sqlite", "d1"]);

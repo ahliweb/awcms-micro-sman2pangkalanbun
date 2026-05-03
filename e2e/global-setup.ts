@@ -13,6 +13,8 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 
+import { SMOKE_SEED_ITEMS } from "./fixtures/smoke-seed";
+
 const execAsync = promisify(execFile);
 
 const __filename = fileURLToPath(import.meta.url);
@@ -140,26 +142,17 @@ async function seedTestData(
 
 	const postIds: string[] = [];
 	let result: any;
-
-	result = await apiPost(baseUrl, token, "/_emdash/api/content/posts", {
-		data: { title: "First Post", excerpt: "The very first post" },
-		slug: "first-post",
-	});
-	postIds.push(result.item?.id ?? result.id);
-	await apiPost(baseUrl, token, `/_emdash/api/content/posts/${postIds[0]}/publish`, {});
-
-	result = await apiPost(baseUrl, token, "/_emdash/api/content/posts", {
-		data: { title: "Second Post", excerpt: "Another post" },
-		slug: "second-post",
-	});
-	postIds.push(result.item?.id ?? result.id);
-	await apiPost(baseUrl, token, `/_emdash/api/content/posts/${postIds[1]}/publish`, {});
-
-	result = await apiPost(baseUrl, token, "/_emdash/api/content/posts", {
-		data: { title: "Draft Post", excerpt: "Not published yet" },
-		slug: "draft-post",
-	});
-	postIds.push(result.item?.id ?? result.id);
+	for (const item of SMOKE_SEED_ITEMS.filter((entry) => entry.collection === "posts")) {
+		result = await apiPost(baseUrl, token, "/_emdash/api/content/posts", {
+			data: { title: item.title, excerpt: item.excerpt },
+			slug: item.slug,
+		});
+		const postId = result.item?.id ?? result.id;
+		postIds.push(postId);
+		if (item.publish) {
+			await apiPost(baseUrl, token, `/_emdash/api/content/posts/${postId}/publish`, {});
+		}
+	}
 
 	// --- Upload test image and create post with image block ---
 	const testImagePath = join(ROOT, "e2e/fixtures/assets/test-image.png");
@@ -203,19 +196,17 @@ async function seedTestData(
 	contentIds["posts"] = postIds;
 
 	const pageIds: string[] = [];
-
-	result = await apiPost(baseUrl, token, "/_emdash/api/content/pages", {
-		data: { title: "About" },
-		slug: "about",
-	});
-	pageIds.push(result.item?.id ?? result.id);
-	await apiPost(baseUrl, token, `/_emdash/api/content/pages/${pageIds[0]}/publish`, {});
-
-	result = await apiPost(baseUrl, token, "/_emdash/api/content/pages", {
-		data: { title: "Contact" },
-		slug: "contact",
-	});
-	pageIds.push(result.item?.id ?? result.id);
+	for (const item of SMOKE_SEED_ITEMS.filter((entry) => entry.collection === "pages")) {
+		result = await apiPost(baseUrl, token, "/_emdash/api/content/pages", {
+			data: { title: item.title },
+			slug: item.slug,
+		});
+		const pageId = result.item?.id ?? result.id;
+		pageIds.push(pageId);
+		if (item.publish) {
+			await apiPost(baseUrl, token, `/_emdash/api/content/pages/${pageId}/publish`, {});
+		}
+	}
 	contentIds["pages"] = pageIds;
 
 	return { collections, contentIds, mediaIds };
