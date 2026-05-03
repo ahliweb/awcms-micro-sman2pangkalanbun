@@ -1,0 +1,20 @@
+[
+  {
+    "sourcePath": "/src/assets/smandapbun-materi-web/smandapbun-dataguru.docx",
+    "checksum": "sha256:2708250ef16de4a2fd7ef923a6e25950687646679cca4ebfc131e7828d3c3047",
+    "targetKey": "legacy/documents/smandapbun-dataguru-2708250ef16d.docx",
+    "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  },
+  {
+    "sourcePath": "/src/assets/smandapbun-materi-web/smandapbun-kaldik.pdf",
+    "checksum": "sha256:120aa1fcc96d999abd4a14f8e077f994f46ea3caaf2fa6991ea51302ab30291e",
+    "targetKey": "legacy/documents/smandapbun-kaldik-120aa1fcc96d.pdf",
+    "mimeType": "application/pdf"
+  },
+  {
+    "sourcePath": "/src/assets/smandapbun-materi-web/smandapbun-logo.png",
+    "checksum": "sha256:4f2397f330922d7c5f480c2324e0ced078bf2124dec3ec76425f0965c7b99b1d",
+    "targetKey": "legacy/documents/smandapbun-logo-4f2397f33092.png",
+    "mimeType": "image/png"
+  }
+]
