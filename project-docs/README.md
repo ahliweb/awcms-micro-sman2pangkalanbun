@@ -42,6 +42,8 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/45-academic-calendar-admin-api.md` - D2.2 secured CRUD route and admin/widget foundation for academic calendar plugin.
 - `project-docs/43-academic-calendar-public-rendering.md` - D2.3 public route, page metadata hook, and upcoming-events rendering surface.
 - `project-docs/46-academic-calendar-qa-ops.md` - D2.4 test coverage and operator runbook for install, smoke verification, and rollback.
+- `project-docs/48-bos-mapping-restoration.md` - deterministic BOS mapping restoration and reference revalidation workflow for #31 closure.
+- `project-docs/49-bos-intake-verifier.md` - deterministic `%PDF` signature and checksum manifest verification step for BOS intake closure.
 
 ## Principles
 
