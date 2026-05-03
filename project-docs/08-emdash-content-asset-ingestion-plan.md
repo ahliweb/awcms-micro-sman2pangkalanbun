@@ -91,7 +91,6 @@ Ingest legacy website content/assets into EmDash so all ongoing management happe
 ## Known Source Gaps to Resolve Before Cutover
 
 - Legacy JSON references include missing files in `/images/news/*`, `/images/alumni/*`, `/images/gallery/*`, and `/images/staff/*`.
-- Legacy finance JSON references `/documents/bos-tw1-2024.pdf`, `/documents/bos-tw2-2024.pdf`, `/documents/bos-tw3-2024.pdf` that are not present in the legacy repo path.
 - These references must be replaced with imported EmDash media IDs/URLs or intentionally removed.
 
 ## Verification Checklist

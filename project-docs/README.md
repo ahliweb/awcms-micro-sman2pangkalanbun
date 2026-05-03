@@ -29,7 +29,6 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/33-query-count-critical-routes.md` - canonical route-set lock for query-count baseline measurement.
 - `project-docs/23-query-count-baseline-policy.md` - regression threshold policy and CI guard behavior for query counts.
 - `project-docs/34-e2e-events-fixture-smoke.md` - events fixture extension and smoke coverage parity artifact.
-- `project-docs/31-bos-attachment-restoration.md` - BOS attachment restoration status and external input checklist.
 - `project-docs/11-license-compliance-pack.md` - non-commercial compliance controls and release checklist gates.
 - `project-docs/12-editorial-governance-playbook.md` - publishing workflow, correction policy, archival policy, and urgent SLAs.
 - `project-docs/25-cutover-checklist-and-rollback-drill.md` - go/no-go checks, owner mapping, and rollback drill runbook.
@@ -42,11 +41,7 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/45-academic-calendar-admin-api.md` - D2.2 secured CRUD route and admin/widget foundation for academic calendar plugin.
 - `project-docs/43-academic-calendar-public-rendering.md` - D2.3 public route, page metadata hook, and upcoming-events rendering surface.
 - `project-docs/46-academic-calendar-qa-ops.md` - D2.4 test coverage and operator runbook for install, smoke verification, and rollback.
-- `project-docs/48-bos-mapping-restoration.md` - deterministic BOS mapping restoration and reference revalidation workflow for #31 closure.
-- `project-docs/49-bos-intake-verifier.md` - deterministic `%PDF` signature and checksum manifest verification step for BOS intake closure.
-- `project-docs/50-external-bos-handoff-packet.md` - copy-paste external request and acknowledgment packet to accelerate #35 handoff.
 - `project-docs/55-cloudflare-production-test-setup.md` - production-like Cloudflare setup runbook (R2, D1, Worker, domain route, validation, and blockers).
-- `project-docs/64-bos-r2-upload-automation.md` - deterministic BOS PDF upload-to-R2 workflow and evidence artifact generation for #51.
 
 ## Principles
 

@@ -60,4 +60,3 @@ Evidence:
 ## Result
 
 - #17 acceptance criteria for admin editability and source isolation: `met`.
-- Remaining finance attachment completeness is tracked separately in #31 and does not block the isolation/editability criteria.

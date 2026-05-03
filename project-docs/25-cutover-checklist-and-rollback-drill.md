@@ -9,7 +9,7 @@ This runbook defines cutover go/no-go checks, owner mapping, and rollback drill 
 - [ ] Migration verification matrix complete (`project-docs/29-wave2-verification-matrix.md`)
 - [ ] Reference closure check clean (`project-docs/migration/reference-validation-report.json`)
 - [ ] Idempotent import dry-run evidence captured (`project-docs/migration/import-runner-dry-run.json`)
-- [ ] Known media exceptions tracked (#31)
+- [ ] Known media exceptions tracked
 
 ### Reliability and CI
 
@@ -62,5 +62,3 @@ This runbook defines cutover go/no-go checks, owner mapping, and rollback drill 
 	- smoke test output summary
 
 ## Open Risk Register
-
-- #31 BOS attachment restoration remains medium-risk content completeness item until authoritative PDFs are provided.

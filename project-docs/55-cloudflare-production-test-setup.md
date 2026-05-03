@@ -83,7 +83,7 @@ Tracked in:
 
 - `#57` Cloudflare auth unblock
 
-Once #57 is resolved, execute M13.1 (#54), M13.2 (#55), and R2 upload flow (#51).
+Once #57 is resolved, execute M13.1 (#54) and M13.2 (#55).
 
 Also execute KV binding slice: #58.
 

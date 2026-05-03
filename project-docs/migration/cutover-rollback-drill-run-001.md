@@ -20,7 +20,6 @@
 
 - Recovery path (revert-first strategy) is documented and actionable.
 - Verification commands are deterministic and repeatable.
-- Residual medium-risk item remains tracked in #31 (BOS attachments).
 
 ## Evidence
 
