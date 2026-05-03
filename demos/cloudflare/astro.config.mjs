@@ -9,6 +9,7 @@ import {
 	cloudflareStream,
 } from "@emdash-cms/cloudflare";
 import { formsPlugin } from "@emdash-cms/plugin-forms";
+import { kelulusanPlugin } from "@emdash-cms/plugin-kelulusan";
 import { defineConfig, fontProviders } from "astro/config";
 import emdash from "emdash/astro";
 
@@ -56,8 +57,8 @@ export default defineConfig({
 			],
 			// Trusted plugins (run in host worker)
 			plugins: [
-				// Test plugin that exercises all v2 APIs
 				formsPlugin(),
+				kelulusanPlugin(),
 			],
 		}),
 	],
