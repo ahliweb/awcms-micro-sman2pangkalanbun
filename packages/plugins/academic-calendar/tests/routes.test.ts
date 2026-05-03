@@ -21,8 +21,8 @@ function makeCollection() {
 			const firstKey = orderBy ? Object.keys(orderBy)[0] : undefined;
 			if (firstKey) {
 				items = items.toSorted((a, b) => {
-			const av = `${a.data[firstKey] ?? ""}`;
-			const bv = `${b.data[firstKey] ?? ""}`;
+					const av = `${a.data[firstKey] ?? ""}`;
+					const bv = `${b.data[firstKey] ?? ""}`;
 					return av.localeCompare(bv);
 				});
 			}

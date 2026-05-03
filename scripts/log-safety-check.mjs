@@ -4,7 +4,8 @@ import { execSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 
-const SENSITIVE_PATTERN = /\b(authorization|cookie|set-cookie|token|password|secret|api[_-]?key)\b/i;
+const SENSITIVE_PATTERN =
+	/\b(authorization|cookie|set-cookie|token|password|secret|api[_-]?key)\b/i;
 const SUPPRESS_MARKER = "log-safety: allow";
 const CONSOLE_LOG_PATTERN = /console\.(debug|info|log|warn|error)\(/;
 const STRUCTURED_LOG_PATTERN = /logEvent\(/;

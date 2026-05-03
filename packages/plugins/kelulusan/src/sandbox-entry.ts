@@ -118,7 +118,12 @@ async function isValidGateSession(ctx: any, nisn: string, accessToken: string | 
 	return true;
 }
 
-async function recordDocumentEvent(ctx: any, student: StudentRecord, eventType: "opened" | "downloaded", actorType: "public" | "admin") {
+async function recordDocumentEvent(
+	ctx: any,
+	student: StudentRecord,
+	eventType: "opened" | "downloaded",
+	actorType: "public" | "admin",
+) {
 	await ctx.storage.document_events.put(makeEventId(), {
 		studentId: student.nisn,
 		nisn: student.nisn,
@@ -131,12 +136,16 @@ async function recordDocumentEvent(ctx: any, student: StudentRecord, eventType: 
 }
 
 async function buildTelemetrySummary(ctx: any, studentIds: string[]) {
-	if (!studentIds.length) return new Map<string, {
-		openedCount: number;
-		downloadedCount: number;
-		lastOpenedAt: string | null;
-		lastDownloadedAt: string | null;
-	}>();
+	if (!studentIds.length)
+		return new Map<
+			string,
+			{
+				openedCount: number;
+				downloadedCount: number;
+				lastOpenedAt: string | null;
+				lastDownloadedAt: string | null;
+			}
+		>();
 
 	const events = await ctx.storage.document_events.query({
 		orderBy: { createdAt: "desc" },
@@ -144,12 +153,15 @@ async function buildTelemetrySummary(ctx: any, studentIds: string[]) {
 	});
 
 	const wanted = new Set(studentIds);
-	const summary = new Map<string, {
-		openedCount: number;
-		downloadedCount: number;
-		lastOpenedAt: string | null;
-		lastDownloadedAt: string | null;
-	}>();
+	const summary = new Map<
+		string,
+		{
+			openedCount: number;
+			downloadedCount: number;
+			lastOpenedAt: string | null;
+			lastDownloadedAt: string | null;
+		}
+	>();
 
 	for (const id of studentIds) {
 		summary.set(id, {

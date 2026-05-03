@@ -1,9 +1,5 @@
 {
-  "checkedFiles": [
-    "news.sample.json",
-    "pages.sample.json",
-    "finance-reports.sample.json"
-  ],
-  "unresolvedCount": 0,
-  "unresolved": []
+	"checkedFiles": ["news.sample.json", "pages.sample.json", "finance-reports.sample.json"],
+	"unresolvedCount": 0,
+	"unresolved": []
 }

@@ -17,14 +17,14 @@ export default defineConfig({
 	},
 	integrations: [
 		react(),
-			emdash({
+		emdash({
 			database: sqlite({ url: "file:./data.db" }),
 			storage: local({
 				directory: "./uploads",
 				baseUrl: "/_emdash/api/media/file",
 			}),
-				plugins: [auditLogPlugin(), kelulusanPlugin()],
-			}),
+			plugins: [auditLogPlugin(), kelulusanPlugin()],
+		}),
 	],
 	fonts: [
 		{

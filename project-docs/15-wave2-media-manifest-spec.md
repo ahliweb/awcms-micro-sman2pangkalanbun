@@ -21,10 +21,10 @@ Each domain keeps a separate manifest shard and a stable sort order.
 
 ```json
 {
-  "sourcePath": "/public/images/staff/teachers/teacher-01.webp",
-  "checksum": "sha256:bda774c97a9206147f01ae1fb1da7b7bee222c000958a50ff8f635fd8b66e3f4",
-  "targetKey": "legacy/staff/teacher-01-bda774c97a92.webp",
-  "mimeType": "image/webp"
+	"sourcePath": "/public/images/staff/teachers/teacher-01.webp",
+	"checksum": "sha256:bda774c97a9206147f01ae1fb1da7b7bee222c000958a50ff8f635fd8b66e3f4",
+	"targetKey": "legacy/staff/teacher-01-bda774c97a92.webp",
+	"mimeType": "image/webp"
 }
 ```
 
