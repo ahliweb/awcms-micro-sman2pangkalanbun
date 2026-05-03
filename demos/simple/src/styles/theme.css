@@ -15,20 +15,32 @@
 */
 
 :root {
-	/* --- Colors ---
-	--color-bg: #ffffff;
-	--color-bg-subtle: #fafafa;
-	--color-text: #1a1a1a;
-	--color-text-secondary: #525252;
-	--color-muted: #8b8b8b;
-	--color-border: #e5e5e5;
-	--color-border-subtle: #f0f0f0;
-	--color-surface: #f7f7f7;
-	--color-accent: #0066cc;
-	--color-accent-hover: #0052a3;
-	--color-on-accent: white;
-	--color-accent-ring: color-mix(in srgb, var(--color-accent) 25%, transparent);
-	*/
+	--color-bg: #f7f8f5;
+	--color-bg-subtle: #f0f3ec;
+	--color-text: #163222;
+	--color-text-secondary: #2f4e3f;
+	--color-muted: #5d7769;
+	--color-border: #d6e0d3;
+	--color-border-subtle: #e3ebe0;
+	--color-surface: #ecf1e8;
+	--color-accent: #1f6f43;
+	--color-accent-hover: #165231;
+	--color-on-accent: #ffffff;
+	--color-accent-ring: color-mix(in srgb, var(--color-accent) 28%, transparent);
+
+	--school-gold: #b88a2e;
+	--school-gold-soft: #e4c985;
+	--shell-header-bg: color-mix(in srgb, #f7f8f5 82%, #e4c985 18%);
+	--shell-footer-bg: linear-gradient(
+		180deg,
+		color-mix(in srgb, #eef3e9 85%, #e4c985 15%) 0%,
+		#ecf2e8 100%
+	);
+	--shell-nav-link: #244236;
+	--shell-nav-link-hover: #1f6f43;
+	--shell-footer-link: #274739;
+	--shell-footer-link-hover: #1b5c36;
+	--shell-focus-ring: color-mix(in srgb, #1f6f43 35%, transparent);
 
 	/* --- Type scale ---
 	--font-size-xs: 0.8125rem;
@@ -49,12 +61,10 @@
 	--leading-relaxed: 1.7;
 	*/
 
-	/* --- Letter spacing ---
-	--tracking-tight: -0.03em;    used on h1 and large titles
-	--tracking-snug: -0.02em;     used on h2–h6, site/card titles
-	--tracking-wide: 0.06em;      used on meta labels, TOC/widget titles
-	--tracking-wider: 0.08em;     used on footer headings, section labels
-	*/
+	--tracking-tight: -0.025em;
+	--tracking-snug: -0.015em;
+	--tracking-wide: 0.05em;
+	--tracking-wider: 0.075em;
 
 	/* --- Spacing ---
 	--spacing-1: 0.25rem;
@@ -71,14 +81,12 @@
 	--spacing-24: 6rem;
 	*/
 
-	/* --- Layout ---
-	--content-width: 680px;       article/page body column width
-	--wide-width: 1200px;         max container width (home, archives)
-	--gutter-width: 200px;        right sidebar column (TOC) on article pages
-	--meta-col-width: 180px;      left meta column on article pages
-	--nav-height: 64px;           sticky header height
-	--search-input-width: 180px;  nav search box width
-	*/
+	--content-width: 700px;
+	--wide-width: 1220px;
+	--gutter-width: 220px;
+	--meta-col-width: 180px;
+	--nav-height: 68px;
+	--search-input-width: 200px;
 
 	/* --- Borders & radius ---
 	--radius: 4px;
