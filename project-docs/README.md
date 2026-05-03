@@ -42,6 +42,7 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/43-academic-calendar-public-rendering.md` - D2.3 public route, page metadata hook, and upcoming-events rendering surface.
 - `project-docs/46-academic-calendar-qa-ops.md` - D2.4 test coverage and operator runbook for install, smoke verification, and rollback.
 - `project-docs/55-cloudflare-production-test-setup.md` - production-like Cloudflare setup runbook (R2, D1, Worker, domain route, validation, and blockers).
+- `project-docs/77-kelulusan-ops-runbook.md` - D3.9 kelulusan operations runbook for data import, deploy verification, and rollback.
 
 ## Principles
 
