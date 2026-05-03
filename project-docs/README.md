@@ -15,6 +15,7 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/09-wave1-bootstrap-baseline.md` - validated local bootstrap, run path, and dev bypass checks.
 - `project-docs/10-wave1-information-architecture.md` - Wave 1 IA/menu tree and section ownership mapping.
 - `project-docs/11-wave1-visual-identity-plan.md` - visual identity baseline plan for Wave 1 implementation.
+- `project-docs/12-wave2-execution-checklist.md` - Wave 2 gate checklist and dependency handoff criteria.
 
 ## Principles
 
