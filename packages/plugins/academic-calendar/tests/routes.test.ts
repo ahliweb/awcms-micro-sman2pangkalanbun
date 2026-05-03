@@ -4,6 +4,12 @@ import plugin from "../src/sandbox-entry.js";
 
 type Stored = { id: string; data: Record<string, unknown> };
 
+function sortValue(value: unknown): string {
+	if (typeof value === "string") return value;
+	if (typeof value === "number" || typeof value === "boolean") return String(value);
+	return "";
+}
+
 function makeCollection() {
 	const map = new Map<string, Record<string, unknown>>();
 	return {
@@ -21,8 +27,8 @@ function makeCollection() {
 			const firstKey = orderBy ? Object.keys(orderBy)[0] : undefined;
 			if (firstKey) {
 				items = items.toSorted((a, b) => {
-					const av = `${a.data[firstKey] ?? ""}`;
-					const bv = `${b.data[firstKey] ?? ""}`;
+					const av = sortValue(a.data[firstKey]);
+					const bv = sortValue(b.data[firstKey]);
 					return av.localeCompare(bv);
 				});
 			}
