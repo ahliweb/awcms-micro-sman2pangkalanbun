@@ -9,7 +9,7 @@
     "build:all": "pnpm run --filter @emdash-cms/demo-cloudflare... build",
     "preview": "astro preview",
     "deploy": "pnpm build:all && wrangler deploy",
-    "db:create": "wrangler d1 create emdash-demo",
+    "db:create": "wrangler d1 create sman2pangkalanbunweb",
     "db:reset:remote": "./scripts/reset-db.sh",
     "typecheck": "astro check"
   },

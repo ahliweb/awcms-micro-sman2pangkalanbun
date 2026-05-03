@@ -4,7 +4,6 @@ import react from "@astrojs/react";
 import {
 	d1,
 	r2,
-	access,
 	sandbox,
 	cloudflareCache,
 	cloudflareImages,
@@ -42,18 +41,7 @@ export default defineConfig({
 			database: d1({ binding: "DB", session: "auto" }),
 			// R2 storage for media
 			storage: r2({ binding: "MEDIA" }),
-			// Cloudflare Access authentication
-			// Reads CF_ACCESS_AUDIENCE from env (wrangler secret or .dev.vars)
-			auth: access({
-				teamDomain: "cloudflare-cto.cloudflareaccess.com",
-				autoProvision: true,
-				defaultRole: 30, // Author
-				// Map your IdP groups to roles (optional)
-				// roleMapping: {
-				// 	"Admins": 50,
-				// 	"Editors": 40,
-				// },
-			}),
+			// Use EmDash built-in auth providers for deployment portability.
 			// Media providers - Cloudflare Images and Stream
 			// Reads from env vars at runtime: CF_ACCOUNT_ID, CF_IMAGES_TOKEN, CF_STREAM_TOKEN
 			// Or customize with accountIdEnvVar/apiTokenEnvVar options

@@ -45,6 +45,7 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/48-bos-mapping-restoration.md` - deterministic BOS mapping restoration and reference revalidation workflow for #31 closure.
 - `project-docs/49-bos-intake-verifier.md` - deterministic `%PDF` signature and checksum manifest verification step for BOS intake closure.
 - `project-docs/50-external-bos-handoff-packet.md` - copy-paste external request and acknowledgment packet to accelerate #35 handoff.
+- `project-docs/55-cloudflare-production-test-setup.md` - production-like Cloudflare setup runbook (R2, D1, Worker, domain route, validation, and blockers).
 
 ## Principles
 
