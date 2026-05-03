@@ -21,7 +21,7 @@ test.describe("@smoke Admin edit-to-publish", () => {
 
 		await admin.page.goto("/posts/draft-post");
 		await expect(admin.page.getByRole("heading", { level: 1 })).toContainText(
-			"Draft Post Smoke Published"
+			"Draft Post Smoke Published",
 		);
 	});
 
@@ -68,7 +68,7 @@ test.describe("@smoke Admin edit-to-publish", () => {
 		await admin.waitForLoading();
 
 		const response = await admin.page.request.get(`/_emdash/api/content/events/${eventId}`, {
-			headers: { "X-EmDash-Request": "1" }
+			headers: { "X-EmDash-Request": "1" },
 		});
 		expect(response.ok()).toBe(true);
 		const payload = await response.json();

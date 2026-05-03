@@ -11,23 +11,23 @@ No unresolved entries remain in this pack.
 
 ## Final Disposition Table
 
-| Missing reference | Disposition | Replacement / action |
-| --- | --- | --- |
-| `/images/news/osn-2024.jpg` | replaced-owned | `/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6409.webp` |
-| `/images/news/mpls-2024.jpg` | replaced-owned | `/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6406.webp` |
-| `/images/news/hardiknas-2024.jpg` | replaced-owned | `/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6398.webp` |
-| `/images/alumni/hasan-basri.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-41.webp` |
-| `/images/alumni/siti-nurhaliza.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-42.webp` |
-| `/images/alumni/ahmad-yani.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-43.webp` |
-| `/images/alumni/rini-wulandari.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-44.webp` |
-| `/images/alumni/budi-prasetyo.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-45.webp` |
-| `/images/alumni/dewi-permatasari.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-46.webp` |
-| `/images/staff/kepala-sekolah.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-01.webp` |
-| `/images/staff/wakasek-kurikulum.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-02.webp` |
-| `/images/staff/wakasek-kesiswaan.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-04.webp` |
-| `/images/staff/wakasek-sarpras.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-05.webp` |
-| `/images/staff/wakasek-humas.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-03.webp` |
-| `/images/staff/kepala-tu.jpg` | replaced-owned | `/public/images/staff/admin/admin-01.webp` |
+| Missing reference                     | Disposition    | Replacement / action                                         |
+| ------------------------------------- | -------------- | ------------------------------------------------------------ |
+| `/images/news/osn-2024.jpg`           | replaced-owned | `/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6409.webp` |
+| `/images/news/mpls-2024.jpg`          | replaced-owned | `/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6406.webp` |
+| `/images/news/hardiknas-2024.jpg`     | replaced-owned | `/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6398.webp` |
+| `/images/alumni/hasan-basri.jpg`      | replaced-owned | `/public/images/staff/teachers/teacher-41.webp`              |
+| `/images/alumni/siti-nurhaliza.jpg`   | replaced-owned | `/public/images/staff/teachers/teacher-42.webp`              |
+| `/images/alumni/ahmad-yani.jpg`       | replaced-owned | `/public/images/staff/teachers/teacher-43.webp`              |
+| `/images/alumni/rini-wulandari.jpg`   | replaced-owned | `/public/images/staff/teachers/teacher-44.webp`              |
+| `/images/alumni/budi-prasetyo.jpg`    | replaced-owned | `/public/images/staff/teachers/teacher-45.webp`              |
+| `/images/alumni/dewi-permatasari.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-46.webp`              |
+| `/images/staff/kepala-sekolah.jpg`    | replaced-owned | `/public/images/staff/teachers/teacher-01.webp`              |
+| `/images/staff/wakasek-kurikulum.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-02.webp`              |
+| `/images/staff/wakasek-kesiswaan.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-04.webp`              |
+| `/images/staff/wakasek-sarpras.jpg`   | replaced-owned | `/public/images/staff/teachers/teacher-05.webp`              |
+| `/images/staff/wakasek-humas.jpg`     | replaced-owned | `/public/images/staff/teachers/teacher-03.webp`              |
+| `/images/staff/kepala-tu.jpg`         | replaced-owned | `/public/images/staff/admin/admin-01.webp`                   |
 
 ## Output Artifact
 

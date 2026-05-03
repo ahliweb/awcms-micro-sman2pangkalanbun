@@ -5,13 +5,13 @@ This playbook defines publishing workflow, approvals, correction policy, archiva
 ## Workflow and Roles
 
 - `Contributor/Author`:
-	- Drafts content
-	- Performs initial fact check and metadata completion
+  - Drafts content
+  - Performs initial fact check and metadata completion
 - `Editor`:
-	- Reviews content quality and policy compliance
-	- Approves publish-ready drafts
+  - Reviews content quality and policy compliance
+  - Approves publish-ready drafts
 - `Admin`:
-	- Handles escalations, urgent overrides, and final governance decisions
+  - Handles escalations, urgent overrides, and final governance decisions
 
 ## Publishing Workflow
 
@@ -25,9 +25,9 @@ This playbook defines publishing workflow, approvals, correction policy, archiva
 
 - Minor corrections (typos/format): update directly, preserve revision history.
 - Material corrections (facts/dates/claims):
-	- update content,
-	- append correction note,
-	- notify editor/admin in issue log.
+  - update content,
+  - append correction note,
+  - notify editor/admin in issue log.
 
 ## Archival Policy
 

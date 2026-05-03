@@ -36,23 +36,23 @@ Decision for Wave 2:
 
 ## Missing-Source Registry
 
-| Reference | Source file | Status | Disposition |
-| --- | --- | --- | --- |
-| `/images/news/osn-2024.jpg` | `blogs/blogs.json` | missing-source | replace from owned photo archive or mark non-featured |
-| `/images/news/mpls-2024.jpg` | `blogs/blogs.json` | missing-source | replace from owned photo archive or mark non-featured |
-| `/images/news/hardiknas-2024.jpg` | `blogs/blogs.json` | missing-source | replace from owned photo archive or mark non-featured |
-| `/images/alumni/hasan-basri.jpg` | `pages/alumni.json` | missing-source | request consented portrait or switch to no-photo card |
-| `/images/alumni/siti-nurhaliza.jpg` | `pages/alumni.json` | missing-source | request consented portrait or switch to no-photo card |
-| `/images/alumni/ahmad-yani.jpg` | `pages/alumni.json` | missing-source | request consented portrait or switch to no-photo card |
-| `/images/alumni/rini-wulandari.jpg` | `pages/alumni.json` | missing-source | request consented portrait or switch to no-photo card |
-| `/images/alumni/budi-prasetyo.jpg` | `pages/alumni.json` | missing-source | request consented portrait or switch to no-photo card |
-| `/images/alumni/dewi-permatasari.jpg` | `pages/alumni.json` | missing-source | request consented portrait or switch to no-photo card |
-| `/images/staff/kepala-sekolah.jpg` | `site.json`, `pages/organization.json` | missing-source | replace with existing staff webp or re-upload authoritative source |
-| `/images/staff/wakasek-kurikulum.jpg` | `pages/organization.json` | missing-source | request source or map to placeholder silhouette |
-| `/images/staff/wakasek-kesiswaan.jpg` | `pages/organization.json` | missing-source | request source or map to placeholder silhouette |
-| `/images/staff/wakasek-sarpras.jpg` | `pages/organization.json` | missing-source | request source or map to placeholder silhouette |
-| `/images/staff/wakasek-humas.jpg` | `pages/organization.json` | missing-source | request source or map to placeholder silhouette |
-| `/images/staff/kepala-tu.jpg` | `pages/organization.json` | missing-source | request source or map to placeholder silhouette |
+| Reference                             | Source file                            | Status         | Disposition                                                        |
+| ------------------------------------- | -------------------------------------- | -------------- | ------------------------------------------------------------------ |
+| `/images/news/osn-2024.jpg`           | `blogs/blogs.json`                     | missing-source | replace from owned photo archive or mark non-featured              |
+| `/images/news/mpls-2024.jpg`          | `blogs/blogs.json`                     | missing-source | replace from owned photo archive or mark non-featured              |
+| `/images/news/hardiknas-2024.jpg`     | `blogs/blogs.json`                     | missing-source | replace from owned photo archive or mark non-featured              |
+| `/images/alumni/hasan-basri.jpg`      | `pages/alumni.json`                    | missing-source | request consented portrait or switch to no-photo card              |
+| `/images/alumni/siti-nurhaliza.jpg`   | `pages/alumni.json`                    | missing-source | request consented portrait or switch to no-photo card              |
+| `/images/alumni/ahmad-yani.jpg`       | `pages/alumni.json`                    | missing-source | request consented portrait or switch to no-photo card              |
+| `/images/alumni/rini-wulandari.jpg`   | `pages/alumni.json`                    | missing-source | request consented portrait or switch to no-photo card              |
+| `/images/alumni/budi-prasetyo.jpg`    | `pages/alumni.json`                    | missing-source | request consented portrait or switch to no-photo card              |
+| `/images/alumni/dewi-permatasari.jpg` | `pages/alumni.json`                    | missing-source | request consented portrait or switch to no-photo card              |
+| `/images/staff/kepala-sekolah.jpg`    | `site.json`, `pages/organization.json` | missing-source | replace with existing staff webp or re-upload authoritative source |
+| `/images/staff/wakasek-kurikulum.jpg` | `pages/organization.json`              | missing-source | request source or map to placeholder silhouette                    |
+| `/images/staff/wakasek-kesiswaan.jpg` | `pages/organization.json`              | missing-source | request source or map to placeholder silhouette                    |
+| `/images/staff/wakasek-sarpras.jpg`   | `pages/organization.json`              | missing-source | request source or map to placeholder silhouette                    |
+| `/images/staff/wakasek-humas.jpg`     | `pages/organization.json`              | missing-source | request source or map to placeholder silhouette                    |
+| `/images/staff/kepala-tu.jpg`         | `pages/organization.json`              | missing-source | request source or map to placeholder silhouette                    |
 
 ## Ownership Gap Decisions
 

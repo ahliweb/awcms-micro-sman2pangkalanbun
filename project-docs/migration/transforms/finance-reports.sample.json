@@ -1,137 +1,137 @@
 [
-  {
-    "source": {
-      "file": "blogs/finance.json",
-      "key": "bos"
-    },
-    "collection": "finance_reports",
-    "localeRows": [
-      {
-        "locale": "id",
-        "slug": "bos",
-        "title": "Dana BOS (Bantuan Operasional Sekolah)",
-        "body": [
-          {
-            "_type": "block",
-            "style": "normal",
-            "children": [
-              {
-                "_type": "span",
-                "text": "Dana Bantuan Operasional Sekolah (BOS) merupakan program pemerintah untuk mendanai biaya operasional non-personalia sekolah. Penggunaan Dana BOS 2024 Komponen Alokasi Pengembangan Perpustakaan Rp 85.000.000 Kegiatan Pembelajaran Rp 250.000.000 Evaluasi Pembelajaran Rp 75.000.000 Pengelolaan Sekolah Rp 120.000.000 Langganan Daya & Jasa Rp 95.000.000 Pemeliharaan Sarpras Rp 180.000.000 Pembayaran Honor Rp 200.000.000 Total Dana BOS 2024: Rp 1.005.000.000"
-              }
-            ]
-          }
-        ],
-        "attachments": []
-      },
-      {
-        "locale": "en",
-        "slug": "bos",
-        "title": "BOS Fund (School Operational Assistance)",
-        "body": [
-          {
-            "_type": "block",
-            "style": "normal",
-            "children": [
-              {
-                "_type": "span",
-                "text": "School Operational Assistance (BOS) fund is a government program to fund non-personnel operational costs of schools. BOS Fund Usage 2024 Component Allocation Library Development Rp 85,000,000 Learning Activities Rp 250,000,000 Learning Evaluation Rp 75,000,000 School Management Rp 120,000,000 Utilities Subscription Rp 95,000,000 Facility Maintenance Rp 180,000,000 Honorarium Payment Rp 200,000,000 Total BOS Fund 2024: Rp 1,005,000,000"
-              }
-            ]
-          }
-        ],
-        "attachments": []
-      }
-    ]
-  },
-  {
-    "source": {
-      "file": "blogs/finance.json",
-      "key": "apbd"
-    },
-    "collection": "finance_reports",
-    "localeRows": [
-      {
-        "locale": "id",
-        "slug": "apbd",
-        "title": "Dana APBD",
-        "body": [
-          {
-            "_type": "block",
-            "style": "normal",
-            "children": [
-              {
-                "_type": "span",
-                "text": "Dana APBD merupakan alokasi anggaran dari Pemerintah Daerah Kabupaten Kotawaringin Barat untuk mendukung operasional dan pengembangan sekolah. Alokasi Dana APBD 2024 Program Anggaran Rehabilitasi Ruang Kelas Rp 450.000.000 Pengadaan Alat Lab Rp 175.000.000 Pengembangan IT Rp 125.000.000 Peningkatan Mutu Pendidikan Rp 200.000.000 Total Dana APBD 2024: Rp 950.000.000"
-              }
-            ]
-          }
-        ],
-        "attachments": []
-      },
-      {
-        "locale": "en",
-        "slug": "apbd",
-        "title": "APBD Fund",
-        "body": [
-          {
-            "_type": "block",
-            "style": "normal",
-            "children": [
-              {
-                "_type": "span",
-                "text": "APBD fund is a budget allocation from the Regional Government of Kotawaringin Barat Regency to support school operations and development. APBD Fund Allocation 2024 Program Budget Classroom Rehabilitation Rp 450,000,000 Lab Equipment Procurement Rp 175,000,000 IT Development Rp 125,000,000 Education Quality Improvement Rp 200,000,000 Total APBD Fund 2024: Rp 950,000,000"
-              }
-            ]
-          }
-        ],
-        "attachments": []
-      }
-    ]
-  },
-  {
-    "source": {
-      "file": "blogs/finance.json",
-      "key": "committee"
-    },
-    "collection": "finance_reports",
-    "localeRows": [
-      {
-        "locale": "id",
-        "slug": "komite",
-        "title": "Dana Komite Sekolah",
-        "body": [
-          {
-            "_type": "block",
-            "style": "normal",
-            "children": [
-              {
-                "_type": "span",
-                "text": "Dana Komite merupakan iuran sukarela dari orang tua/wali siswa yang dikelola secara transparan untuk mendukung kegiatan sekolah yang tidak tercover oleh dana pemerintah. Penggunaan Dana Komite 2024 Kegiatan Anggaran Kegiatan Ekstrakurikuler Rp 85.000.000 Study Tour & Karyawisata Rp 120.000.000 Seragam Pengurus OSIS Rp 15.000.000 Kegiatan Keagamaan Rp 45.000.000 Peningkatan Sarana Rp 75.000.000 Total Dana Komite 2024: Rp 340.000.000"
-              }
-            ]
-          }
-        ],
-        "attachments": []
-      },
-      {
-        "locale": "en",
-        "slug": "komite",
-        "title": "School Committee Fund",
-        "body": [
-          {
-            "_type": "block",
-            "style": "normal",
-            "children": [
-              {
-                "_type": "span",
-                "text": "Committee fund is a voluntary contribution from parents/guardians managed transparently to support school activities not covered by government funds. Committee Fund Usage 2024 Activity Budget Extracurricular Activities Rp 85,000,000 Study Tour & Field Trips Rp 120,000,000 OSIS Officer Uniforms Rp 15,000,000 Religious Activities Rp 45,000,000 Facility Improvement Rp 75,000,000 Total Committee Fund 2024: Rp 340,000,000"
-              }
-            ]
-          }
-        ],
-        "attachments": []
-      }
-    ]
-  }
+	{
+		"source": {
+			"file": "blogs/finance.json",
+			"key": "bos"
+		},
+		"collection": "finance_reports",
+		"localeRows": [
+			{
+				"locale": "id",
+				"slug": "bos",
+				"title": "Dana BOS (Bantuan Operasional Sekolah)",
+				"body": [
+					{
+						"_type": "block",
+						"style": "normal",
+						"children": [
+							{
+								"_type": "span",
+								"text": "Dana Bantuan Operasional Sekolah (BOS) merupakan program pemerintah untuk mendanai biaya operasional non-personalia sekolah. Penggunaan Dana BOS 2024 Komponen Alokasi Pengembangan Perpustakaan Rp 85.000.000 Kegiatan Pembelajaran Rp 250.000.000 Evaluasi Pembelajaran Rp 75.000.000 Pengelolaan Sekolah Rp 120.000.000 Langganan Daya & Jasa Rp 95.000.000 Pemeliharaan Sarpras Rp 180.000.000 Pembayaran Honor Rp 200.000.000 Total Dana BOS 2024: Rp 1.005.000.000"
+							}
+						]
+					}
+				],
+				"attachments": []
+			},
+			{
+				"locale": "en",
+				"slug": "bos",
+				"title": "BOS Fund (School Operational Assistance)",
+				"body": [
+					{
+						"_type": "block",
+						"style": "normal",
+						"children": [
+							{
+								"_type": "span",
+								"text": "School Operational Assistance (BOS) fund is a government program to fund non-personnel operational costs of schools. BOS Fund Usage 2024 Component Allocation Library Development Rp 85,000,000 Learning Activities Rp 250,000,000 Learning Evaluation Rp 75,000,000 School Management Rp 120,000,000 Utilities Subscription Rp 95,000,000 Facility Maintenance Rp 180,000,000 Honorarium Payment Rp 200,000,000 Total BOS Fund 2024: Rp 1,005,000,000"
+							}
+						]
+					}
+				],
+				"attachments": []
+			}
+		]
+	},
+	{
+		"source": {
+			"file": "blogs/finance.json",
+			"key": "apbd"
+		},
+		"collection": "finance_reports",
+		"localeRows": [
+			{
+				"locale": "id",
+				"slug": "apbd",
+				"title": "Dana APBD",
+				"body": [
+					{
+						"_type": "block",
+						"style": "normal",
+						"children": [
+							{
+								"_type": "span",
+								"text": "Dana APBD merupakan alokasi anggaran dari Pemerintah Daerah Kabupaten Kotawaringin Barat untuk mendukung operasional dan pengembangan sekolah. Alokasi Dana APBD 2024 Program Anggaran Rehabilitasi Ruang Kelas Rp 450.000.000 Pengadaan Alat Lab Rp 175.000.000 Pengembangan IT Rp 125.000.000 Peningkatan Mutu Pendidikan Rp 200.000.000 Total Dana APBD 2024: Rp 950.000.000"
+							}
+						]
+					}
+				],
+				"attachments": []
+			},
+			{
+				"locale": "en",
+				"slug": "apbd",
+				"title": "APBD Fund",
+				"body": [
+					{
+						"_type": "block",
+						"style": "normal",
+						"children": [
+							{
+								"_type": "span",
+								"text": "APBD fund is a budget allocation from the Regional Government of Kotawaringin Barat Regency to support school operations and development. APBD Fund Allocation 2024 Program Budget Classroom Rehabilitation Rp 450,000,000 Lab Equipment Procurement Rp 175,000,000 IT Development Rp 125,000,000 Education Quality Improvement Rp 200,000,000 Total APBD Fund 2024: Rp 950,000,000"
+							}
+						]
+					}
+				],
+				"attachments": []
+			}
+		]
+	},
+	{
+		"source": {
+			"file": "blogs/finance.json",
+			"key": "committee"
+		},
+		"collection": "finance_reports",
+		"localeRows": [
+			{
+				"locale": "id",
+				"slug": "komite",
+				"title": "Dana Komite Sekolah",
+				"body": [
+					{
+						"_type": "block",
+						"style": "normal",
+						"children": [
+							{
+								"_type": "span",
+								"text": "Dana Komite merupakan iuran sukarela dari orang tua/wali siswa yang dikelola secara transparan untuk mendukung kegiatan sekolah yang tidak tercover oleh dana pemerintah. Penggunaan Dana Komite 2024 Kegiatan Anggaran Kegiatan Ekstrakurikuler Rp 85.000.000 Study Tour & Karyawisata Rp 120.000.000 Seragam Pengurus OSIS Rp 15.000.000 Kegiatan Keagamaan Rp 45.000.000 Peningkatan Sarana Rp 75.000.000 Total Dana Komite 2024: Rp 340.000.000"
+							}
+						]
+					}
+				],
+				"attachments": []
+			},
+			{
+				"locale": "en",
+				"slug": "komite",
+				"title": "School Committee Fund",
+				"body": [
+					{
+						"_type": "block",
+						"style": "normal",
+						"children": [
+							{
+								"_type": "span",
+								"text": "Committee fund is a voluntary contribution from parents/guardians managed transparently to support school activities not covered by government funds. Committee Fund Usage 2024 Activity Budget Extracurricular Activities Rp 85,000,000 Study Tour & Field Trips Rp 120,000,000 OSIS Officer Uniforms Rp 15,000,000 Religious Activities Rp 45,000,000 Facility Improvement Rp 75,000,000 Total Committee Fund 2024: Rp 340,000,000"
+							}
+						]
+					}
+				],
+				"attachments": []
+			}
+		]
+	}
 ]

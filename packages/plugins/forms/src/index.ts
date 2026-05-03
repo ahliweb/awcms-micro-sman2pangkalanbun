@@ -182,8 +182,8 @@ export function createPlugin(_options: FormsPluginOptions = {}): ResolvedPlugin 
 
 			"settings/turnstile-status": {
 				handler: async (ctx: any) => {
-					const siteKey = await ctx.kv.get("settings:turnstileSiteKey") as string | null;
-					const secretKey = await ctx.kv.get("settings:turnstileSecretKey") as string | null;
+					const siteKey = (await ctx.kv.get("settings:turnstileSiteKey")) as string | null;
+					const secretKey = (await ctx.kv.get("settings:turnstileSecretKey")) as string | null;
 					return {
 						hasSiteKey: !!siteKey,
 						hasSecretKey: !!secretKey,

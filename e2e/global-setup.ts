@@ -216,7 +216,7 @@ async function seedTestData(
 			data: {
 				title: item.title,
 				description: item.description,
-				starts_at: item.startsAt
+				starts_at: item.startsAt,
 			},
 			slug: item.slug,
 		});

@@ -36,7 +36,11 @@ function extractText(value: unknown): string {
 
 function entryDateYear(data: Record<string, unknown>): string | undefined {
 	const candidate =
-		data.publishedAt ?? data.announcement_date ?? data.starts_at ?? data.awarded_on ?? data.published_on;
+		data.publishedAt ??
+		data.announcement_date ??
+		data.starts_at ??
+		data.awarded_on ??
+		data.published_on;
 	if (!(candidate instanceof Date)) return undefined;
 	return String(candidate.getUTCFullYear());
 }
@@ -50,17 +54,16 @@ export async function publicSearch(filters: PublicSearchFilters): Promise<Public
 	const query = filters.q.trim().toLowerCase();
 	if (!query) return [];
 
-	const targetCollections =
-		filters.type && filters.type !== "all" ? [filters.type] : COLLECTIONS;
+	const targetCollections = filters.type && filters.type !== "all" ? [filters.type] : COLLECTIONS;
 
 	const batches = await Promise.all(
 		targetCollections.map(async (collection) => {
 			const { entries } = await getEmDashCollection(collection, {
 				orderBy: { published_at: "desc" },
-				limit: 100
+				limit: 100,
 			});
 			return entries.map((entry) => ({ collection, entry }));
-		})
+		}),
 	);
 
 	const flat = batches.flat();
@@ -90,7 +93,7 @@ export async function publicSearch(filters: PublicSearchFilters): Promise<Public
 				url: buildUrl(collection, entry.id),
 				category,
 				year,
-				haystack
+				haystack,
 			};
 		})
 		.filter((item) => item.haystack.includes(query))

@@ -1,6 +1,7 @@
 export const prerender = false;
 
 import type { APIRoute } from "astro";
+
 import { publicSearch } from "../../utils/public-search";
 
 export const GET: APIRoute = async ({ url }) => {

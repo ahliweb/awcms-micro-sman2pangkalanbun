@@ -50,7 +50,11 @@ test.describe("Kelulusan flows", () => {
 		await expect(page.locator("#pdf-frame")).toHaveAttribute("src", /\/media\//);
 	});
 
-	test("admin list shows row and updates telemetry after actions", async ({ admin, page, serverInfo }) => {
+	test("admin list shows row and updates telemetry after actions", async ({
+		admin,
+		page,
+		serverInfo,
+	}) => {
 		await admin.devBypassAuth();
 		await upsertStudent(
 			page,

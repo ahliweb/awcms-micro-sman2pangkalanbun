@@ -306,10 +306,7 @@ describe("PluginRouteHandler", () => {
 			expect(result.error?.message).toBe("An internal error occurred");
 
 			expect(logSpy).toHaveBeenCalledOnce();
-			const payload = JSON.parse(String(logSpy.mock.calls[0]?.[0])) as Record<
-				string,
-				unknown
-			>;
+			const payload = JSON.parse(String(logSpy.mock.calls[0]?.[0])) as Record<string, unknown>;
 			expect(payload.scope).toBe("emdash");
 			expect(payload.event).toBe("plugin.route_handler_failed");
 			expect(payload.level).toBe("error");
