@@ -99,7 +99,7 @@ export function createPlugin(_options: FormsPluginOptions = {}): ResolvedPlugin 
 
 		hooks: {
 			"plugin:activate": {
-				handler: async (_event, ctx) => {
+				handler: async (_event: any, ctx: any) => {
 					// Schedule weekly cleanup for expired submissions
 					if (ctx.cron) {
 						await ctx.cron.schedule("cleanup", { schedule: "@weekly" });
@@ -108,7 +108,7 @@ export function createPlugin(_options: FormsPluginOptions = {}): ResolvedPlugin 
 			},
 
 			cron: {
-				handler: async (event, ctx) => {
+				handler: async (event: any, ctx: any) => {
 					if (event.name === "cleanup") {
 						await handleCleanup(ctx);
 					} else if (event.name.startsWith("digest:")) {
@@ -181,9 +181,9 @@ export function createPlugin(_options: FormsPluginOptions = {}): ResolvedPlugin 
 			},
 
 			"settings/turnstile-status": {
-				handler: async (ctx) => {
-					const siteKey = await ctx.kv.get<string>("settings:turnstileSiteKey");
-					const secretKey = await ctx.kv.get<string>("settings:turnstileSecretKey");
+				handler: async (ctx: any) => {
+					const siteKey = await ctx.kv.get("settings:turnstileSiteKey") as string | null;
+					const secretKey = await ctx.kv.get("settings:turnstileSecretKey") as string | null;
 					return {
 						hasSiteKey: !!siteKey,
 						hasSecretKey: !!secretKey,
@@ -220,7 +220,7 @@ export function createPlugin(_options: FormsPluginOptions = {}): ResolvedPlugin 
 				},
 			],
 		},
-	});
+	} as any);
 }
 
 export default createPlugin;
