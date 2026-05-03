@@ -133,7 +133,7 @@ async function seedTestData(
 	contentIds: Record<string, string[]>;
 	mediaIds: Record<string, string>;
 }> {
-	const collections: string[] = ["posts", "pages"];
+	const collections: string[] = ["posts", "pages", "events"];
 	const contentIds: Record<string, string[]> = {};
 	const mediaIds: Record<string, string> = {};
 
@@ -208,6 +208,24 @@ async function seedTestData(
 		}
 	}
 	contentIds["pages"] = pageIds;
+
+	const eventIds: string[] = [];
+	for (const item of SMOKE_SEED_ITEMS.filter((entry) => entry.collection === "events")) {
+		result = await apiPost(baseUrl, token, "/_emdash/api/content/events", {
+			data: {
+				title: item.title,
+				description: item.description,
+				starts_at: item.startsAt
+			},
+			slug: item.slug,
+		});
+		const eventId = result.item?.id ?? result.id;
+		eventIds.push(eventId);
+		if (item.publish) {
+			await apiPost(baseUrl, token, `/_emdash/api/content/events/${eventId}/publish`, {});
+		}
+	}
+	contentIds["events"] = eventIds;
 
 	return { collections, contentIds, mediaIds };
 }

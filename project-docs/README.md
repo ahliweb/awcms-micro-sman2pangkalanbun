@@ -28,6 +28,11 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/17-wave2-editability-source-isolation.md` - focused #17 verification report for EmDash editability and legacy isolation.
 - `project-docs/33-query-count-critical-routes.md` - canonical route-set lock for query-count baseline measurement.
 - `project-docs/23-query-count-baseline-policy.md` - regression threshold policy and CI guard behavior for query counts.
+- `project-docs/34-e2e-events-fixture-smoke.md` - events fixture extension and smoke coverage parity artifact.
+- `project-docs/31-bos-attachment-restoration.md` - BOS attachment restoration status and external input checklist.
+- `project-docs/11-license-compliance-pack.md` - non-commercial compliance controls and release checklist gates.
+- `project-docs/12-editorial-governance-playbook.md` - publishing workflow, correction policy, archival policy, and urgent SLAs.
+- `project-docs/25-cutover-checklist-and-rollback-drill.md` - go/no-go checks, owner mapping, and rollback drill runbook.
 
 ## Principles
 
