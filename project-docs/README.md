@@ -44,6 +44,7 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/46-academic-calendar-qa-ops.md` - D2.4 test coverage and operator runbook for install, smoke verification, and rollback.
 - `project-docs/48-bos-mapping-restoration.md` - deterministic BOS mapping restoration and reference revalidation workflow for #31 closure.
 - `project-docs/49-bos-intake-verifier.md` - deterministic `%PDF` signature and checksum manifest verification step for BOS intake closure.
+- `project-docs/50-external-bos-handoff-packet.md` - copy-paste external request and acknowledgment packet to accelerate #35 handoff.
 
 ## Principles
 
