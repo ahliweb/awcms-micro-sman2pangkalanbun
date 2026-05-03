@@ -1,0 +1,161 @@
+[
+  {
+    "source": {
+      "file": "blogs/blogs.json",
+      "index": 0
+    },
+    "collection": "news",
+    "localeRows": [
+      {
+        "locale": "id",
+        "slug": "sman-2-pangkalan-bun-raih-juara-osn-tingkat-provinsi",
+        "title": "SMAN 2 Pangkalan Bun Raih Juara OSN Tingkat Provinsi",
+        "excerpt": "Siswa SMAN 2 Pangkalan Bun berhasil meraih juara dalam ajang Olimpiade Sains Nasional tingkat Provinsi Kalimantan Tengah.",
+        "body": [
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Dengan bangga kami sampaikan bahwa siswa SMAN 2 Pangkalan Bun telah berhasil menorehkan prestasi gemilang dalam ajang Olimpiade Sains Nasional (OSN) tingkat Provinsi Kalimantan Tengah tahun 2024. Muhammad Rizky Pratama, siswa kelas XII MIPA 1, berhasil meraih medali emas pada bidang Matematika dan akan mewakili Kalimantan Tengah di tingkat Nasional. Selain itu, Putri Amelia Sari dari kelas XII MIPA 2 juga meraih medali perak pada bidang Biologi."
+              }
+            ]
+          }
+        ],
+        "authorName": "Admin",
+        "publishedAt": "2024-04-15",
+        "featured": true,
+        "imageSource": "/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6409.webp"
+      },
+      {
+        "locale": "en",
+        "slug": "sman-2-pangkalan-bun-raih-juara-osn-tingkat-provinsi",
+        "title": "SMAN 2 Pangkalan Bun Wins Provincial OSN Championship",
+        "excerpt": "SMAN 2 Pangkalan Bun students successfully won the Provincial Science Olympiad of Central Kalimantan.",
+        "body": [
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "We are proud to announce that SMAN 2 Pangkalan Bun students have achieved excellent results in the 2024 Provincial Science Olympiad of Central Kalimantan. Muhammad Rizky Pratama, a XII MIPA 1 student, won a gold medal in Mathematics and will represent Central Kalimantan at the National level. Additionally, Putri Amelia Sari from XII MIPA 2 also won a silver medal in Biology."
+              }
+            ]
+          }
+        ],
+        "authorName": "Admin",
+        "publishedAt": "2024-04-15",
+        "featured": true,
+        "imageSource": "/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6409.webp"
+      }
+    ]
+  },
+  {
+    "source": {
+      "file": "blogs/blogs.json",
+      "index": 1
+    },
+    "collection": "news",
+    "localeRows": [
+      {
+        "locale": "id",
+        "slug": "kegiatan-masa-pengenalan-lingkungan-sekolah",
+        "title": "Kegiatan Masa Pengenalan Lingkungan Sekolah (MPLS) 2024",
+        "excerpt": "SMAN 2 Pangkalan Bun mengadakan kegiatan MPLS untuk menyambut siswa baru tahun ajaran 2024/2025.",
+        "body": [
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Masa Pengenalan Lingkungan Sekolah (MPLS) tahun 2024 telah berlangsung dengan sukses selama tiga hari, dari tanggal 15-17 Juli 2024. Kegiatan ini diikuti oleh 420 siswa baru yang akan menempuh pendidikan di SMAN 2 Pangkalan Bun. Para siswa diperkenalkan dengan lingkungan sekolah, tata tertib, dan berbagai program unggulan yang ada."
+              }
+            ]
+          }
+        ],
+        "authorName": "Admin",
+        "publishedAt": "2024-07-18",
+        "featured": true,
+        "imageSource": "/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6406.webp"
+      },
+      {
+        "locale": "en",
+        "slug": "kegiatan-masa-pengenalan-lingkungan-sekolah",
+        "title": "School Environment Introduction Period (MPLS) 2024",
+        "excerpt": "SMAN 2 Pangkalan Bun held MPLS activities to welcome new students for the 2024/2025 academic year.",
+        "body": [
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "The School Environment Introduction Period (MPLS) 2024 was successfully held for three days, from July 15-17, 2024. This activity was attended by 420 new students who will pursue their education at SMAN 2 Pangkalan Bun. Students were introduced to the school environment, rules, and various featured programs."
+              }
+            ]
+          }
+        ],
+        "authorName": "Admin",
+        "publishedAt": "2024-07-18",
+        "featured": true,
+        "imageSource": "/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6406.webp"
+      }
+    ]
+  },
+  {
+    "source": {
+      "file": "blogs/blogs.json",
+      "index": 2
+    },
+    "collection": "news",
+    "localeRows": [
+      {
+        "locale": "id",
+        "slug": "peringatan-hari-pendidikan-nasional",
+        "title": "Peringatan Hari Pendidikan Nasional 2024",
+        "excerpt": "SMAN 2 Pangkalan Bun memperingati Hari Pendidikan Nasional dengan berbagai kegiatan.",
+        "body": [
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Dalam rangka memperingati Hari Pendidikan Nasional yang jatuh pada tanggal 2 Mei, SMAN 2 Pangkalan Bun menggelar upacara bendera dan berbagai kegiatan lomba."
+              }
+            ]
+          }
+        ],
+        "authorName": "Admin",
+        "publishedAt": "2024-05-02",
+        "featured": false,
+        "imageSource": "/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6398.webp"
+      },
+      {
+        "locale": "en",
+        "slug": "peringatan-hari-pendidikan-nasional",
+        "title": "National Education Day Commemoration 2024",
+        "excerpt": "SMAN 2 Pangkalan Bun commemorated National Education Day with various activities.",
+        "body": [
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "In commemoration of National Education Day on May 2, SMAN 2 Pangkalan Bun held a flag ceremony and various competition activities."
+              }
+            ]
+          }
+        ],
+        "authorName": "Admin",
+        "publishedAt": "2024-05-02",
+        "featured": false,
+        "imageSource": "/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6398.webp"
+      }
+    ]
+  }
+]

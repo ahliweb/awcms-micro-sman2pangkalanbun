@@ -1,0 +1,24 @@
+{
+  "version": "1.0",
+  "generatedFor": "#30",
+  "items": [
+    {"missing": "/images/news/osn-2024.jpg", "disposition": "replaced-owned", "replacement": "/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6409.webp"},
+    {"missing": "/images/news/mpls-2024.jpg", "disposition": "replaced-owned", "replacement": "/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6406.webp"},
+    {"missing": "/images/news/hardiknas-2024.jpg", "disposition": "replaced-owned", "replacement": "/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6398.webp"},
+    {"missing": "/images/alumni/hasan-basri.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/teachers/teacher-41.webp"},
+    {"missing": "/images/alumni/siti-nurhaliza.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/teachers/teacher-42.webp"},
+    {"missing": "/images/alumni/ahmad-yani.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/teachers/teacher-43.webp"},
+    {"missing": "/images/alumni/rini-wulandari.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/teachers/teacher-44.webp"},
+    {"missing": "/images/alumni/budi-prasetyo.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/teachers/teacher-45.webp"},
+    {"missing": "/images/alumni/dewi-permatasari.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/teachers/teacher-46.webp"},
+    {"missing": "/images/staff/kepala-sekolah.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/teachers/teacher-01.webp"},
+    {"missing": "/images/staff/wakasek-kurikulum.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/teachers/teacher-02.webp"},
+    {"missing": "/images/staff/wakasek-kesiswaan.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/teachers/teacher-04.webp"},
+    {"missing": "/images/staff/wakasek-sarpras.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/teachers/teacher-05.webp"},
+    {"missing": "/images/staff/wakasek-humas.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/teachers/teacher-03.webp"},
+    {"missing": "/images/staff/kepala-tu.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/admin/admin-01.webp"},
+    {"missing": "/documents/bos-tw1-2024.pdf", "disposition": "removed", "replacement": null},
+    {"missing": "/documents/bos-tw2-2024.pdf", "disposition": "removed", "replacement": null},
+    {"missing": "/documents/bos-tw3-2024.pdf", "disposition": "removed", "replacement": null}
+  ]
+}

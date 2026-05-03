@@ -1,0 +1,92 @@
+[
+  {
+    "source": {
+      "file": "pages/profile.json",
+      "key": "principalMessage"
+    },
+    "collection": "pages",
+    "localeRows": [
+      {
+        "locale": "id",
+        "slug": "sambutan-kepala-sekolah",
+        "title": "Sambutan Kepala Sekolah",
+        "body": [
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Assalamu'alaikum Warahmatullahi Wabarakatuh Selamat datang di SMA Negeri 2 Pangkalan Bun. Kami meneguhkan visi: \"Terwujudnya Generasi Pelajar yang Beriman, Cerdas, Berprestasi (BERDASI)\". Misi Sekolah Membentuk peserta didik yang beriman dan bertaqwa kepada Tuhan Yang Maha Esa, taat menjalankan ibadah sesuai keyakinannya, menciptakan budaya toleransi kebhinekaan global dan berbudi pekerti luhur. Membimbing peserta didik untuk selalu berinovasi, menguasai ilmu pengetahuan dan teknologi digital, santun, hormat kepada guru, orang lain dan menjadi teladan. Membentuk peserta didik yang tangguh dan unggul dalam prestasi akademik dan non akademik, melalui pembelajaran yang kreatif berpusat pada siswa, berdiferensiasi mengembangkan kokurikuler dan ekstrakurikuler. Tujuan Satuan Pendidikan Dalam waktu satu tahun, 98% warga sekolah mampu menunjukkan karakter beriman dan bertaqwa kepada Tuhan Yang Maha Esa, taat menjalankan ibadah sesuai keyakinannya, menciptakan budaya toleransi kebhinekaan global dan berbudi pekerti luhur di lingkungan sekolah dan masyarakat. Dalam waktu satu tahun, 98% peserta didik mampu menunjukkan capaian pengetahuan, keterampilan, dan sikap untuk menguasai ilmu pengetahuan dan teknologi digital, santun, hormat kepada guru, orang lain dan menjadi teladan. Dalam waktu satu tahun, 98% peserta didik mampu menunjukkan potensi yang unggul dalam prestasi akademik dan non akademik, melalui pembelajaran kreatif, kolaboratif, dan komunikatif pada kegiatan intrakurikuler, kokurikuler, dan ekstrakurikuler. Keselarasan Kompetensi Lulusan Standar kompetensi lulusan yang menjadi arah pembelajaran mencakup: Keimanan dan ketakwaan terhadap Tuhan Yang Maha Esa Kewargaan Penalaran kritis Kreativitas Kolaborasi Kemandirian Kesehatan Komunikasi Kerangka kerja Pembelajaran Mendalam dijalankan melalui praktik pedagogis, lingkungan pembelajaran, kemitraan dalam pembelajaran, serta pemanfaatan digital yang konsisten pada intrakurikuler, kokurikuler, ekstrakurikuler, dan budaya sekolah. Wassalamu'alaikum Warahmatullahi Wabarakatuh"
+              }
+            ]
+          }
+        ],
+        "heroImageSource": "/images/staff/teachers/teacher-01.webp"
+      },
+      {
+        "locale": "en",
+        "slug": "sambutan-kepala-sekolah",
+        "title": "Principal's Welcome Message",
+        "body": [
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Assalamu'alaikum Warahmatullahi Wabarakatuh Welcome to SMA Negeri 2 Pangkalan Bun. We reaffirm the vision: \"To realize a generation of students who are faithful, intelligent, and achieving (BERDASI)\". School Mission Form students who are faithful and devoted to God Almighty, obedient in worship according to their beliefs, fostering a culture of global diversity tolerance and noble character. Guide students to continually innovate, master science and digital technology, be polite, respect teachers and others, and become role models. Develop resilient students who excel in academic and non-academic achievement through creative, student-centered, differentiated learning that strengthens co-curricular and extracurricular activities. School Goals Within one year, 98% of the school community demonstrates faithful and devoted character toward God Almighty, obedient in worship according to their beliefs, fostering a culture of global diversity tolerance and noble character in school and society. Within one year, 98% of students demonstrate achievements in knowledge, skills, and attitudes to master science and digital technology, be polite, respect teachers and others, and become role models. Within one year, 98% of students demonstrate outstanding potential in academic and non-academic achievement through creative, collaborative, and communicative learning in intra-curricular, co-curricular, and extracurricular activities. Graduate Competency Alignment The graduate competency standards guiding learning include: Faith and devotion to God Almighty Citizenship Critical reasoning Creativity Collaboration Independence Health Communication The Deep Learning Framework is implemented through pedagogical practices, learning environments, learning partnerships, and digital utilization across intra-curricular, co-curricular, extracurricular, and school culture activities. Wassalamu'alaikum Warahmatullahi Wabarakatuh"
+              }
+            ]
+          }
+        ],
+        "heroImageSource": "/images/staff/teachers/teacher-01.webp"
+      }
+    ]
+  },
+  {
+    "source": {
+      "file": "pages/profile.json",
+      "key": "history"
+    },
+    "collection": "pages",
+    "localeRows": [
+      {
+        "locale": "id",
+        "slug": "sejarah",
+        "title": "Sejarah SMAN 2 Pangkalan Bun 1984-2026",
+        "body": [
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "Sejarah SMAN 2 Pangkalan Bun mencatat perjalanan sejak berdiri pada 20 November 1984 hingga penguatan program di tahun 2026. 1984-1989: Perintisan SMA Negeri 2 Pangkalan Bun berdiri pada 20 November 1984. Drs. M.M. Amrullah ditunjuk sebagai pejabat kepala sekolah pertama dengan 2 rombongan belajar, 16 guru, dan 6 staf tata usaha. 1989-1993: Penguatan Awal Tahun 1989 kepemimpinan beralih kepada Masrin Unan, B.A. Selama 4 tahun, sekolah berkembang menjadi 5 rombongan belajar dengan 25 guru dan 7 staf tata usaha. 1993-1995: Penambahan Fasilitas Pada 1993, H. Hasanuddin G.S. B.A. memimpin. Rombongan belajar bertambah menjadi 9 rombel dengan fasilitas perpustakaan, laboratorium IPA, dan mushalla. Jumlah tenaga pendidik meningkat menjadi 32 orang. 1995-2000: Konsolidasi Soepono, B.A. menjabat sebagai kepala sekolah periode 1995-2000. Pada masa ini jumlah guru meningkat menjadi 36 orang. 2000-2002: Pengembangan Sarana Mulai tahun 2000, H. Hasanuddin G.S. B.A. kembali memimpin selama dua tahun. Jumlah rombel meningkat menjadi 12, Mushalla Miftahul Ulum dan pagar sekolah diperluas, serta jumlah tenaga pendidik naik menjadi 39 orang. 2002-2012: Transformasi Pembelajaran Sunari, S.Pd. menjadi pejabat sementara hingga 31 Maret 2003 dan menyerahkan tugas kepada Yudie, S.E., S.Pd. (2003-2012). Pada periode ini rombel berkembang menjadi 21, jurusan bertambah menjadi IPA, IPS, dan Bahasa, serta pembelajaran Moving Class diterapkan. Sarana pendidikan bertambah melalui ruang kelas baru, laboratorium komputer, laboratorium bahasa, dan laboratorium IPA yang terspesialisasi menjadi Fisika, Kimia, dan Biologi. Sarana olahraga juga berkembang dengan lapangan bulu tangkis dan bola basket. Jumlah guru mencapai 43 orang. 2012-2017: Modernisasi Kelas Pada 1 Maret 2012, Khairil Anwar, S.Pd. mengambil alih kepemimpinan. Rombel menjadi 24 dengan 24 ruang kelas (21 di antaranya ber-LCD proyektor), penambahan WC, serta perluasan pagar sekolah. Jumlah tenaga pendidik 36 orang dan sistem Moving Class dihentikan kembali ke model konvensional. 2017-2023: Penyegaran Infrastruktur September 2017, Dra. Siti Farida Oktaria, M.Pd. memimpin dan menambah ruang perpustakaan serta laboratorium komputer baru, disertai perbaikan pintu masuk gerbang sekolah. 2023-2026: Penguatan Mutu Sejak 20 November 2023, kepemimpinan dilanjutkan oleh Fitriah, S.Pd. dengan jumlah tenaga pendidik 50 orang. Program peningkatan mutu meliputi gerakan sekolah sehat, peresmian SMANDA Water, Marching Band Simfoni Smanda Gemilang, rehabilitasi bangunan sekolah, pembangunan pintu masuk belakang, dan panggung kreasi SMANDA Gemilang. Pada tahun 2026 fokus utama diarahkan pada perbaikan kantin sekolah."
+              }
+            ]
+          }
+        ],
+        "heroImageSource": null
+      },
+      {
+        "locale": "en",
+        "slug": "sejarah",
+        "title": "History of SMAN 2 Pangkalan Bun 1984-2026",
+        "body": [
+          {
+            "_type": "block",
+            "style": "normal",
+            "children": [
+              {
+                "_type": "span",
+                "text": "The history of SMAN 2 Pangkalan Bun traces its journey from its establishment on 20 November 1984 through the program focus in 2026. 1984-1989: Founding SMAN 2 Pangkalan Bun was founded on 20 November 1984. Drs. M.M. Amrullah served as the first acting principal with 2 study groups, 16 teachers, and 6 administrative staff. 1989-1993: Early Growth In 1989 leadership shifted to Masrin Unan, B.A. Over four years the school grew to 5 study groups with 25 teachers and 7 administrative staff. 1993-1995: Facility Expansion In 1993 H. Hasanuddin G.S. B.A. led the school. Study groups increased to 9, with a library, science laboratory, and mushalla added. The teaching staff rose to 32. 1995-2000: Consolidation Soepono, B.A. served as principal from 1995-2000, increasing the teacher count to 36. 2000-2002: Infrastructure Growth Starting in 2000 H. Hasanuddin G.S. B.A. returned for two years. Study groups grew to 12, the Miftahul Ulum mushalla and the school fence were expanded, and teaching staff reached 39. 2002-2012: Learning Transformation Sunari, S.Pd. served as interim principal until 31 March 2003 and handed leadership to Yudie, S.E., S.Pd. (2003-2012). During this period study groups expanded to 21, majors grew to Science, Social Studies, and Language, and a Moving Class system was implemented. Facilities expanded with new classrooms, a computer lab, a language lab, and specialized science labs for Physics, Chemistry, and Biology. Sports facilities also grew with badminton and basketball courts. The teaching staff reached 43. 2012-2017: Classroom Modernization On 1 March 2012, Khairil Anwar, S.Pd. took over leadership. Study groups reached 24 with 24 classrooms (21 equipped with LCD projectors), additional restrooms, and expanded school fencing. Teaching staff totaled 36, and the Moving Class system was discontinued in favor of the conventional model. 2017-2023: Infrastructure Refresh In September 2017 Dra. Siti Farida Oktaria, M.Pd. led the school, adding a new library room and computer laboratory and improving the main entrance gate. 2023-2026: Quality Strengthening Since 20 November 2023 leadership has continued under Fitriah, S.Pd. with 50 teaching staff. Quality initiatives include the healthy school movement, the launch of SMANDA Water, the Simfoni Smanda Gemilang marching band, building rehabilitation, a new rear entrance, and the SMANDA Gemilang creative stage. In 2026 the main program focuses on improving the school canteen."
+              }
+            ]
+          }
+        ],
+        "heroImageSource": null
+      }
+    ]
+  }
+]
