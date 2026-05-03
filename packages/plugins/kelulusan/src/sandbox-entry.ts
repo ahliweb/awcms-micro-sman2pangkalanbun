@@ -33,6 +33,12 @@ type StudentRecord = {
 	createdAt: string;
 };
 
+type DocumentEventRecord = {
+	studentId: string;
+	eventType: "opened" | "downloaded";
+	createdAt: string;
+};
+
 type GateSession = {
 	token: string;
 	expiresAt: string;
@@ -80,6 +86,54 @@ async function recordDocumentEvent(ctx: any, student: StudentRecord, eventType: 
 	});
 }
 
+async function buildTelemetrySummary(ctx: any, studentIds: string[]) {
+	if (!studentIds.length) return new Map<string, {
+		openedCount: number;
+		downloadedCount: number;
+		lastOpenedAt: string | null;
+		lastDownloadedAt: string | null;
+	}>();
+
+	const events = await ctx.storage.document_events.query({
+		orderBy: { createdAt: "desc" },
+		limit: 5000,
+	});
+
+	const wanted = new Set(studentIds);
+	const summary = new Map<string, {
+		openedCount: number;
+		downloadedCount: number;
+		lastOpenedAt: string | null;
+		lastDownloadedAt: string | null;
+	}>();
+
+	for (const id of studentIds) {
+		summary.set(id, {
+			openedCount: 0,
+			downloadedCount: 0,
+			lastOpenedAt: null,
+			lastDownloadedAt: null,
+		});
+	}
+
+	for (const item of events.items) {
+		const event = item.data as DocumentEventRecord;
+		if (!wanted.has(event.studentId)) continue;
+		const row = summary.get(event.studentId);
+		if (!row) continue;
+
+		if (event.eventType === "opened") {
+			row.openedCount += 1;
+			if (!row.lastOpenedAt) row.lastOpenedAt = event.createdAt;
+		} else if (event.eventType === "downloaded") {
+			row.downloadedCount += 1;
+			if (!row.lastDownloadedAt) row.lastDownloadedAt = event.createdAt;
+		}
+	}
+
+	return summary;
+}
+
 async function startGateSession(ctx: any, nisn: string) {
 	const expiresInSeconds = 15 * 60;
 	const expiresAt = new Date(Date.now() + expiresInSeconds * 1000).toISOString();
@@ -123,8 +177,23 @@ export default definePlugin({
 					limit: ctx.input.limit ?? 50,
 					cursor: ctx.input.cursor,
 				});
+				const students = result.items.map((item: any) => item.data as StudentRecord);
+				const telemetry = await buildTelemetrySummary(
+					ctx,
+					students.map((student: StudentRecord) => student.nisn),
+				);
+
 				return {
-					items: result.items.map((item: any) => item.data),
+					items: students.map((student: StudentRecord) => {
+						const t = telemetry.get(student.nisn);
+						return {
+							...student,
+							openedCount: t?.openedCount ?? 0,
+							downloadedCount: t?.downloadedCount ?? 0,
+							lastOpenedAt: t?.lastOpenedAt ?? null,
+							lastDownloadedAt: t?.lastDownloadedAt ?? null,
+						};
+					}),
 					nextCursor: result.cursor,
 				};
 			},
