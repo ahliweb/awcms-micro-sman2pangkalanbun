@@ -39,6 +39,9 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/38-log-safety-ci-guard.md` - CI guard rules, remediation, and suppression process for sensitive logging regressions.
 - `project-docs/42-plugin-scaffold-smoke.md` - reproducible build/validate smoke commands for the scaffold sample plugin package.
 - `project-docs/44-academic-calendar-model-contract.md` - D2.1 contract for calendar entities, validation rules, and upcoming-query behavior.
+- `project-docs/45-academic-calendar-admin-api.md` - D2.2 secured CRUD route and admin/widget foundation for academic calendar plugin.
+- `project-docs/43-academic-calendar-public-rendering.md` - D2.3 public route, page metadata hook, and upcoming-events rendering surface.
+- `project-docs/46-academic-calendar-qa-ops.md` - D2.4 test coverage and operator runbook for install, smoke verification, and rollback.
 
 ## Principles
 
