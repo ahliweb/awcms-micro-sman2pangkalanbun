@@ -9,13 +9,20 @@ if (!slug) return Astro.redirect("/404");
 const { entry, cacheHint } = await getEmDashEntry("achievements", slug);
 if (!entry) return Astro.redirect("/404");
 Astro.cache.set(cacheHint);
+
+const data = entry.data as Record<string, unknown>;
+const title = typeof data.title === "string" ? data.title : "Prestasi";
+const summary = typeof data.summary === "string" ? data.summary : null;
+const level = typeof data.level === "string" ? data.level : null;
+const awardedOn = data.awarded_on instanceof Date ? data.awarded_on : null;
+const content = data.content;
 ---
 
-<Base title={entry.data.title} description={entry.data.summary ?? "Prestasi sekolah"}>
+<Base title={title} description={summary ?? "Prestasi sekolah"}>
 	<article class="content-page">
-		<h1>{entry.data.title}</h1>
-		{entry.data.level && <p>Tingkat: {entry.data.level}</p>}
-		{entry.data.awarded_on && <p>Tanggal: {entry.data.awarded_on.toLocaleDateString("id-ID")}</p>}
-		<PortableText value={entry.data.content} />
+		<h1>{title}</h1>
+		{level && <p>Tingkat: {level}</p>}
+		{awardedOn && <p>Tanggal: {awardedOn.toLocaleDateString("id-ID")}</p>}
+		<PortableText value={content} />
 	</article>
 </Base>

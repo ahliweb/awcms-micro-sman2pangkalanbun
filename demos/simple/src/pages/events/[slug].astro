@@ -9,13 +9,21 @@ if (!slug) return Astro.redirect("/404");
 const { entry, cacheHint } = await getEmDashEntry("events", slug);
 if (!entry) return Astro.redirect("/404");
 Astro.cache.set(cacheHint);
+
+const data = entry.data as Record<string, unknown>;
+const title = typeof data.title === "string" ? data.title : "Agenda";
+const description =
+	typeof data.description === "string" ? data.description : null;
+const startsAt = data.starts_at instanceof Date ? data.starts_at : null;
+const location = typeof data.location === "string" ? data.location : null;
+const content = data.content;
 ---
 
-<Base title={entry.data.title} description={entry.data.description ?? "Agenda sekolah"}>
+<Base title={title} description={description ?? "Agenda sekolah"}>
 	<article class="content-page">
-		<h1>{entry.data.title}</h1>
-		{entry.data.starts_at && <p>Waktu: {entry.data.starts_at.toLocaleString("id-ID")}</p>}
-		{entry.data.location && <p>Lokasi: {entry.data.location}</p>}
-		<PortableText value={entry.data.content} />
+		<h1>{title}</h1>
+		{startsAt && <p>Waktu: {startsAt.toLocaleString("id-ID")}</p>}
+		{location && <p>Lokasi: {location}</p>}
+		<PortableText value={content} />
 	</article>
 </Base>

@@ -8,15 +8,23 @@ if (!slug) return Astro.redirect("/404");
 const { entry, cacheHint } = await getEmDashEntry("downloads", slug);
 if (!entry) return Astro.redirect("/404");
 Astro.cache.set(cacheHint);
+
+const data = entry.data as Record<string, unknown>;
+const title = typeof data.title === "string" ? data.title : "Unduhan";
+const description =
+	typeof data.description === "string" ? data.description : null;
+const category = typeof data.category === "string" ? data.category : null;
+const resourceUrl =
+	typeof data.resource_url === "string" ? data.resource_url : null;
 ---
 
-<Base title={entry.data.title} description={entry.data.description ?? "Dokumen unduhan"}>
+<Base title={title} description={description ?? "Dokumen unduhan"}>
 	<article class="content-page">
-		<h1>{entry.data.title}</h1>
-		{entry.data.category && <p>Kategori: {entry.data.category}</p>}
-		{entry.data.description && <p>{entry.data.description}</p>}
-		{entry.data.resource_url && (
-			<p><a href={entry.data.resource_url} target="_blank" rel="noopener noreferrer">Buka Dokumen</a></p>
+		<h1>{title}</h1>
+		{category && <p>Kategori: {category}</p>}
+		{description && <p>{description}</p>}
+		{resourceUrl && (
+			<p><a href={resourceUrl} target="_blank" rel="noopener noreferrer">Buka Dokumen</a></p>
 		)}
 	</article>
 </Base>

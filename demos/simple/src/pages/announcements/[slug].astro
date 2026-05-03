@@ -9,12 +9,17 @@ if (!slug) return Astro.redirect("/404");
 const { entry, cacheHint } = await getEmDashEntry("announcements", slug);
 if (!entry) return Astro.redirect("/404");
 Astro.cache.set(cacheHint);
+
+const data = entry.data as Record<string, unknown>;
+const title = typeof data.title === "string" ? data.title : "Pengumuman";
+const excerpt = typeof data.excerpt === "string" ? data.excerpt : null;
+const content = data.content;
 ---
 
-<Base title={entry.data.title} description={entry.data.excerpt ?? "Pengumuman sekolah"}>
+<Base title={title} description={excerpt ?? "Pengumuman sekolah"}>
 	<article class="content-page">
-		<h1>{entry.data.title}</h1>
-		{entry.data.excerpt && <p>{entry.data.excerpt}</p>}
-		<PortableText value={entry.data.content} />
+		<h1>{title}</h1>
+		{excerpt && <p>{excerpt}</p>}
+		<PortableText value={content} />
 	</article>
 </Base>
