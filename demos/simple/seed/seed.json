@@ -65,6 +65,70 @@
 					"searchable": true
 				}
 			]
+		},
+		{
+			"slug": "announcements",
+			"label": "Announcements",
+			"labelSingular": "Announcement",
+			"supports": ["drafts", "revisions", "search"],
+			"fields": [
+				{ "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
+				{ "slug": "excerpt", "label": "Excerpt", "type": "text", "searchable": true },
+				{ "slug": "content", "label": "Content", "type": "portableText", "searchable": true },
+				{ "slug": "category", "label": "Category", "type": "string", "searchable": true },
+				{ "slug": "announcement_date", "label": "Announcement Date", "type": "datetime" }
+			]
+		},
+		{
+			"slug": "events",
+			"label": "Events",
+			"labelSingular": "Event",
+			"supports": ["drafts", "revisions", "search"],
+			"fields": [
+				{ "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
+				{ "slug": "description", "label": "Description", "type": "text", "searchable": true },
+				{ "slug": "content", "label": "Content", "type": "portableText", "searchable": true },
+				{ "slug": "starts_at", "label": "Starts At", "type": "datetime" },
+				{ "slug": "location", "label": "Location", "type": "string", "searchable": true }
+			]
+		},
+		{
+			"slug": "achievements",
+			"label": "Achievements",
+			"labelSingular": "Achievement",
+			"supports": ["drafts", "revisions", "search"],
+			"fields": [
+				{ "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
+				{ "slug": "summary", "label": "Summary", "type": "text", "searchable": true },
+				{ "slug": "content", "label": "Content", "type": "portableText", "searchable": true },
+				{ "slug": "level", "label": "Level", "type": "string", "searchable": true },
+				{ "slug": "awarded_on", "label": "Awarded On", "type": "datetime" }
+			]
+		},
+		{
+			"slug": "galleries",
+			"label": "Galleries",
+			"labelSingular": "Gallery",
+			"supports": ["drafts", "revisions", "search"],
+			"fields": [
+				{ "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
+				{ "slug": "description", "label": "Description", "type": "text", "searchable": true },
+				{ "slug": "content", "label": "Content", "type": "portableText", "searchable": true },
+				{ "slug": "cover_image", "label": "Cover Image", "type": "image" }
+			]
+		},
+		{
+			"slug": "downloads",
+			"label": "Downloads",
+			"labelSingular": "Download",
+			"supports": ["drafts", "revisions", "search"],
+			"fields": [
+				{ "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
+				{ "slug": "description", "label": "Description", "type": "text", "searchable": true },
+				{ "slug": "category", "label": "Category", "type": "string", "searchable": true },
+				{ "slug": "resource_url", "label": "Resource URL", "type": "url" },
+				{ "slug": "published_on", "label": "Published On", "type": "datetime" }
+			]
 		}
 	],
 
@@ -118,9 +182,11 @@
 				{ "type": "custom", "label": "Beranda", "url": "/" },
 				{ "type": "custom", "label": "Profil Sekolah", "url": "/pages/profil-sekolah" },
 				{ "type": "custom", "label": "Blog", "url": "/posts" },
-				{ "type": "custom", "label": "Keuangan", "url": "/pages/keuangan" },
-				{ "type": "custom", "label": "Layanan", "url": "/pages/layanan" },
-				{ "type": "custom", "label": "Prestasi", "url": "/pages/prestasi" },
+				{ "type": "custom", "label": "Pengumuman", "url": "/announcements" },
+				{ "type": "custom", "label": "Agenda", "url": "/events" },
+				{ "type": "custom", "label": "Prestasi", "url": "/achievements" },
+				{ "type": "custom", "label": "Galeri", "url": "/galleries" },
+				{ "type": "custom", "label": "Unduhan", "url": "/downloads" },
 				{ "type": "custom", "label": "Profil Alumni", "url": "/pages/profil-alumni" },
 				{ "type": "custom", "label": "Kontak", "url": "/pages/kontak" }
 			]
@@ -134,8 +200,9 @@
 				{ "type": "custom", "label": "Sejarah", "url": "/pages/sejarah" },
 				{ "type": "custom", "label": "Visi & Misi", "url": "/pages/visi-misi" },
 				{ "type": "custom", "label": "Info Sekolah", "url": "/posts" },
-				{ "type": "custom", "label": "Keuangan", "url": "/pages/keuangan" },
-				{ "type": "custom", "label": "Layanan", "url": "/pages/layanan" },
+				{ "type": "custom", "label": "Pengumuman", "url": "/announcements" },
+				{ "type": "custom", "label": "Agenda", "url": "/events" },
+				{ "type": "custom", "label": "Unduhan", "url": "/downloads" },
 				{ "type": "custom", "label": "Kontak", "url": "/pages/kontak" }
 			]
 		},
@@ -879,6 +946,93 @@
 							]
 						}
 					]
+				}
+			}
+		],
+		"announcements": [
+			{
+				"id": "ann-1",
+				"slug": "pengumuman-libur-semester",
+				"status": "published",
+				"data": {
+					"title": "Pengumuman Libur Semester",
+					"excerpt": "Jadwal libur semester ganjil tahun ajaran 2026/2027.",
+					"category": "Akademik",
+					"announcement_date": "2026-12-19T08:00:00.000Z",
+					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Libur semester dimulai tanggal 21 Desember 2026 dan berakhir 2 Januari 2027." }] }]
+				}
+			},
+			{
+				"id": "ann-draft",
+				"slug": "pengumuman-draft-internal",
+				"status": "draft",
+				"data": {
+					"title": "Pengumuman Draft Internal",
+					"excerpt": "Draft pengumuman untuk review editorial.",
+					"category": "Internal",
+					"announcement_date": "2026-11-01T08:00:00.000Z",
+					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Konten ini belum dipublikasikan." }] }]
+				}
+			}
+		],
+		"events": [
+			{
+				"id": "evt-1",
+				"slug": "expo-siswa-2026",
+				"status": "published",
+				"data": {
+					"title": "Expo Siswa 2026",
+					"description": "Pameran karya siswa dan presentasi ekstrakurikuler.",
+					"location": "Aula SMAN 2 Pangkalan Bun",
+					"starts_at": "2026-08-10T08:00:00.000Z",
+					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Kegiatan terbuka untuk orang tua dan masyarakat." }] }]
+				}
+			}
+		],
+		"achievements": [
+			{
+				"id": "ach-1",
+				"slug": "juara-1-osn-matematika-2026",
+				"status": "published",
+				"data": {
+					"title": "Juara 1 OSN Matematika 2026",
+					"summary": "Siswa SMAN 2 meraih juara 1 tingkat provinsi.",
+					"level": "Provinsi",
+					"awarded_on": "2026-05-11T09:00:00.000Z",
+					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Prestasi ini menjadi salah satu indikator pembinaan akademik sekolah." }] }]
+				}
+			}
+		],
+		"galleries": [
+			{
+				"id": "gal-1",
+				"slug": "galeri-kegiatan-upacara",
+				"status": "published",
+				"data": {
+					"title": "Galeri Kegiatan Upacara",
+					"description": "Dokumentasi kegiatan upacara bendera.",
+					"cover_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&h=800&fit=crop",
+							"alt": "Kegiatan sekolah",
+							"filename": "gallery-ceremony.jpg"
+						}
+					},
+					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Galeri ini akan diperbarui rutin oleh tim publikasi sekolah." }] }]
+				}
+			}
+		],
+		"downloads": [
+			{
+				"id": "dl-1",
+				"slug": "kalender-pendidikan-2026",
+				"status": "published",
+				"data": {
+					"title": "Kalender Pendidikan 2026",
+					"description": "Dokumen kalender pendidikan tahun ajaran berjalan.",
+					"category": "Akademik",
+					"resource_url": "https://awcms-smandapangkalanbun-web.pages.dev/documents/bos-tw1-2024.pdf",
+					"published_on": "2026-01-10T08:00:00.000Z"
 				}
 			}
 		]

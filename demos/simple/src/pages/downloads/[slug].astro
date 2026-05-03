@@ -1,0 +1,22 @@
+---
+import { decodeSlug, getEmDashEntry } from "emdash";
+import Base from "../../layouts/Base.astro";
+
+const slug = decodeSlug(Astro.params.slug);
+if (!slug) return Astro.redirect("/404");
+
+const { entry, cacheHint } = await getEmDashEntry("downloads", slug);
+if (!entry) return Astro.redirect("/404");
+Astro.cache.set(cacheHint);
+---
+
+<Base title={entry.data.title} description={entry.data.description ?? "Dokumen unduhan"}>
+	<article class="content-page">
+		<h1>{entry.data.title}</h1>
+		{entry.data.category && <p>Kategori: {entry.data.category}</p>}
+		{entry.data.description && <p>{entry.data.description}</p>}
+		{entry.data.resource_url && (
+			<p><a href={entry.data.resource_url} target="_blank" rel="noopener noreferrer">Buka Dokumen</a></p>
+		)}
+	</article>
+</Base>

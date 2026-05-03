@@ -1,0 +1,21 @@
+---
+import { decodeSlug, getEmDashEntry } from "emdash";
+import { PortableText } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+
+const slug = decodeSlug(Astro.params.slug);
+if (!slug) return Astro.redirect("/404");
+
+const { entry, cacheHint } = await getEmDashEntry("achievements", slug);
+if (!entry) return Astro.redirect("/404");
+Astro.cache.set(cacheHint);
+---
+
+<Base title={entry.data.title} description={entry.data.summary ?? "Prestasi sekolah"}>
+	<article class="content-page">
+		<h1>{entry.data.title}</h1>
+		{entry.data.level && <p>Tingkat: {entry.data.level}</p>}
+		{entry.data.awarded_on && <p>Tanggal: {entry.data.awarded_on.toLocaleDateString("id-ID")}</p>}
+		<PortableText value={entry.data.content} />
+	</article>
+</Base>

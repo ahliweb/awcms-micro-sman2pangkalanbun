@@ -1,0 +1,24 @@
+---
+import { getEmDashCollection } from "emdash";
+import Base from "../../layouts/Base.astro";
+
+const { entries: events, cacheHint } = await getEmDashCollection("events", {
+	orderBy: { published_at: "desc" }
+});
+
+Astro.cache.set(cacheHint);
+---
+
+<Base title="Agenda" description="Agenda dan kegiatan sekolah">
+	<section class="list-page">
+		<h1>Agenda</h1>
+		<ul>
+			{events.map((item) => (
+				<li>
+					<a href={`/events/${item.id}`}>{item.data.title}</a>
+					{item.data.description && <p>{item.data.description}</p>}
+				</li>
+			))}
+		</ul>
+	</section>
+</Base>
