@@ -29,5 +29,7 @@ export function academicCalendarPlugin(): PluginDescriptor {
 			exam_windows: { indexes: ["termId", "startAt", "endAt", "kind"] },
 			events: { indexes: ["type", "startAt", "endAt", "locale"] },
 		},
+		adminPages: [{ path: "/calendar", label: "Academic Calendar", icon: "calendar" }],
+		adminWidgets: [{ id: "upcoming-calendar", title: "Upcoming Calendar", size: "half" }],
 	};
 }

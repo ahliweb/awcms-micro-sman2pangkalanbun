@@ -11,6 +11,17 @@ This package defines the academic calendar data model and schema contract used b
 - Upcoming-items query helper for widget/feed usage
 - Minimal plugin descriptor/runtime scaffold for follow-up slices
 
+## Admin and Secured Routes
+
+- Admin page: `/calendar`
+- Admin widget: `widget:upcoming-calendar`
+- Secured CRUD routes (non-public by default):
+  - `terms/list`, `terms/create`, `terms/update`, `terms/delete`
+  - `exam-windows/list`, `exam-windows/create`, `exam-windows/update`, `exam-windows/delete`
+  - `events/list`, `events/create`, `events/update`, `events/delete`
+
+All mutating routes use schema-validated inputs and rollback writes when cross-entity validation fails.
+
 ## Data Model Entities
 
 - `AcademicTerm`: semester boundary and locale/year metadata
