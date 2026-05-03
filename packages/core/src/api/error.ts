@@ -6,6 +6,7 @@
  */
 
 import { InvalidCursorError } from "../database/repositories/types.js";
+import { logEvent } from "../observability/log.js";
 import { mapErrorStatus } from "./errors.js";
 import type { ApiResult } from "./types.js";
 
@@ -60,7 +61,11 @@ export function handleError(
 	if (error instanceof InvalidCursorError) {
 		return apiError("INVALID_CURSOR", error.message, 400);
 	}
-	console.error(`[${fallbackCode}]`, error);
+	logEvent("error", {
+		event: "api.handle_error",
+		context: { code: fallbackCode },
+		error,
+	});
 	return apiError(fallbackCode, fallbackMessage, 500);
 }
 
