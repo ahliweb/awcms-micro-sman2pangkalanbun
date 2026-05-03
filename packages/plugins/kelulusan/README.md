@@ -27,6 +27,7 @@ Scaffold package for the `kelulusan` plugin with storage and route surface for N
 
 - `admin` - Block Kit page scaffold for `/kelulusan`
 - `students/list` - stub list route
+- `students/upsert` - admin route for creating/updating student records
 - `students/get-by-nisn` - public student lookup by NISN
 - `gate/session/start` - public NISN gate session issuer with short-lived access token
 - `documents/access/public` - NISN + gate token PDF access with telemetry event

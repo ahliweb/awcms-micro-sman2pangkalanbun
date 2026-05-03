@@ -25,6 +25,13 @@ const documentAccessAdminSchema = z.object({
 	eventType: z.enum(["opened", "downloaded"]),
 });
 
+const studentUpsertSchema = z.object({
+	nisn: z.string().trim().min(6).max(32),
+	name: z.string().trim().min(1).max(200),
+	pdfMediaId: z.string().trim().min(1),
+	pdfFilename: z.string().trim().min(1).max(255),
+});
+
 type StudentRecord = {
 	nisn: string;
 	name: string;
@@ -234,7 +241,8 @@ export default definePlugin({
 		},
 		"students/list": {
 			input: studentListSchema,
-			handler: async (ctx: any) => {
+			handler: async (routeCtx: any, pluginCtx: any) => {
+				const ctx = { ...pluginCtx, ...routeCtx };
 				const result = await ctx.storage.students.query({
 					orderBy: { createdAt: "desc" },
 					limit: ctx.input.limit ?? 50,
@@ -261,9 +269,26 @@ export default definePlugin({
 				};
 			},
 		},
+		"students/upsert": {
+			input: studentUpsertSchema,
+			handler: async (routeCtx: any, pluginCtx: any) => {
+				const ctx = { ...pluginCtx, ...routeCtx };
+				const record: StudentRecord = {
+					nisn: ctx.input.nisn,
+					name: ctx.input.name,
+					pdfMediaId: ctx.input.pdfMediaId,
+					pdfFilename: ctx.input.pdfFilename,
+					createdAt: nowIso(),
+				};
+
+				await ctx.storage.students.put(record.nisn, record);
+				return record;
+			},
+		},
 		"students/get-by-nisn": {
 			input: studentByNisnSchema,
-			handler: async (ctx: any) => {
+			handler: async (routeCtx: any, pluginCtx: any) => {
+				const ctx = { ...pluginCtx, ...routeCtx };
 				const student = await findStudentByNisn(ctx, ctx.input.nisn);
 				if (!student) {
 					throw PluginRouteError.notFound("Student record not found");
@@ -279,7 +304,8 @@ export default definePlugin({
 		"gate/session/start": {
 			public: true,
 			input: gateSessionStartSchema,
-			handler: async (ctx: any) => {
+			handler: async (routeCtx: any, pluginCtx: any) => {
+				const ctx = { ...pluginCtx, ...routeCtx };
 				await enforceRateLimit(ctx);
 
 				const student = await findStudentByNisn(ctx, ctx.input.nisn);
@@ -304,7 +330,8 @@ export default definePlugin({
 		"documents/access/public": {
 			public: true,
 			input: documentAccessSchema,
-			handler: async (ctx: any) => {
+			handler: async (routeCtx: any, pluginCtx: any) => {
+				const ctx = { ...pluginCtx, ...routeCtx };
 				const student = await findStudentByNisn(ctx, ctx.input.nisn);
 				if (!student) {
 					throw PluginRouteError.notFound("Student record not found");
@@ -337,7 +364,8 @@ export default definePlugin({
 		},
 		"documents/access/admin": {
 			input: documentAccessAdminSchema,
-			handler: async (ctx: any) => {
+			handler: async (routeCtx: any, pluginCtx: any) => {
+				const ctx = { ...pluginCtx, ...routeCtx };
 				const student = await findStudentByNisn(ctx, ctx.input.nisn);
 				if (!student) {
 					throw PluginRouteError.notFound("Student record not found");
