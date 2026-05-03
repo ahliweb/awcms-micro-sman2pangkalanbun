@@ -1,0 +1,202 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Kelulusan" description="Akses hasil kelulusan dengan NISN">
+	<section class="kelulusan-wrap">
+		<h1>Kelulusan</h1>
+		<p class="intro">Masukkan NISN untuk melihat data kelulusan dan dokumen PDF.</p>
+
+		<form id="nisn-form" class="nisn-form">
+			<label for="nisn-input">NISN</label>
+			<div class="row">
+				<input
+					id="nisn-input"
+					name="nisn"
+					type="text"
+					required
+					minlength="6"
+					maxlength="32"
+					inputmode="numeric"
+					autocomplete="off"
+					placeholder="Masukkan NISN"
+				/>
+				<button type="submit">Lihat Hasil</button>
+			</div>
+		</form>
+
+		<p id="status" class="status" role="status" aria-live="polite"></p>
+
+		<section id="result" class="result hidden" aria-live="polite">
+			<h2>Data Siswa</h2>
+			<dl>
+				<div><dt>NISN</dt><dd id="out-nisn">-</dd></div>
+				<div><dt>Nama</dt><dd id="out-name">-</dd></div>
+				<div><dt>File PDF</dt><dd id="out-file">-</dd></div>
+			</dl>
+			<div class="actions">
+				<button id="open-pdf" type="button">Buka PDF</button>
+				<a id="download-pdf" class="download" href="#" target="_blank" rel="noopener">Unduh PDF</a>
+			</div>
+		</section>
+	</section>
+
+	<dialog id="pdf-dialog" class="pdf-dialog">
+		<div class="pdf-head">
+			<strong id="dialog-title">Dokumen Kelulusan</strong>
+			<button id="close-dialog" type="button" aria-label="Tutup">Tutup</button>
+		</div>
+		<iframe id="pdf-frame" title="PDF Kelulusan"></iframe>
+	</dialog>
+
+	<script is:inline>
+		const API_BASE = "/_emdash/api/plugins/kelulusan";
+		const state = { nisn: "", accessToken: "", pdfUrl: "", pdfFilename: "" };
+
+		const form = document.getElementById("nisn-form");
+		const statusEl = document.getElementById("status");
+		const resultEl = document.getElementById("result");
+		const outNisn = document.getElementById("out-nisn");
+		const outName = document.getElementById("out-name");
+		const outFile = document.getElementById("out-file");
+		const openPdfBtn = document.getElementById("open-pdf");
+		const downloadPdf = document.getElementById("download-pdf");
+		const dialog = document.getElementById("pdf-dialog");
+		const closeDialog = document.getElementById("close-dialog");
+		const frame = document.getElementById("pdf-frame");
+		const title = document.getElementById("dialog-title");
+
+		async function apiPost(path, body) {
+			const res = await fetch(`${API_BASE}/${path}`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(body),
+			});
+			const payload = await res.json().catch(() => ({}));
+			if (!res.ok || !payload.success) {
+				const message = payload?.error?.message || "Permintaan gagal";
+				throw new Error(message);
+			}
+			return payload.data;
+		}
+
+		function showMessage(message, isError = false) {
+			statusEl.textContent = message;
+			statusEl.classList.toggle("error", isError);
+		}
+
+		function showResult(data) {
+			outNisn.textContent = data.nisn;
+			outName.textContent = data.name;
+			outFile.textContent = data.pdfFilename;
+			resultEl.classList.remove("hidden");
+		}
+
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			showMessage("Memverifikasi NISN...");
+			resultEl.classList.add("hidden");
+
+			const nisn = String(new FormData(form).get("nisn") || "").trim();
+			if (!nisn) {
+				showMessage("NISN wajib diisi.", true);
+				return;
+			}
+
+			try {
+				const session = await apiPost("gate/session/start", { nisn });
+				state.nisn = session.nisn;
+				state.accessToken = session.accessToken;
+				showResult(session);
+				showMessage("NISN valid. Anda dapat membuka dokumen PDF.");
+
+				const opened = await apiPost("documents/access/public", {
+					nisn: state.nisn,
+					accessToken: state.accessToken,
+					eventType: "opened",
+				});
+				state.pdfUrl = opened.pdfUrl;
+				state.pdfFilename = opened.pdfFilename;
+				downloadPdf.href = opened.pdfUrl;
+				downloadPdf.download = opened.pdfFilename;
+			} catch (error) {
+				showMessage(error instanceof Error ? error.message : "NISN tidak valid", true);
+			}
+		});
+
+		openPdfBtn.addEventListener("click", async () => {
+			if (!state.nisn || !state.accessToken) {
+				showMessage("Masukkan NISN terlebih dahulu.", true);
+				return;
+			}
+
+			try {
+				const opened = await apiPost("documents/access/public", {
+					nisn: state.nisn,
+					accessToken: state.accessToken,
+					eventType: "opened",
+				});
+				state.pdfUrl = opened.pdfUrl;
+				state.pdfFilename = opened.pdfFilename;
+				frame.src = `${opened.pdfUrl}#toolbar=1&navpanes=0`;
+				title.textContent = opened.pdfFilename;
+				dialog.showModal();
+			} catch (error) {
+				showMessage(error instanceof Error ? error.message : "Gagal membuka PDF", true);
+			}
+		});
+
+		downloadPdf.addEventListener("click", async (event) => {
+			if (!state.nisn || !state.accessToken) {
+				event.preventDefault();
+				showMessage("Masukkan NISN terlebih dahulu.", true);
+				return;
+			}
+
+			try {
+				const downloaded = await apiPost("documents/access/public", {
+					nisn: state.nisn,
+					accessToken: state.accessToken,
+					eventType: "downloaded",
+				});
+				downloadPdf.href = downloaded.pdfUrl;
+				downloadPdf.download = downloaded.pdfFilename;
+			} catch (error) {
+				event.preventDefault();
+				showMessage(error instanceof Error ? error.message : "Gagal mengunduh PDF", true);
+			}
+		});
+
+		closeDialog.addEventListener("click", () => {
+			dialog.close();
+			frame.src = "";
+		});
+	</script>
+</Base>
+
+<style>
+	.kelulusan-wrap { max-width: 760px; margin: 0 auto; padding: var(--spacing-12) var(--spacing-6); }
+	.intro { color: var(--color-text-secondary); margin-bottom: var(--spacing-6); }
+	.nisn-form label { display: block; font-weight: 600; margin-bottom: var(--spacing-2); }
+	.row { display: flex; gap: var(--spacing-3); }
+	.row input { flex: 1; padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius); }
+	.row button, .actions button, .actions .download { padding: 0.75rem 1rem; border-radius: var(--radius); border: 1px solid var(--color-border); background: var(--color-text); color: var(--color-bg); text-decoration: none; cursor: pointer; }
+	.status { min-height: 1.5rem; margin-top: var(--spacing-4); }
+	.status.error { color: #b91c1c; }
+	.result { margin-top: var(--spacing-6); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-5); }
+	.result.hidden { display: none; }
+	.result dl { display: grid; gap: var(--spacing-3); }
+	.result dt { font-size: 0.85rem; color: var(--color-text-secondary); }
+	.result dd { margin: 0; font-weight: 600; }
+	.actions { margin-top: var(--spacing-4); display: flex; gap: var(--spacing-3); }
+	.pdf-dialog { width: min(92vw, 980px); border: 0; padding: 0; border-radius: var(--radius-lg); overflow: hidden; }
+	.pdf-dialog::backdrop { background: rgba(0, 0, 0, 0.58); }
+	.pdf-head { display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 1rem; border-bottom: 1px solid var(--color-border); }
+	.pdf-head button { border: 1px solid var(--color-border); background: transparent; border-radius: var(--radius); padding: 0.4rem 0.75rem; cursor: pointer; }
+	#pdf-frame { width: 100%; height: min(80vh, 760px); border: 0; }
+
+	@media (max-width: 720px) {
+		.row { flex-direction: column; }
+		.actions { flex-direction: column; }
+	}
+</style>

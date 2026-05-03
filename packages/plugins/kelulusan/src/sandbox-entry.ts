@@ -1,4 +1,4 @@
-import { definePlugin } from "emdash";
+import { PluginRouteError, definePlugin } from "emdash";
 import { z } from "zod";
 
 const studentListSchema = z.object({
@@ -37,13 +37,6 @@ type GateSession = {
 	token: string;
 	expiresAt: string;
 };
-
-function apiError(code: string, message: string) {
-	return {
-		success: false as const,
-		error: { code, message },
-	};
-}
 
 function nowIso() {
 	return new Date().toISOString();
@@ -131,11 +124,8 @@ export default definePlugin({
 					cursor: ctx.input.cursor,
 				});
 				return {
-					success: true,
-					data: {
-						items: result.items.map((item: any) => item.data),
-						nextCursor: result.cursor,
-					},
+					items: result.items.map((item: any) => item.data),
+					nextCursor: result.cursor,
 				};
 			},
 		},
@@ -145,16 +135,13 @@ export default definePlugin({
 			handler: async (ctx: any) => {
 				const student = await findStudentByNisn(ctx, ctx.input.nisn);
 				if (!student) {
-					return apiError("NOT_FOUND", "Student record not found");
+					throw PluginRouteError.notFound("Student record not found");
 				}
 
 				return {
-					success: true,
-					data: {
-						nisn: student.nisn,
-						name: student.name,
-						pdfFilename: student.pdfFilename,
-					},
+					nisn: student.nisn,
+					name: student.name,
+					pdfFilename: student.pdfFilename,
 				};
 			},
 		},
@@ -164,19 +151,16 @@ export default definePlugin({
 			handler: async (ctx: any) => {
 				const student = await findStudentByNisn(ctx, ctx.input.nisn);
 				if (!student) {
-					return apiError("INVALID_NISN", "NISN is not valid");
+					throw PluginRouteError.badRequest("NISN is not valid");
 				}
 
 				const session = await startGateSession(ctx, student.nisn);
 
 				return {
-					success: true,
-					data: {
-						nisn: student.nisn,
-						name: student.name,
-						pdfFilename: student.pdfFilename,
-						...session,
-					},
+					nisn: student.nisn,
+					name: student.name,
+					pdfFilename: student.pdfFilename,
+					...session,
 				};
 			},
 		},
@@ -186,34 +170,31 @@ export default definePlugin({
 			handler: async (ctx: any) => {
 				const student = await findStudentByNisn(ctx, ctx.input.nisn);
 				if (!student) {
-					return apiError("NOT_FOUND", "Student record not found");
+					throw PluginRouteError.notFound("Student record not found");
 				}
 
 				const authorized = await isValidGateSession(ctx, student.nisn, ctx.input.accessToken);
 				if (!authorized) {
-					return apiError("UNAUTHORIZED", "Invalid or expired access token");
+					throw PluginRouteError.forbidden("Invalid or expired access token");
 				}
 
 				if (!ctx.media) {
-					return apiError("MEDIA_NOT_AVAILABLE", "Media access is not available");
+					throw PluginRouteError.internal("Media access is not available");
 				}
 
 				const media = await ctx.media.get(student.pdfMediaId);
 				if (!media) {
-					return apiError("NOT_FOUND", "Student document not found");
+					throw PluginRouteError.notFound("Student document not found");
 				}
 
 				await recordDocumentEvent(ctx, student, ctx.input.eventType, "public");
 
 				return {
-					success: true,
-					data: {
-						nisn: student.nisn,
-						name: student.name,
-						pdfFilename: student.pdfFilename,
-						pdfUrl: media.url,
-						eventType: ctx.input.eventType,
-					},
+					nisn: student.nisn,
+					name: student.name,
+					pdfFilename: student.pdfFilename,
+					pdfUrl: media.url,
+					eventType: ctx.input.eventType,
 				};
 			},
 		},
@@ -222,29 +203,26 @@ export default definePlugin({
 			handler: async (ctx: any) => {
 				const student = await findStudentByNisn(ctx, ctx.input.nisn);
 				if (!student) {
-					return apiError("NOT_FOUND", "Student record not found");
+					throw PluginRouteError.notFound("Student record not found");
 				}
 
 				if (!ctx.media) {
-					return apiError("MEDIA_NOT_AVAILABLE", "Media access is not available");
+					throw PluginRouteError.internal("Media access is not available");
 				}
 
 				const media = await ctx.media.get(student.pdfMediaId);
 				if (!media) {
-					return apiError("NOT_FOUND", "Student document not found");
+					throw PluginRouteError.notFound("Student document not found");
 				}
 
 				await recordDocumentEvent(ctx, student, ctx.input.eventType, "admin");
 
 				return {
-					success: true,
-					data: {
-						nisn: student.nisn,
-						name: student.name,
-						pdfFilename: student.pdfFilename,
-						pdfUrl: media.url,
-						eventType: ctx.input.eventType,
-					},
+					nisn: student.nisn,
+					name: student.name,
+					pdfFilename: student.pdfFilename,
+					pdfUrl: media.url,
+					eventType: ctx.input.eventType,
 				};
 			},
 		},
