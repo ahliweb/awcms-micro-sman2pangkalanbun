@@ -15,6 +15,12 @@
 		"binding": "ASSETS",
 		"directory": "demos/cloudflare/dist/client"
 	},
+	"rules": [
+		{
+			"type": "ESModule",
+			"globs": ["demos/cloudflare/dist/server/**/*.mjs", "demos/cloudflare/dist/server/**/*.js"]
+		}
+	],
 	"d1_databases": [
 		{
 			"binding": "DB",
@@ -37,6 +43,5 @@
 	],
 	"observability": {
 		"enabled": true
-	},
-	"no_bundle": true
+	}
 }
