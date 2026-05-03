@@ -187,7 +187,6 @@
 				{ "type": "custom", "label": "Agenda", "url": "/events" },
 				{ "type": "custom", "label": "Prestasi", "url": "/achievements" },
 				{ "type": "custom", "label": "Galeri", "url": "/galleries" },
-				{ "type": "custom", "label": "Files", "url": "/files" },
 				{ "type": "custom", "label": "Unduhan", "url": "/downloads" },
 				{ "type": "custom", "label": "Profil Alumni", "url": "/pages/profil-alumni" },
 				{ "type": "custom", "label": "Kontak", "url": "/pages/kontak" }
@@ -204,7 +203,6 @@
 				{ "type": "custom", "label": "Info Sekolah", "url": "/posts" },
 				{ "type": "custom", "label": "Pengumuman", "url": "/announcements" },
 				{ "type": "custom", "label": "Agenda", "url": "/events" },
-				{ "type": "custom", "label": "Files", "url": "/files" },
 				{ "type": "custom", "label": "Unduhan", "url": "/downloads" },
 				{ "type": "custom", "label": "Kontak", "url": "/pages/kontak" }
 			]
