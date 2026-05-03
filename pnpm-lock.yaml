@@ -243,6 +243,9 @@ importers:
       '@emdash-cms/plugin-forms':
         specifier: workspace:*
         version: link:../../packages/plugins/forms
+      '@emdash-cms/plugin-kelulusan':
+        specifier: workspace:*
+        version: link:../../packages/plugins/kelulusan
       '@emdash-cms/plugin-webhook-notifier':
         specifier: workspace:*
         version: link:../../packages/plugins/webhook-notifier
