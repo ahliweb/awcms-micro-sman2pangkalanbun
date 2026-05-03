@@ -1,0 +1,20 @@
+[
+  {
+    "sourcePath": "/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6329.webp",
+    "checksum": "sha256:011a2c96964c6e417c8a534266c0611c21d21e3c743126e536c1777a174d0e53",
+    "targetKey": "legacy/gallery/img-6329-011a2c96964c.webp",
+    "mimeType": "image/webp"
+  },
+  {
+    "sourcePath": "/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6330.webp",
+    "checksum": "sha256:8829f3a6f3f3db9a0bde2fb22c50c4b4d42a169137a193e32ae036c5e22c19dd",
+    "targetKey": "legacy/gallery/img-6330-8829f3a6f3f3.webp",
+    "mimeType": "image/webp"
+  },
+  {
+    "sourcePath": "/src/assets/foto-smandapbun/kegiatan-sekolah/IMG_6331.webp",
+    "checksum": "sha256:9e43592ac2f8cd2ac8e9b67cdc07d552322806e0346f415d8c0a68065c7b5970",
+    "targetKey": "legacy/gallery/img-6331-9e43592ac2f8.webp",
+    "mimeType": "image/webp"
+  }
+]

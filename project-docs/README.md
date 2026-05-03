@@ -16,6 +16,10 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/10-wave1-information-architecture.md` - Wave 1 IA/menu tree and section ownership mapping.
 - `project-docs/11-wave1-visual-identity-plan.md` - visual identity baseline plan for Wave 1 implementation.
 - `project-docs/12-wave2-execution-checklist.md` - Wave 2 gate checklist and dependency handoff criteria.
+- `project-docs/13-wave2-content-contract.md` - locked legacy-to-EmDash mapping contract for Wave 2 import.
+- `project-docs/14-wave2-asset-classification.md` - asset ownership classification and missing-source resolution registry.
+- `project-docs/15-wave2-media-manifest-spec.md` - deterministic media manifest schema, key rules, and idempotency strategy.
+- `project-docs/manifests/*.sample.json` - machine-readable sample manifest shards for staff/backgrounds/gallery/documents.
 
 ## Principles
 
