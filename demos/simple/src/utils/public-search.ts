@@ -17,7 +17,7 @@ export interface PublicSearchResult {
 	year?: string;
 }
 
-const COLLECTIONS = ["posts", "events", "achievements", "galleries", "downloads"];
+const COLLECTIONS = ["posts", "events", "galleries", "downloads"];
 
 function extractText(value: unknown): string {
 	if (!Array.isArray(value)) return "";

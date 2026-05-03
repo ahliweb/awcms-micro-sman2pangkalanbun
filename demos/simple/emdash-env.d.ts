@@ -5,21 +5,6 @@
 
 import type { ContentBylineCredit, PortableTextBlock } from "emdash";
 
-export interface Achievement {
-  id: string;
-  slug: string | null;
-  status: string;
-  title: string;
-  summary?: string;
-  content?: PortableTextBlock[];
-  level?: string;
-  awarded_on?: string;
-  createdAt: Date;
-  updatedAt: Date;
-  publishedAt: Date | null;
-  bylines?: ContentBylineCredit[];
-}
-
 export interface Download {
   id: string;
   slug: string | null;
@@ -93,7 +78,6 @@ export interface Post {
 
 declare module "emdash" {
   interface EmDashCollections {
-    achievements: Achievement;
     downloads: Download;
     events: Event;
     galleries: Gallery;
