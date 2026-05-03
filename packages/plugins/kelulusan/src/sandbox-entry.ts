@@ -42,10 +42,36 @@ type DocumentEventRecord = {
 type GateSession = {
 	token: string;
 	expiresAt: string;
+	issuedIp: string | null;
+	issuedUserAgent: string | null;
 };
+
+type RateLimitState = {
+	attempts: string[];
+	lockedUntil?: string;
+};
+
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LOCK_MS = 15 * 60 * 1000;
+const RATE_MAX_ATTEMPTS = 20;
 
 function nowIso() {
 	return new Date().toISOString();
+}
+
+function toTime(value: string | undefined | null) {
+	if (!value) return 0;
+	const parsed = Date.parse(value);
+	return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function sanitizeIp(ip: string | null) {
+	if (!ip) return "unknown";
+	return ip.trim().toLowerCase() || "unknown";
+}
+
+function rateKey(ip: string | null) {
+	return `gate-rate:${sanitizeIp(ip)}`;
 }
 
 function makeEventId() {
@@ -71,7 +97,18 @@ async function isValidGateSession(ctx: any, nisn: string, accessToken: string | 
 	const gate = (await ctx.kv.get(`gate-session:${nisn}`)) as GateSession | null;
 	if (!gate) return false;
 	if (gate.token !== accessToken) return false;
-	return new Date(gate.expiresAt).getTime() > Date.now();
+	if (new Date(gate.expiresAt).getTime() <= Date.now()) return false;
+
+	const requestIp = sanitizeIp(ctx.requestMeta?.ip ?? null);
+	const gateIp = sanitizeIp(gate.issuedIp ?? null);
+	if (gateIp !== "unknown" && requestIp !== gateIp) return false;
+
+	const requestUserAgent = (ctx.requestMeta?.userAgent ?? "").trim();
+	if (gate.issuedUserAgent && requestUserAgent && gate.issuedUserAgent !== requestUserAgent) {
+		return false;
+	}
+
+	return true;
 }
 
 async function recordDocumentEvent(ctx: any, student: StudentRecord, eventType: "opened" | "downloaded", actorType: "public" | "admin") {
@@ -135,18 +172,44 @@ async function buildTelemetrySummary(ctx: any, studentIds: string[]) {
 }
 
 async function startGateSession(ctx: any, nisn: string) {
-	const expiresInSeconds = 15 * 60;
+	const expiresInSeconds = 10 * 60;
 	const expiresAt = new Date(Date.now() + expiresInSeconds * 1000).toISOString();
 	const token = makeAccessToken();
+	const issuedIp = ctx.requestMeta?.ip ?? null;
+	const issuedUserAgent = (ctx.requestMeta?.userAgent ?? "").trim() || null;
 	await ctx.kv.set(`gate-session:${nisn}`, {
 		token,
 		expiresAt,
+		issuedIp,
+		issuedUserAgent,
 	});
 	return {
 		accessToken: token,
 		expiresAt,
 		expiresInSeconds,
 	};
+}
+
+async function enforceRateLimit(ctx: any) {
+	const key = rateKey(ctx.requestMeta?.ip ?? null);
+	const now = Date.now();
+	const state = ((await ctx.kv.get(key)) as RateLimitState | null) ?? { attempts: [] };
+
+	if (state.lockedUntil && toTime(state.lockedUntil) > now) {
+		throw PluginRouteError.forbidden("Unable to verify NISN");
+	}
+
+	const attempts = state.attempts.filter((ts) => now - toTime(ts) < RATE_WINDOW_MS);
+	if (attempts.length >= RATE_MAX_ATTEMPTS) {
+		await ctx.kv.set(key, {
+			attempts,
+			lockedUntil: new Date(now + RATE_LOCK_MS).toISOString(),
+		});
+		throw PluginRouteError.forbidden("Unable to verify NISN");
+	}
+
+	attempts.push(new Date(now).toISOString());
+	await ctx.kv.set(key, { attempts });
 }
 
 export default definePlugin({
@@ -199,7 +262,6 @@ export default definePlugin({
 			},
 		},
 		"students/get-by-nisn": {
-			public: true,
 			input: studentByNisnSchema,
 			handler: async (ctx: any) => {
 				const student = await findStudentByNisn(ctx, ctx.input.nisn);
@@ -218,9 +280,15 @@ export default definePlugin({
 			public: true,
 			input: gateSessionStartSchema,
 			handler: async (ctx: any) => {
+				await enforceRateLimit(ctx);
+
 				const student = await findStudentByNisn(ctx, ctx.input.nisn);
 				if (!student) {
-					throw PluginRouteError.badRequest("NISN is not valid");
+					ctx.log.warn("Kelulusan NISN verification rejected", {
+						reason: "invalid_nisn",
+						ip: sanitizeIp(ctx.requestMeta?.ip ?? null),
+					});
+					throw PluginRouteError.badRequest("Unable to verify NISN");
 				}
 
 				const session = await startGateSession(ctx, student.nisn);
