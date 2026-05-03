@@ -21,21 +21,6 @@ export interface Download {
   bylines?: ContentBylineCredit[];
 }
 
-export interface Event {
-  id: string;
-  slug: string | null;
-  status: string;
-  title: string;
-  description?: string;
-  content?: PortableTextBlock[];
-  starts_at?: string;
-  location?: string;
-  createdAt: Date;
-  updatedAt: Date;
-  publishedAt: Date | null;
-  bylines?: ContentBylineCredit[];
-}
-
 export interface Gallery {
   id: string;
   slug: string | null;
@@ -79,7 +64,6 @@ export interface Post {
 declare module "emdash" {
   interface EmDashCollections {
     downloads: Download;
-    events: Event;
     galleries: Gallery;
     pages: Page;
     posts: Post;
