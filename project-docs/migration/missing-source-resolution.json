@@ -16,9 +16,6 @@
     {"missing": "/images/staff/wakasek-kesiswaan.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/teachers/teacher-04.webp"},
     {"missing": "/images/staff/wakasek-sarpras.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/teachers/teacher-05.webp"},
     {"missing": "/images/staff/wakasek-humas.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/teachers/teacher-03.webp"},
-    {"missing": "/images/staff/kepala-tu.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/admin/admin-01.webp"},
-    {"missing": "/documents/bos-tw1-2024.pdf", "disposition": "removed", "replacement": null},
-    {"missing": "/documents/bos-tw2-2024.pdf", "disposition": "removed", "replacement": null},
-    {"missing": "/documents/bos-tw3-2024.pdf", "disposition": "removed", "replacement": null}
+    {"missing": "/images/staff/kepala-tu.jpg", "disposition": "replaced-owned", "replacement": "/public/images/staff/admin/admin-01.webp"}
   ]
 }

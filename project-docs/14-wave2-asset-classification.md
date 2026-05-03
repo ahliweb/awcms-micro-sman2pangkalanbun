@@ -38,9 +38,6 @@ Decision for Wave 2:
 
 | Reference | Source file | Status | Disposition |
 | --- | --- | --- | --- |
-| `/documents/bos-tw1-2024.pdf` | `blogs/finance.json` | missing-source | request authoritative document from school admin |
-| `/documents/bos-tw2-2024.pdf` | `blogs/finance.json` | missing-source | request authoritative document from school admin |
-| `/documents/bos-tw3-2024.pdf` | `blogs/finance.json` | missing-source | request authoritative document from school admin |
 | `/images/news/osn-2024.jpg` | `blogs/blogs.json` | missing-source | replace from owned photo archive or mark non-featured |
 | `/images/news/mpls-2024.jpg` | `blogs/blogs.json` | missing-source | replace from owned photo archive or mark non-featured |
 | `/images/news/hardiknas-2024.jpg` | `blogs/blogs.json` | missing-source | replace from owned photo archive or mark non-featured |

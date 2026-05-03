@@ -29,5 +29,4 @@ curl -sS http://127.0.0.1:4330/posts
 
 ## Notes
 
-- BOS attachment files were intentionally removed from initial Wave 2 batch per #30 remediation and are tracked for authoritative restoration in #31.
 - This matrix is the required input for #17 verification and #25 cutover readiness evidence.

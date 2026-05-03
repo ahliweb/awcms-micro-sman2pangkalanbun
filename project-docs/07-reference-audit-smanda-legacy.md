@@ -79,10 +79,6 @@ Detected from structured JSON references:
   - `/images/alumni/*.jpg` (featured alumni portraits)
   - `/images/gallery/*.jpg` (gallery category thumbnails)
   - `/images/staff/*.jpg` (non-webp organization portraits)
-- Referenced documents missing from local path:
-  - `/documents/bos-tw1-2024.pdf`
-  - `/documents/bos-tw2-2024.pdf`
-  - `/documents/bos-tw3-2024.pdf`
 
 ## Data Quality Notes (for migration)
 

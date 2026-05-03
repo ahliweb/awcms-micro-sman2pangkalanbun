@@ -28,9 +28,6 @@ No unresolved entries remain in this pack.
 | `/images/staff/wakasek-sarpras.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-05.webp` |
 | `/images/staff/wakasek-humas.jpg` | replaced-owned | `/public/images/staff/teachers/teacher-03.webp` |
 | `/images/staff/kepala-tu.jpg` | replaced-owned | `/public/images/staff/admin/admin-01.webp` |
-| `/documents/bos-tw1-2024.pdf` | removed | remove attachment row from initial import batch |
-| `/documents/bos-tw2-2024.pdf` | removed | remove attachment row from initial import batch |
-| `/documents/bos-tw3-2024.pdf` | removed | remove attachment row from initial import batch |
 
 ## Output Artifact
 
