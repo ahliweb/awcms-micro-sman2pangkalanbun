@@ -2489,10 +2489,8 @@ function EditorToolbar({
 				return;
 		}
 
-		if (nextIndex !== null) {
-			e.preventDefault();
-			buttons[nextIndex]?.focus();
-		}
+		e.preventDefault();
+		buttons[nextIndex]?.focus();
 	}, []);
 
 	return (

@@ -489,7 +489,6 @@ export const whoamiCommand = defineCommand({
 			// Try dev bypass for local
 			const isLocal = baseUrl.includes("localhost") || baseUrl.includes("127.0.0.1");
 			if (isLocal) {
-				authMethod = "dev-bypass";
 				consola.info(`Auth method: ${pc.cyan("dev-bypass")}`);
 				consola.info("No stored credentials. Client will use dev bypass for localhost.");
 				return;

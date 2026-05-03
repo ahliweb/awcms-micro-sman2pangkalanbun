@@ -555,10 +555,8 @@ export class EmDashRuntime {
 				sandboxedPluginCache.delete(key);
 				this.sandboxedPlugins.delete(key);
 				marketplacePluginKeys.delete(key);
-				if (pluginId) {
-					sandboxedRouteMetaCache.delete(pluginId);
-					marketplaceManifestCache.delete(pluginId);
-				}
+				sandboxedRouteMetaCache.delete(pluginId);
+				marketplaceManifestCache.delete(pluginId);
 			}
 
 			// Load newly active marketplace plugins.

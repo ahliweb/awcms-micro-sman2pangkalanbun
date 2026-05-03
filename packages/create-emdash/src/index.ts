@@ -130,14 +130,19 @@ const NEWLINE_PATTERN = /\r?\n/;
  */
 function ensureGitignored(projectDir: string, fileName: string): void {
 	const target = resolve(projectDir, ".gitignore");
-	const existing = existsSync(target) ? readFileSync(target, "utf-8") : "";
+	let existing = "";
+	try {
+		existing = readFileSync(target, "utf-8");
+	} catch {
+		existing = "";
+	}
 	const lines = existing.split(NEWLINE_PATTERN);
 	if (lines.some((line) => line.trim() === fileName)) {
 		return;
 	}
 	const sep = existing.length === 0 ? "" : existing.endsWith("\n") ? "" : "\n";
 	const next = `${existing}${sep}${fileName}\n`;
-	writeFileSync(target, next);
+	writeFileSync(target, next, { encoding: "utf-8" });
 }
 
 function getTemplateConfig(platform: Platform, key: TemplateKey): TemplateConfig {
@@ -361,7 +366,7 @@ async function main() {
 
 		// Set project name in package.json
 		const pkgPath = resolve(projectDir, "package.json");
-		if (existsSync(pkgPath)) {
+		try {
 			const pkg = JSON.parse(readFileSync(pkgPath, "utf-8"));
 			pkg.name = projectName;
 
@@ -374,7 +379,9 @@ async function main() {
 				};
 			}
 
-			writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
+			writeFileSync(pkgPath, JSON.stringify(pkg, null, 2), { encoding: "utf-8" });
+		} catch {
+			// Template may not include package.json in edge cases.
 		}
 
 		// Scaffold a fresh EMDASH_ENCRYPTION_KEY into the local-secrets file

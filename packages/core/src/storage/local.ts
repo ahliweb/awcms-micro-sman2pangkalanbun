@@ -33,6 +33,7 @@ const LEADING_SLASH_PATTERN = /^\//;
 
 /** Pattern to remove trailing slashes */
 const TRAILING_SLASH_PATTERN = /\/$/;
+const SAFE_KEY_PATTERN = /^[A-Za-z0-9._/-]+$/;
 
 /**
  * Local filesystem storage implementation
@@ -56,6 +57,9 @@ export class LocalStorage implements Storage {
 	 */
 	private getFilePath(key: string): string {
 		const normalizedKey = key.replace(LEADING_SLASH_PATTERN, "");
+		if (!SAFE_KEY_PATTERN.test(normalizedKey) || normalizedKey.includes("..")) {
+			throw new EmDashStorageError("Invalid file path", "INVALID_PATH");
+		}
 		const resolved = path.resolve(this.directory, normalizedKey);
 
 		// Verify the resolved path is within the base directory

@@ -535,7 +535,7 @@ function ContentNewPage() {
 				const updated = await updateBylineMutation.mutateAsync({ id: bylineId, ...input });
 				return updated;
 			}}
-			manifest={manifest ?? null}
+			manifest={manifest}
 		/>
 	);
 }
@@ -949,7 +949,7 @@ function ContentEditPage() {
 				const updated = await updateBylineMutation.mutateAsync({ id: bylineId, ...input });
 				return updated;
 			}}
-			manifest={manifest ?? null}
+			manifest={manifest}
 		/>
 	);
 }

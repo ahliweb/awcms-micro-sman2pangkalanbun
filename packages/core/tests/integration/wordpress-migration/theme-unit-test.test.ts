@@ -8,7 +8,7 @@
  * @see https://github.com/WordPress/theme-test-data
  */
 
-import { createReadStream, existsSync } from "node:fs";
+import { createReadStream } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 
@@ -27,21 +27,36 @@ const TEST_DATA_PATH = join(
 
 const TEST_DATA_URL =
 	"https://raw.githubusercontent.com/WordPress/theme-test-data/master/themeunittestdata.wordpress.xml";
+const XML_DECL_PATTERN = /^<\?xml\b/;
+
+function isNodeError(error: unknown): error is NodeJS.ErrnoException {
+	return error instanceof Error && "code" in error;
+}
 
 /**
  * Download the WordPress theme unit test data if it doesn't exist locally.
  */
 async function ensureTestData(): Promise<void> {
-	if (existsSync(TEST_DATA_PATH)) return;
-
 	console.log(`Downloading WordPress theme unit test data from ${TEST_DATA_URL}...`);
 	const response = await fetch(TEST_DATA_URL);
 	if (!response.ok) {
 		throw new Error(`Failed to download test data: ${response.status} ${response.statusText}`);
 	}
 	const data = await response.text();
+	if (!XML_DECL_PATTERN.test(data) || !data.includes("<rss")) {
+		throw new Error("Downloaded test data is not valid WXR XML");
+	}
+	if (data.length > 20_000_000) {
+		throw new Error("Downloaded test data is unexpectedly large");
+	}
 	await mkdir(dirname(TEST_DATA_PATH), { recursive: true });
-	await writeFile(TEST_DATA_PATH, data, "utf-8");
+	try {
+		await writeFile(TEST_DATA_PATH, data, { encoding: "utf-8", flag: "wx" });
+	} catch (error) {
+		if (!isNodeError(error) || error.code !== "EEXIST") {
+			throw error;
+		}
+	}
 	console.log(`Downloaded to ${TEST_DATA_PATH}`);
 }
 

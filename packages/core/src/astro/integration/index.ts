@@ -395,6 +395,14 @@ export function emdash(config: EmDashConfig = {}): AstroIntegration {
 						}
 
 						if (needsWrite) {
+							if (result.types.length > 2_000_000) {
+								logger.warn("Typegen output too large; skipping write");
+								return;
+							}
+							if (!result.types.includes("declare")) {
+								logger.warn("Typegen output missing declarations; skipping write");
+								return;
+							}
 							await writeFile(outputPath, result.types, "utf-8");
 							logger.info(`Generated emdash-env.d.ts (${result.collections} collections)`);
 						}

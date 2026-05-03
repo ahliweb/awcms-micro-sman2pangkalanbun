@@ -16,7 +16,7 @@
  * endpoints can land alongside.
  */
 
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 import { defineCommand } from "citty";
@@ -52,8 +52,12 @@ export function writeEncryptionKeyToFile(
 	value: string,
 	force: boolean,
 ): "wrote" | "skipped" {
-	const exists = existsSync(targetPath);
-	const existing = exists ? readFileSync(targetPath, "utf-8") : "";
+	let existing = "";
+	try {
+		existing = readFileSync(targetPath, "utf-8");
+	} catch {
+		existing = "";
+	}
 
 	const hasPopulatedKey = POPULATED_KEY_LINE_PATTERN.test(existing);
 	if (hasPopulatedKey && !force) {
@@ -74,7 +78,7 @@ export function writeEncryptionKeyToFile(
 		next = `${existing}${sep}${newLine}\n`;
 	}
 
-	writeFileSync(targetPath, next);
+	writeFileSync(targetPath, next, { encoding: "utf-8" });
 	return "wrote";
 }
 

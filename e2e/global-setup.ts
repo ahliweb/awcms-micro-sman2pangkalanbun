@@ -28,6 +28,7 @@ const SERVER_INFO_PATH = join(tmpdir(), "emdash-pw-server.json");
 
 // Regex patterns
 const COOKIE_VALUE_PATTERN = /^([^;]+)/;
+const TOKEN_PATTERN = /^[A-Za-z0-9._-]{20,300}$/;
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -290,6 +291,7 @@ export default async function globalSetup(): Promise<void> {
 		const setupData = setupJson.data;
 		const token = setupData.token;
 		if (!token) throw new Error("Setup bypass did not return a PAT token");
+		if (!TOKEN_PATTERN.test(token)) throw new Error("Setup bypass returned an invalid token");
 
 		const setCookie = setupRes.headers.get("set-cookie");
 		let sessionCookie = "";

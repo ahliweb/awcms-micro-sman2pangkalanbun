@@ -69,7 +69,10 @@ export function invalidateSiteSettingsCache(): void {
  * Type guard for MediaReference values
  */
 function isMediaReference(value: unknown): value is MediaReference {
-	return typeof value === "object" && value !== null && "mediaId" in value;
+	if (typeof value !== "object" || value === null) {
+		return false;
+	}
+	return Object.hasOwn(value, "mediaId");
 }
 
 /**
