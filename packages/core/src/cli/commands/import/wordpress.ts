@@ -23,6 +23,7 @@ const NUMBER_PATTERN = /^-?\d+(\.\d+)?$/;
 const DOT_PATTERN = /\./g;
 const NON_ALPHANUMERIC_UNDERSCORE_PATTERN = /[^a-zA-Z0-9_]/g;
 const TRAILING_SLASH_PATTERN = /\/$/;
+const SAFE_MEDIA_FILENAME_PATTERN = /[^A-Za-z0-9._-]/g;
 const PHP_STRING_PATTERN = /s:\d+:"(.*)";/;
 const PHP_ARRAY_PATTERN = /s:(\d+):"([^"]+)";(?:s:(\d+):"([^"]+)"|i:(\d+)|b:([01]))/g;
 
@@ -976,7 +977,8 @@ async function downloadMedia(attachment: WxrAttachment, mediaDir: string): Promi
 
 	// Validate URL is not targeting internal/private addresses
 	const parsed = validateExternalUrl(attachment.url);
-	const filename = parsed.pathname.split("/").pop() || `media-${attachment.id}`;
+	const rawName = parsed.pathname.split("/").pop() || `media-${attachment.id}`;
+	const filename = rawName.replace(SAFE_MEDIA_FILENAME_PATTERN, "_");
 	const filePath = join(mediaDir, filename);
 
 	await mkdir(dirname(filePath), { recursive: true });

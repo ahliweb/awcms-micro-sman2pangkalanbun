@@ -14,7 +14,7 @@
  */
 
 import { createHash } from "node:crypto";
-import { readFile, stat, mkdir, writeFile, rm, copyFile, symlink, readdir } from "node:fs/promises";
+import { readFile, mkdir, writeFile, rm, copyFile, symlink, readdir } from "node:fs/promises";
 import { resolve, join, extname, basename } from "node:path";
 
 import { defineCommand } from "citty";
@@ -627,11 +627,10 @@ export const bundleCommand = defineCommand({
 			consola.start("Creating tarball...");
 			await createTarball(bundleDir, tarballPath);
 
-			const tarballStat = await stat(tarballPath);
-			const tarballSizeKB = (tarballStat.size / 1024).toFixed(1);
+			const tarballBuf = await readFile(tarballPath);
+			const tarballSizeKB = (tarballBuf.length / 1024).toFixed(1);
 
 			// Calculate checksum
-			const tarballBuf = await readFile(tarballPath);
 			const checksum = createHash("sha256").update(tarballBuf).digest("hex");
 
 			consola.success(`Created ${tarballName} (${tarballSizeKB}KB)`);

@@ -5,12 +5,16 @@
  */
 
 import { writeFile, mkdir } from "node:fs/promises";
-import { resolve, dirname } from "node:path";
+import { resolve, dirname, sep } from "node:path";
 
 import { defineCommand } from "citty";
 import consola from "consola";
 
 import { connectionArgs, createClientFromArgs } from "../client-factory.js";
+
+function isInside(baseDir: string, targetPath: string): boolean {
+	return targetPath === baseDir || targetPath.startsWith(`${baseDir}${sep}`);
+}
 
 export const typesCommand = defineCommand({
 	meta: {
@@ -44,9 +48,18 @@ export const typesCommand = defineCommand({
 
 			// Fetch TypeScript types
 			const types = await client.schemaTypes();
+			if (!types.includes("declare")) {
+				throw new Error("Schema types payload is invalid");
+			}
+			if (types.length > 2_000_000) {
+				throw new Error("Schema types payload is unexpectedly large");
+			}
 
 			// Write types file
 			const outputPath = resolve(cwd, args.output);
+			if (!isInside(cwd, outputPath)) {
+				throw new Error("Output path must stay within the working directory");
+			}
 			await mkdir(dirname(outputPath), { recursive: true });
 			await writeFile(outputPath, types, "utf-8");
 			consola.success(`Generated ${args.output}`);

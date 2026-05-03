@@ -24,6 +24,7 @@ import { LogoLockup } from "./Logo.js";
 // ============================================================================
 
 type SignupStep = "email" | "check-email" | "verify" | "complete" | "error";
+const SIGNUP_TOKEN_PATTERN = /^[A-Za-z0-9_-]{20,200}$/;
 
 // ============================================================================
 // Step Components
@@ -304,9 +305,13 @@ export function SignupPage() {
 		const params = new URLSearchParams(window.location.search);
 		const urlToken = params.get("token");
 
-		if (urlToken) {
+		if (urlToken && SIGNUP_TOKEN_PATTERN.test(urlToken)) {
 			setToken(urlToken);
 			void verifyToken(urlToken);
+		} else if (urlToken) {
+			setError("Invalid signup token");
+			setErrorCode("invalid_token");
+			setStep("error");
 		}
 	}, []);
 

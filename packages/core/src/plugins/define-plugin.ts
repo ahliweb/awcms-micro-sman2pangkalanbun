@@ -244,7 +244,10 @@ function resolveHooks(hooks: PluginHooks, pluginId: string): ResolvedPluginHooks
 function isHookConfig<THandler>(
 	hook: HookConfig<THandler> | THandler,
 ): hook is HookConfig<THandler> {
-	return typeof hook === "object" && hook !== null && "handler" in hook;
+	if (typeof hook !== "object" || hook === null) {
+		return false;
+	}
+	return Object.hasOwn(hook, "handler");
 }
 
 /**

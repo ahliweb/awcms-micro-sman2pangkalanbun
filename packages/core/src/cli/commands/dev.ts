@@ -6,7 +6,7 @@
 
 import { spawn } from "node:child_process";
 import { readFile, access } from "node:fs/promises";
-import { resolve } from "node:path";
+import { resolve, sep } from "node:path";
 
 import { defineCommand } from "citty";
 import consola from "consola";
@@ -40,6 +40,10 @@ async function fileExists(path: string): Promise<boolean> {
 	} catch {
 		return false;
 	}
+}
+
+function isInside(baseDir: string, targetPath: string): boolean {
+	return targetPath === baseDir || targetPath.startsWith(`${baseDir}${sep}`);
 }
 
 export const devCommand = defineCommand({
@@ -118,10 +122,19 @@ export const devCommand = defineCommand({
 					const client = createClientFromArgs({ url: remoteUrl });
 					const schema = await client.schemaExport();
 					const types = await client.schemaTypes();
+					if (!types.includes("declare")) {
+						throw new Error("Schema types payload is invalid");
+					}
+					if (types.length > 2_000_000) {
+						throw new Error("Schema types payload is unexpectedly large");
+					}
 
 					const { writeFile, mkdir } = await import("node:fs/promises");
 					const { resolve: resolvePath, dirname } = await import("node:path");
 					const outputPath = resolvePath(cwd, ".emdash/types.ts");
+					if (!isInside(cwd, outputPath)) {
+						throw new Error("Generated types path must stay within working directory");
+					}
 					await mkdir(dirname(outputPath), { recursive: true });
 					await writeFile(outputPath, types, "utf-8");
 					await writeFile(
