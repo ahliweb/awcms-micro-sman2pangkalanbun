@@ -14,7 +14,7 @@
  * Designed for sandboxed execution:
  * - All HTTP via ctx.http.fetch()
  * - Block Kit admin UI (no React components)
- * - Capabilities: read:content, network:fetch:any
+ * - Capabilities: content:read, network:request:unrestricted
  */
 
 import type { PluginDescriptor } from "emdash";
@@ -31,7 +31,7 @@ export function atprotoPlugin(): PluginDescriptor {
 		version: "0.1.0",
 		format: "standard",
 		entrypoint: "@emdash-cms/plugin-atproto/sandbox",
-		capabilities: ["read:content", "network:fetch:any"],
+		capabilities: ["content:read", "network:request:unrestricted"],
 		storage: {
 			records: { indexes: ["contentId", "status", "lastSyncedAt"] },
 		},

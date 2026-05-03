@@ -20,7 +20,7 @@ export function sandboxedTestPlugin(): PluginDescriptor {
 		adminPages: [{ path: "/sandbox", label: "Sandbox Tests", icon: "shield" }],
 		adminWidgets: [{ id: "sandbox-status", title: "Sandbox Status", size: "half" }],
 
-		capabilities: ["read:content", "network:fetch"],
+		capabilities: ["content:read", "network:request"],
 		allowedHosts: ["httpbin.org"],
 		storage: {
 			events: { indexes: ["timestamp", "type"] },

@@ -19,8 +19,8 @@ describe("atprotoPlugin descriptor", () => {
 
 	it("declares required capabilities", () => {
 		const descriptor = atprotoPlugin();
-		expect(descriptor.capabilities).toContain("read:content");
-		expect(descriptor.capabilities).toContain("network:fetch:any");
+		expect(descriptor.capabilities).toContain("content:read");
+		expect(descriptor.capabilities).toContain("network:request:unrestricted");
 	});
 
 	it("declares the storage used by the sandbox implementation", () => {
