@@ -1,6 +1,5 @@
 // @ts-check
 import cloudflare from "@astrojs/cloudflare";
-import react from "@astrojs/react";
 import {
 	d1,
 	r2,
@@ -31,7 +30,6 @@ export default defineConfig({
 		responsiveStyles: true,
 	},
 	integrations: [
-		react(),
 		emdash({
 			// D1 database - binding name must match wrangler.jsonc
 			// session: "auto" enables read replicas (nearest replica for anon,
