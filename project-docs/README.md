@@ -33,6 +33,7 @@ This documentation set defines how to build and operate **Website SMAN 2 Pangkal
 - `project-docs/11-license-compliance-pack.md` - non-commercial compliance controls and release checklist gates.
 - `project-docs/12-editorial-governance-playbook.md` - publishing workflow, correction policy, archival policy, and urgent SLAs.
 - `project-docs/25-cutover-checklist-and-rollback-drill.md` - go/no-go checks, owner mapping, and rollback drill runbook.
+- `project-docs/04-05-06-content-chain-implementation.md` - implementation evidence for core/secondary collections and public search/filtering.
 
 ## Principles
 

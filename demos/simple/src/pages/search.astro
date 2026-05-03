@@ -1,18 +1,16 @@
 ---
 export const prerender = false;
 
-import { search } from "emdash";
 import Base from "../layouts/Base.astro";
+import { publicSearch, searchCollections } from "../utils/public-search";
 
 const query = Astro.url.searchParams.get("q")?.trim() || "";
+const type = Astro.url.searchParams.get("type")?.trim() || "all";
+const year = Astro.url.searchParams.get("year")?.trim() || "";
+const category = Astro.url.searchParams.get("category")?.trim() || "";
 
-// Use the FTS-backed search() API instead of loading every post and
-// filtering in JS. FTS scales as the post count grows, returns ranked
-// results, and handles tokenization/stemming. Templates that grep all
-// post bodies in JS quickly become unusable past a few hundred posts.
-const { items: results } = query
-	? await search(query, { collections: ["posts"], limit: 30 })
-	: { items: [] };
+const results = query ? await publicSearch({ q: query, type, year, category }) : [];
+const collections = searchCollections();
 ---
 
 <Base
@@ -23,6 +21,14 @@ const { items: results } = query
 		<h1 class="search-title">Search</h1>
 
 		<form method="get" action="/search" class="search-form">
+			<select name="type" class="search-input search-select">
+				<option value="all" selected={type === "all"}>Semua Tipe</option>
+				{collections.map((name) => (
+					<option value={name} selected={type === name}>{name}</option>
+				))}
+			</select>
+			<input type="text" name="year" value={year} placeholder="Tahun" class="search-input search-year" />
+			<input type="text" name="category" value={category} placeholder="Kategori" class="search-input search-category" />
 			<input
 				type="search"
 				name="q"
@@ -50,15 +56,14 @@ const { items: results } = query
 					{results.map((result) => (
 						<li class="search-result">
 							<a
-								href={`/posts/${result.slug ?? result.id}`}
+								href={result.url}
 								class="result-link"
 							>
 								<h2 class="result-title">
-									{result.title ?? "Untitled"}
+									{result.title}
 								</h2>
-								{result.snippet && (
-									<p class="result-snippet" set:html={result.snippet} />
-								)}
+								<p class="result-meta">{result.collection}{result.year ? ` • ${result.year}` : ""}{result.category ? ` • ${result.category}` : ""}</p>
+								{result.snippet && <p class="result-snippet">{result.snippet}</p>}
 							</a>
 						</li>
 					))}
@@ -84,8 +89,15 @@ const { items: results } = query
 
 	.search-form {
 		display: flex;
+		flex-wrap: wrap;
 		gap: var(--spacing-2);
 		margin-bottom: var(--spacing-8);
+	}
+
+	.search-select,
+	.search-year,
+	.search-category {
+		flex: 0 1 160px;
 	}
 
 	.search-input {
@@ -172,11 +184,10 @@ const { items: results } = query
 		color: var(--color-text-secondary);
 	}
 
-	/* FTS returns <mark> wrapping the matched terms */
-	.result-snippet :global(mark) {
-		background: var(--color-accent-ring, rgba(99, 102, 241, 0.2));
-		color: inherit;
-		padding: 0 0.1em;
-		border-radius: 2px;
+	.result-meta {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+		margin-bottom: var(--spacing-1);
 	}
+
 </style>

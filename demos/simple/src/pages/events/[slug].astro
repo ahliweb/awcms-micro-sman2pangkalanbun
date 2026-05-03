@@ -1,0 +1,21 @@
+---
+import { decodeSlug, getEmDashEntry } from "emdash";
+import { PortableText } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+
+const slug = decodeSlug(Astro.params.slug);
+if (!slug) return Astro.redirect("/404");
+
+const { entry, cacheHint } = await getEmDashEntry("events", slug);
+if (!entry) return Astro.redirect("/404");
+Astro.cache.set(cacheHint);
+---
+
+<Base title={entry.data.title} description={entry.data.description ?? "Agenda sekolah"}>
+	<article class="content-page">
+		<h1>{entry.data.title}</h1>
+		{entry.data.starts_at && <p>Waktu: {entry.data.starts_at.toLocaleString("id-ID")}</p>}
+		{entry.data.location && <p>Lokasi: {entry.data.location}</p>}
+		<PortableText value={entry.data.content} />
+	</article>
+</Base>

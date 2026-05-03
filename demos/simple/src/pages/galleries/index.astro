@@ -1,0 +1,26 @@
+---
+import { getEmDashCollection } from "emdash";
+import { Image } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+
+const { entries: galleries, cacheHint } = await getEmDashCollection("galleries", {
+	orderBy: { published_at: "desc" }
+});
+
+Astro.cache.set(cacheHint);
+---
+
+<Base title="Galeri" description="Galeri kegiatan sekolah">
+	<section class="list-page">
+		<h1>Galeri</h1>
+		<ul>
+			{galleries.map((item) => (
+				<li>
+					<a href={`/galleries/${item.id}`}>{item.data.title}</a>
+					{item.data.cover_image && <Image image={item.data.cover_image} />}
+					{item.data.description && <p>{item.data.description}</p>}
+				</li>
+			))}
+		</ul>
+	</section>
+</Base>
