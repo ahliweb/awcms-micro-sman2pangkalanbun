@@ -51,4 +51,29 @@ test.describe("@smoke Admin edit-to-publish", () => {
 		await expect(admin.page.getByRole("heading", { level: 1 })).toContainText("Post With Image");
 		await expect(admin.page.locator("img")).toBeVisible();
 	});
+
+	test("publishes a draft event and persists published status", async ({ admin }) => {
+		await admin.goToContent("events");
+		await admin.page.getByRole("link", { name: "Debate Workshop Draft", exact: true }).click();
+		await admin.waitForLoading();
+		const eventId = admin.page.url().split("/").pop();
+
+		await admin.fillField("title", "Debate Workshop Published");
+		await admin.clickSave();
+		await admin.waitForSaveComplete();
+
+		const publishButton = admin.page.getByRole("button", { name: "Publish" });
+		await expect(publishButton).toBeVisible();
+		await publishButton.click();
+		await admin.waitForLoading();
+
+		const response = await admin.page.request.get(`/_emdash/api/content/events/${eventId}`, {
+			headers: { "X-EmDash-Request": "1" }
+		});
+		expect(response.ok()).toBe(true);
+		const payload = await response.json();
+		const item = payload.data?.item ?? payload.item;
+		expect(item?.status).toBe("published");
+		expect(item?.data?.title).toBe("Debate Workshop Published");
+	});
 });
