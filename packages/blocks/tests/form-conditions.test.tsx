@@ -423,7 +423,7 @@ describe("form conditional fields", () => {
 		expect(onAction).toHaveBeenCalledTimes(1);
 		const payload = onAction.mock.calls[0]?.[0] as BlockInteraction;
 		expect(payload.type).toBe("form_submit");
-		expect(Object.prototype.hasOwnProperty.call(payload.values, "__proto__")).toBe(false);
+		expect(Object.hasOwn(payload.values, "__proto__")).toBe(false);
 		expect(({} as { polluted?: unknown }).polluted).toBeUndefined();
 	});
 });
