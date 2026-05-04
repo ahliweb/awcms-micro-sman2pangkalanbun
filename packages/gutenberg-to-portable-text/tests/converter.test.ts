@@ -521,6 +521,40 @@ https://${domain}/123456
 			},
 		);
 
+		it("does not match provider on lookalike hostnames", () => {
+			const content = `<!-- wp:embed {"url":"https://youtube.com.evil.example/123456"} -->
+<figure class="wp-block-embed">
+<div class="wp-block-embed__wrapper">
+https://youtube.com.evil.example/123456
+</div>
+</figure>
+<!-- /wp:embed -->`;
+
+			const result = gutenbergToPortableText(content);
+
+			expect(result[0]).toMatchObject({
+				_type: "embed",
+				provider: undefined,
+			});
+		});
+
+		it("does not match provider when hostname only contains provider substring", () => {
+			const content = `<!-- wp:embed {"url":"https://evilyoutube.com/123456"} -->
+<figure class="wp-block-embed">
+<div class="wp-block-embed__wrapper">
+https://evilyoutube.com/123456
+</div>
+</figure>
+<!-- /wp:embed -->`;
+
+			const result = gutenbergToPortableText(content);
+
+			expect(result[0]).toMatchObject({
+				_type: "embed",
+				provider: undefined,
+			});
+		});
+
 		it("converts audio embeds", () => {
 			const content = `<!-- wp:audio {"src":"https://example.com/audio.mp3"} -->
 <audio controls src="https://example.com/audio.mp3"></audio>
