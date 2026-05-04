@@ -81,6 +81,31 @@ describe("countdown admin route", () => {
 		expect(kvStore.get("settings:dismissOncePerSession")).toBe(false);
 		expect(result.toast).toMatchObject({ type: "success" });
 	});
+
+	it("returns validation error toast for invalid form values", async () => {
+		const adminRoute = (plugin as any).routes.admin;
+		const { ctx } = makeCtx();
+
+		const result = await adminRoute.handler(
+			{
+				input: {
+					type: "form_submit",
+					action_id: "save_settings",
+					values: {
+						enabled: true,
+						targetAt: "",
+						caption: "Invalid",
+						imageUrl: "https://cdn.example.com/countdown.jpg",
+					},
+				},
+			},
+			ctx,
+		);
+
+		expect(result.toast).toMatchObject({ type: "error" });
+		expect(Array.isArray(result.blocks)).toBe(true);
+		expect(result.blocks[0]).toMatchObject({ type: "banner", style: "error" });
+	});
 });
 
 describe("countdown public fragments", () => {
