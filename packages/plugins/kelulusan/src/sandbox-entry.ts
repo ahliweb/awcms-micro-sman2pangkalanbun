@@ -137,6 +137,15 @@ function buildStoragePdfUrl(storageKey: string): string {
 	return `/_emdash/api/media/file/${encodeStorageKey(storageKey)}`;
 }
 
+function buildDownloadPdfUrl(storageKey: string, filename: string): string {
+	const base = buildStoragePdfUrl(storageKey);
+	const params = new URLSearchParams({ dl: "1" });
+	if (filename.trim()) {
+		params.set("name", filename.trim());
+	}
+	return `${base}?${params.toString()}`;
+}
+
 async function resolveStudentPdf(ctx: any, student: StudentRecord): Promise<ResolvedPdf | null> {
 	if (!ctx.media) return null;
 
@@ -1023,7 +1032,10 @@ export default definePlugin({
 					nisn: student.nisn,
 					name: student.name,
 					pdfFilename: student.pdfFilename,
-					pdfUrl: resolvedPdf.url,
+					pdfUrl:
+						ctx.input.eventType === "downloaded"
+							? buildDownloadPdfUrl(resolvedPdf.resolvedMediaId, student.pdfFilename)
+							: resolvedPdf.url,
 					eventType: ctx.input.eventType,
 				};
 			},
@@ -1052,7 +1064,10 @@ export default definePlugin({
 					nisn: student.nisn,
 					name: student.name,
 					pdfFilename: student.pdfFilename,
-					pdfUrl: resolvedPdf.url,
+					pdfUrl:
+						ctx.input.eventType === "downloaded"
+							? buildDownloadPdfUrl(resolvedPdf.resolvedMediaId, student.pdfFilename)
+							: resolvedPdf.url,
 					eventType: ctx.input.eventType,
 				};
 			},
