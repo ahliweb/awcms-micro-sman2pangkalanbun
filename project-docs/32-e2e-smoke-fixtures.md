@@ -10,8 +10,8 @@ This artifact locks the smoke fixture content set used by Playwright setup.
 
 - Stable collection and slug set for smoke assertions.
 - Stable publish-state expectations:
-	- published: `first-post`, `second-post`, `about`
-	- draft: `draft-post`, `contact`
+  - published: `first-post`, `second-post`, `about`
+  - draft: `draft-post`, `contact`
 - Global setup consumes this file directly to avoid ad-hoc drift.
 
 ## Integration Point

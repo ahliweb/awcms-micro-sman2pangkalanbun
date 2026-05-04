@@ -10,11 +10,11 @@ import { resolve, dirname, sep } from "node:path";
 import { defineCommand } from "citty";
 import consola from "consola";
 
-import { connectionArgs, createClientFromArgs } from "../client-factory.js";
 import {
 	validateGeneratedTypesPayload,
 	validateSchemaExportPayload,
 } from "../../typegen/validate.js";
+import { connectionArgs, createClientFromArgs } from "../client-factory.js";
 
 function isInside(baseDir: string, targetPath: string): boolean {
 	return targetPath === baseDir || targetPath.startsWith(`${baseDir}${sep}`);

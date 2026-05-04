@@ -19,17 +19,17 @@ This runbook configures a production-like environment for the SMAN 2 Pangkalanbu
 ## Config Changes Applied
 
 - `demos/cloudflare/wrangler.jsonc`
-	- Worker name: `sman2pangkalanbunweb`
-	- D1 database name: `sman2pangkalanbunweb`
-	- D1 database id: `24247c48-0dd9-472f-9d55-3098da8d799e`
-	- R2 bucket name: `sman2pangkalanbunweb`
-	- KV binding `SESSION`:
-		- id: `b40b1549d5ed4cd289fb68292252bfae`
-		- preview_id: `37a3ede4864d4914aa136239640269b0`
+  - Worker name: `sman2pangkalanbunweb`
+  - D1 database name: `sman2pangkalanbunweb`
+  - D1 database id: `24247c48-0dd9-472f-9d55-3098da8d799e`
+  - R2 bucket name: `sman2pangkalanbunweb`
+  - KV binding `SESSION`:
+    - id: `b40b1549d5ed4cd289fb68292252bfae`
+    - preview_id: `37a3ede4864d4914aa136239640269b0`
 - `demos/cloudflare/astro.config.mjs`
-	- removed demo-specific Cloudflare Access dependency for portability
+  - removed demo-specific Cloudflare Access dependency for portability
 - `demos/cloudflare/package.json`
-	- updated D1 create script to `sman2pangkalanbunweb`
+  - updated D1 create script to `sman2pangkalanbunweb`
 
 ## Required Secrets/Env
 
@@ -51,12 +51,12 @@ the token must include zone-scoped route permissions in addition to Workers acco
 Minimum practical scope set for this project:
 
 - Account permissions:
-	- `Workers Scripts:Edit`
-	- `D1:Edit` (if migrations/remote DB ops are part of deploy flow)
-	- `Workers KV Storage:Edit` (if KV namespace operations are needed)
-	- `R2:Edit` (if bucket/object operations are needed)
+  - `Workers Scripts:Edit`
+  - `D1:Edit` (if migrations/remote DB ops are part of deploy flow)
+  - `Workers KV Storage:Edit` (if KV namespace operations are needed)
+  - `R2:Edit` (if bucket/object operations are needed)
 - Zone permissions (for `sman2pangkalanbun.sch.id`):
-	- `Workers Routes:Edit`
+  - `Workers Routes:Edit`
 
 Resource scoping:
 
@@ -132,7 +132,7 @@ Also execute KV binding slice: #58.
 ## Current Deploy Result
 
 - Worker successfully deployed on workers.dev:
-	- `https://sman2pangkalanbunweb.ahliweb.workers.dev`
+  - `https://sman2pangkalanbunweb.ahliweb.workers.dev`
 - Root response currently redirects to setup flow:
-	- `302 -> /_emdash/admin/setup`
+  - `302 -> /_emdash/admin/setup`
 - Remaining domain binding permission gap is tracked in `#59`.

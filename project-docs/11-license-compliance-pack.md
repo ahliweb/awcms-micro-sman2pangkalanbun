@@ -5,8 +5,8 @@ This pack codifies repository-level compliance controls for non-commercial usage
 ## License and Usage Constraints
 
 - Primary compliance references:
-	- `project-docs/06-license-and-compliance.md`
-	- repository `LICENSE` files (where applicable)
+  - `project-docs/06-license-and-compliance.md`
+  - repository `LICENSE` files (where applicable)
 - Non-commercial usage constraints must be explicitly documented in release notes and deployment approvals.
 
 ## Required Compliance Gates Before Release

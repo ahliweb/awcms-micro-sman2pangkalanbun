@@ -1,53 +1,53 @@
 {
-  "runId": "wave2-matrix-run-001",
-  "executedAt": "2026-05-03T00:52:00Z",
-  "checks": [
-    {
-      "id": "R1",
-      "category": "routes",
-      "description": "Critical public routes return HTTP 200",
-      "result": "pass",
-      "evidence": "tmp/opencode/wave2-route-status.txt"
-    },
-    {
-      "id": "M1",
-      "category": "media",
-      "description": "Transform references have zero unresolved local paths",
-      "result": "pass",
-      "evidence": "project-docs/migration/reference-validation-report.json"
-    },
-    {
-      "id": "L1",
-      "category": "locale",
-      "description": "Transform outputs emit id/en locale rows where provided by source",
-      "result": "pass",
-      "evidence": "project-docs/migration/transforms/news.sample.json"
-    },
-    {
-      "id": "A1",
-      "category": "admin-editability",
-      "description": "Draft post can be created and published through EmDash API",
-      "result": "pass",
-      "evidence": "tmp/opencode/wave2-create-post-response.json and tmp/opencode/wave2-publish-post-response.json"
-    },
-    {
-      "id": "A2",
-      "category": "admin-editability",
-      "description": "Published content is visible on public render",
-      "result": "pass",
-      "evidence": "tmp/opencode/wave2-posts.html"
-    },
-    {
-      "id": "S1",
-      "category": "source-isolation",
-      "description": "Frontend source has no legacy JSON/runtime imports",
-      "result": "pass",
-      "evidence": "grep scan over demos/simple/src and live collection loader in demos/simple/src/live.config.ts"
-    }
-  ],
-  "summary": {
-    "pass": 6,
-    "fail": 0,
-    "blocked": 0
-  }
+	"runId": "wave2-matrix-run-001",
+	"executedAt": "2026-05-03T00:52:00Z",
+	"checks": [
+		{
+			"id": "R1",
+			"category": "routes",
+			"description": "Critical public routes return HTTP 200",
+			"result": "pass",
+			"evidence": "tmp/opencode/wave2-route-status.txt"
+		},
+		{
+			"id": "M1",
+			"category": "media",
+			"description": "Transform references have zero unresolved local paths",
+			"result": "pass",
+			"evidence": "project-docs/migration/reference-validation-report.json"
+		},
+		{
+			"id": "L1",
+			"category": "locale",
+			"description": "Transform outputs emit id/en locale rows where provided by source",
+			"result": "pass",
+			"evidence": "project-docs/migration/transforms/news.sample.json"
+		},
+		{
+			"id": "A1",
+			"category": "admin-editability",
+			"description": "Draft post can be created and published through EmDash API",
+			"result": "pass",
+			"evidence": "tmp/opencode/wave2-create-post-response.json and tmp/opencode/wave2-publish-post-response.json"
+		},
+		{
+			"id": "A2",
+			"category": "admin-editability",
+			"description": "Published content is visible on public render",
+			"result": "pass",
+			"evidence": "tmp/opencode/wave2-posts.html"
+		},
+		{
+			"id": "S1",
+			"category": "source-isolation",
+			"description": "Frontend source has no legacy JSON/runtime imports",
+			"result": "pass",
+			"evidence": "grep scan over demos/simple/src and live collection loader in demos/simple/src/live.config.ts"
+		}
+	],
+	"summary": {
+		"pass": 6,
+		"fail": 0,
+		"blocked": 0
+	}
 }

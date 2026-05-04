@@ -79,9 +79,9 @@ export default definePlugin({
 				const model = await loadModel(ctx);
 				const filteredModel = locale
 					? {
-						...model,
-						events: model.events.filter((event) => event.locale === locale),
-					}
+							...model,
+							events: model.events.filter((event) => event.locale === locale),
+						}
 					: model;
 				const items = getUpcomingItems(filteredModel, new Date().toISOString(), limit);
 				return { success: true, data: { items } };
@@ -156,7 +156,10 @@ export default definePlugin({
 		},
 		"exam-windows/list": {
 			handler: async (ctx: any) => {
-				const result = await ctx.storage.exam_windows.query({ orderBy: { startAt: "asc" }, limit: 200 });
+				const result = await ctx.storage.exam_windows.query({
+					orderBy: { startAt: "asc" },
+					limit: 200,
+				});
 				return { success: true, data: { items: result.items.map((i: StorageItem) => i.data) } };
 			},
 		},

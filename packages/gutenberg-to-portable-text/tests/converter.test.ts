@@ -1057,7 +1057,7 @@ https://evilyoutube.com/123456
 						{
 							_type: "testimonial" as const,
 							_key: ctx.generateKey(),
-						text: extractText(block.innerHTML),
+							text: extractText(block.innerHTML),
 							rating: block.attrs.rating as number,
 						} as unknown as import("../src/types.js").PortableTextBlock,
 					],

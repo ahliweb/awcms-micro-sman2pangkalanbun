@@ -42,9 +42,7 @@ export type ExamWindow = z.infer<typeof examWindowSchema>;
 export type CalendarEvent = z.infer<typeof calendarEventSchema>;
 export type CalendarModel = z.infer<typeof calendarModelSchema>;
 
-export type ValidationResult =
-	| { ok: true; data: CalendarModel }
-	| { ok: false; errors: string[] };
+export type ValidationResult = { ok: true; data: CalendarModel } | { ok: false; errors: string[] };
 
 function toTime(value: string): number {
 	return new Date(value).getTime();
@@ -101,9 +99,7 @@ function validateExamWindows(examWindows: ExamWindow[], termIds: Set<string>): s
 			const b = examWindows[j];
 			if (!a || !b) continue;
 			if (a.termId !== b.termId) continue;
-			if (
-				overlaps(toTime(a.startAt), toTime(a.endAt), toTime(b.startAt), toTime(b.endAt))
-			) {
+			if (overlaps(toTime(a.startAt), toTime(a.endAt), toTime(b.startAt), toTime(b.endAt))) {
 				errors.push(`Exam windows ${a.id} and ${b.id} overlap in term ${a.termId}`);
 			}
 		}
@@ -155,11 +151,7 @@ export interface UpcomingItem {
 	endAt?: string;
 }
 
-export function getUpcomingItems(
-	model: CalendarModel,
-	nowIso: string,
-	limit = 5,
-): UpcomingItem[] {
+export function getUpcomingItems(model: CalendarModel, nowIso: string, limit = 5): UpcomingItem[] {
 	const now = toTime(nowIso);
 	const exams: UpcomingItem[] = model.examWindows
 		.filter((exam) => toTime(exam.endAt) >= now)

@@ -3,6 +3,7 @@
  * and the fixture database is back in "setup complete" state.
  */
 import { readFileSync, writeFileSync } from "node:fs";
+
 import { buildFromBase, parseSafeHttpBaseUrl } from "./safe-base-url";
 import { SERVER_INFO_PATH } from "./server-info-path";
 

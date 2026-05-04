@@ -8,8 +8,8 @@
  *
  */
 
-import { PluginContextFactory, type PluginContextFactoryOptions } from "./context.js";
 import { logEvent } from "../observability/log.js";
+import { PluginContextFactory, type PluginContextFactoryOptions } from "./context.js";
 import { extractRequestMeta } from "./request-meta.js";
 import type { ResolvedPlugin, RouteContext, PluginRoute } from "./types.js";
 

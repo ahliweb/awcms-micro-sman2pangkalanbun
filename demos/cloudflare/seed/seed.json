@@ -72,7 +72,13 @@
 			"labelSingular": "Gallery",
 			"supports": ["drafts", "revisions", "search"],
 			"fields": [
-				{ "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
 				{ "slug": "description", "label": "Description", "type": "text", "searchable": true },
 				{ "slug": "content", "label": "Content", "type": "portableText", "searchable": true },
 				{ "slug": "cover_image", "label": "Cover Image", "type": "image" }
@@ -84,7 +90,13 @@
 			"labelSingular": "Download",
 			"supports": ["drafts", "revisions", "search"],
 			"fields": [
-				{ "slug": "title", "label": "Title", "type": "string", "required": true, "searchable": true },
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
 				{ "slug": "description", "label": "Description", "type": "text", "searchable": true },
 				{ "slug": "category", "label": "Category", "type": "string", "searchable": true },
 				{ "slug": "preview_image", "label": "Preview Image", "type": "image" },
@@ -155,7 +167,11 @@
 			"label": "Footer Navigation",
 			"items": [
 				{ "type": "custom", "label": "Profil Sekolah", "url": "/pages/profil-sekolah" },
-				{ "type": "custom", "label": "Sambutan Kepala Sekolah", "url": "/pages/sambutan-kepala-sekolah" },
+				{
+					"type": "custom",
+					"label": "Sambutan Kepala Sekolah",
+					"url": "/pages/sambutan-kepala-sekolah"
+				},
 				{ "type": "custom", "label": "Sejarah", "url": "/pages/sejarah" },
 				{ "type": "custom", "label": "Visi & Misi", "url": "/pages/visi-misi" },
 				{ "type": "custom", "label": "Info Sekolah", "url": "/posts" },
@@ -167,8 +183,18 @@
 			"name": "social",
 			"label": "Social Links",
 			"items": [
-				{ "type": "custom", "label": "Instagram", "url": "https://instagram.com/sman2pangkalanbun", "target": "_blank" },
-				{ "type": "custom", "label": "YouTube", "url": "https://youtube.com/@sman2pangkalanbun", "target": "_blank" }
+				{
+					"type": "custom",
+					"label": "Instagram",
+					"url": "https://instagram.com/sman2pangkalanbun",
+					"target": "_blank"
+				},
+				{
+					"type": "custom",
+					"label": "YouTube",
+					"url": "https://youtube.com/@sman2pangkalanbun",
+					"target": "_blank"
+				}
 			]
 		}
 	],
@@ -323,7 +349,18 @@
 				"status": "published",
 				"data": {
 					"title": "Profil Sekolah",
-					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Halaman ringkasan profil sekolah. Konten detail dimigrasikan bertahap melalui EmDash." }] }]
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Halaman ringkasan profil sekolah. Konten detail dimigrasikan bertahap melalui EmDash."
+								}
+							]
+						}
+					]
 				}
 			},
 			{
@@ -332,7 +369,18 @@
 				"status": "published",
 				"data": {
 					"title": "Sambutan Kepala Sekolah",
-					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Sambutan kepala sekolah tersedia sebagai konten referensi awal dan akan disempurnakan saat migrasi konten." }] }]
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Sambutan kepala sekolah tersedia sebagai konten referensi awal dan akan disempurnakan saat migrasi konten."
+								}
+							]
+						}
+					]
 				}
 			},
 			{
@@ -341,7 +389,18 @@
 				"status": "published",
 				"data": {
 					"title": "Sejarah",
-					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Halaman sejarah sekolah untuk baseline navigasi EmDash." }] }]
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Halaman sejarah sekolah untuk baseline navigasi EmDash."
+								}
+							]
+						}
+					]
 				}
 			},
 			{
@@ -350,7 +409,18 @@
 				"status": "published",
 				"data": {
 					"title": "Visi & Misi",
-					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Visi, misi, dan tujuan sekolah dikelola dari EmDash pada fase migrasi konten." }] }]
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Visi, misi, dan tujuan sekolah dikelola dari EmDash pada fase migrasi konten."
+								}
+							]
+						}
+					]
 				}
 			},
 			{
@@ -359,7 +429,18 @@
 				"status": "published",
 				"data": {
 					"title": "Keuangan",
-					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Transparansi keuangan (BOS, APBD, Komite) akan dipublikasikan melalui koleksi EmDash terkait." }] }]
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Transparansi keuangan (BOS, APBD, Komite) akan dipublikasikan melalui koleksi EmDash terkait."
+								}
+							]
+						}
+					]
 				}
 			},
 			{
@@ -368,7 +449,18 @@
 				"status": "published",
 				"data": {
 					"title": "Layanan",
-					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Informasi layanan sekolah akan dikelola sebagai konten EmDash dan diperluas bertahap." }] }]
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Informasi layanan sekolah akan dikelola sebagai konten EmDash dan diperluas bertahap."
+								}
+							]
+						}
+					]
 				}
 			},
 			{
@@ -377,7 +469,18 @@
 				"status": "published",
 				"data": {
 					"title": "Prestasi",
-					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Daftar prestasi siswa dan sekolah akan dipopulasi dari pipeline migrasi konten." }] }]
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Daftar prestasi siswa dan sekolah akan dipopulasi dari pipeline migrasi konten."
+								}
+							]
+						}
+					]
 				}
 			},
 			{
@@ -386,7 +489,18 @@
 				"status": "published",
 				"data": {
 					"title": "Profil Alumni",
-					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Profil alumni akan dikelola melalui koleksi alumni di EmDash." }] }]
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Profil alumni akan dikelola melalui koleksi alumni di EmDash."
+								}
+							]
+						}
+					]
 				}
 			},
 			{
@@ -395,7 +509,18 @@
 				"status": "published",
 				"data": {
 					"title": "Kontak",
-					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Informasi kontak resmi sekolah dikelola melalui pengaturan dan konten EmDash." }] }]
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Informasi kontak resmi sekolah dikelola melalui pengaturan dan konten EmDash."
+								}
+							]
+						}
+					]
 				}
 			}
 		],
@@ -921,7 +1046,18 @@
 							"filename": "gallery-ceremony.jpg"
 						}
 					},
-					"content": [{ "_type": "block", "style": "normal", "children": [{ "_type": "span", "text": "Galeri ini akan diperbarui rutin oleh tim publikasi sekolah." }] }]
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Galeri ini akan diperbarui rutin oleh tim publikasi sekolah."
+								}
+							]
+						}
+					]
 				}
 			}
 		],

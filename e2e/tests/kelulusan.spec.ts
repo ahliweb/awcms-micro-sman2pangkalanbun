@@ -82,7 +82,11 @@ test.describe("Kelulusan flows", () => {
 		await page.goto("/kelulusan/hasil");
 		await expect(page).toHaveURL(/\/kelulusan/);
 	});
-	test("admin list shows row and updates telemetry after actions", async ({ admin, page, serverInfo }) => {
+	test("admin list shows row and updates telemetry after actions", async ({
+		admin,
+		page,
+		serverInfo,
+	}) => {
 		await admin.devBypassAuth();
 		await upsertStudent(
 			page,

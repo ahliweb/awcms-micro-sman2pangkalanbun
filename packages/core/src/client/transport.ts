@@ -143,7 +143,8 @@ export function refreshInterceptor(options: {
 }): Interceptor {
 	let refreshing: Promise<string | null> | null = null;
 	const tokenEndpoint = new URL(options.tokenEndpoint);
-	const isLocalhost = tokenEndpoint.hostname === "localhost" || tokenEndpoint.hostname === "127.0.0.1";
+	const isLocalhost =
+		tokenEndpoint.hostname === "localhost" || tokenEndpoint.hostname === "127.0.0.1";
 	if (tokenEndpoint.protocol !== "https:" && !(tokenEndpoint.protocol === "http:" && isLocalhost)) {
 		throw new Error("Token endpoint must use HTTPS (or localhost HTTP)");
 	}
