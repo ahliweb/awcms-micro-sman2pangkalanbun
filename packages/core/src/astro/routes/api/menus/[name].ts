@@ -20,8 +20,12 @@ export const GET: APIRoute = async ({ params, locals }) => {
 	const { emdash, user } = locals;
 	const name = params.name!;
 
-	const denied = requirePerm(user, "menus:read");
-	if (denied) return denied;
+	// Allow anonymous access for GET requests (menus are public navigation data)
+	// Only require authentication for non-anonymous users (for personalized data)
+	if (user) {
+		const denied = requirePerm(user, "menus:read");
+		if (denied) return denied;
+	}
 
 	try {
 		const result = await handleMenuGet(emdash.db, name);

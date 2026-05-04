@@ -935,15 +935,16 @@ export class SchemaRegistry {
 			case "string":
 				text = value;
 				break;
-			case "number":
-			case "boolean":
-				text = String(value);
-				break;
+		case "number":
+		case "boolean":
+			text = String(value);
+			break;
 		case "object": {
-			text = value == null ? "" : (JSON.stringify(value) as string | undefined) ?? "";
+			if (!value) { text = ""; break; }
+			text = (JSON.stringify(value) as string | undefined) ?? "";
 			break;
 		}
-			default:
+		default:
 				text = "";
 		}
 		return `'${text.replace(SINGLE_QUOTE_PATTERN, "''")}'`;

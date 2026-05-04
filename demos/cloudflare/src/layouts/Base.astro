@@ -358,7 +358,7 @@ const isLoggedIn = !!Astro.locals.user;
 				if (!container) return;
 
 				try {
-					const res = await fetch("/_emdash/api/public/menus/footer", {
+					const res = await fetch("/_emdash/api/menus/footer", {
 						headers: { Accept: "application/json" },
 					});
 					if (!res.ok) return; // Keep server-rendered menu on error

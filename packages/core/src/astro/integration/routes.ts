@@ -555,6 +555,12 @@ export function injectCoreRoutes(injectRoute: InjectRoute): void {
 		entrypoint: resolveRoute("api/menus/[name]/reorder.ts"),
 	});
 
+	// Public menu API route (no authentication required)
+	injectRoute({
+		pattern: "/_emdash/api/public/menus/[name]",
+		entrypoint: resolveRoute("api/public/menus/[name].ts"),
+	});
+
 	// Widget area routes
 	injectRoute({
 		pattern: "/_emdash/api/widget-areas",
