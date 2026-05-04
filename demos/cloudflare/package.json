@@ -3,16 +3,17 @@
   "version": "0.0.3",
   "private": true,
   "type": "module",
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "build:all": "pnpm run --filter @emdash-cms/demo-cloudflare... build",
-    "preview": "astro preview",
-    "deploy": "pnpm build:all && wrangler deploy",
-    "db:create": "wrangler d1 create sman2pangkalanbunweb",
-    "db:reset:remote": "./scripts/reset-db.sh",
-    "typecheck": "astro check"
-  },
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"build:all": "pnpm run --filter @emdash-cms/demo-cloudflare... build",
+		"preview": "astro preview",
+		"deploy": "pnpm build:all && wrangler deploy",
+		"db:create": "wrangler d1 create sman2pangkalanbunweb",
+		"db:reset:remote": "./scripts/reset-db.sh",
+		"skl:upload:r2": "node ./scripts/upload-skl-r2.mjs",
+		"typecheck": "astro check"
+	},
   "dependencies": {
     "@astrojs/cloudflare": "catalog:",
     "@astrojs/react": "catalog:",
