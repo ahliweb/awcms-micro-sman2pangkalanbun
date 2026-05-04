@@ -29,6 +29,7 @@ import {
 	resolveCredentialKey,
 	saveCredentials,
 } from "../credentials.js";
+import { getOpenExternalUrlCommand } from "../open-external-url.js";
 import { configureOutputMode } from "../output.js";
 
 // ---------------------------------------------------------------------------
@@ -293,12 +294,12 @@ export const loginCommand = defineCommand({
 			// Try to open browser (best-effort)
 			try {
 				const { execFile } = await import("node:child_process");
-				if (process.platform === "darwin") {
-					execFile("open", [deviceCode.verification_uri]);
-				} else if (process.platform === "win32") {
-					execFile("cmd", ["/c", "start", "", deviceCode.verification_uri]);
-				} else {
-					execFile("xdg-open", [deviceCode.verification_uri]);
+				const openCommand = getOpenExternalUrlCommand(
+					process.platform,
+					deviceCode.verification_uri,
+				);
+				if (openCommand) {
+					execFile(openCommand.command, openCommand.args);
 				}
 			} catch {
 				// Ignore — user can open manually
