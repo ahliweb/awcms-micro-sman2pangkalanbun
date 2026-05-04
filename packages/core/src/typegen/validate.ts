@@ -1,5 +1,14 @@
 const TYPEGEN_MAX_BYTES = 2_000_000;
-const FORBIDDEN_CONTROL_PATTERN = /[\u0000\u0001-\u0008\u000B\u000C\u000E-\u001F\u007F]/;
+const FORBIDDEN_CONTROL_PATTERN = new RegExp(
+	"[" +
+	String.fromCodePoint(0x0000) +
+	String.fromCodePoint(0x0001) + "-" + String.fromCodePoint(0x0008) +
+	String.fromCodePoint(0x000B) +
+	String.fromCodePoint(0x000C) +
+	String.fromCodePoint(0x000E) + "-" + String.fromCodePoint(0x001F) +
+	String.fromCodePoint(0x007F) +
+	"]"
+);
 const SCHEMA_JSON_MAX_BYTES = 2_000_000;
 
 /**

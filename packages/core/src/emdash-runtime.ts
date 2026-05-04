@@ -2180,6 +2180,13 @@ export class EmDashRuntime {
 			return { public: false };
 		}
 
+		// Fallback: check build-time sandboxed plugin entries. These are plugins
+		// bundled at build time (not marketplace-installed). Route-level public
+		// flags can't be known without executing the sandbox, so default to private.
+		if (this.sandboxedPluginEntries.some((e) => e.id === pluginId)) {
+			return { public: false };
+		}
+
 		return null;
 	}
 
@@ -2218,6 +2225,15 @@ export class EmDashRuntime {
 		const sandboxedPlugin = this.findSandboxedPlugin(pluginId);
 		if (sandboxedPlugin) {
 			return this.handleSandboxedRoute(sandboxedPlugin, path, request);
+		}
+
+		// Check build-time sandboxed plugin entries third. These are plugins
+		// bundled at build time. If the sandbox runner wasn't available at
+		// startup (missing bindings), the sandboxedPlugins map will be empty
+		// but the entries still exist — try loading on demand.
+		const entry = this.sandboxedPluginEntries.find((e) => e.id === pluginId);
+		if (entry) {
+			return this.handleSandboxedRouteFromEntry(entry, path, request);
 		}
 
 		return {

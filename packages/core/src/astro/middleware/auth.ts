@@ -107,6 +107,10 @@ const PUBLIC_API_PREFIXES = [
 	"/_emdash/api/comments/",
 	"/_emdash/api/media/file/",
 	"/_emdash/.well-known/",
+	// Public menu API — read-only, no authentication required.
+	// Used by client-side scripts to fetch fresh menu data for
+	// dynamic footer/header navigation.
+	"/_emdash/api/menus/",
 ];
 
 const PUBLIC_API_EXACT = new Set([
