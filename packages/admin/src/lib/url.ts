@@ -22,6 +22,13 @@ export function sanitizeRedirectUrl(raw: string): string {
 }
 
 /**
+ * Returns true only for internal path-style redirects.
+ */
+export function isSafeRedirectPath(raw: string): boolean {
+	return raw.startsWith("/") && !raw.startsWith("//") && !raw.includes("\\");
+}
+
+/**
  * Build a public content URL from collection metadata and slug.
  *
  * Uses the collection's `urlPattern` when available (e.g. `/blog/{slug}`),
