@@ -22,6 +22,19 @@ function asRecord(value: unknown): Record<string, unknown> {
 	return value as Record<string, unknown>;
 }
 
+function escapeHtml(value: string): string {
+	return value
+		.replaceAll("&", "&amp;")
+		.replaceAll("<", "&lt;")
+		.replaceAll(">", "&gt;")
+		.replaceAll('"', "&quot;")
+		.replaceAll("'", "&#39;");
+}
+
+function serializeForInlineScript(value: unknown): string {
+	return JSON.stringify(value).replaceAll("<", "\\u003c");
+}
+
 async function buildSettingsPage(ctx: PluginContext): Promise<{ blocks: unknown[] }> {
 	const settings = await getSettings(ctx);
 
@@ -122,6 +135,50 @@ async function saveSettingsFromAdmin(
 	};
 }
 
+async function buildCountdownFragments(ctx: PluginContext) {
+	const settings = await getSettings(ctx);
+	if (!settings.enabled) return null;
+
+	const validation = validateCountdownSettings(settings);
+	if (!validation.valid) {
+		ctx.log.warn("[countdown] skipped fragments due to invalid settings", validation.errors);
+		return null;
+	}
+
+	const initial = {
+		targetAt: settings.targetAt,
+		caption: settings.caption,
+		imageUrl: settings.imageUrl,
+		showFrom: settings.showFrom,
+		showUntil: settings.showUntil,
+		dismissOncePerSession: settings.dismissOncePerSession,
+	};
+
+	const caption = escapeHtml(settings.caption);
+	const image = settings.imageUrl ? `<img class="ecountdown-image" src="${escapeHtml(settings.imageUrl)}" alt="${caption}">` : "";
+
+	return [
+		{
+			kind: "html",
+			placement: "body:end",
+			key: "countdown-popup-root",
+			html: `<div id="ecountdown-root" hidden><div class="ecountdown-overlay" data-ecountdown-close></div><section class="ecountdown-card" role="dialog" aria-modal="true" aria-label="Countdown popup"><button type="button" class="ecountdown-close" data-ecountdown-close aria-label="Close">×</button>${image}<p class="ecountdown-caption">${caption}</p><p class="ecountdown-timer" data-ecountdown-timer>--:--:--</p></section></div>`,
+		},
+		{
+			kind: "inline-script",
+			placement: "body:end",
+			key: "countdown-popup-script",
+			code: `(function(){var cfg=${serializeForInlineScript(initial)};var root=document.getElementById('ecountdown-root');if(!root)return;var now=Date.now();if(cfg.showFrom&&Date.parse(cfg.showFrom)>now)return;if(cfg.showUntil&&Date.parse(cfg.showUntil)<now)return;var target=Date.parse(cfg.targetAt);if(!Number.isFinite(target)||target<=now)return;var dismissKey='ecountdown:dismissed';if(cfg.dismissOncePerSession&&window.sessionStorage&&sessionStorage.getItem(dismissKey)==='1')return;var timer=root.querySelector('[data-ecountdown-timer]');var close=function(){root.hidden=true;if(cfg.dismissOncePerSession&&window.sessionStorage){try{sessionStorage.setItem(dismissKey,'1')}catch(_){}}};root.querySelectorAll('[data-ecountdown-close]').forEach(function(el){el.addEventListener('click',close)});var tick=function(){var diff=target-Date.now();if(diff<=0){close();return}var sec=Math.floor(diff/1000)%60;var min=Math.floor(diff/60000)%60;var hour=Math.floor(diff/3600000)%24;var day=Math.floor(diff/86400000);if(timer){timer.textContent=day+'d '+String(hour).padStart(2,'0')+':'+String(min).padStart(2,'0')+':'+String(sec).padStart(2,'0')}};tick();root.hidden=false;var id=setInterval(tick,1000);window.addEventListener('pagehide',function(){clearInterval(id)},{once:true});})();`,
+		},
+		{
+			kind: "html",
+			placement: "head",
+			key: "countdown-popup-css",
+			html: `<style>#ecountdown-root{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:1rem}#ecountdown-root[hidden]{display:none!important}.ecountdown-overlay{position:absolute;inset:0;background:rgb(15 23 42 / .55);backdrop-filter:blur(2px)}.ecountdown-card{position:relative;max-width:30rem;width:min(100%,30rem);background:#fff;color:#0f172a;border-radius:1rem;box-shadow:0 25px 60px rgb(2 6 23 / .35);overflow:hidden;display:grid;gap:.75rem;padding:1rem 1rem 1.25rem}.ecountdown-image{width:100%;height:auto;max-height:14rem;object-fit:cover;border-radius:.75rem}.ecountdown-caption{margin:0;font:600 1rem/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}.ecountdown-timer{margin:0;font:700 1.2rem/1.2 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;color:#0b4db6}.ecountdown-close{position:absolute;inset-inline-end:.5rem;top:.5rem;border:0;background:rgb(255 255 255 / .9);width:2rem;height:2rem;border-radius:999px;cursor:pointer;font:700 1.1rem/1 sans-serif}@media (max-width:640px){.ecountdown-card{max-width:22rem;padding:.875rem}.ecountdown-caption{font-size:.95rem}.ecountdown-timer{font-size:1.05rem}}</style>`,
+		},
+	];
+}
+
 async function getSettings(ctx: PluginContext): Promise<CountdownSettings> {
 	const enabled = await ctx.kv.get<boolean>(getSettingKey("enabled"));
 	const targetAt = await ctx.kv.get<string>(getSettingKey("targetAt"));
@@ -167,6 +224,12 @@ export default definePlugin({
 			handler: async (_event: unknown, ctx: PluginContext) => {
 				await saveSettings(ctx, DEFAULT_COUNTDOWN_SETTINGS);
 				ctx.log.info("[countdown] defaults initialized");
+			},
+		},
+		"page:fragments": {
+			errorPolicy: "continue",
+			handler: async (_event: unknown, ctx: PluginContext) => {
+				return buildCountdownFragments(ctx);
 			},
 		},
 	},
