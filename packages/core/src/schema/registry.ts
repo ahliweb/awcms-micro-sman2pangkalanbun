@@ -939,10 +939,10 @@ export class SchemaRegistry {
 			case "boolean":
 				text = String(value);
 				break;
-			case "object": {
-				text = value === null ? "" : (JSON.stringify(value) as string | undefined) ?? "";
-				break;
-			}
+		case "object": {
+			text = value == null ? "" : (JSON.stringify(value) as string | undefined) ?? "";
+			break;
+		}
 			default:
 				text = "";
 		}
