@@ -7,16 +7,13 @@
  */
 
 import { readFileSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
 
 import { test as base } from "@playwright/test";
 
 import { AdminPage } from "./admin";
+import { SERVER_INFO_PATH } from "./server-info-path";
 
 export { AdminPage } from "./admin";
-
-const SERVER_INFO_PATH = join(tmpdir(), "emdash-pw-server.json");
 
 interface ServerInfo {
 	pid: number;

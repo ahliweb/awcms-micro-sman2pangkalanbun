@@ -3,10 +3,7 @@
  * and the fixture database is back in "setup complete" state.
  */
 import { readFileSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
-
-const SERVER_INFO_PATH = join(tmpdir(), "emdash-pw-server.json");
+import { SERVER_INFO_PATH } from "./server-info-path";
 
 export async function refreshServerPatAfterDevBypass(baseUrl: string): Promise<void> {
 	const res = await fetch(`${baseUrl}/_emdash/api/setup/dev-bypass?token=1`);

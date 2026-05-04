@@ -7,13 +7,14 @@
  */
 
 import { execFile, spawn } from "node:child_process";
-import { existsSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 
 import { SMOKE_SEED_ITEMS } from "./fixtures/smoke-seed";
+import { SERVER_INFO_PATH } from "./fixtures/server-info-path";
 
 const execAsync = promisify(execFile);
 
@@ -24,8 +25,6 @@ const FIXTURE_DIR = resolve(ROOT, "e2e/fixture");
 const CLI_BINARY = resolve(ROOT, "packages/core/dist/cli/index.mjs");
 const PORT = 4444;
 const MARKETPLACE_PORT = 4445;
-const SERVER_INFO_PATH = join(tmpdir(), "emdash-pw-server.json");
-
 // Regex patterns
 const COOKIE_VALUE_PATTERN = /^([^;]+)/;
 const TOKEN_PATTERN = /^[A-Za-z0-9._-]{20,300}$/;
@@ -331,6 +330,7 @@ export default async function globalSetup(): Promise<void> {
 			contentIds: seed.contentIds,
 			mediaIds: seed.mediaIds,
 		};
+		mkdirSync(dirname(SERVER_INFO_PATH), { recursive: true });
 		writeFileSync(SERVER_INFO_PATH, JSON.stringify(info, null, 2));
 
 		console.log(`[pw] Server ready at ${baseUrl} (pid ${server.pid})`);
