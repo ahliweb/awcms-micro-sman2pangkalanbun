@@ -31,7 +31,7 @@ const SAFE_INLINE_TYPES = new Set([
 	"application/pdf",
 ]);
 
-export const GET: APIRoute = async ({ params, locals }) => {
+export const GET: APIRoute = async ({ params, locals, url }) => {
 	const { key } = params;
 	const { emdash } = locals;
 
@@ -46,17 +46,27 @@ export const GET: APIRoute = async ({ params, locals }) => {
 	try {
 		const result = await emdash.storage.download(key);
 
-		const isInline = SAFE_INLINE_TYPES.has(result.contentType);
+		const forceDownload = url.searchParams.has("dl");
+		const isInline = !forceDownload && SAFE_INLINE_TYPES.has(result.contentType);
 
 		const headers: Record<string, string> = {
 			"Content-Type": result.contentType,
-			"Cache-Control": "public, max-age=31536000, immutable",
+			"Cache-Control": forceDownload
+				? "private, max-age=300"
+				: "public, max-age=31536000, immutable",
 			"X-Content-Type-Options": "nosniff",
 			"Content-Disposition": isInline ? "inline" : "attachment",
 		};
 
 		if (result.size) {
 			headers["Content-Length"] = String(result.size);
+		}
+
+		// When forcing download, include the filename derived from the storage key
+		// so browsers save with the correct name instead of the object-key UUID.
+		if (forceDownload) {
+			const rawName = key.includes("/") ? key.slice(key.lastIndexOf("/") + 1) : key;
+			headers["Content-Disposition"] = `attachment; filename*=UTF-8''${encodeURIComponent(rawName)}`;
 		}
 
 		// Sandbox CSP on non-inline content — prevents script execution for SVGs,

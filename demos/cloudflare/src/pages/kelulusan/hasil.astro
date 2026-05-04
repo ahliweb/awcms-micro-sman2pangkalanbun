@@ -167,17 +167,12 @@ import Base from "../../layouts/Base.astro";
 					accessToken: state.accessToken,
 					eventType: "downloaded",
 				});
-				const response = await fetch(downloaded.pdfUrl);
-				if (!response.ok) throw new Error("Gagal mengunduh file");
-				const blob = await response.blob();
-				const url = URL.createObjectURL(blob);
 				const a = document.createElement("a");
-				a.href = url;
-				a.download = downloaded.pdfFilename;
+				a.href = downloaded.pdfUrl + "?dl=1";
+				a.style.display = "none";
 				document.body.appendChild(a);
 				a.click();
-				document.body.removeChild(a);
-				URL.revokeObjectURL(url);
+				setTimeout(() => document.body.removeChild(a), 5000);
 				showMessage("Unduhan dimulai.");
 			} catch (error) {
 				showMessage(error instanceof Error ? error.message : "Gagal mengunduh PDF", true);
