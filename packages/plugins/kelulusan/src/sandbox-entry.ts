@@ -37,6 +37,14 @@ const studentUpsertSchema = z.object({
 	pdfFilename: z.string().trim().min(1).max(255),
 });
 
+const importTemplateSchema = z.object({
+	rows: z.array(z.object({
+		nisn: z.string().trim().min(6).max(32),
+		name: z.string().trim().min(1).max(200),
+		filename: z.string().trim().min(1).max(255),
+	})).min(1).max(1000),
+});
+
 type StudentRecord = {
 	nisn: string;
 	name: string;
@@ -239,6 +247,7 @@ function buildAdminBlocks(
 	selectedNisn?: string,
 	eventType: "opened" | "downloaded" = "opened",
 	banner?: { title: string; description: string },
+	childBlocks?: Array<Record<string, unknown>>,
 ) {
 	const options = items.map((item) => ({
 		label: `${item.nisn} - ${item.name}`,
@@ -255,19 +264,30 @@ function buildAdminBlocks(
 		});
 	}
 
+	const totalOpened = items.reduce((sum, item) => sum + item.openedCount, 0);
+	const totalDownloaded = items.reduce((sum, item) => sum + item.downloadedCount, 0);
+
 	blocks.push(
-		{ type: "header", text: "Kelulusan" },
+		{ type: "header", text: "Kelulusan SKL 2025/2026" },
 		{
 			type: "context",
-			text: "Lihat data siswa, telemetry dokumen, dan ambil URL PDF per siswa.",
+			text: `${items.length} siswa terdaftar. Total dibuka: ${totalOpened} · Total diunduh: ${totalDownloaded}`,
 		},
+	);
+
+	if (childBlocks) {
+		blocks.push(...childBlocks);
+	}
+
+	blocks.push(
+		{ type: "divider" },
 		{
 			type: "table",
 			blockId: "kelulusan-students",
 			columns: [
 				{ key: "nisn", label: "NISN", format: "code" },
 				{ key: "name", label: "Nama", format: "text" },
-				{ key: "pdfFilename", label: "PDF", format: "text" },
+				{ key: "pdfFilename", label: "File PDF", format: "text" },
 				{ key: "openedCount", label: "Dibuka", format: "badge" },
 				{ key: "downloadedCount", label: "Diunduh", format: "badge" },
 			],
@@ -301,6 +321,71 @@ function buildAdminBlocks(
 	);
 
 	return { blocks };
+}
+
+function buildImportBlocks(existingCount: number, banner?: { title: string; description: string }) {
+	const blocks: Array<Record<string, unknown>> = [];
+	if (banner) {
+		blocks.push({
+			type: "banner",
+			variant: banner.title.includes("berhasil") || banner.title.includes("Berhasil") ? "default" : "error",
+			title: banner.title,
+			description: banner.description,
+		});
+	}
+
+	blocks.push(
+		{ type: "header", text: "Import Data Siswa" },
+		{
+			type: "context",
+			text: `Gunakan template: | No | NISN | Nama Peserta Didik | File PDF |. Data yang sudah ada (${existingCount} siswa) akan diperbarui berdasarkan NISN. Upload folder SKL-2026 ke R2 terlebih dahulu, lalu import data di bawah.`,
+		},
+		{ type: "divider" },
+		{
+			type: "form",
+			block_id: "kelulusan-import",
+			fields: [
+				{
+					type: "text_input",
+					action_id: "template",
+					label: "Template data (paste dari SKL-DATA.md)",
+					multiline: true,
+					placeholder: "| No | NISN | Nama Peserta Didik | File PDF |\n| 1 | 0051718871 | EVA ELISTIANI | SKL-0051718871-SMAN 2 PANGKALAN BUN-2026.pdf |",
+				},
+			],
+			submit: { label: "Import data", action_id: "import_template" },
+		},
+	);
+
+	return { blocks };
+}
+
+const NISN_PATTERN = /^\d{7,}$/;
+
+function parseTemplateRows(input: string): Array<{ nisn: string; name: string; filename: string }> {
+	const rows: Array<{ nisn: string; name: string; filename: string }> = [];
+	const lines = input.split("\n");
+
+	for (const line of lines) {
+		const trimmed = line.trim();
+		if (!trimmed.startsWith("|")) continue;
+		if (trimmed.includes("---")) continue;
+		if (trimmed.includes("No") && trimmed.includes("NISN") && trimmed.includes("Nama")) continue;
+
+		const cols = trimmed.split("|").map((c) => c.trim()).filter(Boolean);
+		if (cols.length < 4) continue;
+
+		const nisn = cols[1];
+		const name = cols[2];
+		const filename = cols[3];
+
+		if (!nisn || !name || !filename) continue;
+		if (!NISN_PATTERN.test(nisn)) continue;
+
+		rows.push({ nisn, name, filename });
+	}
+
+	return rows;
 }
 
 async function startGateSession(ctx: any, nisn: string) {
@@ -345,31 +430,117 @@ async function enforceRateLimit(ctx: any) {
 }
 
 export default definePlugin({
-		routes: {
+	routes: {
 		admin: {
 			handler: async (routeCtx: any, pluginCtx: any) => {
 				const ctx = { ...pluginCtx, ...routeCtx };
-				const interaction = routeCtx.input as { type?: string; page?: string };
-				if (interaction.type === "page_load" && interaction.page === "/kelulusan") {
-					const listed = await listStudentsWithTelemetry(ctx, 100);
-					return buildAdminBlocks(listed.items);
-				}
-
-				const formInteraction = routeCtx.input as {
+				const interaction = routeCtx.input as {
 					type?: string;
+					page?: string;
 					action_id?: string;
 					values?: Record<string, unknown>;
 				};
+
+				if (interaction.type === "page_load") {
+					const listed = await listStudentsWithTelemetry(ctx, 200);
+
+					const importSection = {
+						type: "section" as const,
+						fields: [
+							{ type: "button", action_id: "show_import", label: "Import Data Siswa", style: "primary" },
+						],
+					};
+
+					return {
+						...buildAdminBlocks(listed.items),
+						blocks: [
+							...(buildAdminBlocks(listed.items).blocks || []),
+							{ type: "divider" },
+							importSection,
+						],
+					};
+				}
+
 				if (
-					formInteraction.type === "form_submit" &&
-					formInteraction.action_id === "open_document"
+					interaction.type === "form_submit" &&
+					interaction.action_id === "import_template"
+				) {
+					const template = typeof interaction.values?.template === "string" ? interaction.values.template : "";
+					if (!template.trim()) {
+						const listed = await listStudentsWithTelemetry(ctx, 200);
+						return {
+							blocks: [
+								...(buildImportBlocks(listed.items.length, {
+									title: "Error",
+									description: "Template data kosong. Silakan paste data dari SKL-DATA.md.",
+								}).blocks),
+							],
+						};
+					}
+
+					const rows = parseTemplateRows(template);
+					if (!rows.length) {
+						const listed = await listStudentsWithTelemetry(ctx, 200);
+						return {
+							blocks: [
+								...(buildImportBlocks(listed.items.length, {
+									title: "Error",
+									description: "Tidak dapat membaca data. Pastikan format: | No | NISN | Nama | File PDF |",
+								}).blocks),
+							],
+						};
+					}
+
+					let imported = 0;
+					for (const row of rows) {
+						await ctx.storage.students.put(row.nisn, {
+							nisn: row.nisn,
+							name: row.name,
+							pdfMediaId: `SKL-2026/${row.filename}`,
+							pdfFilename: row.filename,
+							createdAt: nowIso(),
+						});
+						imported++;
+					}
+
+					const listed = await listStudentsWithTelemetry(ctx, 200);
+					return {
+						blocks: [
+							...(buildImportBlocks(listed.items.length, {
+								title: "Import Berhasil",
+								description: `${imported} dari ${rows.length} data siswa berhasil diimpor. Total: ${listed.items.length} siswa.`,
+							}).blocks),
+							{ type: "divider" },
+							...buildAdminBlocks(listed.items).blocks,
+						],
+						toast: { message: `${imported} siswa berhasil diimpor`, type: "success" },
+					};
+				}
+
+				if (
+					interaction.type === "interaction" &&
+					interaction.action_id === "show_import"
+				) {
+					const listed = await listStudentsWithTelemetry(ctx, 200);
+					return {
+						blocks: [
+							...buildImportBlocks(listed.items.length).blocks,
+							{ type: "divider" },
+							...buildAdminBlocks(listed.items).blocks,
+						],
+					};
+				}
+
+				if (
+					interaction.type === "form_submit" &&
+					interaction.action_id === "open_document"
 				) {
 					const nisn =
-						typeof formInteraction.values?.nisn === "string" ? formInteraction.values.nisn : "";
+						typeof interaction.values?.nisn === "string" ? interaction.values.nisn : "";
 					const eventType =
-						formInteraction.values?.eventType === "downloaded" ? "downloaded" : "opened";
+						interaction.values?.eventType === "downloaded" ? "downloaded" : "opened";
 					if (!nisn) {
-						const listed = await listStudentsWithTelemetry(ctx, 100);
+						const listed = await listStudentsWithTelemetry(ctx, 200);
 						return {
 							...buildAdminBlocks(listed.items, undefined, eventType),
 							toast: { message: "Pilih siswa terlebih dahulu", type: "error" },
@@ -377,7 +548,7 @@ export default definePlugin({
 					}
 					const student = await findStudentByNisn(ctx, nisn);
 					if (!student) {
-						const listed = await listStudentsWithTelemetry(ctx, 100);
+						const listed = await listStudentsWithTelemetry(ctx, 200);
 						return {
 							...buildAdminBlocks(listed.items, nisn, eventType),
 							toast: { message: "Data siswa tidak ditemukan", type: "error" },
@@ -388,14 +559,14 @@ export default definePlugin({
 					}
 					const media = await ctx.media.get(student.pdfMediaId);
 					if (!media) {
-						const listed = await listStudentsWithTelemetry(ctx, 100);
+						const listed = await listStudentsWithTelemetry(ctx, 200);
 						return {
 							...buildAdminBlocks(listed.items, nisn, eventType),
-							toast: { message: "Dokumen siswa tidak ditemukan", type: "error" },
+							toast: { message: "Dokumen siswa belum diupload. Upload ke R2: SKL-2026/", type: "error" },
 						};
 					}
 					await recordDocumentEvent(ctx, student, eventType, "admin");
-					const listed = await listStudentsWithTelemetry(ctx, 100);
+					const listed = await listStudentsWithTelemetry(ctx, 200);
 
 					return {
 						...buildAdminBlocks(listed.items, nisn, eventType, {
@@ -412,7 +583,8 @@ export default definePlugin({
 					};
 				}
 
-				return { blocks: [] };
+				const listed = await listStudentsWithTelemetry(ctx, 200);
+				return buildAdminBlocks(listed.items);
 			},
 		},
 		"students/list": {
@@ -436,6 +608,24 @@ export default definePlugin({
 
 				await ctx.storage.students.put(record.nisn, record);
 				return record;
+			},
+		},
+		"students/import-template": {
+			input: importTemplateSchema,
+			handler: async (routeCtx: any, pluginCtx: any) => {
+				const ctx = { ...pluginCtx, ...routeCtx };
+				let imported = 0;
+				for (const row of ctx.input.rows) {
+					await ctx.storage.students.put(row.nisn, {
+						nisn: row.nisn,
+						name: row.name,
+						pdfMediaId: `SKL-2026/${row.filename}`,
+						pdfFilename: row.filename,
+						createdAt: nowIso(),
+					});
+					imported++;
+				}
+				return { imported, total: ctx.input.rows.length };
 			},
 		},
 		"students/get-by-nisn": {
@@ -472,10 +662,22 @@ export default definePlugin({
 
 				const session = await startGateSession(ctx, student.nisn);
 
+				if (ctx.media) {
+					const media = await ctx.media.get(student.pdfMediaId);
+					return {
+						nisn: student.nisn,
+						name: student.name,
+						pdfFilename: student.pdfFilename,
+						pdfUrl: media?.url ?? null,
+						...session,
+					};
+				}
+
 				return {
 					nisn: student.nisn,
 					name: student.name,
 					pdfFilename: student.pdfFilename,
+					pdfUrl: null,
 					...session,
 				};
 			},
