@@ -1,7 +1,10 @@
 import node from "@astrojs/node";
 import react from "@astrojs/react";
+import { academicCalendarPlugin } from "@emdash-cms/plugin-academic-calendar";
 import { auditLogPlugin } from "@emdash-cms/plugin-audit-log";
+import { countdownPlugin } from "@emdash-cms/plugin-countdown";
 import { kelulusanPlugin } from "@emdash-cms/plugin-kelulusan";
+import { webhookNotifierPlugin } from "@emdash-cms/plugin-webhook-notifier";
 import { defineConfig, fontProviders } from "astro/config";
 import emdash, { local } from "emdash/astro";
 import { sqlite } from "emdash/db";
@@ -23,7 +26,7 @@ export default defineConfig({
 				directory: "./uploads",
 				baseUrl: "/_emdash/api/media/file",
 			}),
-				plugins: [auditLogPlugin(), kelulusanPlugin()],
+			plugins: [academicCalendarPlugin(), auditLogPlugin(), countdownPlugin(), kelulusanPlugin(), webhookNotifierPlugin()],
 			}),
 	],
 	fonts: [
