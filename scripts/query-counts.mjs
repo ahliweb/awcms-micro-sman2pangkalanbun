@@ -65,6 +65,13 @@ const ROUTES = JSON.parse(readFileSync(routesConfigPath, "utf8")).map((route) =>
 const TRACKED_PHASES = new Set(["cold", "warm"]);
 const VALID_TARGETS = new Set(["sqlite", "d1"]);
 const QUERY_LOG_PREFIX = "[emdash-query-log] ";
+const SAFE_ROUTE_PATH_PATTERN = /^\/[A-Za-z0-9/_-]*$/;
+
+function assertSafeRoutePath(routePath) {
+	if (!SAFE_ROUTE_PATH_PATTERN.test(routePath)) {
+		throw new Error(`Unsafe route path in query-counts.routes.json: ${routePath}`);
+	}
+}
 
 /**
  * Resolve once a TCP connection to (host, port) succeeds, or reject on
@@ -309,6 +316,7 @@ async function hit(method, path, phase) {
 	let lastErr;
 	for (let i = 0; i < 10; i++) {
 		try {
+			assertSafeRoutePath(path);
 			const r = await fetch(`${BASE}${path}`, {
 				method,
 				headers: { "x-perf-phase": phase },

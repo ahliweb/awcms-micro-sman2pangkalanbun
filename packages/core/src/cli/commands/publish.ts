@@ -29,6 +29,22 @@ import {
 } from "../credentials.js";
 
 const DEFAULT_REGISTRY = "https://marketplace.emdashcms.com";
+const SAFE_PLUGIN_ID_PATTERN = /^[a-z0-9][a-z0-9_-]*$/;
+
+function normalizeRegistryUrl(input: string): string {
+	const url = new URL(input);
+	const isLocalhost = url.hostname === "localhost" || url.hostname === "127.0.0.1";
+	if (url.protocol !== "https:" && !(url.protocol === "http:" && isLocalhost)) {
+		throw new Error("Registry URL must use HTTPS (or localhost HTTP)");
+	}
+	return url.toString();
+}
+
+function assertSafePluginId(pluginId: string): void {
+	if (!SAFE_PLUGIN_ID_PATTERN.test(pluginId)) {
+		throw new Error(`Unsafe plugin id: ${pluginId}`);
+	}
+}
 
 // ── GitHub Device Flow ──────────────────────────────────────────
 
@@ -371,7 +387,7 @@ export const publishCommand = defineCommand({
 		},
 	},
 	async run({ args }) {
-		const registryUrl = args.registry;
+		const registryUrl = normalizeRegistryUrl(args.registry);
 
 		// ── Step 1: Resolve tarball ──
 
@@ -431,6 +447,7 @@ export const publishCommand = defineCommand({
 		// ── Step 2: Read manifest from tarball ──
 
 		const manifest = await readManifestFromTarball(tarballPath);
+		assertSafePluginId(manifest.id);
 		console.log();
 		consola.info(`Plugin: ${pc.bold(`${manifest.id}@${manifest.version}`)}`);
 		if (manifest.capabilities.length > 0) {
