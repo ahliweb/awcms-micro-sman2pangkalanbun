@@ -1150,6 +1150,26 @@ export async function handleContentPublish(
 				},
 			};
 		}
+		// Handle UNIQUE constraint violations (slug collision etc.)
+		const message = error instanceof Error ? error.message.toLowerCase() : "";
+		if (message.includes("unique constraint failed") || message.includes("duplicate key")) {
+			if (message.includes("slug")) {
+				return {
+					success: false,
+					error: {
+						code: "SLUG_CONFLICT",
+						message: "A page with this slug already exists. Please choose a different slug before publishing.",
+					},
+				};
+			}
+			return {
+				success: false,
+				error: {
+					code: "CONFLICT",
+					message: "Unique constraint violation",
+				},
+			};
+		}
 		const errMsg = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
 		console.error("Content publish error:", errMsg, "stack:", error instanceof Error ? error.stack : undefined);
 		return {
