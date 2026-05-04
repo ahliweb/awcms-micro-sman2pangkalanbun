@@ -91,6 +91,10 @@ function makeCtx(input: unknown, overrides?: { ip?: string; userAgent?: string }
 		media: {
 			async get(id: string) {
 				if (id === "missing") return null;
+				// Storage-key-like ids (containing `/` or ending in `.pdf`) simulate
+				// the real behaviour where `media.get` queries the `media` table by
+				// primary key and won't find entries keyed by R2 object paths.
+				if (id.includes("/") || id.toLowerCase().endsWith(".pdf")) return null;
 				return {
 					id,
 					filename: "kelulusan.pdf",
@@ -365,5 +369,101 @@ describe("kelulusan plugin routes", () => {
 		expect(action.toast).toMatchObject({ type: "success" });
 		expect(action.blocks[0]).toMatchObject({ type: "banner" });
 		expect(String(action.blocks[0].description)).toContain("https://cdn.example.test/pdf-4.pdf");
+	});
+
+	it("resolves storage-key pdfMediaId for public opened event", async () => {
+		const startRoute = (plugin as any).routes["gate/session/start"];
+		const accessPublicRoute = (plugin as any).routes["documents/access/public"];
+
+		const { ctx, students } = makeCtx({ nisn: "0051718871" }, { ip: "10.8.0.2" });
+
+		await students.put("stu-sk", {
+			nisn: "0051718871",
+			name: "EVA ELISTIANI",
+			pdfMediaId: "SKL-2026/SKL-0051718871-SMAN 2 PANGKALAN BUN-2026.pdf",
+			pdfFilename: "SKL-0051718871-SMAN 2 PANGKALAN BUN-2026.pdf",
+			createdAt: "2026-04-01T00:00:00.000Z",
+		});
+
+		const start = await startRoute.handler({
+			...ctx,
+			input: startRoute.input.parse({ nisn: "0051718871" }),
+		});
+
+		const result = await accessPublicRoute.handler({
+			...ctx,
+			input: accessPublicRoute.input.parse({
+				nisn: "0051718871",
+				accessToken: start.accessToken,
+				eventType: "opened",
+			}),
+		});
+
+		expect(result.pdfUrl).toBe(
+			"/_emdash/api/media/file/SKL-2026/SKL-0051718871-SMAN%202%20PANGKALAN%20BUN-2026.pdf",
+		);
+	});
+
+	it("resolves storage-key pdfMediaId in admin open_document banner", async () => {
+		const adminRoute = (plugin as any).routes.admin;
+		const { ctx, students } = makeCtx({ nisn: "0051718871" });
+
+		await students.put("stu-sk-admin", {
+			nisn: "0051718871",
+			name: "EVA ELISTIANI",
+			pdfMediaId: "SKL-2026/SKL-0051718871-SMAN 2 PANGKALAN BUN-2026.pdf",
+			pdfFilename: "SKL-0051718871-SMAN 2 PANGKALAN BUN-2026.pdf",
+			createdAt: "2026-04-01T00:00:00.000Z",
+		});
+
+		const action = await adminRoute.handler(
+			{
+				...ctx,
+				input: {
+					type: "form_submit",
+					action_id: "open_document",
+					values: { nisn: "0051718871", eventType: "opened" },
+				},
+			},
+			ctx,
+		);
+
+		expect(action.toast).toMatchObject({ type: "success" });
+		expect(action.blocks[0]).toMatchObject({ type: "banner" });
+		expect(String(action.blocks[0].description)).toContain(
+			"/_emdash/api/media/file/SKL-2026/SKL",
+		);
+	});
+
+	it("falls back to SKL-2026/filename when pdfMediaId is unresolvable", async () => {
+		const startRoute = (plugin as any).routes["gate/session/start"];
+		const accessPublicRoute = (plugin as any).routes["documents/access/public"];
+
+		const { ctx, students } = makeCtx({ nisn: "1122334455" }, { ip: "10.8.0.3" });
+
+		await students.put("stu-fallback", {
+			nisn: "1122334455",
+			name: "Dina",
+			// media.get will return null for "missing" (explicitly mocked to null).
+			pdfMediaId: "missing",
+			pdfFilename: "dina-fallback.pdf",
+			createdAt: "2026-04-01T00:00:00.000Z",
+		});
+
+		const start = await startRoute.handler({
+			...ctx,
+			input: startRoute.input.parse({ nisn: "1122334455" }),
+		});
+
+		const result = await accessPublicRoute.handler({
+			...ctx,
+			input: accessPublicRoute.input.parse({
+				nisn: "1122334455",
+				accessToken: start.accessToken,
+				eventType: "opened",
+			}),
+		});
+
+		expect(result.pdfUrl).toBe("/_emdash/api/media/file/SKL-2026/dina-fallback.pdf");
 	});
 });
