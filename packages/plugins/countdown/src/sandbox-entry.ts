@@ -10,6 +10,118 @@ import {
 } from "./settings.js";
 import type { CountdownSettings } from "./types.js";
 
+interface InteractionInput {
+	type?: unknown;
+	page?: unknown;
+	action_id?: unknown;
+	values?: unknown;
+}
+
+function asRecord(value: unknown): Record<string, unknown> {
+	if (typeof value !== "object" || value === null) return {};
+	return value as Record<string, unknown>;
+}
+
+async function buildSettingsPage(ctx: PluginContext): Promise<{ blocks: unknown[] }> {
+	const settings = await getSettings(ctx);
+
+	return {
+		blocks: [
+			{ type: "header", text: "Countdown Popup Settings" },
+			{
+				type: "context",
+				text: "Configure the public countdown popup image, caption, and visibility window.",
+			},
+			{ type: "divider" },
+			{
+				type: "form",
+				block_id: "countdown-settings",
+				fields: [
+					{
+						type: "toggle",
+						action_id: "enabled",
+						label: "Enable popup",
+						initial_value: settings.enabled,
+					},
+					{
+						type: "text_input",
+						action_id: "targetAt",
+						label: "Target datetime (ISO)",
+						initial_value: settings.targetAt,
+					},
+					{
+						type: "text_input",
+						action_id: "caption",
+						label: "Caption",
+						multiline: true,
+						initial_value: settings.caption,
+					},
+					{
+						type: "text_input",
+						action_id: "imageUrl",
+						label: "Image URL",
+						initial_value: settings.imageUrl,
+					},
+					{
+						type: "text_input",
+						action_id: "showFrom",
+						label: "Show from (ISO, optional)",
+						initial_value: settings.showFrom ?? "",
+					},
+					{
+						type: "text_input",
+						action_id: "showUntil",
+						label: "Show until (ISO, optional)",
+						initial_value: settings.showUntil ?? "",
+					},
+					{
+						type: "toggle",
+						action_id: "dismissOncePerSession",
+						label: "Dismiss once per session",
+						initial_value: settings.dismissOncePerSession,
+					},
+				],
+				submit: { label: "Save settings", action_id: "save_settings" },
+			},
+		],
+	};
+}
+
+async function saveSettingsFromAdmin(
+	ctx: PluginContext,
+	values: Record<string, unknown>,
+): Promise<{ blocks: unknown[]; toast: { message: string; type: "success" | "error" } }> {
+	const patch = normalizeCountdownPatch({
+		enabled: values.enabled,
+		targetAt: values.targetAt,
+		caption: values.caption,
+		imageUrl: values.imageUrl,
+		showFrom: values.showFrom === "" ? null : values.showFrom,
+		showUntil: values.showUntil === "" ? null : values.showUntil,
+		dismissOncePerSession: values.dismissOncePerSession,
+	});
+
+	const merged = applySettingsPatch(await getSettings(ctx), patch);
+	const validation = validateCountdownSettings(merged);
+
+	if (!validation.valid) {
+		return {
+			blocks: [
+				{ type: "banner", style: "error", text: validation.errors.join("; ") },
+				...(await buildSettingsPage(ctx)).blocks,
+			],
+			toast: { message: "Failed to save countdown settings", type: "error" },
+		};
+	}
+
+	await saveSettings(ctx, merged);
+
+	return {
+		...(await buildSettingsPage(ctx)),
+		toast: { message: "Countdown settings saved", type: "success" },
+	};
+}
+
 async function getSettings(ctx: PluginContext): Promise<CountdownSettings> {
 	const enabled = await ctx.kv.get<boolean>(getSettingKey("enabled"));
 	const targetAt = await ctx.kv.get<string>(getSettingKey("targetAt"));
@@ -59,6 +171,25 @@ export default definePlugin({
 		},
 	},
 	routes: {
+		admin: {
+			handler: async (routeCtx: { input: unknown }, ctx: PluginContext) => {
+				const interaction = asRecord(routeCtx.input) as InteractionInput;
+				const interactionType = typeof interaction.type === "string" ? interaction.type : "";
+				const page = typeof interaction.page === "string" ? interaction.page : "";
+				const actionId =
+					typeof interaction.action_id === "string" ? interaction.action_id : "";
+
+				if (interactionType === "page_load" && page === "/settings") {
+					return buildSettingsPage(ctx);
+				}
+
+				if (interactionType === "form_submit" && actionId === "save_settings") {
+					return saveSettingsFromAdmin(ctx, asRecord(interaction.values));
+				}
+
+				return { blocks: [] };
+			},
+		},
 		settings: {
 			handler: async (_routeCtx: unknown, ctx: PluginContext) => {
 				const settings = await getSettings(ctx);
