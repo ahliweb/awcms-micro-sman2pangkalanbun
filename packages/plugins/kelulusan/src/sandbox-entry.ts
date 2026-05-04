@@ -330,6 +330,25 @@ async function buildTelemetrySummary(ctx: any, studentIds: string[]) {
 	return summary;
 }
 
+async function fetchAllStudentsWithTelemetry(ctx: any) {
+	const PAGE_SIZE = 1000;
+	const all: Array<
+		StudentRecord & {
+			openedCount: number;
+			downloadedCount: number;
+			lastOpenedAt: string | null;
+			lastDownloadedAt: string | null;
+		}
+	> = [];
+	let cursor: string | undefined;
+	do {
+		const page = await listStudentsWithTelemetry(ctx, PAGE_SIZE, cursor);
+		all.push(...page.items);
+		cursor = page.nextCursor;
+	} while (cursor);
+	return { items: all };
+}
+
 async function listStudentsWithTelemetry(ctx: any, limit: number, cursor?: string) {
 	const result = await ctx.storage.students.query({
 		orderBy: { createdAt: "desc" },
@@ -596,7 +615,7 @@ export default definePlugin({
 				};
 
 				if (interaction.type === "page_load") {
-					const listed = await listStudentsWithTelemetry(ctx, 200);
+					const listed = await fetchAllStudentsWithTelemetry(ctx);
 
 					const importSection = {
 						type: "section" as const,
@@ -624,7 +643,7 @@ export default definePlugin({
 					const template =
 						typeof interaction.values?.template === "string" ? interaction.values.template : "";
 					if (!template.trim()) {
-						const listed = await listStudentsWithTelemetry(ctx, 200);
+						const listed = await fetchAllStudentsWithTelemetry(ctx);
 						return {
 							blocks: [
 								...buildImportBlocks(listed.items.length, {
@@ -637,7 +656,7 @@ export default definePlugin({
 
 					const rows = parseTemplateRows(template);
 					if (!rows.length) {
-						const listed = await listStudentsWithTelemetry(ctx, 200);
+						const listed = await fetchAllStudentsWithTelemetry(ctx);
 						return {
 							blocks: [
 								...buildImportBlocks(listed.items.length, {
@@ -663,7 +682,7 @@ export default definePlugin({
 						imported++;
 					}
 
-					const listed = await listStudentsWithTelemetry(ctx, 200);
+					const listed = await fetchAllStudentsWithTelemetry(ctx);
 					return {
 						blocks: [
 							...buildImportBlocks(listed.items.length, {
@@ -678,7 +697,7 @@ export default definePlugin({
 				}
 
 			if (interaction.type === "interaction" && interaction.action_id === "show_import") {
-				const listed = await listStudentsWithTelemetry(ctx, 200);
+				const listed = await fetchAllStudentsWithTelemetry(ctx);
 				return {
 					blocks: [
 						...buildImportBlocks(listed.items.length).blocks,
@@ -697,7 +716,7 @@ export default definePlugin({
 					typeof interaction.values?.upload_filename === "string"
 						? interaction.values.upload_filename.trim()
 						: "";
-				const listed = await listStudentsWithTelemetry(ctx, 200);
+				const listed = await fetchAllStudentsWithTelemetry(ctx);
 
 				if (!uploadNisn || !uploadFilename) {
 					return {
@@ -743,7 +762,7 @@ export default definePlugin({
 					createdAt: student.createdAt || nowIso(),
 				});
 
-				const updatedList = await listStudentsWithTelemetry(ctx, 200);
+				const updatedList = await fetchAllStudentsWithTelemetry(ctx);
 				return {
 					blocks: [
 						...buildImportBlocks(updatedList.items.length, {
@@ -762,7 +781,7 @@ export default definePlugin({
 					const eventType =
 						interaction.values?.eventType === "downloaded" ? "downloaded" : "opened";
 					if (!nisn) {
-						const listed = await listStudentsWithTelemetry(ctx, 200);
+						const listed = await fetchAllStudentsWithTelemetry(ctx);
 						return {
 							...buildAdminBlocks(listed.items, undefined, eventType),
 							toast: { message: "Pilih siswa terlebih dahulu", type: "error" },
@@ -770,7 +789,7 @@ export default definePlugin({
 					}
 					const student = await findStudentByNisn(ctx, nisn);
 					if (!student) {
-						const listed = await listStudentsWithTelemetry(ctx, 200);
+						const listed = await fetchAllStudentsWithTelemetry(ctx);
 						return {
 							...buildAdminBlocks(listed.items, nisn, eventType),
 							toast: { message: "Data siswa tidak ditemukan", type: "error" },
@@ -781,7 +800,7 @@ export default definePlugin({
 				}
 				const resolvedPdf = await resolveStudentPdf(ctx, student);
 				if (!resolvedPdf) {
-					const listed = await listStudentsWithTelemetry(ctx, 200);
+					const listed = await fetchAllStudentsWithTelemetry(ctx);
 					return {
 						...buildAdminBlocks(listed.items, nisn, eventType),
 							toast: {
@@ -791,7 +810,7 @@ export default definePlugin({
 						};
 					}
 					await recordDocumentEvent(ctx, student, eventType, "admin");
-					const listed = await listStudentsWithTelemetry(ctx, 200);
+					const listed = await fetchAllStudentsWithTelemetry(ctx);
 
 				return {
 					...buildAdminBlocks(listed.items, nisn, eventType, {
@@ -808,7 +827,7 @@ export default definePlugin({
 					};
 				}
 
-				const listed = await listStudentsWithTelemetry(ctx, 200);
+				const listed = await fetchAllStudentsWithTelemetry(ctx);
 				return buildAdminBlocks(listed.items);
 			},
 		},
