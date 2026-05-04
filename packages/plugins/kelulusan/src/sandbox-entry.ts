@@ -66,6 +66,7 @@ type RateLimitState = {
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LOCK_MS = 15 * 60 * 1000;
 const RATE_MAX_ATTEMPTS = 20;
+const PUBLIC_EVENT_DEDUPE_MS = 5 * 1000;
 
 function nowIso() {
 	return new Date().toISOString();
@@ -133,6 +134,25 @@ async function recordDocumentEvent(ctx: any, student: StudentRecord, eventType: 
 		actorType,
 		createdAt: nowIso(),
 	});
+}
+
+async function shouldRecordPublicEvent(
+	ctx: any,
+	studentNisn: string,
+	eventType: "opened" | "downloaded",
+	accessToken: string,
+): Promise<boolean> {
+	const key = `event-dedupe:${studentNisn}:${eventType}:${accessToken}`;
+	const last = (await ctx.kv.get(key)) as string | null;
+	const now = Date.now();
+	if (last) {
+		const age = now - toTime(last);
+		if (age >= 0 && age < PUBLIC_EVENT_DEDUPE_MS) {
+			return false;
+		}
+	}
+	await ctx.kv.set(key, new Date(now).toISOString());
+	return true;
 }
 
 async function buildTelemetrySummary(ctx: any, studentIds: string[]) {
@@ -378,7 +398,15 @@ export default definePlugin({
 					throw PluginRouteError.notFound("Student document not found");
 				}
 
-				await recordDocumentEvent(ctx, student, ctx.input.eventType, "public");
+				const shouldRecord = await shouldRecordPublicEvent(
+					ctx,
+					student.nisn,
+					ctx.input.eventType,
+					ctx.input.accessToken,
+				);
+				if (shouldRecord) {
+					await recordDocumentEvent(ctx, student, ctx.input.eventType, "public");
+				}
 
 				return {
 					nisn: student.nisn,
