@@ -9,6 +9,7 @@ import {
 	cloudflareStream,
 } from "@emdash-cms/cloudflare";
 import { academicCalendarPlugin } from "@emdash-cms/plugin-academic-calendar";
+import { countdownPlugin } from "@emdash-cms/plugin-countdown";
 import { formsPlugin } from "@emdash-cms/plugin-forms";
 import { kelulusanPlugin } from "@emdash-cms/plugin-kelulusan";
 import { webhookNotifierPlugin } from "@emdash-cms/plugin-webhook-notifier";
@@ -52,6 +53,7 @@ export default defineConfig({
 			// Trusted plugins (run in host worker)
 			plugins: [
 				academicCalendarPlugin(),
+				countdownPlugin(),
 				formsPlugin(),
 				kelulusanPlugin(),
 				webhookNotifierPlugin(),

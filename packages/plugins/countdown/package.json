@@ -2,7 +2,7 @@
 	"name": "@emdash-cms/plugin-countdown",
 	"private": true,
 	"version": "0.0.1",
-	"description": "Countdown popup plugin for EmDash CMS",
+	"description": "Countdown popup plugin with configurable timer, caption, and image",
 	"type": "module",
 	"main": "dist/index.mjs",
 	"exports": {
@@ -12,21 +12,13 @@
 		},
 		"./sandbox": "./dist/sandbox-entry.mjs"
 	},
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"scripts": {
 		"build": "tsdown src/index.ts src/sandbox-entry.ts --format esm --dts --clean",
 		"dev": "tsdown src/index.ts src/sandbox-entry.ts --format esm --dts --watch",
 		"typecheck": "tsgo --noEmit"
 	},
-	"keywords": [
-		"emdash",
-		"cms",
-		"plugin",
-		"countdown",
-		"popup"
-	],
+	"keywords": ["emdash", "cms", "plugin", "countdown"],
 	"author": "Matt Kane",
 	"license": "MIT",
 	"peerDependencies": {

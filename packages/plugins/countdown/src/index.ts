@@ -7,9 +7,11 @@ export function countdownPlugin(): PluginDescriptor {
 		format: "standard",
 		entrypoint: "@emdash-cms/plugin-countdown/sandbox",
 		capabilities: ["hooks.page-fragments:register"],
-		storage: {
-			dismissals: { indexes: ["createdAt", "sessionId"] },
-		},
-		adminPages: [{ path: "/settings", label: "Countdown Settings", icon: "clock" }],
+		storage: { dismissals: { indexes: ["createdAt", "sessionId"] } },
+		adminPages: [{
+			path: "/settings",
+			label: "Countdown Settings",
+			icon: "clock",
+		}],
 	};
 }

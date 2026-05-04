@@ -139,8 +139,8 @@ export const DELETE: APIRoute = async ({ params, locals, cache }) => {
 		return apiError("NOT_CONFIGURED", "EmDash is not initialized", 500);
 	}
 
-	// Fetch item to check ownership
-	const existing = await emdash.handleContentGet(collection, id);
+	// Fetch item to check ownership (include trashed so delete-from-trash works)
+	const existing = await (emdash.handleContentGetIncludingTrashed ?? emdash.handleContentGet)(collection, id);
 	if (!existing.success) {
 		return apiError(
 			existing.error?.code ?? "UNKNOWN_ERROR",
