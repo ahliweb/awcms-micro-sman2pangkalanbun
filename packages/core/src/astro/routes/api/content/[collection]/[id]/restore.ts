@@ -7,6 +7,7 @@
 import type { APIRoute } from "astro";
 
 import { requireOwnerPerm } from "#api/authorize.js";
+import { invalidateTags } from "#api/cache.js";
 import { apiError, mapErrorStatus, unwrapResult } from "#api/error.js";
 
 export const prerender = false;
@@ -50,7 +51,7 @@ export const POST: APIRoute = async ({ params, locals, cache }) => {
 
 	if (!result.success) return unwrapResult(result);
 
-	if (cache.enabled) await cache.invalidate({ tags: [collection, resolvedId] });
+	await invalidateTags(cache, [collection, resolvedId]);
 
 	return unwrapResult(result);
 };

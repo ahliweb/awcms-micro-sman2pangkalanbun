@@ -19,13 +19,18 @@ export interface PublicSearchResult {
 
 const COLLECTIONS = ["posts", "galleries", "downloads"];
 
+function readChildren(value: unknown): unknown[] {
+	if (!value || typeof value !== "object") return [];
+	if (!("children" in value)) return [];
+	const maybeChildren = value.children;
+	return Array.isArray(maybeChildren) ? maybeChildren : [];
+}
+
 function extractText(value: unknown): string {
 	if (!Array.isArray(value)) return "";
 	return value
 		.flatMap((block) => {
-			if (!block || typeof block !== "object") return [];
-			const children = (block as { children?: unknown }).children;
-			if (!Array.isArray(children)) return [];
+			const children = readChildren(block);
 			return children
 				.filter((child): child is { text?: unknown } => !!child && typeof child === "object")
 				.map((child) => (typeof child.text === "string" ? child.text : ""));
@@ -70,7 +75,7 @@ export async function publicSearch(filters: PublicSearchFilters): Promise<Public
 
 	return flat
 		.map(({ collection, entry }) => {
-			const data = entry.data as Record<string, unknown>;
+			const data = entry.data;
 			const title = typeof data.title === "string" ? data.title : "Untitled";
 			const excerpt =
 				typeof data.excerpt === "string"
