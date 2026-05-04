@@ -111,10 +111,24 @@ describe("countdown admin route", () => {
 describe("countdown public fragments", () => {
 	it("returns null when popup is disabled", async () => {
 		const fragmentHook = (plugin as any).hooks["page:fragments"];
-		const { ctx } = makeCtx();
+		const { ctx, kvStore } = makeCtx();
+		kvStore.set("settings:enabled", false);
+		kvStore.set("settings:targetAt", "");
 
 		const result = await fragmentHook.handler({ page: { kind: "content" } }, ctx);
 		expect(result).toBeNull();
+	});
+
+	it("auto-initializes settings on first access", async () => {
+		const fragmentHook = (plugin as any).hooks["page:fragments"];
+		const { ctx, kvStore } = makeCtx();
+
+		const result = await fragmentHook.handler({ page: { kind: "content" } }, ctx);
+
+		expect(Array.isArray(result)).toBe(true);
+		expect(kvStore.has("settings:enabled")).toBe(true);
+		expect(kvStore.get("settings:enabled")).toBe(true);
+		expect(typeof kvStore.get("settings:targetAt")).toBe("string");
 	});
 
 	it("returns fragments when popup is enabled with valid settings", async () => {

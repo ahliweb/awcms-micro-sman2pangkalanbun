@@ -36,6 +36,22 @@ async function getSettings(ctx: any): Promise<CountdownSettings> {
 	const showUntil = await ctx.kv.get(getSettingKey("showUntil"));
 	const dismissOncePerSession = await ctx.kv.get(getSettingKey("dismissOncePerSession"));
 
+	const hasAnySetting =
+		typeof enabled === "boolean" ||
+		typeof targetAt === "string" ||
+		typeof caption === "string" ||
+		typeof imageUrl === "string";
+
+	if (!hasAnySetting) {
+		const defaults: CountdownSettings = {
+			...DEFAULT_COUNTDOWN_SETTINGS,
+			enabled: true,
+			targetAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+		};
+		await saveSettings(ctx, defaults);
+		return defaults;
+	}
+
 	return {
 		enabled: typeof enabled === "boolean" ? enabled : DEFAULT_COUNTDOWN_SETTINGS.enabled,
 		targetAt: typeof targetAt === "string" ? targetAt : DEFAULT_COUNTDOWN_SETTINGS.targetAt,
