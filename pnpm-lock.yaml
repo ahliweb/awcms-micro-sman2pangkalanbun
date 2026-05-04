@@ -455,6 +455,9 @@ importers:
       '@emdash-cms/auth-atproto':
         specifier: workspace:*
         version: link:../../packages/auth-atproto
+      '@emdash-cms/plugin-academic-calendar':
+        specifier: workspace:*
+        version: link:../../packages/plugins/academic-calendar
       '@emdash-cms/plugin-atproto':
         specifier: workspace:*
         version: link:../../packages/plugins/atproto
@@ -464,9 +467,15 @@ importers:
       '@emdash-cms/plugin-color':
         specifier: workspace:*
         version: link:../../packages/plugins/color
+      '@emdash-cms/plugin-countdown':
+        specifier: workspace:*
+        version: link:../../packages/plugins/countdown
       '@emdash-cms/plugin-kelulusan':
         specifier: workspace:*
         version: link:../../packages/plugins/kelulusan
+      '@emdash-cms/plugin-webhook-notifier':
+        specifier: workspace:*
+        version: link:../../packages/plugins/webhook-notifier
       astro:
         specifier: 'catalog:'
         version: 6.1.7(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.2)(tsx@4.21.0)(typescript@6.0.0-beta)(yaml@2.8.4)
