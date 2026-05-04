@@ -17,7 +17,7 @@ export function kelulusanPlugin(
 		format: "standard",
 		entrypoint: "@emdash-cms/plugin-kelulusan/sandbox",
 		options: { publicGatePath, adminPagePath },
-		capabilities: ["media:read"],
+		capabilities: ["media:read", "media:write"],
 		storage: {
 			students: {
 				indexes: ["nisn", "name", "createdAt"],
