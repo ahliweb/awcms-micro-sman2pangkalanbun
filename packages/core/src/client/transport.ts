@@ -142,9 +142,14 @@ export function refreshInterceptor(options: {
 	onTokenRefreshed?: (accessToken: string, refreshToken: string, expiresAt: string) => void;
 }): Interceptor {
 	let refreshing: Promise<string | null> | null = null;
+	const tokenEndpoint = new URL(options.tokenEndpoint);
+	const isLocalhost = tokenEndpoint.hostname === "localhost" || tokenEndpoint.hostname === "127.0.0.1";
+	if (tokenEndpoint.protocol !== "https:" && !(tokenEndpoint.protocol === "http:" && isLocalhost)) {
+		throw new Error("Token endpoint must use HTTPS (or localhost HTTP)");
+	}
 
 	async function refresh(): Promise<string | null> {
-		const res = await globalThis.fetch(options.tokenEndpoint, {
+		const res = await globalThis.fetch(tokenEndpoint, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
