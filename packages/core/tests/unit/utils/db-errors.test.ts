@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { isMissingTableError } from "../../../src/utils/db-errors.js";
+import { isMissingTableError, isSqliteCorruptionError } from "../../../src/utils/db-errors.js";
 
 describe("isMissingTableError", () => {
 	it("detects SQLite / D1 phrasing", () => {
@@ -42,5 +42,19 @@ describe("isMissingTableError", () => {
 		expect(isMissingTableError(undefined)).toBe(false);
 		expect(isMissingTableError(42)).toBe(false);
 		expect(isMissingTableError({})).toBe(false);
+	});
+});
+
+describe("isSqliteCorruptionError", () => {
+	it("detects SQLite corruption signatures", () => {
+		expect(isSqliteCorruptionError(new Error("SQLITE_CORRUPT: database disk image is malformed"))).toBe(true);
+		expect(isSqliteCorruptionError(new Error("D1_ERROR: SQLITE_CORRUPT_VTAB"))).toBe(true);
+		expect(isSqliteCorruptionError("database disk image is malformed")).toBe(true);
+	});
+
+	it("rejects unrelated errors", () => {
+		expect(isSqliteCorruptionError(new Error("SQLITE_CONSTRAINT: unique failed"))).toBe(false);
+		expect(isSqliteCorruptionError(new Error("permission denied"))).toBe(false);
+		expect(isSqliteCorruptionError(null)).toBe(false);
 	});
 });

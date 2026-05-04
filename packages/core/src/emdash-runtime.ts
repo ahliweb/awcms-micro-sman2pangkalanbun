@@ -164,6 +164,7 @@ import { PluginStateRepository } from "./plugins/state.js";
 import { requestCached } from "./request-cache.js";
 import { getRequestContext } from "./request-context.js";
 import { FTSManager } from "./search/fts-manager.js";
+import { isSqliteCorruptionError } from "./utils/db-errors.js";
 
 /**
  * Map schema field types to editor field kinds
@@ -354,6 +355,26 @@ export class EmDashRuntime {
 	/** Current hook pipeline. Use the `hooks` getter for external access. */
 	get hooks(): HookPipeline {
 		return this._hooks;
+	}
+
+	private async withFtsCorruptionRetry<T extends { success: boolean; error?: { message?: string } }>(
+		collection: string,
+		op: () => Promise<T>,
+	): Promise<T> {
+		const first = await op();
+		if (first.success) return first;
+
+		if (!isSqliteCorruptionError(first.error?.message ?? "")) return first;
+
+		try {
+			const repaired = await new FTSManager(this.db).repairCorruptedIndex(collection);
+			if (!repaired) return first;
+		} catch (error) {
+			console.error("[search] FTS recovery failed:", error);
+			return first;
+		}
+
+		return op();
 	}
 
 	/** All plugins eligible for the hook pipeline (includes built-in plugins).
@@ -1826,13 +1847,15 @@ export class EmDashRuntime {
 		// Update the content table:
 		// - If collection uses draft revisions: only update metadata (no data fields, no slug)
 		// - Otherwise: update everything as before
-		const result = await handleContentUpdate(this.db, collection, resolvedId, {
-			...bodyWithoutRev,
-			data: usesDraftRevisions ? undefined : processedData,
-			slug: usesDraftRevisions ? undefined : bodyWithoutRev.slug,
-			authorId: bodyWithoutRev.authorId,
-			bylines: bodyWithoutRev.bylines,
-		});
+		const result = await this.withFtsCorruptionRetry(collection, async () =>
+			handleContentUpdate(this.db, collection, resolvedId, {
+				...bodyWithoutRev,
+				data: usesDraftRevisions ? undefined : processedData,
+				slug: usesDraftRevisions ? undefined : bodyWithoutRev.slug,
+				authorId: bodyWithoutRev.authorId,
+				bylines: bodyWithoutRev.bylines,
+			}),
+		);
 
 		// Hydrate draft data BEFORE firing afterSave hooks so the hook sees
 		// the same effective data the response surfaces — for revision-
@@ -1876,7 +1899,9 @@ export class EmDashRuntime {
 		}
 
 		// Delete the content
-		const result = await handleContentDelete(this.db, collection, id);
+		const result = await this.withFtsCorruptionRetry(collection, async () =>
+			handleContentDelete(this.db, collection, id),
+		);
 
 		// Run afterDelete hooks (fire-and-forget)
 		if (result.success) {
@@ -1902,7 +1927,9 @@ export class EmDashRuntime {
 	}
 
 	async handleContentPermanentDelete(collection: string, id: string) {
-		const result = await handleContentPermanentDelete(this.db, collection, id);
+		const result = await this.withFtsCorruptionRetry(collection, async () =>
+			handleContentPermanentDelete(this.db, collection, id),
+		);
 
 		// Run afterDelete hooks so plugins (e.g. AI Search) can clean up
 		if (result.success) {
@@ -1929,7 +1956,9 @@ export class EmDashRuntime {
 		id: string,
 		options: { publishedAt?: string } = {},
 	) {
-		const result = await handleContentPublish(this.db, collection, id, options);
+		const result = await this.withFtsCorruptionRetry(collection, async () =>
+			handleContentPublish(this.db, collection, id, options),
+		);
 
 		// Run afterPublish hooks (fire-and-forget)
 		if (result.success && result.data) {
@@ -1940,7 +1969,9 @@ export class EmDashRuntime {
 	}
 
 	async handleContentUnpublish(collection: string, id: string) {
-		const result = await handleContentUnpublish(this.db, collection, id);
+		const result = await this.withFtsCorruptionRetry(collection, async () =>
+			handleContentUnpublish(this.db, collection, id),
+		);
 
 		// Run afterUnpublish hooks (fire-and-forget)
 		if (result.success && result.data) {
@@ -1963,7 +1994,9 @@ export class EmDashRuntime {
 	}
 
 	async handleContentDiscardDraft(collection: string, id: string) {
-		return handleContentDiscardDraft(this.db, collection, id);
+		return this.withFtsCorruptionRetry(collection, async () =>
+			handleContentDiscardDraft(this.db, collection, id),
+		);
 	}
 
 	async handleContentCompare(collection: string, id: string) {
