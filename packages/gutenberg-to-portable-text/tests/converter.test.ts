@@ -1261,6 +1261,14 @@ describe("WordPress.com classic editor content", () => {
 		expect(img.asset.url).toBe("https://example.com/photo.jpg?a=1&b=2");
 	});
 
+	it("decodes URL entities in a single pass", () => {
+		const html = `<p><img src="https://example.com/photo.jpg?a=1&amp;#38;b=2" alt="test"></p>`;
+		const result = htmlToPortableText(html);
+
+		const img = result.find((b) => b._type === "image") as PortableTextImageBlock;
+		expect(img.asset.url).toBe("https://example.com/photo.jpg?a=1&#38;b=2");
+	});
+
 	// Test for figure with HTML entities
 	it("decodes HTML entities in figure images", () => {
 		const html = `<figure><img src="https://example.com/photo.jpg?w=200&#038;h=300" alt="test"><figcaption>Caption</figcaption></figure>`;
