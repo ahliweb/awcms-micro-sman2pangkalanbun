@@ -9,8 +9,8 @@
  *
  */
 
-import type { CronExecutor } from "../cron.js";
 import { logEvent } from "../../observability/log.js";
+import type { CronExecutor } from "../cron.js";
 import type { CronScheduler, SystemCleanupFn } from "./types.js";
 
 /** Minimum interval between tick attempts (ms) */

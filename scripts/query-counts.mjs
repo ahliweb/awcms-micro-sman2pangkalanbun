@@ -60,7 +60,10 @@ const HOST = "127.0.0.1";
 const PORT = 14321;
 const BASE = `http://${HOST}:${PORT}`;
 
-const ROUTES = JSON.parse(readFileSync(routesConfigPath, "utf8")).map((route) => [route.method, route.path]);
+const ROUTES = JSON.parse(readFileSync(routesConfigPath, "utf8")).map((route) => [
+	route.method,
+	route.path,
+]);
 
 const TRACKED_PHASES = new Set(["cold", "warm"]);
 const VALID_TARGETS = new Set(["sqlite", "d1"]);

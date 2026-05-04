@@ -8,6 +8,7 @@
 import { existsSync, readFileSync, readdirSync, rmSync, unlinkSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+
 import { SERVER_INFO_PATH } from "./fixtures/server-info-path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));

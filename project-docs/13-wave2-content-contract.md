@@ -56,20 +56,20 @@ This document freezes the legacy-to-EmDash mapping contract for the first migrat
 
 ## Mapping Matrix
 
-| Source | Legacy node | Target | Mapping rule |
-| --- | --- | --- | --- |
-| `site.json` | `site`, `stats`, `headmaster` | site settings + `pages` (`profil-sekolah`) | Organization metadata goes to settings; narrative summary goes to page body blocks. |
-| `navigation.json` | `mainMenu` tree | EmDash menus (`primary`) | Keep hierarchy depth and labels; preserve hrefs where routed in EmDash, mark unresolved routes as placeholders. |
-| `pages/profile.json` | profile sections | `pages` | Each top-level node maps to one page; HTML `content` mapped to Portable Text. |
-| `pages/staff.json` | `teachingStaff.staff`, `adminStaff.staff` | `staff_profiles` + `pages` index | Staff cards normalized to collection rows; page intro text remains in `pages`. |
-| `pages/services.json` | service nodes, labs, activities | `service_items` + `pages` | Structured arrays become JSON fields in `service_items`; long HTML blocks to Portable Text. |
-| `pages/organization.json` | organization nodes | `pages` | Keep sections per slug path; position arrays stay structured JSON fields. |
-| `pages/achievements.json` | `achievements[]` | `achievements` | One row per achievement entry; year kept as sortable integer/string. |
-| `pages/alumni.json` | featured alumni and stats | `pages` + optional `staff_profiles` extension | Wave 2 stores alumni as page-embedded structured JSON; later extraction optional. |
-| `pages/contact.json` | contact info, social links, map | site settings + `pages` | Operational contacts to settings; map/socials also retained in contact page payload. |
-| `blogs/blogs.json` | `blogs[]`, `schoolInfo`, `agenda`, `gallery` | `news`, `announcements`, `events`, `galleries` | News posts map to `news`; schedule list to `events`; gallery categories to `galleries`. |
-| `blogs/finance.json` | `bos`, `apbd`, `committee` | `finance_reports` | Each finance section imported as separate finance record with attachments list. |
-| `images.json` | external image pools | `galleries` seed references only | Classified as `external-third-party`; not hotlinked in production import. |
+| Source                    | Legacy node                                  | Target                                         | Mapping rule                                                                                                    |
+| ------------------------- | -------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `site.json`               | `site`, `stats`, `headmaster`                | site settings + `pages` (`profil-sekolah`)     | Organization metadata goes to settings; narrative summary goes to page body blocks.                             |
+| `navigation.json`         | `mainMenu` tree                              | EmDash menus (`primary`)                       | Keep hierarchy depth and labels; preserve hrefs where routed in EmDash, mark unresolved routes as placeholders. |
+| `pages/profile.json`      | profile sections                             | `pages`                                        | Each top-level node maps to one page; HTML `content` mapped to Portable Text.                                   |
+| `pages/staff.json`        | `teachingStaff.staff`, `adminStaff.staff`    | `staff_profiles` + `pages` index               | Staff cards normalized to collection rows; page intro text remains in `pages`.                                  |
+| `pages/services.json`     | service nodes, labs, activities              | `service_items` + `pages`                      | Structured arrays become JSON fields in `service_items`; long HTML blocks to Portable Text.                     |
+| `pages/organization.json` | organization nodes                           | `pages`                                        | Keep sections per slug path; position arrays stay structured JSON fields.                                       |
+| `pages/achievements.json` | `achievements[]`                             | `achievements`                                 | One row per achievement entry; year kept as sortable integer/string.                                            |
+| `pages/alumni.json`       | featured alumni and stats                    | `pages` + optional `staff_profiles` extension  | Wave 2 stores alumni as page-embedded structured JSON; later extraction optional.                               |
+| `pages/contact.json`      | contact info, social links, map              | site settings + `pages`                        | Operational contacts to settings; map/socials also retained in contact page payload.                            |
+| `blogs/blogs.json`        | `blogs[]`, `schoolInfo`, `agenda`, `gallery` | `news`, `announcements`, `events`, `galleries` | News posts map to `news`; schedule list to `events`; gallery categories to `galleries`.                         |
+| `blogs/finance.json`      | `bos`, `apbd`, `committee`                   | `finance_reports`                              | Each finance section imported as separate finance record with attachments list.                                 |
+| `images.json`             | external image pools                         | `galleries` seed references only               | Classified as `external-third-party`; not hotlinked in production import.                                       |
 
 ## Field-Level Normalization Rules
 

@@ -13,18 +13,18 @@ Structured line shape:
 
 ```json
 {
-  "ts": "2026-05-03T00:00:00.000Z",
-  "scope": "emdash",
-  "level": "error",
-  "event": "api.handle_error",
-  "context": {
-    "code": "CONTENT_UPDATE_ERROR"
-  },
-  "error": {
-    "name": "Error",
-    "message": "...",
-    "stack": "..."
-  }
+	"ts": "2026-05-03T00:00:00.000Z",
+	"scope": "emdash",
+	"level": "error",
+	"event": "api.handle_error",
+	"context": {
+		"code": "CONTENT_UPDATE_ERROR"
+	},
+	"error": {
+		"name": "Error",
+		"message": "...",
+		"stack": "..."
+	}
 }
 ```
 

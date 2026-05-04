@@ -7,7 +7,7 @@ function parseArgs(argv) {
 	const out = {
 		before: "",
 		after: "",
-		thresholds: resolve("scripts/query-counts.thresholds.json")
+		thresholds: resolve("scripts/query-counts.thresholds.json"),
 	};
 	for (let i = 0; i < argv.length; i++) {
 		const arg = argv[i];
@@ -16,7 +16,8 @@ function parseArgs(argv) {
 		else if (arg === "--thresholds") out.thresholds = argv[++i] ?? out.thresholds;
 		else throw new Error(`Unknown argument: ${arg}`);
 	}
-	if (!out.before || !out.after) throw new Error("Usage: --before <path> --after <path> [--thresholds <path>]");
+	if (!out.before || !out.after)
+		throw new Error("Usage: --before <path> --after <path> [--thresholds <path>]");
 	return out;
 }
 
@@ -47,7 +48,7 @@ function main() {
 	process.stderr.write("Query-count regression(s) detected:\n");
 	for (const regression of regressions) {
 		process.stderr.write(
-			`  ${regression.key}: before=${regression.previous} after=${regression.next} increase=+${regression.increase} threshold=+${regression.maxIncrease}\n`
+			`  ${regression.key}: before=${regression.previous} after=${regression.next} increase=+${regression.increase} threshold=+${regression.maxIncrease}\n`,
 		);
 	}
 	process.exit(1);

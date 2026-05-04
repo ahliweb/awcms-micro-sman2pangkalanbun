@@ -13,8 +13,8 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 
-import { SMOKE_SEED_ITEMS } from "./fixtures/smoke-seed";
 import { SERVER_INFO_PATH } from "./fixtures/server-info-path";
+import { SMOKE_SEED_ITEMS } from "./fixtures/smoke-seed";
 
 const execAsync = promisify(execFile);
 
@@ -215,7 +215,7 @@ async function seedTestData(
 			data: {
 				title: item.title,
 				description: item.description,
-				starts_at: item.startsAt
+				starts_at: item.startsAt,
 			},
 			slug: item.slug,
 		});

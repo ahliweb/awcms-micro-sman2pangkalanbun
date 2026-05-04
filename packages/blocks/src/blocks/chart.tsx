@@ -94,11 +94,11 @@ function sanitizeOptions(obj: Record<string, unknown>): Record<string, unknown> 
 				result,
 				key,
 				value.map((item) =>
-				isRecord(item)
-					? sanitizeOptions(item)
-					: containsHtml(item)
-						? escapeHtml(item as string)
-						: item,
+					isRecord(item)
+						? sanitizeOptions(item)
+						: containsHtml(item)
+							? escapeHtml(item as string)
+							: item,
 				),
 			);
 		} else if (isRecord(value)) {

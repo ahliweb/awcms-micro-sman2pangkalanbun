@@ -9,8 +9,8 @@
  *
  */
 
-import type { CronExecutor } from "../cron.js";
 import { logEvent } from "../../observability/log.js";
+import type { CronExecutor } from "../cron.js";
 import type { CronScheduler, SystemCleanupFn } from "./types.js";
 
 /** Minimum polling interval (ms) — prevents tight loops if next_run_at is in the past */

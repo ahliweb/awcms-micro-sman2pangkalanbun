@@ -140,7 +140,10 @@ export const DELETE: APIRoute = async ({ params, locals, cache }) => {
 	}
 
 	// Fetch item to check ownership (include trashed so delete-from-trash works)
-	const existing = await (emdash.handleContentGetIncludingTrashed ?? emdash.handleContentGet)(collection, id);
+	const existing = await (emdash.handleContentGetIncludingTrashed ?? emdash.handleContentGet)(
+		collection,
+		id,
+	);
 	if (!existing.success) {
 		return apiError(
 			existing.error?.code ?? "UNKNOWN_ERROR",

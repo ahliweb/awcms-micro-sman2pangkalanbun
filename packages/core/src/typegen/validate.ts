@@ -5,7 +5,9 @@ const SCHEMA_JSON_MAX_BYTES = 2_000_000;
 /**
  * Guard typegen payloads before writing them to disk.
  */
-export function validateGeneratedTypesPayload(types: string): { ok: true } | { ok: false; reason: string } {
+export function validateGeneratedTypesPayload(
+	types: string,
+): { ok: true } | { ok: false; reason: string } {
 	if (types.length > TYPEGEN_MAX_BYTES) {
 		return { ok: false, reason: "Schema types payload is unexpectedly large" };
 	}

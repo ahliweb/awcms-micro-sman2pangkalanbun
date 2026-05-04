@@ -20,10 +20,10 @@ export default defineConfig({
 	adapter: node({ mode: "standalone" }),
 	integrations: [
 		react(),
-			emdash({
-				database: sqlite({ url: dbUrl }),
-				plugins: [colorPlugin(), kelulusanPlugin()],
-				marketplace: marketplaceUrl,
+		emdash({
+			database: sqlite({ url: dbUrl }),
+			plugins: [colorPlugin(), kelulusanPlugin()],
+			marketplace: marketplaceUrl,
 			sandboxRunner: marketplaceUrl ? "./noop-sandbox.mjs" : undefined,
 		}),
 	],

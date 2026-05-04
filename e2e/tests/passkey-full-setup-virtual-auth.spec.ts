@@ -8,8 +8,8 @@
 import { readFileSync } from "node:fs";
 
 import { expect, test } from "../fixtures";
-import { buildFromBase, parseSafeHttpBaseUrl } from "../fixtures/safe-base-url";
 import { refreshServerPatAfterDevBypass } from "../fixtures/refresh-server-pat";
+import { buildFromBase, parseSafeHttpBaseUrl } from "../fixtures/safe-base-url";
 import { SERVER_INFO_PATH } from "../fixtures/server-info-path";
 import { addVirtualWebAuthnAuthenticator } from "../fixtures/virtual-authenticator";
 

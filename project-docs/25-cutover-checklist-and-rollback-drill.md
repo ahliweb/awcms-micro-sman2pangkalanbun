@@ -32,9 +32,9 @@ This runbook defines cutover go/no-go checks, owner mapping, and rollback drill 
 
 - `Go` only when all critical checks above pass.
 - `No-Go` if any of these fail:
-	- CI required checks failing
-	- unresolved critical content/media defects
-	- missing compliance/governance sign-off
+  - CI required checks failing
+  - unresolved critical content/media defects
+  - missing compliance/governance sign-off
 
 ## Cutover Day Owner Matrix
 
@@ -57,8 +57,8 @@ This runbook defines cutover go/no-go checks, owner mapping, and rollback drill 
 - Drill status: `completed` (staging)
 - Recovery objective target: `< 30 minutes`
 - Evidence artifacts:
-	- CI run links
-	- route status output
-	- smoke test output summary
+  - CI run links
+  - route status output
+  - smoke test output summary
 
 ## Open Risk Register

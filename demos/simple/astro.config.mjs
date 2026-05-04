@@ -20,14 +20,20 @@ export default defineConfig({
 	},
 	integrations: [
 		react(),
-			emdash({
+		emdash({
 			database: sqlite({ url: "file:./data.db" }),
 			storage: local({
 				directory: "./uploads",
 				baseUrl: "/_emdash/api/media/file",
 			}),
-			plugins: [academicCalendarPlugin(), auditLogPlugin(), countdownPlugin(), kelulusanPlugin(), webhookNotifierPlugin()],
-			}),
+			plugins: [
+				academicCalendarPlugin(),
+				auditLogPlugin(),
+				countdownPlugin(),
+				kelulusanPlugin(),
+				webhookNotifierPlugin(),
+			],
+		}),
 	],
 	fonts: [
 		{

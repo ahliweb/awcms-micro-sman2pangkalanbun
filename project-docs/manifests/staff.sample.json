@@ -1,20 +1,20 @@
 [
-  {
-    "sourcePath": "/public/images/staff/teachers/teacher-01.webp",
-    "checksum": "sha256:bda774c97a9206147f01ae1fb1da7b7bee222c000958a50ff8f635fd8b66e3f4",
-    "targetKey": "legacy/staff/teacher-01-bda774c97a92.webp",
-    "mimeType": "image/webp"
-  },
-  {
-    "sourcePath": "/public/images/staff/teachers/teacher-02.webp",
-    "checksum": "sha256:a9428ba7b3559d474f79055a9aa190ce1a582b3769d3556b5a138a10a7a6df5d",
-    "targetKey": "legacy/staff/teacher-02-a9428ba7b355.webp",
-    "mimeType": "image/webp"
-  },
-  {
-    "sourcePath": "/public/images/staff/teachers/teacher-03.webp",
-    "checksum": "sha256:cce99df888352456cbcb1feef529638d346147ba89e4eb886d20ddd134239e52",
-    "targetKey": "legacy/staff/teacher-03-cce99df88835.webp",
-    "mimeType": "image/webp"
-  }
+	{
+		"sourcePath": "/public/images/staff/teachers/teacher-01.webp",
+		"checksum": "sha256:bda774c97a9206147f01ae1fb1da7b7bee222c000958a50ff8f635fd8b66e3f4",
+		"targetKey": "legacy/staff/teacher-01-bda774c97a92.webp",
+		"mimeType": "image/webp"
+	},
+	{
+		"sourcePath": "/public/images/staff/teachers/teacher-02.webp",
+		"checksum": "sha256:a9428ba7b3559d474f79055a9aa190ce1a582b3769d3556b5a138a10a7a6df5d",
+		"targetKey": "legacy/staff/teacher-02-a9428ba7b355.webp",
+		"mimeType": "image/webp"
+	},
+	{
+		"sourcePath": "/public/images/staff/teachers/teacher-03.webp",
+		"checksum": "sha256:cce99df888352456cbcb1feef529638d346147ba89e4eb886d20ddd134239e52",
+		"targetKey": "legacy/staff/teacher-03-cce99df88835.webp",
+		"mimeType": "image/webp"
+	}
 ]

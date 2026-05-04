@@ -38,11 +38,16 @@ const studentUpsertSchema = z.object({
 });
 
 const importTemplateSchema = z.object({
-	rows: z.array(z.object({
-		nisn: z.string().trim().min(6).max(32),
-		name: z.string().trim().min(1).max(200),
-		filename: z.string().trim().min(1).max(255),
-	})).min(1).max(1000),
+	rows: z
+		.array(
+			z.object({
+				nisn: z.string().trim().min(6).max(32),
+				name: z.string().trim().min(1).max(200),
+				filename: z.string().trim().min(1).max(255),
+			}),
+		)
+		.min(1)
+		.max(1000),
 });
 
 type StudentRecord = {
@@ -132,7 +137,12 @@ async function isValidGateSession(ctx: any, nisn: string, accessToken: string | 
 	return true;
 }
 
-async function recordDocumentEvent(ctx: any, student: StudentRecord, eventType: "opened" | "downloaded", actorType: "public" | "admin") {
+async function recordDocumentEvent(
+	ctx: any,
+	student: StudentRecord,
+	eventType: "opened" | "downloaded",
+	actorType: "public" | "admin",
+) {
 	await ctx.storage.document_events.put(makeEventId(), {
 		studentId: student.nisn,
 		nisn: student.nisn,
@@ -162,12 +172,16 @@ async function shouldRecordPublicEvent(
 }
 
 async function buildTelemetrySummary(ctx: any, studentIds: string[]) {
-	if (!studentIds.length) return new Map<string, {
-		openedCount: number;
-		downloadedCount: number;
-		lastOpenedAt: string | null;
-		lastDownloadedAt: string | null;
-	}>();
+	if (!studentIds.length)
+		return new Map<
+			string,
+			{
+				openedCount: number;
+				downloadedCount: number;
+				lastOpenedAt: string | null;
+				lastDownloadedAt: string | null;
+			}
+		>();
 
 	const events = await ctx.storage.document_events.query({
 		orderBy: { createdAt: "desc" },
@@ -175,12 +189,15 @@ async function buildTelemetrySummary(ctx: any, studentIds: string[]) {
 	});
 
 	const wanted = new Set(studentIds);
-	const summary = new Map<string, {
-		openedCount: number;
-		downloadedCount: number;
-		lastOpenedAt: string | null;
-		lastDownloadedAt: string | null;
-	}>();
+	const summary = new Map<
+		string,
+		{
+			openedCount: number;
+			downloadedCount: number;
+			lastOpenedAt: string | null;
+			lastDownloadedAt: string | null;
+		}
+	>();
 
 	for (const id of studentIds) {
 		summary.set(id, {
@@ -328,7 +345,10 @@ function buildImportBlocks(existingCount: number, banner?: { title: string; desc
 	if (banner) {
 		blocks.push({
 			type: "banner",
-			variant: banner.title.includes("berhasil") || banner.title.includes("Berhasil") ? "default" : "error",
+			variant:
+				banner.title.includes("berhasil") || banner.title.includes("Berhasil")
+					? "default"
+					: "error",
 			title: banner.title,
 			description: banner.description,
 		});
@@ -350,7 +370,8 @@ function buildImportBlocks(existingCount: number, banner?: { title: string; desc
 					action_id: "template",
 					label: "Template data (paste dari SKL-DATA.md)",
 					multiline: true,
-					placeholder: "| No | NISN | Nama Peserta Didik | File PDF |\n| 1 | 0051718871 | EVA ELISTIANI | SKL-0051718871-SMAN 2 PANGKALAN BUN-2026.pdf |",
+					placeholder:
+						"| No | NISN | Nama Peserta Didik | File PDF |\n| 1 | 0051718871 | EVA ELISTIANI | SKL-0051718871-SMAN 2 PANGKALAN BUN-2026.pdf |",
 				},
 			],
 			submit: { label: "Import data", action_id: "import_template" },
@@ -372,7 +393,10 @@ function parseTemplateRows(input: string): Array<{ nisn: string; name: string; f
 		if (trimmed.includes("---")) continue;
 		if (trimmed.includes("No") && trimmed.includes("NISN") && trimmed.includes("Nama")) continue;
 
-		const cols = trimmed.split("|").map((c) => c.trim()).filter(Boolean);
+		const cols = trimmed
+			.split("|")
+			.map((c) => c.trim())
+			.filter(Boolean);
 		if (cols.length < 4) continue;
 
 		const nisn = cols[1];
@@ -447,7 +471,12 @@ export default definePlugin({
 					const importSection = {
 						type: "section" as const,
 						fields: [
-							{ type: "button", action_id: "show_import", label: "Import Data Siswa", style: "primary" },
+							{
+								type: "button",
+								action_id: "show_import",
+								label: "Import Data Siswa",
+								style: "primary",
+							},
 						],
 					};
 
@@ -461,19 +490,17 @@ export default definePlugin({
 					};
 				}
 
-				if (
-					interaction.type === "form_submit" &&
-					interaction.action_id === "import_template"
-				) {
-					const template = typeof interaction.values?.template === "string" ? interaction.values.template : "";
+				if (interaction.type === "form_submit" && interaction.action_id === "import_template") {
+					const template =
+						typeof interaction.values?.template === "string" ? interaction.values.template : "";
 					if (!template.trim()) {
 						const listed = await listStudentsWithTelemetry(ctx, 200);
 						return {
 							blocks: [
-								...(buildImportBlocks(listed.items.length, {
+								...buildImportBlocks(listed.items.length, {
 									title: "Error",
 									description: "Template data kosong. Silakan paste data dari SKL-DATA.md.",
-								}).blocks),
+								}).blocks,
 							],
 						};
 					}
@@ -483,10 +510,11 @@ export default definePlugin({
 						const listed = await listStudentsWithTelemetry(ctx, 200);
 						return {
 							blocks: [
-								...(buildImportBlocks(listed.items.length, {
+								...buildImportBlocks(listed.items.length, {
 									title: "Error",
-									description: "Tidak dapat membaca data. Pastikan format: | No | NISN | Nama | File PDF |",
-								}).blocks),
+									description:
+										"Tidak dapat membaca data. Pastikan format: | No | NISN | Nama | File PDF |",
+								}).blocks,
 							],
 						};
 					}
@@ -506,10 +534,10 @@ export default definePlugin({
 					const listed = await listStudentsWithTelemetry(ctx, 200);
 					return {
 						blocks: [
-							...(buildImportBlocks(listed.items.length, {
+							...buildImportBlocks(listed.items.length, {
 								title: "Import Berhasil",
 								description: `${imported} dari ${rows.length} data siswa berhasil diimpor. Total: ${listed.items.length} siswa.`,
-							}).blocks),
+							}).blocks,
 							{ type: "divider" },
 							...buildAdminBlocks(listed.items).blocks,
 						],
@@ -517,10 +545,7 @@ export default definePlugin({
 					};
 				}
 
-				if (
-					interaction.type === "interaction" &&
-					interaction.action_id === "show_import"
-				) {
+				if (interaction.type === "interaction" && interaction.action_id === "show_import") {
 					const listed = await listStudentsWithTelemetry(ctx, 200);
 					return {
 						blocks: [
@@ -531,12 +556,8 @@ export default definePlugin({
 					};
 				}
 
-				if (
-					interaction.type === "form_submit" &&
-					interaction.action_id === "open_document"
-				) {
-					const nisn =
-						typeof interaction.values?.nisn === "string" ? interaction.values.nisn : "";
+				if (interaction.type === "form_submit" && interaction.action_id === "open_document") {
+					const nisn = typeof interaction.values?.nisn === "string" ? interaction.values.nisn : "";
 					const eventType =
 						interaction.values?.eventType === "downloaded" ? "downloaded" : "opened";
 					if (!nisn) {
@@ -562,7 +583,10 @@ export default definePlugin({
 						const listed = await listStudentsWithTelemetry(ctx, 200);
 						return {
 							...buildAdminBlocks(listed.items, nisn, eventType),
-							toast: { message: "Dokumen siswa belum diupload. Upload ke R2: SKL-2026/", type: "error" },
+							toast: {
+								message: "Dokumen siswa belum diupload. Upload ke R2: SKL-2026/",
+								type: "error",
+							},
 						};
 					}
 					await recordDocumentEvent(ctx, student, eventType, "admin");

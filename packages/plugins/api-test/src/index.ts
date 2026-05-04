@@ -67,13 +67,7 @@ export function createPlugin(_options: ApiTestPluginOptions = {}): ResolvedPlugi
 		version: "0.0.1",
 
 		// Declare ALL capabilities to test everything
-		capabilities: [
-			"content:read",
-			"content:write",
-			"media:read",
-			"media:write",
-			"network:request",
-		],
+		capabilities: ["content:read", "content:write", "media:read", "media:write", "network:request"],
 
 		// Allowed hosts for fetch testing
 		allowedHosts: ["httpbin.org", "*.httpbin.org", "jsonplaceholder.typicode.com"],
