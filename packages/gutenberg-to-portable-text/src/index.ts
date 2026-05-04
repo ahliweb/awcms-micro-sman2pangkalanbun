@@ -28,14 +28,8 @@ const ALT_ATTR_PATTERN = /alt=["']([^"']*)["']/i;
 const LIST_ITEM_PATTERN = /<li[^>]*>([\s\S]*?)<\/li>/gu;
 const CODE_TAG_PATTERN = /<code[^>]*>([\s\S]*?)<\/code>/i;
 const FIGCAPTION_TAG_PATTERN = /<figcaption[^>]*>([\s\S]*?)<\/figcaption>/i;
-const AMP_ENTITY_PATTERN = /&amp;/g;
-const LESS_THAN_ENTITY_PATTERN = /&lt;/g;
-const GREATER_THAN_ENTITY_PATTERN = /&gt;/g;
-const QUOTE_ENTITY_PATTERN = /&quot;/g;
-const APOS_ENTITY_PATTERN = /&#039;/g;
-const NUMERIC_AMP_ENTITY_PATTERN = /&#0?38;/g;
-const HEX_AMP_ENTITY_PATTERN = /&#x26;/gi;
-const NBSP_ENTITY_PATTERN = /&nbsp;/g;
+const HTML_ENTITY_PATTERN = /&(lt|gt|amp|quot|#039|nbsp);/g;
+const URL_ENTITY_PATTERN = /&(amp|#0?38|#x26);/gi;
 
 // Re-export types
 export type {
@@ -433,25 +427,31 @@ function transformBlock(
  * Decode HTML entities
  */
 function decodeHtmlEntities(html: string): string {
-	return html
-		.replace(LESS_THAN_ENTITY_PATTERN, "<")
-		.replace(GREATER_THAN_ENTITY_PATTERN, ">")
-		.replace(AMP_ENTITY_PATTERN, "&")
-		.replace(QUOTE_ENTITY_PATTERN, '"')
-		.replace(APOS_ENTITY_PATTERN, "'")
-		.replace(NUMERIC_AMP_ENTITY_PATTERN, "&") // &#038; or &#38;
-		.replace(HEX_AMP_ENTITY_PATTERN, "&") // &#x26;
-		.replace(NBSP_ENTITY_PATTERN, " ");
+	return html.replace(HTML_ENTITY_PATTERN, (entity) => {
+		switch (entity) {
+			case "&lt;":
+				return "<";
+			case "&gt;":
+				return ">";
+			case "&amp;":
+				return "&";
+			case "&quot;":
+				return '"';
+			case "&#039;":
+				return "'";
+			case "&nbsp;":
+				return " ";
+			default:
+				return entity;
+		}
+	});
 }
 
 /**
  * Decode HTML entities in URLs (used for image src attributes)
  */
 function decodeUrlEntities(url: string): string {
-	return url
-		.replace(AMP_ENTITY_PATTERN, "&")
-		.replace(NUMERIC_AMP_ENTITY_PATTERN, "&")
-		.replace(HEX_AMP_ENTITY_PATTERN, "&");
+	return url.replace(URL_ENTITY_PATTERN, "&");
 }
 
 /**
