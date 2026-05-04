@@ -269,7 +269,7 @@ describe("kelulusan plugin routes", () => {
 		});
 		expect(openResult.pdfUrl).toContain("pdf-2.pdf");
 
-		await accessPublicRoute.handler({
+		const downloadResult = await accessPublicRoute.handler({
 			...ctx,
 			input: accessPublicRoute.input.parse({
 				nisn: "9876543210",
@@ -277,6 +277,8 @@ describe("kelulusan plugin routes", () => {
 				eventType: "downloaded",
 			}),
 		});
+		expect(downloadResult.pdfUrl).toContain("dl=1");
+		expect(downloadResult.pdfUrl).toContain("name=sari.pdf");
 
 		const listed = await listRoute.handler({
 			...ctx,

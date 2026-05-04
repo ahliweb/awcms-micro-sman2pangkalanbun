@@ -31,6 +31,29 @@ const SAFE_INLINE_TYPES = new Set([
 	"application/pdf",
 ]);
 
+const CRLF_RE = /[\r\n]/g;
+const SLASH_RE = /[\\/]/g;
+const QUOTE_RE = /"/g;
+
+function getDownloadFilename(key: string, requestedName: string | null): string {
+	const raw = (requestedName ?? "").trim();
+	if (!raw) {
+		return key.includes("/") ? key.slice(key.lastIndexOf("/") + 1) : key;
+	}
+
+	const normalized = raw
+		.replace(CRLF_RE, "")
+		.replace(SLASH_RE, "-")
+		.replace(QUOTE_RE, "")
+		.trim();
+
+	if (!normalized) {
+		return key.includes("/") ? key.slice(key.lastIndexOf("/") + 1) : key;
+	}
+
+	return normalized;
+}
+
 export const GET: APIRoute = async ({ params, locals, url }) => {
 	const { key } = params;
 	const { emdash } = locals;
@@ -65,8 +88,9 @@ export const GET: APIRoute = async ({ params, locals, url }) => {
 		// When forcing download, include the filename derived from the storage key
 		// so browsers save with the correct name instead of the object-key UUID.
 		if (forceDownload) {
-			const rawName = key.includes("/") ? key.slice(key.lastIndexOf("/") + 1) : key;
-			headers["Content-Disposition"] = `attachment; filename*=UTF-8''${encodeURIComponent(rawName)}`;
+			const requestedName = url.searchParams.get("name");
+			const filename = getDownloadFilename(key, requestedName);
+			headers["Content-Disposition"] = `attachment; filename*=UTF-8''${encodeURIComponent(filename)}`;
 		}
 
 		// Sandbox CSP on non-inline content — prevents script execution for SVGs,

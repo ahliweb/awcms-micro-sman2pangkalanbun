@@ -13,6 +13,7 @@ function mockMediaContext(key: string | undefined) {
 	return {
 		context: {
 			params: { key },
+			url: new URL("https://example.test/_emdash/api/media/file/test"),
 			locals: {
 				emdash: {
 					storage: { download },
@@ -57,5 +58,16 @@ describe("media file catch-all route", () => {
 		const response = await getMediaFile(context);
 		expect(response.status).toBe(404);
 		expect(download).not.toHaveBeenCalled();
+	});
+
+	it("uses requested filename for forced downloads", async () => {
+		const { context } = mockMediaContext("SKL-2026/26d836ff-47ac-4b6d-8f3a-7ebed2399");
+		context.url = new URL("https://example.test/_emdash/api/media/file/SKL-2026/26d836ff?dl=1&name=SKL-0051718871-SMAN%202%20PANGKALAN%20BUN-2026.pdf");
+
+		const response = await getMediaFile(context);
+		expect(response.status).toBe(200);
+		expect(response.headers.get("Content-Disposition")).toContain(
+			"filename*=UTF-8''SKL-0051718871-SMAN%202%20PANGKALAN%20BUN-2026.pdf",
+		);
 	});
 });
