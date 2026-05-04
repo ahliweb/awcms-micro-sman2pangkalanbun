@@ -107,7 +107,7 @@ describe("Distraction-free mode state", () => {
 		// Simple state test - verifies the type and state pattern works
 		type FocusMode = "normal" | "spotlight";
 
-		let focusMode: FocusMode = "normal";
+		let focusMode: FocusMode;
 
 		// Toggle to spotlight
 		focusMode = "spotlight";
