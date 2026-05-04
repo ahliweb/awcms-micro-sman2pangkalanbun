@@ -132,11 +132,16 @@ async function findStudentByNisn(ctx: any, nisn: string): Promise<StudentRecord 
 	if (byExact.items[0]) return byExact.items[0].data as StudentRecord;
 
 	if (normalized.length >= 6) {
-		const byNormalized = await ctx.storage.students.query({
-			where: { nisnNormalized: normalized },
-			limit: 1,
-		});
-		if (byNormalized.items[0]) return byNormalized.items[0].data as StudentRecord;
+		try {
+			const byNormalized = await ctx.storage.students.query({
+				where: { nisnNormalized: normalized },
+				limit: 1,
+			});
+			if (byNormalized.items[0]) return byNormalized.items[0].data as StudentRecord;
+		} catch {
+			// Backward-compatibility: older storage schemas may not have
+			// `nisnNormalized` declared as a queryable field.
+		}
 	}
 
 	const fallback = await ctx.storage.students.query({
@@ -144,7 +149,8 @@ async function findStudentByNisn(ctx: any, nisn: string): Promise<StudentRecord 
 	});
 	for (const item of fallback.items) {
 		const student = item.data as StudentRecord;
-		if (normalizeNisn(student.nisn) === normalized && normalized.length >= 6) {
+		const studentNisn = typeof student.nisn === "string" ? student.nisn : "";
+		if (normalizeNisn(studentNisn) === normalized && normalized.length >= 6) {
 			return student;
 		}
 	}
