@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { execSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 
@@ -8,6 +8,7 @@ const SENSITIVE_PATTERN = /\b(authorization|cookie|set-cookie|token|password|sec
 const SUPPRESS_MARKER = "log-safety: allow";
 const CONSOLE_LOG_PATTERN = /console\.(debug|info|log|warn|error)\(/;
 const STRUCTURED_LOG_PATTERN = /logEvent\(/;
+const SAFE_REF_PATTERN = /^[A-Za-z0-9_./:-]+$/;
 
 const SCAN_DIRS = ["packages/core/src", "packages/admin/src", "demos/simple/src"];
 const SCAN_EXTS = new Set([".ts", ".tsx", ".js", ".mjs", ".cjs", ".astro"]);
@@ -24,18 +25,25 @@ function parseArgs(argv) {
 	return args;
 }
 
-function run(command) {
-	return execSync(command, { encoding: "utf8" }).trim();
+function isSafeRef(value) {
+	return SAFE_REF_PATTERN.test(value);
+}
+
+function runGit(args) {
+	return execFileSync("git", args, { encoding: "utf8" }).trim();
 }
 
 function listAllTrackedFiles() {
-	const out = run("git ls-files");
+	const out = runGit(["ls-files"]);
 	if (!out) return [];
 	return out.split("\n").filter(Boolean);
 }
 
 function listChangedFiles(base, head) {
-	const out = run(`git diff --name-only ${base}...${head}`);
+	if (!isSafeRef(base) || !isSafeRef(head)) {
+		throw new Error("Invalid git ref for --base or --head");
+	}
+	const out = runGit(["diff", "--name-only", `${base}...${head}`]);
 	if (!out) return [];
 	return out.split("\n").filter(Boolean);
 }
@@ -71,6 +79,9 @@ function checkFile(filePath) {
 
 function main() {
 	const { mode, base, head } = parseArgs(process.argv.slice(2));
+	if (mode !== "all" && mode !== "changed") {
+		throw new Error("Invalid --mode. Use 'all' or 'changed'.");
+	}
 	const files = mode === "all" ? listAllTrackedFiles() : listChangedFiles(base, head);
 	const targets = files.filter(isScannable);
 
