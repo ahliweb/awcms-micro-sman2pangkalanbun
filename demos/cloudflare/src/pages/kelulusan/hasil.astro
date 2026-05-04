@@ -160,18 +160,25 @@ import Base from "../../layouts/Base.astro";
 		downloadPdf.addEventListener("click", async (event) => {
 			event.preventDefault();
 			if (!state.nisn || !state.accessToken) return;
+			showMessage("Menyiapkan unduhan...");
 			try {
 				const downloaded = await apiPost("documents/access/public", {
 					nisn: state.nisn,
 					accessToken: state.accessToken,
 					eventType: "downloaded",
 				});
+				const response = await fetch(downloaded.pdfUrl);
+				if (!response.ok) throw new Error("Gagal mengunduh file");
+				const blob = await response.blob();
+				const url = URL.createObjectURL(blob);
 				const a = document.createElement("a");
-				a.href = downloaded.pdfUrl;
+				a.href = url;
 				a.download = downloaded.pdfFilename;
 				document.body.appendChild(a);
 				a.click();
 				document.body.removeChild(a);
+				URL.revokeObjectURL(url);
+				showMessage("Unduhan dimulai.");
 			} catch (error) {
 				showMessage(error instanceof Error ? error.message : "Gagal mengunduh PDF", true);
 			}
