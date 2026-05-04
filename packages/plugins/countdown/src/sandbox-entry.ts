@@ -108,22 +108,41 @@ function serializeForInlineScript(value: unknown): string {
 
 async function buildSettingsPage(ctx: any) {
 	const settings = await getSettings(ctx);
+	const hasImage = settings.imageUrl.length > 0;
 	return {
 		blocks: [
-			{ type: "header", text: "Countdown Popup Settings" },
+			{ type: "header", text: "Countdown Popup" },
 			{
 				type: "context",
-				text: "Configure the public countdown popup image, caption, and visibility window.",
+				text: "Display a countdown timer popup on the public site with an optional image, caption, and configurable visibility window.",
+			},
+			{ type: "divider" },
+			{
+				type: "section",
+				fields: [
+					{
+						type: "toggle",
+						action_id: "enabled",
+						label: "Enable countdown popup",
+						initial_value: settings.enabled,
+					},
+				],
 			},
 			{ type: "divider" },
 			{
 				type: "form",
 				block_id: "countdown-settings",
 				fields: [
-					{ type: "toggle", action_id: "enabled", label: "Enable popup", initial_value: settings.enabled },
-					{ type: "text_input", action_id: "targetAt", label: "Target datetime (ISO)", initial_value: settings.targetAt },
-					{ type: "text_input", action_id: "caption", label: "Caption", multiline: true, initial_value: settings.caption },
-					{ type: "text_input", action_id: "imageUrl", label: "Image URL", initial_value: settings.imageUrl },
+					{
+						type: "media_picker",
+						action_id: "imageUrl",
+						label: "Popup image",
+						mime_type_filter: "image/",
+						initial_value: settings.imageUrl,
+						placeholder: "Select from media library or paste URL",
+					},
+					{ type: "text_input", action_id: "caption", label: "Caption", multiline: true, initial_value: settings.caption, placeholder: "e.g. Pendaftaran dibuka dalam..." },
+					{ type: "text_input", action_id: "targetAt", label: "Target datetime (ISO)", initial_value: settings.targetAt, placeholder: "2026-06-01T00:00:00" },
 					{ type: "text_input", action_id: "showFrom", label: "Show from (ISO, optional)", initial_value: settings.showFrom ?? "" },
 					{ type: "text_input", action_id: "showUntil", label: "Show until (ISO, optional)", initial_value: settings.showUntil ?? "" },
 					{
@@ -134,6 +153,13 @@ async function buildSettingsPage(ctx: any) {
 					},
 				],
 				submit: { label: "Save settings", action_id: "save_settings" },
+			},
+			{ type: "divider" },
+			{
+				type: "context",
+				text: hasImage
+					? "The countdown popup will appear on every public page including the home page."
+					: "Add an image from the media library, then enable the popup. It will appear on every public page including the home page.",
 			},
 		],
 	};
@@ -184,24 +210,25 @@ async function buildCountdownFragments(ctx: any) {
 		dismissOncePerSession: settings.dismissOncePerSession,
 	};
 	const caption = escapeHtml(settings.caption);
+	const hasImage = settings.imageUrl.length > 0;
 	return [
 		{
 			kind: "html",
 			placement: "body:end",
 			key: "countdown-popup-root",
-			html: `<div id="ecountdown-root" hidden><div class="ecountdown-overlay" data-ecountdown-close></div><section class="ecountdown-card" role="dialog" aria-modal="true" aria-label="Countdown popup"><button type="button" class="ecountdown-close" data-ecountdown-close aria-label="Close">×</button>${settings.imageUrl ? `<img class="ecountdown-image" src="${escapeHtml(settings.imageUrl)}" alt="${caption}">` : ""}<p class="ecountdown-caption">${caption}</p><p class="ecountdown-timer" data-ecountdown-timer>--:--:--</p></section></div>`,
+			html: `<div id="ecountdown-root" hidden><div class="ecountdown-overlay" data-ecountdown-close></div><section class="ecountdown-card" role="dialog" aria-modal="true" aria-label="Countdown popup"><button type="button" class="ecountdown-close" data-ecountdown-close aria-label="Close">×</button>${hasImage ? `<div class="ecountdown-image-wrap"><img class="ecountdown-image" src="${escapeHtml(settings.imageUrl)}" alt="${caption}"></div>` : ""}${settings.caption ? `<p class="ecountdown-caption">${caption}</p>` : ""}<p class="ecountdown-timer" data-ecountdown-timer>--:--:--</p></section></div>`,
 		},
 		{
 			kind: "inline-script",
 			placement: "body:end",
 			key: "countdown-popup-script",
-			code: `(function(){var cfg=${serializeForInlineScript(initial)};var root=document.getElementById('ecountdown-root');if(!root)return;var now=Date.now();if(cfg.showFrom&&Date.parse(cfg.showFrom)>now)return;if(cfg.showUntil&&Date.parse(cfg.showUntil)<now)return;var target=Date.parse(cfg.targetAt);if(!Number.isFinite(target)||target<=now)return;var dismissKey='ecountdown:dismissed';if(cfg.dismissOncePerSession&&window.sessionStorage&&sessionStorage.getItem(dismissKey)==='1')return;var timer=root.querySelector('[data-ecountdown-timer]');var close=function(){root.hidden=true;if(cfg.dismissOncePerSession&&window.sessionStorage){try{sessionStorage.setItem(dismissKey,'1')}catch(_){}}};root.querySelectorAll('[data-ecountdown-close]').forEach(function(el){el.addEventListener('click',close)});var tick=function(){var diff=target-Date.now();if(diff<=0){close();return}var sec=Math.floor(diff/1000)%60;var min=Math.floor(diff/60000)%60;var hour=Math.floor(diff/3600000)%24;var day=Math.floor(diff/86400000);if(timer){timer.textContent=day+'d '+String(hour).padStart(2,'0')+':'+String(min).padStart(2,'0')+':'+String(sec).padStart(2,'0')}};tick();root.hidden=false;var id=setInterval(tick,1000);window.addEventListener('pagehide',function(){clearInterval(id)},{once:true});})();`,
+			code: `(function(){var cfg=${serializeForInlineScript(initial)};var root=document.getElementById('ecountdown-root');if(!root)return;var now=Date.now();if(cfg.showFrom&&Date.parse(cfg.showFrom)>now)return;if(cfg.showUntil&&Date.parse(cfg.showUntil)<now)return;var target=Date.parse(cfg.targetAt);if(!Number.isFinite(target)||target<=now)return;var dismissKey='ecountdown:dismissed';if(cfg.dismissOncePerSession&&window.sessionStorage&&sessionStorage.getItem(dismissKey)==='1')return;var timerEl=root.querySelector('[data-ecountdown-timer]');var close=function(){root.classList.add('ecountdown-exit');setTimeout(function(){root.hidden=true},300);if(cfg.dismissOncePerSession&&window.sessionStorage){try{sessionStorage.setItem(dismissKey,'1')}catch(_){}}};root.querySelectorAll('[data-ecountdown-close]').forEach(function(el){el.addEventListener('click',close)});root.addEventListener('click',function(e){if(e.target===root)close()});var pad=function(n){return String(n).padStart(2,'0')};var tick=function(){var diff=target-Date.now();if(diff<=0){close();return}var sec=Math.floor(diff/1000)%60;var min=Math.floor(diff/60000)%60;var hour=Math.floor(diff/3600000)%24;var day=Math.floor(diff/86400000);var parts=[];if(day>0)parts.push(day+'d');parts.push(pad(hour)+':'+pad(min)+':'+pad(sec));if(timerEl){timerEl.textContent=parts.join(' ')}};tick();root.hidden=false;root.classList.add('ecountdown-enter');var id=setInterval(tick,1000);window.addEventListener('pagehide',function(){clearInterval(id)},{once:true});document.addEventListener('keydown',function(e){if(e.key==='Escape')close()},{once:true});})();`,
 		},
 		{
 			kind: "html",
 			placement: "head",
 			key: "countdown-popup-css",
-			html: `<style>#ecountdown-root{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:1rem}#ecountdown-root[hidden]{display:none!important}.ecountdown-overlay{position:absolute;inset:0;background:rgb(15 23 42 / .55);backdrop-filter:blur(2px)}.ecountdown-card{position:relative;max-width:30rem;width:min(100%,30rem);background:#fff;color:#0f172a;border-radius:1rem;box-shadow:0 25px 60px rgb(2 6 23 / .35);overflow:hidden;display:grid;gap:.75rem;padding:1rem 1rem 1.25rem}.ecountdown-image{width:100%;height:auto;max-height:14rem;object-fit:cover;border-radius:.75rem}.ecountdown-caption{margin:0;font:600 1rem/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}.ecountdown-timer{margin:0;font:700 1.2rem/1.2 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;color:#0b4db6}.ecountdown-close{position:absolute;inset-inline-end:.5rem;top:.5rem;border:0;background:rgb(255 255 255 / .9);width:2rem;height:2rem;border-radius:999px;cursor:pointer;font:700 1.1rem/1 sans-serif}@media (max-width:640px){.ecountdown-card{max-width:22rem;padding:.875rem}.ecountdown-caption{font-size:.95rem}.ecountdown-timer{font-size:1.05rem}}</style>`,
+			html: `<style>#ecountdown-root{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:1.5rem}#ecountdown-root[hidden]{display:none!important}.ecountdown-overlay{position:absolute;inset:0;background:rgb(15 23 42/.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}.ecountdown-card{position:relative;max-width:28rem;width:min(100%,28rem);background:#fff;color:#0f172a;border-radius:1.25rem;box-shadow:0 24px 80px rgb(0 0 0/.25),0 2px 8px rgb(0 0 0/.08);overflow:hidden;display:flex;flex-direction:column;gap:0}.ecountdown-image-wrap{border-radius:1.25rem 1.25rem 0 0;overflow:hidden}.ecountdown-image{display:block;width:100%;height:auto;max-height:16rem;object-fit:cover}.ecountdown-caption{margin:0;padding:1rem 1.25rem .5rem;font:600 .95rem/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;text-align:center;color:#334155}.ecountdown-timer{margin:0;padding:.25rem 1.25rem 1.25rem;font:700 1.5rem/1.2 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;text-align:center;color:#1d4ed8}.ecountdown-close{position:absolute;inset-inline-end:.75rem;top:.75rem;border:0;background:rgb(255 255 255/.9);backdrop-filter:blur(8px);width:2.25rem;height:2.25rem;border-radius:999px;cursor:pointer;font:700 1.2rem/1 sans-serif;color:#64748b;display:grid;place-items:center;box-shadow:0 2px 8px rgb(0 0 0/.1);transition:background .15s,color .15s;z-index:2}.ecountdown-close:hover{background:#fff;color:#0f172a}@keyframes ecountdown-enter{0%{opacity:0;transform:scale(.95)}100%{opacity:1;transform:scale(1)}}@keyframes ecountdown-exit{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.95)}}.ecountdown-enter{animation:ecountdown-enter .3s ease-out forwards}.ecountdown-exit{animation:ecountdown-exit .25s ease-in forwards}@media (max-width:640px){#ecountdown-root{padding:1rem;align-items:end}.ecountdown-card{max-width:100%;border-radius:1.25rem 1.25rem .5rem .5rem}.ecountdown-caption{font-size:.9rem}.ecountdown-timer{font-size:1.3rem}.ecountdown-image-wrap{border-radius:1.25rem 1.25rem 0 0}}</style>`,
 		},
 	];
 }
