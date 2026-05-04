@@ -125,11 +125,16 @@ async function findStudentByNisn(ctx: any, nisn: string): Promise<StudentRecord 
 	const trimmed = nisn.trim();
 	const normalized = normalizeNisn(trimmed);
 
-	const byExact = await ctx.storage.students.query({
-		where: { nisn: trimmed },
-		limit: 1,
-	});
-	if (byExact.items[0]) return byExact.items[0].data as StudentRecord;
+	try {
+		const byExact = await ctx.storage.students.query({
+			where: { nisn: trimmed },
+			limit: 1,
+		});
+		if (byExact.items[0]) return byExact.items[0].data as StudentRecord;
+	} catch {
+		// Backward-compatibility: older storage schemas or adapters may reject
+		// field-based filtering for undeclared/legacy fields.
+	}
 
 	if (normalized.length >= 6) {
 		try {
@@ -144,15 +149,28 @@ async function findStudentByNisn(ctx: any, nisn: string): Promise<StudentRecord 
 		}
 	}
 
-	const fallback = await ctx.storage.students.query({
-		limit: 5000,
-	});
-	for (const item of fallback.items) {
-		const student = item.data as StudentRecord;
-		const studentNisn = typeof student.nisn === "string" ? student.nisn : "";
-		if (normalizeNisn(studentNisn) === normalized && normalized.length >= 6) {
-			return student;
+	let cursor: string | undefined;
+	for (let page = 0; page < 100; page++) {
+		let fallback;
+		try {
+			fallback = await ctx.storage.students.query({
+				limit: 500,
+				cursor,
+			});
+		} catch {
+			break;
 		}
+
+		for (const item of fallback.items) {
+			const student = item.data as StudentRecord;
+			const studentNisn = typeof student.nisn === "string" ? student.nisn : "";
+			if (normalizeNisn(studentNisn) === normalized && normalized.length >= 6) {
+				return student;
+			}
+		}
+
+		if (!fallback.cursor) break;
+		cursor = fallback.cursor;
 	}
 
 	return null;
