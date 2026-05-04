@@ -486,7 +486,7 @@ async function enforceRateLimit(ctx: any) {
 }
 
 export default definePlugin({
-	routes: {
+		routes: {
 		admin: {
 			handler: async (routeCtx: any, pluginCtx: any) => {
 				const ctx = { ...pluginCtx, ...routeCtx };
