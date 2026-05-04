@@ -37,3 +37,5 @@ Scaffold package for the `kelulusan` plugin with storage and route surface for N
 ## Notes
 
 This package intentionally provides only the issue #69 scaffold. Business logic, access control, telemetry persistence, and viewers are implemented in follow-up issues.
+
+Public telemetry events are deduplicated for a short window to reduce accidental double-counting from rapid repeated clicks.

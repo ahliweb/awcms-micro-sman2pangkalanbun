@@ -208,4 +208,48 @@ describe("kelulusan plugin routes", () => {
 		expect(listed.items[0].lastOpenedAt).toBeTruthy();
 		expect(listed.items[0].lastDownloadedAt).toBeTruthy();
 	});
+
+	it("deduplicates rapid repeated public opened events", async () => {
+		const startRoute = (plugin as any).routes["gate/session/start"];
+		const accessPublicRoute = (plugin as any).routes["documents/access/public"];
+		const listRoute = (plugin as any).routes["students/list"];
+
+		const { ctx, students } = makeCtx({ nisn: "1122334455" }, { ip: "10.1.2.3" });
+
+		await students.put("stu-3", {
+			nisn: "1122334455",
+			name: "Dina",
+			pdfMediaId: "pdf-3",
+			pdfFilename: "dina.pdf",
+			createdAt: "2026-02-01T00:00:00.000Z",
+		});
+
+		const start = await startRoute.handler({
+			...ctx,
+			input: startRoute.input.parse({ nisn: "1122334455" }),
+		});
+
+		const payload = {
+			nisn: "1122334455",
+			accessToken: start.accessToken,
+			eventType: "opened",
+		};
+
+		await accessPublicRoute.handler({
+			...ctx,
+			input: accessPublicRoute.input.parse(payload),
+		});
+		await accessPublicRoute.handler({
+			...ctx,
+			input: accessPublicRoute.input.parse(payload),
+		});
+
+		const listed = await listRoute.handler({
+			...ctx,
+			input: listRoute.input.parse({ limit: 10 }),
+		});
+
+		expect(listed.items).toHaveLength(1);
+		expect(listed.items[0].openedCount).toBe(1);
+	});
 });
