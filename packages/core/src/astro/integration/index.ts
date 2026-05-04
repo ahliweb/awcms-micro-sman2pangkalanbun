@@ -14,6 +14,7 @@ import type { AstroIntegration, AstroIntegrationLogger } from "astro";
 
 import { validateAllowedOrigins, validateOriginShape } from "../../auth/allowed-origins.js";
 import type { ResolvedPlugin } from "../../plugins/types.js";
+import { validateGeneratedTypesPayload } from "../../typegen/validate.js";
 import { local } from "../storage/adapters.js";
 import { notoSans } from "./font-provider.js";
 import {
@@ -395,12 +396,9 @@ export function emdash(config: EmDashConfig = {}): AstroIntegration {
 						}
 
 						if (needsWrite) {
-							if (result.types.length > 2_000_000) {
-								logger.warn("Typegen output too large; skipping write");
-								return;
-							}
-							if (!result.types.includes("declare")) {
-								logger.warn("Typegen output missing declarations; skipping write");
+							const validation = validateGeneratedTypesPayload(result.types);
+							if (!validation.ok) {
+								logger.warn(`${validation.reason}; skipping write`);
 								return;
 							}
 							await writeFile(outputPath, result.types, "utf-8");

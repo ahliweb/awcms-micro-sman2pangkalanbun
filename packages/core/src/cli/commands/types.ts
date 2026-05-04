@@ -11,6 +11,7 @@ import { defineCommand } from "citty";
 import consola from "consola";
 
 import { connectionArgs, createClientFromArgs } from "../client-factory.js";
+import { validateGeneratedTypesPayload } from "../../typegen/validate.js";
 
 function isInside(baseDir: string, targetPath: string): boolean {
 	return targetPath === baseDir || targetPath.startsWith(`${baseDir}${sep}`);
@@ -48,11 +49,9 @@ export const typesCommand = defineCommand({
 
 			// Fetch TypeScript types
 			const types = await client.schemaTypes();
-			if (!types.includes("declare")) {
-				throw new Error("Schema types payload is invalid");
-			}
-			if (types.length > 2_000_000) {
-				throw new Error("Schema types payload is unexpectedly large");
+			const validation = validateGeneratedTypesPayload(types);
+			if (!validation.ok) {
+				throw new Error(validation.reason);
 			}
 
 			// Write types file

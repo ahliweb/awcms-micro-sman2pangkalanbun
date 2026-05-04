@@ -13,6 +13,7 @@ import consola from "consola";
 
 import { createDatabase } from "../../database/connection.js";
 import { runMigrations } from "../../database/migrations/runner.js";
+import { validateGeneratedTypesPayload } from "../../typegen/validate.js";
 
 interface PackageJson {
 	name?: string;
@@ -122,11 +123,9 @@ export const devCommand = defineCommand({
 					const client = createClientFromArgs({ url: remoteUrl });
 					const schema = await client.schemaExport();
 					const types = await client.schemaTypes();
-					if (!types.includes("declare")) {
-						throw new Error("Schema types payload is invalid");
-					}
-					if (types.length > 2_000_000) {
-						throw new Error("Schema types payload is unexpectedly large");
+					const validation = validateGeneratedTypesPayload(types);
+					if (!validation.ok) {
+						throw new Error(validation.reason);
 					}
 
 					const { writeFile, mkdir } = await import("node:fs/promises");
