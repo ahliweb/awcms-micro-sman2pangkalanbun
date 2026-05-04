@@ -5,6 +5,7 @@
 import { describe, it, expect } from "vitest";
 
 import { gutenbergToPortableText, htmlToPortableText, parseGutenbergBlocks } from "../src/index.js";
+import { extractText } from "../src/inline.js";
 import type {
 	PortableTextTextBlock,
 	PortableTextImageBlock,
@@ -14,7 +15,6 @@ import type {
 	PortableTextCoverBlock,
 } from "../src/types.js";
 
-const HTML_TAG_PATTERN = /<[^>]+>/g;
 const knownProviders = [
 	["youtube.com", "youtube"],
 	["youtu.be", "youtube"],
@@ -1023,7 +1023,7 @@ https://${domain}/123456
 						{
 							_type: "testimonial" as const,
 							_key: ctx.generateKey(),
-							text: block.innerHTML.replace(HTML_TAG_PATTERN, "").trim(),
+						text: extractText(block.innerHTML),
 							rating: block.attrs.rating as number,
 						} as unknown as import("../src/types.js").PortableTextBlock,
 					],
