@@ -58,6 +58,7 @@ const uploadPdfSchema = z.object({
 
 type StudentRecord = {
 	nisn: string;
+	nisnNormalized?: string;
 	name: string;
 	pdfMediaId: string;
 	pdfFilename: string;
@@ -86,6 +87,7 @@ const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LOCK_MS = 15 * 60 * 1000;
 const RATE_MAX_ATTEMPTS = 20;
 const PUBLIC_EVENT_DEDUPE_MS = 5 * 1000;
+const NON_DIGIT_PATTERN = /\D+/g;
 
 function nowIso() {
 	return new Date().toISOString();
@@ -115,13 +117,39 @@ function makeAccessToken() {
 	return `${Date.now().toString(36)}-${randomPart}`;
 }
 
+function normalizeNisn(value: string): string {
+	return value.replace(NON_DIGIT_PATTERN, "");
+}
+
 async function findStudentByNisn(ctx: any, nisn: string): Promise<StudentRecord | null> {
-	const result = await ctx.storage.students.query({
-		where: { nisn },
+	const trimmed = nisn.trim();
+	const normalized = normalizeNisn(trimmed);
+
+	const byExact = await ctx.storage.students.query({
+		where: { nisn: trimmed },
 		limit: 1,
 	});
-	if (!result.items[0]) return null;
-	return result.items[0].data as StudentRecord;
+	if (byExact.items[0]) return byExact.items[0].data as StudentRecord;
+
+	if (normalized.length >= 6) {
+		const byNormalized = await ctx.storage.students.query({
+			where: { nisnNormalized: normalized },
+			limit: 1,
+		});
+		if (byNormalized.items[0]) return byNormalized.items[0].data as StudentRecord;
+	}
+
+	const fallback = await ctx.storage.students.query({
+		limit: 5000,
+	});
+	for (const item of fallback.items) {
+		const student = item.data as StudentRecord;
+		if (normalizeNisn(student.nisn) === normalized && normalized.length >= 6) {
+			return student;
+		}
+	}
+
+	return null;
 }
 
 async function isValidGateSession(ctx: any, nisn: string, accessToken: string | undefined) {
@@ -553,8 +581,10 @@ export default definePlugin({
 
 					let imported = 0;
 					for (const row of rows) {
-						await ctx.storage.students.put(row.nisn, {
+						const normalizedNisn = normalizeNisn(row.nisn);
+						await ctx.storage.students.put(normalizedNisn || row.nisn, {
 							nisn: row.nisn,
+							nisnNormalized: normalizedNisn,
 							name: row.name,
 							pdfMediaId: `SKL-2026/${row.filename}`,
 							pdfFilename: row.filename,
@@ -633,8 +663,11 @@ export default definePlugin({
 				}
 
 				const pdfKey = `SKL-2026/${uploadFilename}`;
-				await ctx.storage.students.put(uploadNisn, {
+				const studentKey =
+					student.nisnNormalized ?? (normalizeNisn(student.nisn) || student.nisn);
+				await ctx.storage.students.put(studentKey, {
 					...student,
+					nisnNormalized: normalizeNisn(student.nisn),
 					pdfMediaId: pdfKey,
 					pdfFilename: uploadFilename,
 					createdAt: student.createdAt || nowIso(),
@@ -722,27 +755,30 @@ export default definePlugin({
 				const ctx = { ...pluginCtx, ...routeCtx };
 				const record: StudentRecord = {
 					nisn: ctx.input.nisn,
+					nisnNormalized: normalizeNisn(ctx.input.nisn),
 					name: ctx.input.name,
 					pdfMediaId: ctx.input.pdfMediaId,
 					pdfFilename: ctx.input.pdfFilename,
 					createdAt: nowIso(),
 				};
 
-				await ctx.storage.students.put(record.nisn, record);
+				await ctx.storage.students.put(record.nisnNormalized || record.nisn, record);
 				return record;
 			},
 		},
 		"students/import-template": {
 			input: importTemplateSchema,
-			handler: async (routeCtx: any, pluginCtx: any) => {
-				const ctx = { ...pluginCtx, ...routeCtx };
-				let imported = 0;
-				for (const row of ctx.input.rows) {
-					await ctx.storage.students.put(row.nisn, {
-						nisn: row.nisn,
-						name: row.name,
-						pdfMediaId: `SKL-2026/${row.filename}`,
-						pdfFilename: row.filename,
+				handler: async (routeCtx: any, pluginCtx: any) => {
+					const ctx = { ...pluginCtx, ...routeCtx };
+					let imported = 0;
+					for (const row of ctx.input.rows) {
+						const normalizedNisn = normalizeNisn(row.nisn);
+						await ctx.storage.students.put(normalizedNisn || row.nisn, {
+							nisn: row.nisn,
+							nisnNormalized: normalizedNisn,
+							name: row.name,
+							pdfMediaId: `SKL-2026/${row.filename}`,
+							pdfFilename: row.filename,
 						createdAt: nowIso(),
 					});
 					imported++;
@@ -784,8 +820,9 @@ export default definePlugin({
 				const binary = Uint8Array.from(atob(contentBase64), (c) => c.charCodeAt(0));
 				await ctx.media.put(pdfKey, binary, { contentType: "application/pdf" });
 
-				await ctx.storage.students.put(nisn, {
+				await ctx.storage.students.put(student.nisnNormalized || normalizeNisn(student.nisn) || nisn, {
 					...student,
+					nisnNormalized: normalizeNisn(student.nisn),
 					pdfMediaId: pdfKey,
 					pdfFilename: filename,
 					createdAt: student.createdAt || nowIso(),

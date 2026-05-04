@@ -135,6 +135,27 @@ describe("kelulusan plugin routes", () => {
 		expect(result.expiresInSeconds).toBe(600);
 	});
 
+	it("starts gate session for formatted NISN input", async () => {
+		const route = (plugin as any).routes["gate/session/start"];
+		const { ctx, students } = makeCtx({ nisn: "0051 7188-71" });
+
+		await students.put("stu-formatted", {
+			nisn: "0051718871",
+			nisnNormalized: "0051718871",
+			name: "EVA ELISTIANI",
+			pdfMediaId: "pdf-formatted",
+			pdfFilename: "eva.pdf",
+			createdAt: "2026-01-01T00:00:00.000Z",
+		});
+
+		const parsed = route.input.parse(ctx.input);
+		const result = await route.handler({ ...ctx, input: parsed });
+
+		expect(result.nisn).toBe("0051718871");
+		expect(result.name).toBe("EVA ELISTIANI");
+		expect(typeof result.accessToken).toBe("string");
+	});
+
 	it("rejects gate session start for unknown NISN", async () => {
 		const route = (plugin as any).routes["gate/session/start"];
 		const { ctx } = makeCtx({ nisn: "0000000000" });
