@@ -12,7 +12,7 @@
  * 6. Display audit results
  */
 
-import { readFile, stat } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { resolve, basename } from "node:path";
 
 import { defineCommand } from "citty";
@@ -227,8 +227,7 @@ type ManifestSummary = typeof manifestSummarySchema._zod.output;
 /**
  * Read manifest.json from a tarball without fully extracting it.
  */
-async function readManifestFromTarball(tarballPath: string): Promise<ManifestSummary> {
-	const data = await readFile(tarballPath);
+async function readManifestFromTarball(data: Buffer): Promise<ManifestSummary> {
 	const stream = new ReadableStream<Uint8Array>({
 		start(controller) {
 			controller.enqueue(new Uint8Array(data.buffer, data.byteOffset, data.byteLength));
@@ -438,13 +437,13 @@ export const publishCommand = defineCommand({
 			}
 		}
 
-		const tarballStat = await stat(tarballPath);
-		const sizeKB = (tarballStat.size / 1024).toFixed(1);
+		const tarballData = await readFile(tarballPath);
+		const sizeKB = (tarballData.byteLength / 1024).toFixed(1);
 		consola.info(`Tarball: ${pc.dim(tarballPath)} (${sizeKB}KB)`);
 
 		// ── Step 2: Read manifest from tarball ──
 
-		const manifest = await readManifestFromTarball(tarballPath);
+		const manifest = await readManifestFromTarball(tarballData);
 		assertSafePluginId(manifest.id);
 		console.log();
 		consola.info(`Plugin: ${pc.bold(`${manifest.id}@${manifest.version}`)}`);
@@ -561,7 +560,6 @@ export const publishCommand = defineCommand({
 
 		consola.start(`Publishing ${manifest.id}@${manifest.version}...`);
 
-		const tarballData = await readFile(tarballPath);
 		const formData = new FormData();
 		formData.append(
 			"bundle",
