@@ -34,6 +34,7 @@ const LEADING_SLASH_PATTERN = /^\//;
 /** Pattern to remove trailing slashes */
 const TRAILING_SLASH_PATTERN = /\/$/;
 const SAFE_KEY_PATTERN = /^[A-Za-z0-9._/-]+$/;
+const MAX_UPLOAD_BYTES = 100 * 1024 * 1024; // 100 MB
 
 /**
  * Local filesystem storage implementation
@@ -97,6 +98,13 @@ export class LocalStorage implements Storage {
 				buffer = Buffer.from(options.body);
 			} else {
 				buffer = options.body;
+			}
+
+			if (buffer.length > MAX_UPLOAD_BYTES) {
+				throw new EmDashStorageError(
+					`Upload exceeds maximum size: ${options.key}`,
+					"UPLOAD_FAILED",
+				);
 			}
 
 			await fs.writeFile(filePath, buffer);
