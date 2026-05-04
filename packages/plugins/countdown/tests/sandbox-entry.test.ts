@@ -82,3 +82,33 @@ describe("countdown admin route", () => {
 		expect(result.toast).toMatchObject({ type: "success" });
 	});
 });
+
+describe("countdown public fragments", () => {
+	it("returns null when popup is disabled", async () => {
+		const fragmentHook = (plugin as any).hooks["page:fragments"];
+		const { ctx } = makeCtx();
+
+		const result = await fragmentHook.handler({ page: { kind: "content" } }, ctx);
+		expect(result).toBeNull();
+	});
+
+	it("returns fragments when popup is enabled with valid settings", async () => {
+		const fragmentHook = (plugin as any).hooks["page:fragments"];
+		const { ctx, kvStore } = makeCtx();
+		kvStore.set("settings:enabled", true);
+		kvStore.set("settings:targetAt", "2099-06-01T00:00:00.000Z");
+		kvStore.set("settings:caption", "Countdown to graduation");
+		kvStore.set("settings:imageUrl", "https://cdn.example.com/popup.jpg");
+		kvStore.set("settings:showFrom", null);
+		kvStore.set("settings:showUntil", null);
+		kvStore.set("settings:dismissOncePerSession", true);
+
+		const result = await fragmentHook.handler({ page: { kind: "content" } }, ctx);
+
+		expect(Array.isArray(result)).toBe(true);
+		expect(result).toHaveLength(3);
+		expect(result[0]).toMatchObject({ kind: "html", placement: "body:end" });
+		expect(result[1]).toMatchObject({ kind: "inline-script", placement: "body:end" });
+		expect(result[2]).toMatchObject({ kind: "html", placement: "head" });
+	});
+});

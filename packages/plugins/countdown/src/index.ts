@@ -6,6 +6,7 @@ export function countdownPlugin(): PluginDescriptor {
 		version: "0.0.1",
 		format: "standard",
 		entrypoint: "@emdash-cms/plugin-countdown/sandbox",
+		capabilities: ["hooks.page-fragments:register"],
 		storage: {
 			dismissals: { indexes: ["createdAt", "sessionId"] },
 		},
