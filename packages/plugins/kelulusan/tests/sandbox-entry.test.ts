@@ -252,4 +252,40 @@ describe("kelulusan plugin routes", () => {
 		expect(listed.items).toHaveLength(1);
 		expect(listed.items[0].openedCount).toBe(1);
 	});
+
+	it("builds admin blocks and returns document URL banner for selected student", async () => {
+		const adminRoute = (plugin as any).routes.admin;
+		const { ctx, students } = makeCtx({ type: "page_load", page: "/kelulusan" });
+
+		await students.put("stu-4", {
+			nisn: "4455667788",
+			name: "Rina",
+			pdfMediaId: "pdf-4",
+			pdfFilename: "rina.pdf",
+			createdAt: "2026-03-01T00:00:00.000Z",
+		});
+
+		const pageLoad = await adminRoute.handler(
+			{ ...ctx, input: { type: "page_load", page: "/kelulusan" } },
+			ctx,
+		);
+		expect(Array.isArray(pageLoad.blocks)).toBe(true);
+		expect(pageLoad.blocks[0]).toMatchObject({ type: "header", text: "Kelulusan" });
+
+		const action = await adminRoute.handler(
+			{
+				...ctx,
+				input: {
+					type: "form_submit",
+					action_id: "open_document",
+					values: { nisn: "4455667788", eventType: "opened" },
+				},
+			},
+			ctx,
+		);
+
+		expect(action.toast).toMatchObject({ type: "success" });
+		expect(action.blocks[0]).toMatchObject({ type: "banner" });
+		expect(String(action.blocks[0].description)).toContain("https://cdn.example.test/pdf-4.pdf");
+	});
 });
