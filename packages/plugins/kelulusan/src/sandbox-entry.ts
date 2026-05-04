@@ -65,6 +65,11 @@ type StudentRecord = {
 	createdAt: string;
 };
 
+type ResolvedPdf = {
+	url: string;
+	resolvedMediaId: string;
+};
+
 type DocumentEventRecord = {
 	studentId: string;
 	eventType: "opened" | "downloaded";
@@ -115,6 +120,47 @@ function makeEventId() {
 function makeAccessToken() {
 	const randomPart = Math.random().toString(36).slice(2, 10);
 	return `${Date.now().toString(36)}-${randomPart}`;
+}
+
+function encodeStorageKey(key: string): string {
+	return key
+		.split("/")
+		.map((part) => encodeURIComponent(part))
+		.join("/");
+}
+
+function looksLikeStorageKey(value: string): boolean {
+	return value.includes("/") || value.toLowerCase().endsWith(".pdf");
+}
+
+function buildStoragePdfUrl(storageKey: string): string {
+	return `/_emdash/api/media/file/${encodeStorageKey(storageKey)}`;
+}
+
+async function resolveStudentPdf(ctx: any, student: StudentRecord): Promise<ResolvedPdf | null> {
+	if (!ctx.media) return null;
+
+	const byMediaId = await ctx.media.get(student.pdfMediaId);
+	if (byMediaId) {
+		return {
+			url: byMediaId.url,
+			resolvedMediaId: byMediaId.id,
+		};
+	}
+
+	const keyCandidate = student.pdfMediaId.trim();
+	if (keyCandidate && looksLikeStorageKey(keyCandidate)) {
+		return {
+			url: buildStoragePdfUrl(keyCandidate),
+			resolvedMediaId: student.pdfMediaId,
+		};
+	}
+
+	const fallbackKey = `SKL-2026/${student.pdfFilename}`;
+	return {
+		url: buildStoragePdfUrl(fallbackKey),
+		resolvedMediaId: fallbackKey,
+	};
 }
 
 function normalizeNisn(value: string): string {
@@ -730,14 +776,14 @@ export default definePlugin({
 							toast: { message: "Data siswa tidak ditemukan", type: "error" },
 						};
 					}
-					if (!ctx.media) {
-						throw PluginRouteError.internal("Media access is not available");
-					}
-					const media = await ctx.media.get(student.pdfMediaId);
-					if (!media) {
-						const listed = await listStudentsWithTelemetry(ctx, 200);
-						return {
-							...buildAdminBlocks(listed.items, nisn, eventType),
+				if (!ctx.media) {
+					throw PluginRouteError.internal("Media access is not available");
+				}
+				const resolvedPdf = await resolveStudentPdf(ctx, student);
+				if (!resolvedPdf) {
+					const listed = await listStudentsWithTelemetry(ctx, 200);
+					return {
+						...buildAdminBlocks(listed.items, nisn, eventType),
 							toast: {
 								message: "Dokumen siswa belum diupload. Upload ke R2: SKL-2026/",
 								type: "error",
@@ -747,12 +793,12 @@ export default definePlugin({
 					await recordDocumentEvent(ctx, student, eventType, "admin");
 					const listed = await listStudentsWithTelemetry(ctx, 200);
 
-					return {
-						...buildAdminBlocks(listed.items, nisn, eventType, {
-							title: "URL PDF tersedia",
-							description: `${student.pdfFilename}: ${media.url}`,
-						}),
-						toast: {
+				return {
+					...buildAdminBlocks(listed.items, nisn, eventType, {
+						title: "URL PDF tersedia",
+						description: `${student.pdfFilename}: ${resolvedPdf.url}`,
+					}),
+					toast: {
 							message:
 								eventType === "downloaded"
 									? "URL unduh PDF berhasil diambil"
@@ -879,12 +925,12 @@ export default definePlugin({
 				const session = await startGateSession(ctx, student.nisn);
 
 				if (ctx.media) {
-					const media = await ctx.media.get(student.pdfMediaId);
+					const resolvedPdf = await resolveStudentPdf(ctx, student);
 					return {
 						nisn: student.nisn,
 						name: student.name,
 						pdfFilename: student.pdfFilename,
-						pdfUrl: media?.url ?? null,
+						pdfUrl: resolvedPdf?.url ?? null,
 						...session,
 					};
 				}
@@ -939,8 +985,8 @@ export default definePlugin({
 					throw PluginRouteError.internal("Media access is not available");
 				}
 
-				const media = await ctx.media.get(student.pdfMediaId);
-				if (!media) {
+				const resolvedPdf = await resolveStudentPdf(ctx, student);
+				if (!resolvedPdf) {
 					throw PluginRouteError.notFound("Student document not found");
 				}
 
@@ -958,7 +1004,7 @@ export default definePlugin({
 					nisn: student.nisn,
 					name: student.name,
 					pdfFilename: student.pdfFilename,
-					pdfUrl: media.url,
+					pdfUrl: resolvedPdf.url,
 					eventType: ctx.input.eventType,
 				};
 			},
@@ -976,8 +1022,8 @@ export default definePlugin({
 					throw PluginRouteError.internal("Media access is not available");
 				}
 
-				const media = await ctx.media.get(student.pdfMediaId);
-				if (!media) {
+				const resolvedPdf = await resolveStudentPdf(ctx, student);
+				if (!resolvedPdf) {
 					throw PluginRouteError.notFound("Student document not found");
 				}
 
@@ -987,7 +1033,7 @@ export default definePlugin({
 					nisn: student.nisn,
 					name: student.name,
 					pdfFilename: student.pdfFilename,
-					pdfUrl: media.url,
+					pdfUrl: resolvedPdf.url,
 					eventType: ctx.input.eventType,
 				};
 			},
