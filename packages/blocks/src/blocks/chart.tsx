@@ -57,6 +57,10 @@ function isRecord(v: unknown): v is Record<string, unknown> {
 	return typeof v === "object" && v !== null && !Array.isArray(v);
 }
 
+function isUnsafeObjectKey(key: string): boolean {
+	return key === "__proto__" || key === "prototype" || key === "constructor";
+}
+
 const RE_HTML_TAG = /<[a-z/!]/i;
 
 function containsHtml(v: unknown): boolean {
@@ -72,6 +76,7 @@ function sanitizeOptions(obj: Record<string, unknown>): Record<string, unknown> 
 	const result: Record<string, unknown> = {};
 	for (const [key, value] of Object.entries(obj)) {
 		if (DANGEROUS_KEYS.has(key)) continue;
+		if (isUnsafeObjectKey(key)) continue;
 		if (containsHtml(value)) {
 			result[key] = escapeHtml(value as string);
 		} else if (Array.isArray(value)) {
