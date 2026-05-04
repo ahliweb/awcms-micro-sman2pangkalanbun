@@ -1,5 +1,9 @@
 import type { SubFieldDef, GridAxisDef } from "./types";
 
+function isUnsafeKey(key: string): boolean {
+	return key === "__proto__" || key === "prototype" || key === "constructor";
+}
+
 /**
  * Normalize a value into a plain object keyed by sub-field definitions.
  * Missing declared keys get their defaultValue (or undefined). Keys present
@@ -14,6 +18,7 @@ export function normalizeObject(value: unknown, fields: SubFieldDef[]): Record<s
 			: {};
 	const obj: Record<string, unknown> = { ...source };
 	for (const field of fields) {
+		if (isUnsafeKey(field.key)) continue;
 		if (source[field.key] === undefined) {
 			obj[field.key] = field.defaultValue ?? undefined;
 		}
@@ -42,6 +47,7 @@ export function normalizeGrid(
 ): Record<string, Record<string, unknown>> {
 	const out: Record<string, Record<string, unknown>> = {};
 	for (const row of rows) {
+		if (isUnsafeKey(row.key)) continue;
 		out[row.key] = {};
 	}
 
@@ -51,12 +57,13 @@ export function normalizeGrid(
 
 	const source = value as Record<string, unknown>;
 	for (const row of rows) {
+		if (isUnsafeKey(row.key)) continue;
 		const rowVal = source[row.key];
 		const rowOut = out[row.key]!;
 		if (Array.isArray(rowVal)) {
 			// Legacy array format: convert ["leaf", "fruit"] → { leaf: true, fruit: true }
 			for (const code of rowVal) {
-				if (typeof code === "string") {
+				if (typeof code === "string" && !isUnsafeKey(code)) {
 					rowOut[code] = true;
 				}
 			}
@@ -65,8 +72,12 @@ export function normalizeGrid(
 			// over them. Unknown keys survive so cells added to the schema later
 			// or managed outside this widget aren't silently dropped on save.
 			const rowObj = rowVal as Record<string, unknown>;
-			Object.assign(rowOut, rowObj);
+			for (const [cellKey, cellValue] of Object.entries(rowObj)) {
+				if (isUnsafeKey(cellKey)) continue;
+				rowOut[cellKey] = cellValue;
+			}
 			for (const col of columns) {
+				if (isUnsafeKey(col.key)) continue;
 				if (rowObj[col.key] !== undefined) {
 					rowOut[col.key] = rowObj[col.key];
 				}
