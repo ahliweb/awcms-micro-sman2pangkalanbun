@@ -11,7 +11,10 @@ import { defineCommand } from "citty";
 import consola from "consola";
 
 import { connectionArgs, createClientFromArgs } from "../client-factory.js";
-import { validateGeneratedTypesPayload } from "../../typegen/validate.js";
+import {
+	validateGeneratedTypesPayload,
+	validateSchemaExportPayload,
+} from "../../typegen/validate.js";
 
 function isInside(baseDir: string, targetPath: string): boolean {
 	return targetPath === baseDir || targetPath.startsWith(`${baseDir}${sep}`);
@@ -45,6 +48,10 @@ export const typesCommand = defineCommand({
 
 			// Fetch JSON schema
 			const schema = await client.schemaExport();
+			const schemaValidation = validateSchemaExportPayload(schema);
+			if (!schemaValidation.ok) {
+				throw new Error(schemaValidation.reason);
+			}
 			consola.success(`Found ${schema.collections.length} collections`);
 
 			// Fetch TypeScript types
@@ -65,7 +72,7 @@ export const typesCommand = defineCommand({
 
 			// Also write a schema.json for reference
 			const schemaJsonPath = resolve(dirname(outputPath), "schema.json");
-			await writeFile(schemaJsonPath, JSON.stringify(schema, null, 2), "utf-8");
+			await writeFile(schemaJsonPath, schemaValidation.serialized, "utf-8");
 			consola.info(`Schema version: ${schema.version}`);
 
 			consola.box({
