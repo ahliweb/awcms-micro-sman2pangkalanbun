@@ -15,6 +15,11 @@ const keyPrefix = process.env.SKL_R2_PREFIX || "SKL-2026";
 const publicBase = (process.env.SKL_PUBLIC_BASE_URL || "").replace(/\/$/, "");
 const dryRun = process.argv.includes("--dry-run");
 const localMode = process.argv.includes("--local");
+const maxRetries = Number(process.env.SKL_UPLOAD_MAX_RETRIES || "4");
+
+function sleep(ms) {
+	return new Promise((done) => setTimeout(done, ms));
+}
 
 if (!existsSync(pdfDir)) {
 	console.error(`Missing directory: ${pdfDir}`);
@@ -71,21 +76,48 @@ for (const row of rows) {
 
 	const storageFlag = localMode ? "--local" : "--remote";
 
-	const result = spawnSync(
-		"npx",
-		["wrangler", "r2", "object", "put", `${bucket}/${key}`, "--file", filePath, storageFlag],
-		{
-			cwd: resolve(repoRoot, "demos/cloudflare"),
-			stdio: "pipe",
-			encoding: "utf8",
-		},
-	);
+	let success = false;
+	for (let attempt = 1; attempt <= maxRetries; attempt++) {
+		const result = spawnSync(
+			"npx",
+			["wrangler", "r2", "object", "put", `${bucket}/${key}`, "--file", filePath, storageFlag],
+			{
+				cwd: resolve(repoRoot, "demos/cloudflare"),
+				stdio: "pipe",
+				encoding: "utf8",
+			},
+		);
 
-	if (result.status !== 0) {
+		if (result.status === 0) {
+			success = true;
+			break;
+		}
+
+		const output = `${result.stdout || ""}\n${result.stderr || ""}`;
+		const isRetryable =
+			output.includes("timed out") ||
+			output.includes("ECONNRESET") ||
+			output.includes("network") ||
+			output.includes("503") ||
+			output.includes("502");
+
+		if (!isRetryable || attempt === maxRetries) {
+			console.error(`Upload failed for ${row.filename}`);
+			if (result.stdout) console.error(result.stdout.trim());
+			if (result.stderr) console.error(result.stderr.trim());
+			process.exit(result.status ?? 1);
+		}
+
+		const delayMs = attempt * 2000;
+		console.warn(
+			`Retrying ${row.filename} (${attempt}/${maxRetries}) after ${delayMs}ms due to transient error...`,
+		);
+		await sleep(delayMs);
+	}
+
+	if (!success) {
 		console.error(`Upload failed for ${row.filename}`);
-		if (result.stdout) console.error(result.stdout.trim());
-		if (result.stderr) console.error(result.stderr.trim());
-		process.exit(result.status ?? 1);
+		process.exit(1);
 	}
 
 	uploaded += 1;
