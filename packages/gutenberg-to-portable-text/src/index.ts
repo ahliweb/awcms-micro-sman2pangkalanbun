@@ -17,6 +17,9 @@ import type {
 	TransformContext,
 } from "./types.js";
 
+/** Maximum input length to prevent polynomial regex backtracking on pathological HTML */
+export const MAX_CONVERTER_INPUT_LENGTH = 10_000_000; // 10 MB
+
 // Regex patterns for HTML parsing and conversion
 const BLOCK_ELEMENT_PATTERN =
 	/<(p|h[1-6]|blockquote|pre|ul|ol|figure|div|hr)[^>]*>([\s\S]*?)<\/\1>|<(hr|br)\s*\/?>|<img\s+[^>]+\/?>/gu;
@@ -118,6 +121,11 @@ export function gutenbergToPortableText(
 	content: string,
 	options: ConvertOptions = {},
 ): PortableTextBlock[] {
+	// Reject pathologically large inputs to prevent polynomial regex backtracking
+	if (content.length > MAX_CONVERTER_INPUT_LENGTH) {
+		return [];
+	}
+
 	// Handle empty content
 	if (!content || !content.trim()) {
 		return [];
@@ -151,6 +159,11 @@ export function htmlToPortableText(
 	html: string,
 	options: ConvertOptions = {},
 ): PortableTextBlock[] {
+	// Reject pathologically large inputs to prevent polynomial regex backtracking
+	if (html.length > MAX_CONVERTER_INPUT_LENGTH) {
+		return [];
+	}
+
 	const generateKey = options.keyGenerator || createKeyGenerator();
 	const blocks: PortableTextBlock[] = [];
 
