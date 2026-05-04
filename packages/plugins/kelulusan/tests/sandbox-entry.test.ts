@@ -135,6 +135,63 @@ describe("kelulusan plugin routes", () => {
 		expect(result.expiresInSeconds).toBe(600);
 	});
 
+	it("rejects gate session start for unknown NISN", async () => {
+		const route = (plugin as any).routes["gate/session/start"];
+		const { ctx } = makeCtx({ nisn: "0000000000" });
+
+		const parsed = route.input.parse(ctx.input);
+		await expect(route.handler({ ...ctx, input: parsed })).rejects.toMatchObject({
+			code: "BAD_REQUEST",
+		});
+	});
+
+	it("resolves active gate session and rejects mismatched token", async () => {
+		const startRoute = (plugin as any).routes["gate/session/start"];
+		const resolveRoute = (plugin as any).routes["gate/session/resolve"];
+		const { ctx, students } = makeCtx(
+			{ nisn: "5566778899", accessToken: "placeholder" },
+			{ ip: "10.8.0.1", userAgent: "test-browser" },
+		);
+
+		await students.put("stu-resolve", {
+			nisn: "5566778899",
+			name: "Rahma",
+			pdfMediaId: "pdf-5",
+			pdfFilename: "rahma.pdf",
+			createdAt: "2026-02-01T00:00:00.000Z",
+		});
+
+		const started = await startRoute.handler({
+			...ctx,
+			input: startRoute.input.parse({ nisn: "5566778899" }),
+		});
+
+		const resolved = await resolveRoute.handler({
+			...ctx,
+			input: resolveRoute.input.parse({
+				nisn: "5566778899",
+				accessToken: started.accessToken,
+			}),
+		});
+		expect(resolved).toMatchObject({
+			nisn: "5566778899",
+			name: "Rahma",
+			pdfFilename: "rahma.pdf",
+		});
+
+		await expect(
+			resolveRoute.handler({
+				...ctx,
+				input: resolveRoute.input.parse({
+					nisn: "5566778899",
+					accessToken: "wrong-token",
+				}),
+			}),
+		).rejects.toMatchObject({
+			code: "FORBIDDEN",
+		});
+	});
+
 	it("denies public document access with invalid token", async () => {
 		const route = (plugin as any).routes["documents/access/public"];
 		const { ctx, students } = makeCtx({
