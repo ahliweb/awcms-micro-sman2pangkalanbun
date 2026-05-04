@@ -31,9 +31,9 @@ import Base from "../../layouts/Base.astro";
 				<button id="open-pdf" type="button" class="btn-primary">
 					<span class="btn-icon">&#128196;</span> Buka PDF
 				</button>
-				<a id="download-pdf" class="btn-secondary" href="#" target="_blank" rel="noopener">
-					<span class="btn-icon">&#11015;</span> Unduh PDF
-				</a>
+			<a id="download-pdf" class="btn-secondary" href="#" role="button">
+				<span class="btn-icon">&#11015;</span> Unduh PDF
+			</a>
 			</div>
 		</section>
 	</section>
@@ -146,8 +146,6 @@ import Base from "../../layouts/Base.astro";
 				});
 				state.pdfUrl = opened.pdfUrl;
 				state.pdfFilename = opened.pdfFilename;
-				downloadPdf.href = opened.pdfUrl;
-				downloadPdf.download = opened.pdfFilename;
 				frame.src = `${opened.pdfUrl}#toolbar=1&navpanes=0`;
 				title.textContent = opened.pdfFilename;
 				dialog.showModal();
@@ -160,20 +158,21 @@ import Base from "../../layouts/Base.astro";
 		});
 
 		downloadPdf.addEventListener("click", async (event) => {
-			if (!state.nisn || !state.accessToken) {
-				event.preventDefault();
-				return;
-			}
+			event.preventDefault();
+			if (!state.nisn || !state.accessToken) return;
 			try {
 				const downloaded = await apiPost("documents/access/public", {
 					nisn: state.nisn,
 					accessToken: state.accessToken,
 					eventType: "downloaded",
 				});
-				downloadPdf.href = downloaded.pdfUrl;
-				downloadPdf.download = downloaded.pdfFilename;
+				const a = document.createElement("a");
+				a.href = downloaded.pdfUrl;
+				a.download = downloaded.pdfFilename;
+				document.body.appendChild(a);
+				a.click();
+				document.body.removeChild(a);
 			} catch (error) {
-				event.preventDefault();
 				showMessage(error instanceof Error ? error.message : "Gagal mengunduh PDF", true);
 			}
 		});
