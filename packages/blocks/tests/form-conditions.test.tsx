@@ -400,4 +400,30 @@ describe("form conditional fields", () => {
 		// Toggle B is false → Field B hidden
 		expect(screen.queryByText("Field B")).toBeNull();
 	});
+
+	it("ignores unsafe action keys to prevent prototype mutation", () => {
+		const onAction = vi.fn();
+		renderForm(
+			{
+				type: "form",
+				fields: [
+					{
+						type: "text_input",
+						action_id: "__proto__",
+						label: "Danger",
+						initial_value: "polluted",
+					},
+				],
+				submit: { label: "Save", action_id: "save" },
+			},
+			onAction,
+		);
+
+		fireEvent.click(screen.getByText("Save"));
+		expect(onAction).toHaveBeenCalledTimes(1);
+		const payload = onAction.mock.calls[0]?.[0] as BlockInteraction;
+		expect(payload.type).toBe("form_submit");
+		expect(Object.prototype.hasOwnProperty.call(payload.values, "__proto__")).toBe(false);
+		expect(({} as { polluted?: unknown }).polluted).toBeUndefined();
+	});
 });

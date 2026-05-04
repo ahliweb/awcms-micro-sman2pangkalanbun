@@ -61,6 +61,16 @@ function isUnsafeObjectKey(key: string): boolean {
 	return key === "__proto__" || key === "prototype" || key === "constructor";
 }
 
+function safeSet(target: Record<string, unknown>, key: string, value: unknown): void {
+	if (isUnsafeObjectKey(key)) return;
+	Object.defineProperty(target, key, {
+		value,
+		writable: true,
+		enumerable: true,
+		configurable: true,
+	});
+}
+
 const RE_HTML_TAG = /<[a-z/!]/i;
 
 function containsHtml(v: unknown): boolean {
@@ -78,19 +88,23 @@ function sanitizeOptions(obj: Record<string, unknown>): Record<string, unknown> 
 		if (DANGEROUS_KEYS.has(key)) continue;
 		if (isUnsafeObjectKey(key)) continue;
 		if (containsHtml(value)) {
-			result[key] = escapeHtml(value as string);
+			safeSet(result, key, escapeHtml(value as string));
 		} else if (Array.isArray(value)) {
-			result[key] = value.map((item) =>
+			safeSet(
+				result,
+				key,
+				value.map((item) =>
 				isRecord(item)
 					? sanitizeOptions(item)
 					: containsHtml(item)
 						? escapeHtml(item as string)
 						: item,
+				),
 			);
 		} else if (isRecord(value)) {
-			result[key] = sanitizeOptions(value);
+			safeSet(result, key, sanitizeOptions(value));
 		} else {
-			result[key] = value;
+			safeSet(result, key, value);
 		}
 	}
 	return result;
