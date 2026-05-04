@@ -940,8 +940,7 @@ export class SchemaRegistry {
 				text = String(value);
 				break;
 			case "object": {
-				const raw = value === null ? undefined : JSON.stringify(value);
-				text = raw !== undefined ? raw : "";
+				text = value === null ? "" : (JSON.stringify(value) as string | undefined) ?? "";
 				break;
 			}
 			default:
