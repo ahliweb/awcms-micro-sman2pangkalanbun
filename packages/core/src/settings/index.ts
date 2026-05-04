@@ -72,7 +72,7 @@ function isMediaReference(value: unknown): value is MediaReference {
 	if (typeof value !== "object" || value === null) {
 		return false;
 	}
-	return Object.hasOwn(value, "mediaId");
+	return Object.prototype.hasOwnProperty.call(value, "mediaId");
 }
 
 /**
