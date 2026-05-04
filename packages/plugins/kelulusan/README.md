@@ -30,6 +30,7 @@ Scaffold package for the `kelulusan` plugin with storage and route surface for N
 - `students/upsert` - admin route for creating/updating student records
 - `students/get-by-nisn` - public student lookup by NISN
 - `gate/session/start` - public NISN gate session issuer with short-lived access token
+- `gate/session/resolve` - validates active gate session and returns student summary for result page
 - `documents/access/public` - NISN + gate token PDF access with telemetry event
 - `documents/access/admin` - authenticated admin PDF access with telemetry event
 

@@ -14,6 +14,11 @@ const gateSessionStartSchema = z.object({
 	nisn: z.string().trim().min(6).max(32),
 });
 
+const gateSessionResolveSchema = z.object({
+	nisn: z.string().trim().min(6).max(32),
+	accessToken: z.string().trim().min(8),
+});
+
 const documentAccessSchema = z.object({
 	nisn: z.string().trim().min(6).max(32),
 	accessToken: z.string().trim().min(8).optional(),
@@ -324,6 +329,28 @@ export default definePlugin({
 					name: student.name,
 					pdfFilename: student.pdfFilename,
 					...session,
+				};
+			},
+		},
+		"gate/session/resolve": {
+			public: true,
+			input: gateSessionResolveSchema,
+			handler: async (routeCtx: any, pluginCtx: any) => {
+				const ctx = { ...pluginCtx, ...routeCtx };
+				const student = await findStudentByNisn(ctx, ctx.input.nisn);
+				if (!student) {
+					throw PluginRouteError.notFound("Student record not found");
+				}
+
+				const authorized = await isValidGateSession(ctx, student.nisn, ctx.input.accessToken);
+				if (!authorized) {
+					throw PluginRouteError.forbidden("Invalid or expired access token");
+				}
+
+				return {
+					nisn: student.nisn,
+					name: student.name,
+					pdfFilename: student.pdfFilename,
 				};
 			},
 		},

@@ -11,31 +11,11 @@
 		</form>
 		<p id="status" role="status"></p>
 
-		<section id="result" hidden>
-			<p id="student-nisn"></p>
-			<p id="student-name"></p>
-			<p id="student-file"></p>
-			<button id="open-pdf" type="button">Buka PDF</button>
-			<a id="download-pdf" href="#" target="_blank" rel="noopener">Unduh PDF</a>
-		</section>
-
-		<dialog id="pdf-dialog">
-			<button id="close-dialog" type="button">Tutup</button>
-			<iframe id="pdf-frame" title="PDF Kelulusan"></iframe>
-		</dialog>
-
 		<script is:inline>
 			const API_BASE = "/_emdash/api/plugins/kelulusan";
-			const state = { nisn: "", token: "", pdfUrl: "" };
-
+			const SESSION_KEY = "kelulusan:gate-session";
 			const form = document.getElementById("nisn-form");
 			const statusEl = document.getElementById("status");
-			const resultEl = document.getElementById("result");
-			const openBtn = document.getElementById("open-pdf");
-			const downloadLink = document.getElementById("download-pdf");
-			const dialog = document.getElementById("pdf-dialog");
-			const closeBtn = document.getElementById("close-dialog");
-			const frame = document.getElementById("pdf-frame");
 
 			async function post(path, body) {
 				const response = await fetch(`${API_BASE}/${path}`, {
@@ -66,51 +46,18 @@
 
 				try {
 					const session = await post("gate/session/start", { nisn });
-					state.nisn = session.nisn;
-					state.token = session.accessToken;
-					document.getElementById("student-nisn").textContent = `NISN: ${session.nisn}`;
-					document.getElementById("student-name").textContent = `Nama: ${session.name}`;
-					document.getElementById("student-file").textContent = `File: ${session.pdfFilename}`;
-					resultEl.hidden = false;
-					statusEl.textContent = "NISN valid";
-
-					const opened = await post("documents/access/public", {
-						nisn: session.nisn,
-						accessToken: session.accessToken,
-						eventType: "opened",
-					});
-					state.pdfUrl = opened.pdfUrl;
-					downloadLink.href = opened.pdfUrl;
-					downloadLink.download = opened.pdfFilename;
+					sessionStorage.setItem(
+						SESSION_KEY,
+						JSON.stringify({
+							nisn: session.nisn,
+							accessToken: session.accessToken,
+							expiresAt: session.expiresAt,
+						}),
+					);
+					window.location.assign("/kelulusan/hasil");
 				} catch (error) {
 					statusEl.textContent = error instanceof Error ? error.message : "NISN invalid";
 				}
-			});
-
-			openBtn.addEventListener("click", async () => {
-				if (!state.nisn || !state.token) return;
-				const opened = await post("documents/access/public", {
-					nisn: state.nisn,
-					accessToken: state.token,
-					eventType: "opened",
-				});
-				frame.src = `${opened.pdfUrl}#toolbar=1&navpanes=0`;
-				dialog.showModal();
-			});
-
-			downloadLink.addEventListener("click", async () => {
-				if (!state.nisn || !state.token) return;
-				const downloaded = await post("documents/access/public", {
-					nisn: state.nisn,
-					accessToken: state.token,
-					eventType: "downloaded",
-				});
-				downloadLink.href = downloaded.pdfUrl;
-			});
-
-			closeBtn.addEventListener("click", () => {
-				dialog.close();
-				frame.src = "";
 			});
 		</script>
 	</body>
