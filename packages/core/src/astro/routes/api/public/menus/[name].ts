@@ -36,7 +36,7 @@ export const GET: APIRoute = async ({ params, locals }) => {
 		}
 
 		return apiSuccess(menu);
-	} catch (error) {
+	} catch {
 		return apiError(
 			"MENU_GET_ERROR",
 			"Failed to fetch menu",
