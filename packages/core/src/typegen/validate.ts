@@ -1,5 +1,6 @@
 const TYPEGEN_MAX_BYTES = 2_000_000;
 const FORBIDDEN_CONTROL_PATTERN = /[\u0000\u0001-\u0008\u000B\u000C\u000E-\u001F\u007F]/;
+const SCHEMA_JSON_MAX_BYTES = 2_000_000;
 
 /**
  * Guard typegen payloads before writing them to disk.
@@ -15,4 +16,30 @@ export function validateGeneratedTypesPayload(types: string): { ok: true } | { o
 		return { ok: false, reason: "Schema types payload contains control characters" };
 	}
 	return { ok: true };
+}
+
+/**
+ * Guard schema export payloads before writing them to disk.
+ */
+export function validateSchemaExportPayload(
+	schema: unknown,
+): { ok: true; serialized: string } | { ok: false; reason: string } {
+	if (typeof schema !== "object" || schema === null || Array.isArray(schema)) {
+		return { ok: false, reason: "Schema export payload is invalid" };
+	}
+
+	const record = schema as Record<string, unknown>;
+	if (!Array.isArray(record.collections)) {
+		return { ok: false, reason: "Schema export payload is invalid" };
+	}
+	if (typeof record.version !== "number") {
+		return { ok: false, reason: "Schema export payload is invalid" };
+	}
+
+	const serialized = JSON.stringify(schema, null, 2);
+	if (serialized.length > SCHEMA_JSON_MAX_BYTES) {
+		return { ok: false, reason: "Schema export payload is unexpectedly large" };
+	}
+
+	return { ok: true, serialized };
 }
