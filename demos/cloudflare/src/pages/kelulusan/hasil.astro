@@ -70,11 +70,11 @@ import Base from "../../layouts/Base.astro";
 				body: JSON.stringify(body),
 			});
 			const payload = await res.json().catch(() => ({}));
-			if (!res.ok || !payload.success) {
+			if (!res.ok || payload.success === false) {
 				const message = payload?.error?.message || "Permintaan gagal";
 				throw new Error(message);
 			}
-			return payload.data;
+			return payload.data ?? payload;
 		}
 
 		function showMessage(message, isError = false) {
