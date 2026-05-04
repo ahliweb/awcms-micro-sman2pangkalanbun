@@ -13,7 +13,10 @@ import consola from "consola";
 
 import { createDatabase } from "../../database/connection.js";
 import { runMigrations } from "../../database/migrations/runner.js";
-import { validateGeneratedTypesPayload } from "../../typegen/validate.js";
+import {
+	validateGeneratedTypesPayload,
+	validateSchemaExportPayload,
+} from "../../typegen/validate.js";
 
 interface PackageJson {
 	name?: string;
@@ -122,6 +125,10 @@ export const devCommand = defineCommand({
 					const { createClientFromArgs } = await import("../client-factory.js");
 					const client = createClientFromArgs({ url: remoteUrl });
 					const schema = await client.schemaExport();
+					const schemaValidation = validateSchemaExportPayload(schema);
+					if (!schemaValidation.ok) {
+						throw new Error(schemaValidation.reason);
+					}
 					const types = await client.schemaTypes();
 					const validation = validateGeneratedTypesPayload(types);
 					if (!validation.ok) {
@@ -138,7 +145,7 @@ export const devCommand = defineCommand({
 					await writeFile(outputPath, types, "utf-8");
 					await writeFile(
 						resolvePath(dirname(outputPath), "schema.json"),
-						JSON.stringify(schema, null, 2),
+						schemaValidation.serialized,
 						"utf-8",
 					);
 					consola.success(`Generated types for ${schema.collections.length} collections`);
