@@ -19,6 +19,7 @@
 import { readFileSync } from "node:fs";
 
 import { expect, test } from "../fixtures";
+import { buildFromBase, parseSafeHttpBaseUrl } from "../fixtures/safe-base-url";
 import { SERVER_INFO_PATH } from "../fixtures/server-info-path";
 import { addVirtualWebAuthnAuthenticator } from "../fixtures/virtual-authenticator";
 
@@ -29,6 +30,10 @@ const URL_IN_TEXT_REGEX = /https?:\/\/[^\s]+/;
 
 function getServerInfo(): { baseUrl: string; token: string; sessionCookie: string } {
 	return JSON.parse(readFileSync(SERVER_INFO_PATH, "utf-8"));
+}
+
+function apiUrl(baseUrl: string, path: string): URL {
+	return buildFromBase(parseSafeHttpBaseUrl(baseUrl), path);
 }
 
 /**
@@ -43,7 +48,7 @@ async function createInviteViaApi(email: string, role = 30): Promise<string> {
 	const { baseUrl, token, sessionCookie } = getServerInfo();
 
 	// Clear previously captured emails
-	await fetch(`${baseUrl}/_emdash/api/dev/emails`, {
+	await fetch(apiUrl(baseUrl, "/_emdash/api/dev/emails"), {
 		method: "DELETE",
 		headers: {
 			"X-EmDash-Request": "1",
@@ -52,7 +57,7 @@ async function createInviteViaApi(email: string, role = 30): Promise<string> {
 	});
 
 	// Create the invite
-	const createRes = await fetch(`${baseUrl}/_emdash/api/auth/invite`, {
+	const createRes = await fetch(apiUrl(baseUrl, "/_emdash/api/auth/invite"), {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -77,7 +82,7 @@ async function createInviteViaApi(email: string, role = 30): Promise<string> {
 	}
 
 	// Otherwise, retrieve the invite URL from captured dev emails
-	const emailsRes = await fetch(`${baseUrl}/_emdash/api/dev/emails`, {
+	const emailsRes = await fetch(apiUrl(baseUrl, "/_emdash/api/dev/emails"), {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
@@ -173,7 +178,7 @@ test.describe("Invite creation via API", () => {
 	test("creating invite for existing user returns error", async () => {
 		const { baseUrl, token } = getServerInfo();
 
-		const res = await fetch(`${baseUrl}/_emdash/api/auth/invite`, {
+		const res = await fetch(apiUrl(baseUrl, "/_emdash/api/auth/invite"), {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
