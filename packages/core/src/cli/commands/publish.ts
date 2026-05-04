@@ -27,6 +27,7 @@ import {
 	saveMarketplaceCredential,
 	removeMarketplaceCredential,
 } from "../credentials.js";
+import { getOpenExternalUrlCommand } from "../open-external-url.js";
 
 const DEFAULT_REGISTRY = "https://marketplace.emdashcms.com";
 const SAFE_PLUGIN_ID_PATTERN = /^[a-z0-9][a-z0-9_-]*$/;
@@ -127,12 +128,9 @@ async function authenticateViaDeviceFlow(registryUrl: string): Promise<Marketpla
 	// Try to open browser
 	try {
 		const { execFile } = await import("node:child_process");
-		if (process.platform === "darwin") {
-			execFile("open", [deviceCode.verification_uri]);
-		} else if (process.platform === "win32") {
-			execFile("cmd", ["/c", "start", "", deviceCode.verification_uri]);
-		} else {
-			execFile("xdg-open", [deviceCode.verification_uri]);
+		const openCommand = getOpenExternalUrlCommand(process.platform, deviceCode.verification_uri);
+		if (openCommand) {
+			execFile(openCommand.command, openCommand.args);
 		}
 	} catch {
 		// User can open manually
