@@ -2255,6 +2255,58 @@ export class EmDashRuntime {
 		return undefined;
 	}
 
+	private async handleSandboxedRouteFromEntry(
+		entry: SandboxedPluginEntry,
+		path: string,
+		request: Request,
+	): Promise<{
+		success: boolean;
+		data?: unknown;
+		error?: { code: string; message: string };
+	}> {
+		const pluginKey = `${entry.id}:${entry.version}`;
+		let plugin = this.sandboxedPlugins.get(pluginKey);
+
+		if (!plugin) {
+			if (!sandboxRunner || !sandboxRunner.isAvailable()) {
+				return {
+					success: false,
+					error: {
+						code: "NOT_FOUND",
+						message: `Plugin not loaded: ${entry.id}`,
+					},
+				};
+			}
+
+			try {
+				const manifest: PluginManifest = {
+					id: entry.id,
+					version: entry.version,
+					capabilities: entry.capabilities ?? [],
+					allowedHosts: entry.allowedHosts ?? [],
+					storage: entry.storage ?? {},
+					hooks: [],
+					routes: [],
+					admin: {},
+				};
+
+				plugin = await sandboxRunner.load(manifest, entry.code);
+				this.sandboxedPlugins.set(pluginKey, plugin);
+			} catch (error) {
+				console.error(`EmDash: Failed to load sandboxed plugin ${entry.id} on demand:`, error);
+				return {
+					success: false,
+					error: {
+						code: "NOT_FOUND",
+						message: `Plugin not loaded: ${entry.id}`,
+					},
+				};
+			}
+		}
+
+		return this.handleSandboxedRoute(plugin, path, request);
+	}
+
 	/**
 	 * Normalize image/file fields in content data.
 	 * Fills missing dimensions, storageKey, mimeType, and filename from providers.
