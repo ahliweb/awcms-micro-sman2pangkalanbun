@@ -1150,12 +1150,13 @@ export async function handleContentPublish(
 				},
 			};
 		}
-		console.error("Content publish error:", error);
+		const errMsg = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+		console.error("Content publish error:", errMsg, "stack:", error instanceof Error ? error.stack : undefined);
 		return {
 			success: false,
 			error: {
 				code: "CONTENT_PUBLISH_ERROR",
-				message: "Failed to publish content",
+				message: `Failed to publish content: ${errMsg}`,
 			},
 		};
 	}
