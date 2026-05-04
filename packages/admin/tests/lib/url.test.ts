@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { sanitizeRedirectUrl } from "../../src/lib/url";
+import { isSafeRedirectPath, sanitizeRedirectUrl } from "../../src/lib/url";
 
 describe("sanitizeRedirectUrl", () => {
 	it("allows simple relative paths", () => {
@@ -55,5 +55,22 @@ describe("sanitizeRedirectUrl", () => {
 
 	it("rejects bare domain", () => {
 		expect(sanitizeRedirectUrl("evil.com")).toBe("/_emdash/admin");
+	});
+});
+
+describe("isSafeRedirectPath", () => {
+	it("accepts internal paths", () => {
+		expect(isSafeRedirectPath("/_emdash/admin")).toBe(true);
+		expect(isSafeRedirectPath("/_emdash/admin?tab=settings#content")).toBe(true);
+	});
+
+	it("rejects protocol-relative and escaped paths", () => {
+		expect(isSafeRedirectPath("//evil.com")).toBe(false);
+		expect(isSafeRedirectPath("/\\evil.com")).toBe(false);
+	});
+
+	it("rejects non-path urls", () => {
+		expect(isSafeRedirectPath("https://evil.com")).toBe(false);
+		expect(isSafeRedirectPath("javascript:alert(1)")).toBe(false);
 	});
 });
