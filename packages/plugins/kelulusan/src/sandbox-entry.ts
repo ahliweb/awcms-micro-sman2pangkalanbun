@@ -147,9 +147,7 @@ async function shouldRecordPublicEvent(
 	const now = Date.now();
 	if (last) {
 		const age = now - toTime(last);
-		if (age >= 0 && age < PUBLIC_EVENT_DEDUPE_MS) {
-			return false;
-		}
+		if (age >= 0 && age < PUBLIC_EVENT_DEDUPE_MS) return false;
 	}
 	await ctx.kv.set(key, new Date(now).toISOString());
 	return true;
@@ -203,6 +201,108 @@ async function buildTelemetrySummary(ctx: any, studentIds: string[]) {
 	return summary;
 }
 
+async function listStudentsWithTelemetry(ctx: any, limit: number, cursor?: string) {
+	const result = await ctx.storage.students.query({
+		orderBy: { createdAt: "desc" },
+		limit,
+		cursor,
+	});
+	const students = result.items.map((item: any) => item.data as StudentRecord);
+	const telemetry = await buildTelemetrySummary(
+		ctx,
+		students.map((student: StudentRecord) => student.nisn),
+	);
+
+	const items = students.map((student: StudentRecord) => {
+		const t = telemetry.get(student.nisn);
+		return {
+			...student,
+			openedCount: t?.openedCount ?? 0,
+			downloadedCount: t?.downloadedCount ?? 0,
+			lastOpenedAt: t?.lastOpenedAt ?? null,
+			lastDownloadedAt: t?.lastDownloadedAt ?? null,
+		};
+	});
+
+	return { items, nextCursor: result.cursor };
+}
+
+function buildAdminBlocks(
+	items: Array<
+		StudentRecord & {
+			openedCount: number;
+			downloadedCount: number;
+			lastOpenedAt: string | null;
+			lastDownloadedAt: string | null;
+		}
+	>,
+	selectedNisn?: string,
+	eventType: "opened" | "downloaded" = "opened",
+	banner?: { title: string; description: string },
+) {
+	const options = items.map((item) => ({
+		label: `${item.nisn} - ${item.name}`,
+		value: item.nisn,
+	}));
+
+	const blocks: Array<Record<string, unknown>> = [];
+	if (banner) {
+		blocks.push({
+			type: "banner",
+			variant: "default",
+			title: banner.title,
+			description: banner.description,
+		});
+	}
+
+	blocks.push(
+		{ type: "header", text: "Kelulusan" },
+		{
+			type: "context",
+			text: "Lihat data siswa, telemetry dokumen, dan ambil URL PDF per siswa.",
+		},
+		{
+			type: "table",
+			blockId: "kelulusan-students",
+			columns: [
+				{ key: "nisn", label: "NISN", format: "code" },
+				{ key: "name", label: "Nama", format: "text" },
+				{ key: "pdfFilename", label: "PDF", format: "text" },
+				{ key: "openedCount", label: "Dibuka", format: "badge" },
+				{ key: "downloadedCount", label: "Diunduh", format: "badge" },
+			],
+			rows: items,
+			emptyText: "Belum ada data siswa.",
+		},
+		{
+			type: "form",
+			block_id: "kelulusan-admin-action",
+			fields: [
+				{
+					type: "select",
+					action_id: "nisn",
+					label: "Pilih siswa",
+					options,
+					initial_value: selectedNisn ?? options[0]?.value,
+				},
+				{
+					type: "select",
+					action_id: "eventType",
+					label: "Aksi dokumen",
+					options: [
+						{ label: "Buka PDF", value: "opened" },
+						{ label: "Unduh PDF", value: "downloaded" },
+					],
+					initial_value: eventType,
+				},
+			],
+			submit: { label: "Ambil URL PDF", action_id: "open_document" },
+		},
+	);
+
+	return { blocks };
+}
+
 async function startGateSession(ctx: any, nisn: string) {
 	const expiresInSeconds = 10 * 60;
 	const expiresAt = new Date(Date.now() + expiresInSeconds * 1000).toISOString();
@@ -245,19 +345,70 @@ async function enforceRateLimit(ctx: any) {
 }
 
 export default definePlugin({
-	routes: {
+		routes: {
 		admin: {
-			handler: async (routeCtx: any) => {
+			handler: async (routeCtx: any, pluginCtx: any) => {
+				const ctx = { ...pluginCtx, ...routeCtx };
 				const interaction = routeCtx.input as { type?: string; page?: string };
 				if (interaction.type === "page_load" && interaction.page === "/kelulusan") {
+					const listed = await listStudentsWithTelemetry(ctx, 100);
+					return buildAdminBlocks(listed.items);
+				}
+
+				const formInteraction = routeCtx.input as {
+					type?: string;
+					action_id?: string;
+					values?: Record<string, unknown>;
+				};
+				if (
+					formInteraction.type === "form_submit" &&
+					formInteraction.action_id === "open_document"
+				) {
+					const nisn =
+						typeof formInteraction.values?.nisn === "string" ? formInteraction.values.nisn : "";
+					const eventType =
+						formInteraction.values?.eventType === "downloaded" ? "downloaded" : "opened";
+					if (!nisn) {
+						const listed = await listStudentsWithTelemetry(ctx, 100);
+						return {
+							...buildAdminBlocks(listed.items, undefined, eventType),
+							toast: { message: "Pilih siswa terlebih dahulu", type: "error" },
+						};
+					}
+					const student = await findStudentByNisn(ctx, nisn);
+					if (!student) {
+						const listed = await listStudentsWithTelemetry(ctx, 100);
+						return {
+							...buildAdminBlocks(listed.items, nisn, eventType),
+							toast: { message: "Data siswa tidak ditemukan", type: "error" },
+						};
+					}
+					if (!ctx.media) {
+						throw PluginRouteError.internal("Media access is not available");
+					}
+					const media = await ctx.media.get(student.pdfMediaId);
+					if (!media) {
+						const listed = await listStudentsWithTelemetry(ctx, 100);
+						return {
+							...buildAdminBlocks(listed.items, nisn, eventType),
+							toast: { message: "Dokumen siswa tidak ditemukan", type: "error" },
+						};
+					}
+					await recordDocumentEvent(ctx, student, eventType, "admin");
+					const listed = await listStudentsWithTelemetry(ctx, 100);
+
 					return {
-						blocks: [
-							{ type: "header", text: "Kelulusan" },
-							{
-								type: "context",
-								text: "Kelulusan admin scaffold is active. Student list and telemetry will be added in follow-up issues.",
-							},
-						],
+						...buildAdminBlocks(listed.items, nisn, eventType, {
+							title: "URL PDF tersedia",
+							description: `${student.pdfFilename}: ${media.url}`,
+						}),
+						toast: {
+							message:
+								eventType === "downloaded"
+									? "URL unduh PDF berhasil diambil"
+									: "URL buka PDF berhasil diambil",
+							type: "success",
+						},
 					};
 				}
 
@@ -268,30 +419,7 @@ export default definePlugin({
 			input: studentListSchema,
 			handler: async (routeCtx: any, pluginCtx: any) => {
 				const ctx = { ...pluginCtx, ...routeCtx };
-				const result = await ctx.storage.students.query({
-					orderBy: { createdAt: "desc" },
-					limit: ctx.input.limit ?? 50,
-					cursor: ctx.input.cursor,
-				});
-				const students = result.items.map((item: any) => item.data as StudentRecord);
-				const telemetry = await buildTelemetrySummary(
-					ctx,
-					students.map((student: StudentRecord) => student.nisn),
-				);
-
-				return {
-					items: students.map((student: StudentRecord) => {
-						const t = telemetry.get(student.nisn);
-						return {
-							...student,
-							openedCount: t?.openedCount ?? 0,
-							downloadedCount: t?.downloadedCount ?? 0,
-							lastOpenedAt: t?.lastOpenedAt ?? null,
-							lastDownloadedAt: t?.lastDownloadedAt ?? null,
-						};
-					}),
-					nextCursor: result.cursor,
-				};
+				return listStudentsWithTelemetry(ctx, ctx.input.limit ?? 50, ctx.input.cursor);
 			},
 		},
 		"students/upsert": {
