@@ -8,6 +8,7 @@
 import { readFileSync } from "node:fs";
 
 import { expect, test } from "../fixtures";
+import { buildFromBase, parseSafeHttpBaseUrl } from "../fixtures/safe-base-url";
 import { refreshServerPatAfterDevBypass } from "../fixtures/refresh-server-pat";
 import { SERVER_INFO_PATH } from "../fixtures/server-info-path";
 import { addVirtualWebAuthnAuthenticator } from "../fixtures/virtual-authenticator";
@@ -19,10 +20,11 @@ function fixtureBaseUrl(): string {
 }
 
 async function resetSetup(): Promise<void> {
-	const base = fixtureBaseUrl();
-	const res = await fetch(`${base}/_emdash/api/setup/dev-reset`, {
+	const base = parseSafeHttpBaseUrl(fixtureBaseUrl());
+	const url = buildFromBase(base, "/_emdash/api/setup/dev-reset");
+	const res = await fetch(url, {
 		method: "POST",
-		headers: { "X-EmDash-Request": "1", Origin: base },
+		headers: { "X-EmDash-Request": "1", Origin: base.origin },
 	});
 	if (!res.ok) throw new Error(`dev-reset failed: ${res.status}`);
 }
