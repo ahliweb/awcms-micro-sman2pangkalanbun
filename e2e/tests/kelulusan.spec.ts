@@ -41,6 +41,7 @@ test.describe("Kelulusan flows", () => {
 		await page.goto("/kelulusan");
 		await page.fill("#nisn", "1234567890");
 		await page.click("button[type='submit']");
+		await expect(page).toHaveURL(/\/kelulusan\/hasil$/);
 
 		await expect(page.locator("#result")).toBeVisible();
 		await expect(page.locator("#student-name")).toContainText("Siswa Uji");
@@ -48,6 +49,11 @@ test.describe("Kelulusan flows", () => {
 		await page.click("#open-pdf");
 		await expect(page.locator("#pdf-dialog")).toHaveAttribute("open", "");
 		await expect(page.locator("#pdf-frame")).toHaveAttribute("src", /\/media\//);
+	});
+
+	test("result page redirects to gate without valid session", async ({ page }) => {
+		await page.goto("/kelulusan/hasil");
+		await expect(page).toHaveURL(/\/kelulusan$/);
 	});
 
 	test("admin list shows row and updates telemetry after actions", async ({ admin, page, serverInfo }) => {
