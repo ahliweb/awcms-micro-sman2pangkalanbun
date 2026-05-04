@@ -56,6 +56,33 @@ test.describe("Kelulusan flows", () => {
 		await expect(page).toHaveURL(/\/kelulusan$/);
 	});
 
+	test("result page rejects tampered gate session token", async ({ admin, page, serverInfo }) => {
+		await admin.devBypassAuth();
+		await upsertStudent(
+			page,
+			serverInfo.sessionCookie,
+			serverInfo.mediaIds.testImage,
+			"3344556677",
+			"Token Tamper",
+		);
+
+		await page.goto("/kelulusan");
+		await page.fill("#nisn", "3344556677");
+		await page.click("button[type='submit']");
+		await expect(page).toHaveURL(/\/kelulusan\/hasil$/);
+
+		await page.evaluate(() => {
+			const raw = sessionStorage.getItem("kelulusan:gate-session");
+			if (!raw) return;
+			const parsed = JSON.parse(raw);
+			parsed.accessToken = "tampered-token";
+			sessionStorage.setItem("kelulusan:gate-session", JSON.stringify(parsed));
+		});
+
+		await page.goto("/kelulusan/hasil");
+		await expect(page).toHaveURL(/\/kelulusan/);
+	});
+
 	test("admin list shows row and updates telemetry after actions", async ({ admin, page, serverInfo }) => {
 		await admin.devBypassAuth();
 		await upsertStudent(
