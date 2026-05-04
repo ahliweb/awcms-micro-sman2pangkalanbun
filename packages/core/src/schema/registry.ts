@@ -939,9 +939,11 @@ export class SchemaRegistry {
 			case "boolean":
 				text = String(value);
 				break;
-			case "object":
-				text = value === null ? "" : (JSON.stringify(value) ?? "");
+			case "object": {
+				const raw = value === null ? undefined : JSON.stringify(value);
+				text = raw !== undefined ? raw : "";
 				break;
+			}
 			default:
 				text = "";
 		}

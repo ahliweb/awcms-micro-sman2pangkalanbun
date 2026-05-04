@@ -244,10 +244,10 @@ function resolveHooks(hooks: PluginHooks, pluginId: string): ResolvedPluginHooks
 function isHookConfig<THandler>(
 	hook: HookConfig<THandler> | THandler,
 ): hook is HookConfig<THandler> {
-	if (typeof hook !== "object" || hook === null) {
+	if (hook === null || typeof hook !== "object") {
 		return false;
 	}
-	return Object.prototype.hasOwnProperty.call(hook, "handler");
+	return "handler" in hook;
 }
 
 /**
