@@ -247,7 +247,7 @@ function isHookConfig<THandler>(
 	if (typeof hook !== "object" || hook === null) {
 		return false;
 	}
-	return Object.hasOwn(hook, "handler");
+	return Object.prototype.hasOwnProperty.call(hook, "handler");
 }
 
 /**
