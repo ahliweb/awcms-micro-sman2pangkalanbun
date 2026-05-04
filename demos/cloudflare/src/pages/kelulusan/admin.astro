@@ -1,0 +1,205 @@
+---
+import Base from "../../layouts/Base.astro";
+
+const user = Astro.locals.user;
+---
+
+<Base title="Kelulusan Admin" description="Daftar siswa kelulusan dan akses dokumen PDF">
+	<section class="admin-wrap">
+		<header class="admin-header">
+			<h1>Kelulusan — Admin</h1>
+			<p class="subtitle">Kelola data siswa dan pantau akses dokumen SKL</p>
+		</header>
+
+		{
+			!user
+				? (
+					<div class="notice">
+						<p>Anda harus login sebagai admin untuk mengakses halaman ini.</p>
+						<a href="/_emdash/admin/login?redirect=%2Fkelulusan%2Fadmin" class="btn-primary">Login Admin</a>
+					</div>
+				)
+				: (
+					<>
+						<p id="status" class="status" role="status" aria-live="polite"></p>
+						<div class="table-wrap">
+							<table>
+								<thead>
+									<tr>
+										<th>NISN</th>
+										<th>Nama</th>
+										<th>File PDF</th>
+										<th>Dibuka</th>
+										<th>Diunduh</th>
+										<th>Aksi</th>
+									</tr>
+								</thead>
+								<tbody id="rows"></tbody>
+							</table>
+						</div>
+					</>
+				)
+		}
+	</section>
+
+	<dialog id="pdf-dialog" class="pdf-dialog">
+		<div class="pdf-head">
+			<strong id="dialog-title">Dokumen Kelulusan</strong>
+			<button id="close-dialog" type="button" aria-label="Tutup">&#10005; Tutup</button>
+		</div>
+		<iframe id="pdf-frame" title="PDF Kelulusan"></iframe>
+	</dialog>
+
+	{
+		user && (
+			<script is:inline>
+				const API_BASE = "/_emdash/api/plugins/kelulusan";
+				const rowsEl = document.getElementById("rows");
+				const statusEl = document.getElementById("status");
+				const dialog = document.getElementById("pdf-dialog");
+				const closeDialog = document.getElementById("close-dialog");
+				const frame = document.getElementById("pdf-frame");
+				const title = document.getElementById("dialog-title");
+
+				function setStatus(message, isError = false) {
+					statusEl.textContent = message;
+					statusEl.classList.toggle("error", isError);
+				}
+
+				async function post(path, body) {
+					const res = await fetch(`${API_BASE}/${path}`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							"X-EmDash-Request": "1",
+						},
+						credentials: "same-origin",
+						body: JSON.stringify(body || {}),
+					});
+					const payload = await res.json().catch(() => ({}));
+					if (!res.ok || !payload.success) {
+						throw new Error(payload?.error?.message || "Permintaan admin gagal");
+					}
+					return payload.data;
+				}
+
+				function renderRows(items) {
+					rowsEl.innerHTML = "";
+					if (!items.length) {
+						rowsEl.innerHTML = '<tr><td colspan="6" class="empty">Belum ada data siswa. Import data terlebih dahulu.</td></tr>';
+						return;
+					}
+
+					for (const item of items) {
+						const openedText = item.lastOpenedAt
+							? `${item.openedCount}x <span class="muted">(${new Date(item.lastOpenedAt).toLocaleString()})</span>`
+							: '<span class="muted">Belum</span>';
+						const downloadedText = item.lastDownloadedAt
+							? `${item.downloadedCount}x <span class="muted">(${new Date(item.lastDownloadedAt).toLocaleString()})</span>`
+							: '<span class="muted">Belum</span>';
+
+						const tr = document.createElement("tr");
+						tr.innerHTML = `
+							<td><code>${item.nisn || "-"}</code></td>
+							<td>${item.name || "-"}</td>
+							<td class="filename">${item.pdfFilename || "-"}</td>
+							<td>${openedText}</td>
+							<td>${downloadedText}</td>
+							<td class="actions-cell">
+								<button type="button" data-action="open" data-nisn="${item.nisn}">Buka</button>
+								<button type="button" data-action="download" data-nisn="${item.nisn}">Unduh</button>
+							</td>
+						`;
+						rowsEl.appendChild(tr);
+					}
+				}
+
+				async function loadList() {
+					setStatus("Memuat daftar siswa...");
+					try {
+						const data = await post("students/list", { limit: 100 });
+						renderRows(data.items || []);
+						setStatus(`${(data.items || []).length} siswa terdaftar.`);
+					} catch (error) {
+						setStatus(error instanceof Error ? error.message : "Gagal memuat daftar", true);
+					}
+				}
+
+				rowsEl.addEventListener("click", async (event) => {
+					const target = event.target;
+					if (!(target instanceof HTMLButtonElement)) return;
+					const action = target.dataset.action;
+					const nisn = target.dataset.nisn;
+					if (!action || !nisn) return;
+
+					try {
+						const eventType = action === "download" ? "downloaded" : "opened";
+						const data = await post("documents/access/admin", { nisn, eventType });
+
+						if (action === "download") {
+							window.open(data.pdfUrl, "_blank", "noopener");
+							void loadList();
+							return;
+						}
+
+						title.textContent = data.pdfFilename || "Dokumen Kelulusan";
+						frame.src = `${data.pdfUrl}#toolbar=1&navpanes=0`;
+						dialog.showModal();
+						void loadList();
+					} catch (error) {
+						setStatus(error instanceof Error ? error.message : "Aksi gagal", true);
+					}
+				});
+
+				closeDialog.addEventListener("click", () => {
+					dialog.close();
+					frame.src = "";
+				});
+
+				dialog.addEventListener("click", (event) => {
+					if (event.target === dialog) {
+						dialog.close();
+						frame.src = "";
+					}
+				});
+
+				void loadList();
+			</script>
+		)
+	}
+</Base>
+
+<style>
+	.admin-wrap { max-width: 1100px; margin: 0 auto; padding: var(--spacing-12) var(--spacing-6); }
+	.admin-header { margin-bottom: var(--spacing-6); }
+	.admin-header h1 { font-size: 1.5rem; margin-bottom: var(--spacing-1); }
+	.subtitle { color: var(--color-text-secondary); font-size: 0.9rem; }
+	.notice { border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-6); text-align: center; }
+	.notice p { margin-bottom: var(--spacing-4); }
+	.btn-primary { display: inline-block; padding: 0.6rem 1.2rem; border-radius: var(--radius); background: var(--color-brand); color: #fff; text-decoration: none; font-weight: 600; }
+	.status { min-height: 1.5rem; margin-bottom: var(--spacing-3); font-size: 0.9rem; }
+	.status.error { color: #b91c1c; }
+	.table-wrap { border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: auto; }
+	table { width: 100%; border-collapse: collapse; }
+	th, td { text-align: start; padding: 0.65rem 0.75rem; border-bottom: 1px solid var(--color-border); vertical-align: middle; font-size: 0.9rem; }
+	thead th { font-size: 0.8rem; color: var(--color-text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
+	tbody tr:last-child td { border-bottom: none; }
+	tbody tr:hover { background: var(--color-bg-hover); }
+	.actions-cell { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+	.actions-cell button { border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-bg); color: var(--color-text); padding: 0.35rem 0.65rem; cursor: pointer; font-size: 0.85rem; }
+	.actions-cell button:hover { background: var(--color-bg-hover); }
+	.empty { color: var(--color-text-secondary); text-align: center; padding: var(--spacing-6) !important; }
+	.muted { color: var(--color-text-secondary); font-size: 0.8rem; }
+	code { background: var(--color-bg-hover); padding: 0.15rem 0.4rem; border-radius: var(--radius-sm); font-size: 0.85rem; }
+	.filename { max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+	.pdf-dialog { width: min(92vw, 980px); border: 0; padding: 0; border-radius: var(--radius-lg); overflow: hidden; }
+	.pdf-dialog::backdrop { background: rgba(0, 0, 0, 0.58); }
+	.pdf-head { display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 1rem; border-bottom: 1px solid var(--color-border); }
+	.pdf-head button { border: 1px solid var(--color-border); background: transparent; border-radius: var(--radius); padding: 0.4rem 0.75rem; cursor: pointer; }
+	#pdf-frame { width: 100%; height: min(80vh, 760px); border: 0; }
+	@media (max-width: 768px) {
+		.table-wrap { font-size: 0.85rem; }
+		th, td { padding: 0.5rem; }
+		.filename { max-width: 120px; }
+	}
+</style>

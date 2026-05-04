@@ -50,6 +50,12 @@ const importTemplateSchema = z.object({
 		.max(1000),
 });
 
+const uploadPdfSchema = z.object({
+	nisn: z.string().trim().min(6).max(32),
+	filename: z.string().trim().min(1).max(255),
+	contentBase64: z.string().min(1),
+});
+
 type StudentRecord = {
 	nisn: string;
 	name: string;
@@ -358,7 +364,7 @@ function buildImportBlocks(existingCount: number, banner?: { title: string; desc
 		{ type: "header", text: "Import Data Siswa" },
 		{
 			type: "context",
-			text: `Gunakan template: | No | NISN | Nama Peserta Didik | File PDF |. Data yang sudah ada (${existingCount} siswa) akan diperbarui berdasarkan NISN. Upload folder SKL-2026 ke R2 terlebih dahulu, lalu import data di bawah.`,
+			text: `Template: | No | NISN | Nama Peserta Didik | File PDF |. Data existing (${existingCount} siswa) akan diperbarui berdasarkan NISN.`,
 		},
 		{ type: "divider" },
 		{
@@ -368,13 +374,39 @@ function buildImportBlocks(existingCount: number, banner?: { title: string; desc
 				{
 					type: "text_input",
 					action_id: "template",
-					label: "Template data (paste dari SKL-DATA.md)",
+					label: "Paste data dari SKL-DATA.md",
 					multiline: true,
 					placeholder:
 						"| No | NISN | Nama Peserta Didik | File PDF |\n| 1 | 0051718871 | EVA ELISTIANI | SKL-0051718871-SMAN 2 PANGKALAN BUN-2026.pdf |",
 				},
 			],
 			submit: { label: "Import data", action_id: "import_template" },
+		},
+		{ type: "divider" },
+		{ type: "header", text: "Upload PDF per NISN" },
+		{
+			type: "context",
+			text: "Upload file PDF kelulusan untuk siswa tertentu. File akan disimpan di folder SKL-2026/",
+		},
+		{ type: "divider" },
+		{
+			type: "form",
+			block_id: "kelulusan-upload",
+			fields: [
+				{
+					type: "text_input",
+					action_id: "upload_nisn",
+					label: "NISN Siswa",
+					placeholder: "Contoh: 0051718871",
+				},
+				{
+					type: "text_input",
+					action_id: "upload_filename",
+					label: "Nama File PDF",
+					placeholder: "SKL-0051718871-SMAN 2 PANGKALAN BUN-2026.pdf",
+				},
+			],
+			submit: { label: "Upload PDF", action_id: "upload_pdf" },
 		},
 	);
 
@@ -545,18 +577,84 @@ export default definePlugin({
 					};
 				}
 
-				if (interaction.type === "interaction" && interaction.action_id === "show_import") {
-					const listed = await listStudentsWithTelemetry(ctx, 200);
+			if (interaction.type === "interaction" && interaction.action_id === "show_import") {
+				const listed = await listStudentsWithTelemetry(ctx, 200);
+				return {
+					blocks: [
+						...buildImportBlocks(listed.items.length).blocks,
+						{ type: "divider" },
+						...buildAdminBlocks(listed.items).blocks,
+					],
+				};
+			}
+
+			if (interaction.type === "form_submit" && interaction.action_id === "upload_pdf") {
+				const uploadNisn =
+					typeof interaction.values?.upload_nisn === "string"
+						? interaction.values.upload_nisn.trim()
+						: "";
+				const uploadFilename =
+					typeof interaction.values?.upload_filename === "string"
+						? interaction.values.upload_filename.trim()
+						: "";
+				const listed = await listStudentsWithTelemetry(ctx, 200);
+
+				if (!uploadNisn || !uploadFilename) {
 					return {
 						blocks: [
-							...buildImportBlocks(listed.items.length).blocks,
+							...buildImportBlocks(listed.items.length, {
+								title: "Error",
+								description: "NISN dan nama file wajib diisi.",
+							}).blocks,
 							{ type: "divider" },
 							...buildAdminBlocks(listed.items).blocks,
 						],
+						toast: { message: "NISN dan nama file wajib diisi", type: "error" },
 					};
 				}
 
-				if (interaction.type === "form_submit" && interaction.action_id === "open_document") {
+				const student = await findStudentByNisn(ctx, uploadNisn);
+				if (!student) {
+					return {
+						blocks: [
+							...buildImportBlocks(listed.items.length, {
+								title: "Error",
+								description: `Siswa dengan NISN ${uploadNisn} tidak ditemukan. Import data terlebih dahulu.`,
+							}).blocks,
+							{ type: "divider" },
+							...buildAdminBlocks(listed.items).blocks,
+						],
+						toast: { message: "NISN tidak ditemukan", type: "error" },
+					};
+				}
+
+				if (!ctx.media) {
+					throw PluginRouteError.internal("Media access is not available");
+				}
+
+				const pdfKey = `SKL-2026/${uploadFilename}`;
+				await ctx.storage.students.put(uploadNisn, {
+					...student,
+					pdfMediaId: pdfKey,
+					pdfFilename: uploadFilename,
+					createdAt: student.createdAt || nowIso(),
+				});
+
+				const updatedList = await listStudentsWithTelemetry(ctx, 200);
+				return {
+					blocks: [
+						...buildImportBlocks(updatedList.items.length, {
+							title: "Upload Berhasil",
+							description: `PDF untuk ${student.name} (${uploadNisn}) terdaftar sebagai ${uploadFilename}. Upload file ke folder SKL-2026/ di R2.`,
+						}).blocks,
+						{ type: "divider" },
+						...buildAdminBlocks(updatedList.items).blocks,
+					],
+					toast: { message: "PDF berhasil didaftarkan", type: "success" },
+				};
+			}
+
+			if (interaction.type === "form_submit" && interaction.action_id === "open_document") {
 					const nisn = typeof interaction.values?.nisn === "string" ? interaction.values.nisn : "";
 					const eventType =
 						interaction.values?.eventType === "downloaded" ? "downloaded" : "opened";
@@ -665,6 +763,39 @@ export default definePlugin({
 					nisn: student.nisn,
 					name: student.name,
 					pdfFilename: student.pdfFilename,
+				};
+			},
+		},
+		"students/upload-pdf": {
+			input: uploadPdfSchema,
+			handler: async (routeCtx: any, pluginCtx: any) => {
+				const ctx = { ...pluginCtx, ...routeCtx };
+				if (!ctx.media) {
+					throw PluginRouteError.internal("Media access is not available");
+				}
+
+				const { nisn, filename, contentBase64 } = ctx.input;
+				const student = await findStudentByNisn(ctx, nisn);
+				if (!student) {
+					throw PluginRouteError.notFound(`Siswa dengan NISN ${nisn} tidak ditemukan`);
+				}
+
+				const pdfKey = `SKL-2026/${filename}`;
+				const binary = Uint8Array.from(atob(contentBase64), (c) => c.charCodeAt(0));
+				await ctx.media.put(pdfKey, binary, { contentType: "application/pdf" });
+
+				await ctx.storage.students.put(nisn, {
+					...student,
+					pdfMediaId: pdfKey,
+					pdfFilename: filename,
+					createdAt: student.createdAt || nowIso(),
+				});
+
+				return {
+					success: true,
+					nisn,
+					filename,
+					mediaId: pdfKey,
 				};
 			},
 		},

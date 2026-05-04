@@ -327,7 +327,7 @@ describe("kelulusan plugin routes", () => {
 			ctx,
 		);
 		expect(Array.isArray(pageLoad.blocks)).toBe(true);
-		expect(pageLoad.blocks[0]).toMatchObject({ type: "header", text: "Kelulusan" });
+		expect(pageLoad.blocks[0]).toMatchObject({ type: "header", text: "Kelulusan SKL 2025/2026" });
 
 		const action = await adminRoute.handler(
 			{
