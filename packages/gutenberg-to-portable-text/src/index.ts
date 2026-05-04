@@ -8,7 +8,7 @@
 
 import { parse } from "@wordpress/block-serialization-default-parser";
 
-import { parseInlineContent } from "./inline.js";
+import { extractText, parseInlineContent } from "./inline.js";
 import { getTransformer } from "./transformers/index.js";
 import type {
 	GutenbergBlock,
@@ -27,7 +27,6 @@ const SRC_ATTR_PATTERN = /src=["']([^"']+)["']/i;
 const ALT_ATTR_PATTERN = /alt=["']([^"']*)["']/i;
 const LIST_ITEM_PATTERN = /<li[^>]*>([\s\S]*?)<\/li>/gu;
 const CODE_TAG_PATTERN = /<code[^>]*>([\s\S]*?)<\/code>/i;
-const HTML_TAG_PATTERN = /<[^>]+>/g;
 const FIGCAPTION_TAG_PATTERN = /<figcaption[^>]*>([\s\S]*?)<\/figcaption>/i;
 const AMP_ENTITY_PATTERN = /&amp;/g;
 const LESS_THAN_ENTITY_PATTERN = /&lt;/g;
@@ -376,7 +375,7 @@ export function htmlToPortableText(
 							url: imgUrl || undefined,
 						},
 						alt: altMatch?.[1],
-						caption: captionMatch?.[1]?.replace(HTML_TAG_PATTERN, "").trim(),
+						caption: captionMatch?.[1] ? extractText(captionMatch[1]) : undefined,
 					});
 				}
 				break;
