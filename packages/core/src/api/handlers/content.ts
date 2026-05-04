@@ -818,17 +818,15 @@ export async function handleContentDelete(
 	try {
 		const deleted = await withTransaction(db, async (trx) => {
 			const repo = new ContentRepository(trx);
-			const resolvedId = (await resolveId(repo, collection, id)) ?? id;
+			const resolvedId = (await resolveIdIncludingTrashed(repo, collection, id)) ?? id;
 			return repo.delete(collection, resolvedId);
 		});
 
 		if (!deleted) {
+			// Item may already be in trash — treat as success
 			return {
-				success: false,
-				error: {
-					code: "NOT_FOUND",
-					message: `Content item not found: ${id}`,
-				},
+				success: true,
+				data: { deleted: true },
 			};
 		}
 
@@ -837,12 +835,13 @@ export async function handleContentDelete(
 			data: { deleted: true },
 		};
 	} catch (error) {
-		console.error("Content delete error:", error);
+		const errMsg = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+		console.error("Content delete error:", errMsg);
 		return {
 			success: false,
 			error: {
 				code: "CONTENT_DELETE_ERROR",
-				message: "Failed to delete content",
+				message: `Failed to delete content: ${errMsg}`,
 			},
 		};
 	}
