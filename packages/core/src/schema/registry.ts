@@ -940,7 +940,7 @@ export class SchemaRegistry {
 				text = String(value);
 				break;
 			case "object":
-				text = value === null ? "" : JSON.stringify(value);
+				text = value === null ? "" : (JSON.stringify(value) ?? "");
 				break;
 			default:
 				text = "";
