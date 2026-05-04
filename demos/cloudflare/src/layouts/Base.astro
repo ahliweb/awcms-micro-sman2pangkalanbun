@@ -154,28 +154,28 @@ const isLoggedIn = !!Astro.locals.user;
 						</a>
 						<p class="footer-tagline">{siteTagline}</p>
 					</div>
-					<div class="footer-nav">
-						<h4 class="footer-heading">Navigate</h4>
-						<ul class="footer-links">
-							{
-								footerMenu?.items.map((item) => (
-									<li>
-										<a
-											href={item.url}
-											target={item.target}
-											rel={
-												item.target === "_blank"
-													? "noopener noreferrer"
-													: undefined
-											}
-										>
-											{item.label}
-										</a>
-									</li>
-								))
-							}
-						</ul>
-					</div>
+				<div class="footer-nav" id="footer-nav-container">
+					<h4 class="footer-heading">Navigate</h4>
+					<ul class="footer-links" id="footer-links">
+						{
+							footerMenu?.items.map((item) => (
+								<li>
+									<a
+										href={item.url}
+										target={item.target}
+										rel={
+											item.target === "_blank"
+												? "noopener noreferrer"
+												: undefined
+										}
+									>
+										{item.label}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</div>
 					<div class="footer-nav">
 						<h4 class="footer-heading">Connect</h4>
 						<ul class="footer-links">
@@ -350,6 +350,41 @@ const isLoggedIn = !!Astro.locals.user;
 						root.classList.toggle("dark", e.matches);
 					}
 				});
+
+			// Fetch fresh footer menu from public API
+			// This ensures menu updates appear immediately even when pages are cached
+			async function fetchFooterMenu() {
+				const container = document.getElementById("footer-links");
+				if (!container) return;
+
+				try {
+					const res = await fetch("/_emdash/api/public/menus/footer", {
+						headers: { Accept: "application/json" },
+					});
+					if (!res.ok) return; // Keep server-rendered menu on error
+
+					const json = await res.json();
+					const menu = json?.data;
+					if (!menu || !Array.isArray(menu.items) || menu.items.length === 0) return;
+
+					// Build fresh menu HTML
+					const html = menu.items
+						.map((item: { label: string; custom_url: string | null; target: string | null }) => {
+							const url = item.custom_url || "#";
+							const target = item.target;
+							const rel = target === "_blank" ? ' rel="noopener noreferrer"' : "";
+							const targetAttr = target ? ` target="${target}"` : "";
+							return `<li><a href="${url}"${targetAttr}${rel}>${item.label}</a></li>`;
+						})
+						.join("");
+
+					container.innerHTML = html;
+				} catch {
+					// Fetch failed - keep server-rendered menu
+				}
+			}
+
+			fetchFooterMenu();
 		</script>
 
 		<style is:global>
