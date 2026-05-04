@@ -6,16 +6,13 @@
  */
 
 import { readFileSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
 
 import { expect, test } from "../fixtures";
 import { refreshServerPatAfterDevBypass } from "../fixtures/refresh-server-pat";
+import { SERVER_INFO_PATH } from "../fixtures/server-info-path";
 import { addVirtualWebAuthnAuthenticator } from "../fixtures/virtual-authenticator";
 
 const ADMIN_AFTER_SETUP_URL = /\/_emdash\/admin(\/login)?/;
-
-const SERVER_INFO_PATH = join(tmpdir(), "emdash-pw-server.json");
 
 function fixtureBaseUrl(): string {
 	return JSON.parse(readFileSync(SERVER_INFO_PATH, "utf-8")).baseUrl as string;

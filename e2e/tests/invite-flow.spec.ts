@@ -17,18 +17,15 @@
  */
 
 import { readFileSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
 
 import { expect, test } from "../fixtures";
+import { SERVER_INFO_PATH } from "../fixtures/server-info-path";
 import { addVirtualWebAuthnAuthenticator } from "../fixtures/virtual-authenticator";
 
 // Regex patterns
 const ADMIN_URL_PATTERN = /\/_emdash\/admin/;
 const INVITE_URL_REGEX = /https?:\/\/[^\s]+\/admin\/invite\/accept\?token=[^\s]+/;
 const URL_IN_TEXT_REGEX = /https?:\/\/[^\s]+/;
-
-const SERVER_INFO_PATH = join(tmpdir(), "emdash-pw-server.json");
 
 function getServerInfo(): { baseUrl: string; token: string; sessionCookie: string } {
 	return JSON.parse(readFileSync(SERVER_INFO_PATH, "utf-8"));
