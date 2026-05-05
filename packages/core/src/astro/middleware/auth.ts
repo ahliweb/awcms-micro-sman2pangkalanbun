@@ -653,7 +653,7 @@ async function handlePasskeyAuth(
 		if (!sessionUser?.id) {
 			if (isApiRoute) {
 				return Response.json(
-					{ error: { code: "NOT_AUTHENTICATED", message: "Not authenticated" } },
+					{ error: { code: "NOT_AUTHENTICATED", message: "Session expired. Please sign in again." } },
 					{ status: 401, headers: MW_CACHE_HEADERS },
 				);
 			}
@@ -671,7 +671,7 @@ async function handlePasskeyAuth(
 			session?.destroy();
 			if (isApiRoute) {
 				return Response.json(
-					{ error: { code: "NOT_FOUND", message: "User not found" } },
+					{ error: { code: "NOT_FOUND", message: "Session expired. Please sign in again." } },
 					{ status: 401, headers: MW_CACHE_HEADERS },
 				);
 			}

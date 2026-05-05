@@ -9,11 +9,25 @@ export const API_BASE = "/_emdash/api";
 /**
  * Fetch wrapper that adds the X-EmDash-Request CSRF protection header
  * to all requests. All API calls should use this instead of raw fetch().
+ *
+ * On 401 responses from within the admin, redirects to the login page
+ * automatically so users aren't stuck on a broken admin with stale sessions.
  */
 export function apiFetch(input: string | URL | Request, init?: RequestInit): Promise<Response> {
 	const headers = new Headers(init?.headers);
 	headers.set("X-EmDash-Request", "1");
-	return fetch(input, { ...init, headers });
+	return fetch(input, { ...init, headers }).then((response) => {
+		if (
+			response.status === 401 &&
+			!window.location.pathname.startsWith("/_emdash/admin/login") &&
+			!window.location.pathname.startsWith("/_emdash/admin/invite")
+		) {
+			const currentPath = window.location.pathname + window.location.search;
+			window.location.href = `/_emdash/admin/login?redirect=${encodeURIComponent(currentPath)}`;
+			return new Promise<Response>(() => {});
+		}
+		return response;
+	});
 }
 
 /**
