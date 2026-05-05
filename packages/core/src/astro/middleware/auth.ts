@@ -192,25 +192,25 @@ export const onRequest = defineMiddleware(async (context, next) => {
 	// Public API routes skip auth but still need CSRF protection on state-changing methods.
 	// We check Origin header against the request host (same approach as Astro's checkOrigin).
 	// This prevents cross-origin form submissions and fetch requests from malicious sites.
+	//
+	// IMPORTANT: Public routes only skip auth for safe methods (GET/HEAD/OPTIONS).
+	// State-changing methods (POST/PUT/DELETE) must go through full auth so that
+	// session-authenticated users can make writes (e.g. menu item updates).
 	if (isPublicApiRoute) {
 		const method = context.request.method.toUpperCase();
-		if (
-			isUnsafeMethod(method) &&
-			!isCsrfExemptPublicRoute(url.pathname) // OAuth protocol endpoints — cross-origin by design
-		) {
-			const publicOrigin = getPublicOrigin(url, context.locals.emdash?.config);
-			const csrfError = checkPublicCsrf(context.request, url, publicOrigin);
-			if (csrfError) return csrfError;
+		if (isUnsafeMethod(method)) {
+			if (!isCsrfExemptPublicRoute(url.pathname)) {
+				const publicOrigin = getPublicOrigin(url, context.locals.emdash?.config);
+				const csrfError = checkPublicCsrf(context.request, url, publicOrigin);
+				if (csrfError) return csrfError;
+			}
+			// public route with unsafe method: fall through to full auth below
+		} else {
+			return next();
 		}
-		return next();
-	}
-
-	// Plugin routes: soft auth (resolve user if credentials present, but never block).
-	// The catch-all handler decides per-route whether auth is required (public vs private).
-	// Public plugin routes that accept POST are vulnerable to cross-origin form submissions,
-	// so we apply the same Origin-based CSRF check as other public routes.
-	const isPluginRoute = url.pathname.startsWith("/_emdash/api/plugins/");
-	if (isPluginRoute) {
+	} else if (url.pathname.startsWith("/_emdash/api/plugins/")) {
+		// Plugin routes: soft auth (resolve user if credentials present, but never block).
+		// The catch-all handler decides per-route whether auth is required (public vs private).
 		const method = context.request.method.toUpperCase();
 		if (method !== "GET" && method !== "HEAD" && method !== "OPTIONS") {
 			const publicOrigin = getPublicOrigin(url, context.locals.emdash?.config);
