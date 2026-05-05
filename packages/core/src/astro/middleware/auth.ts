@@ -647,10 +647,16 @@ async function handlePasskeyAuth(
 	const { emdash } = locals;
 
 	try {
-		// Check session for user (session.get returns a Promise)
 		const sessionUser = await session?.get("user");
 
 		if (!sessionUser?.id) {
+			console.log("[auth:session] no session user id", {
+				path: url.pathname,
+				method: context.request.method,
+				isApiRoute,
+				hasSession: !!session,
+				hasCookie: !!context.cookies?.get("astro-session")?.value,
+			});
 			if (isApiRoute) {
 				return Response.json(
 					{ error: { code: "NOT_AUTHENTICATED", message: "Session expired. Please sign in again." } },
@@ -667,6 +673,11 @@ async function handlePasskeyAuth(
 		const user = await adapter.getUserById(sessionUser.id);
 
 		if (!user) {
+			console.log("[auth:session] user not found in db", {
+				path: url.pathname,
+				method: context.request.method,
+				sessionUserId: sessionUser.id,
+			});
 			// User no longer exists - clear session
 			session?.destroy();
 			if (isApiRoute) {
@@ -692,6 +703,12 @@ async function handlePasskeyAuth(
 
 		// Set user in locals for use by routes
 		locals.user = user;
+		console.log("[auth:session] user authenticated", {
+			path: url.pathname,
+			method: context.request.method,
+			userId: user.id,
+			role: user.role,
+		});
 	} catch (error) {
 		console.error("Auth middleware error:", error);
 		// On error, redirect to login
