@@ -194,7 +194,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	}
 
 	if (!user) {
-		return new Response(renderErrorPage("Authentication required."), {
+		return new Response(renderErrorPage("Session expired. Please sign in again."), {
 			status: 401,
 			headers: { "Content-Type": "text/html; charset=utf-8" },
 		});

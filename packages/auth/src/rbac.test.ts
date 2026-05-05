@@ -85,6 +85,7 @@ describe("rbac", () => {
 			} catch (e) {
 				expect(e).toBeInstanceOf(PermissionError);
 				expect((e as PermissionError).code).toBe("unauthorized");
+				expect((e as PermissionError).message).toBe("Session expired. Please sign in again.");
 			}
 		});
 
