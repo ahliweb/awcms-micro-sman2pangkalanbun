@@ -89,6 +89,8 @@ export const Permissions = {
 
 export type Permission = keyof typeof Permissions;
 
+const AUTH_EXPIRED_MESSAGE = "Session expired. Please sign in again.";
+
 /**
  * Check if a user has a specific permission
  */
@@ -108,7 +110,7 @@ export function requirePermission(
 	permission: Permission,
 ): asserts user is { role: RoleLevel } {
 	if (!user) {
-		throw new PermissionError("unauthorized", "Authentication required");
+		throw new PermissionError("unauthorized", AUTH_EXPIRED_MESSAGE);
 	}
 	if (!hasPermission(user, permission)) {
 		throw new PermissionError("forbidden", `Missing permission: ${permission}`);
@@ -146,7 +148,7 @@ export function requirePermissionOnResource(
 	anyPermission: Permission,
 ): asserts user is { role: RoleLevel; id: string } {
 	if (!user) {
-		throw new PermissionError("unauthorized", "Authentication required");
+		throw new PermissionError("unauthorized", AUTH_EXPIRED_MESSAGE);
 	}
 	if (!canActOnOwn(user, ownerId, ownPermission, anyPermission)) {
 		throw new PermissionError("forbidden", `Missing permission: ${anyPermission}`);
