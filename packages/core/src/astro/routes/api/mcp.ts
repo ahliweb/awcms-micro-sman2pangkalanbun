@@ -27,7 +27,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	}
 
 	if (!user) {
-		return apiError("UNAUTHORIZED", "Authentication required", 401);
+		return apiError("UNAUTHORIZED", "Session expired. Please sign in again.", 401);
 	}
 
 	const server = createMcpServer();

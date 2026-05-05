@@ -10,6 +10,8 @@ import { hasPermission, canActOnOwn } from "@emdash-cms/auth";
 
 import { apiError } from "./error.js";
 
+const AUTH_EXPIRED_MESSAGE = "Session expired. Please sign in again.";
+
 interface UserLike {
 	id: string;
 	role: RoleLevel;
@@ -29,7 +31,7 @@ export function requirePerm(
 	permission: Permission,
 ): Response | null {
 	if (!user) {
-		return apiError("UNAUTHORIZED", "Authentication required", 401);
+		return apiError("UNAUTHORIZED", AUTH_EXPIRED_MESSAGE, 401);
 	}
 	if (!hasPermission(user, permission)) {
 		return apiError("FORBIDDEN", "Insufficient permissions", 403);
@@ -54,7 +56,7 @@ export function requireOwnerPerm(
 	anyPermission: Permission,
 ): Response | null {
 	if (!user) {
-		return apiError("UNAUTHORIZED", "Authentication required", 401);
+		return apiError("UNAUTHORIZED", AUTH_EXPIRED_MESSAGE, 401);
 	}
 	if (!canActOnOwn(user, ownerId, ownPermission, anyPermission)) {
 		return apiError("FORBIDDEN", "Insufficient permissions", 403);
