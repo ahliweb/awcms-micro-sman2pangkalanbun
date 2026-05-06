@@ -1,13 +1,12 @@
 import { describe, it, expect } from "vitest";
 
-import { version } from "../package.json";
 import { atprotoPlugin } from "../src/index.js";
 
 describe("atprotoPlugin descriptor", () => {
 	it("returns a valid PluginDescriptor", () => {
 		const descriptor = atprotoPlugin();
 		expect(descriptor.id).toBe("atproto");
-		expect(descriptor.version).toBe(version);
+		expect(descriptor.version).toBe("0.1.0");
 		expect(descriptor.entrypoint).toBe("@emdash-cms/plugin-atproto/sandbox");
 		expect(descriptor.adminPages).toHaveLength(1);
 		expect(descriptor.adminWidgets).toHaveLength(1);

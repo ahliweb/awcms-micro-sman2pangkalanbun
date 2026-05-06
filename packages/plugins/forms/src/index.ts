@@ -21,7 +21,6 @@
 import type { PluginDescriptor, ResolvedPlugin } from "emdash";
 import { definePlugin } from "emdash";
 
-import { version } from "../package.json";
 import { handleCleanup, handleDigest } from "./handlers/cron.js";
 import {
 	formsCreateHandler,
@@ -67,7 +66,7 @@ export function formsPlugin(
 ): PluginDescriptor<FormsPluginOptions> {
 	return {
 		id: "emdash-forms",
-		version,
+		version: "0.0.1",
 		entrypoint: "@emdash-cms/plugin-forms",
 		adminEntry: "@emdash-cms/plugin-forms/admin",
 		componentsEntry: "@emdash-cms/plugin-forms/astro",
@@ -92,7 +91,7 @@ export function formsPlugin(
 export function createPlugin(_options: FormsPluginOptions = {}): ResolvedPlugin {
 	return definePlugin({
 		id: "emdash-forms",
-		version,
+		version: "0.0.1",
 		capabilities: ["email:send", "media:write", "network:request"],
 		allowedHosts: ["*"],
 
@@ -100,7 +99,7 @@ export function createPlugin(_options: FormsPluginOptions = {}): ResolvedPlugin 
 
 		hooks: {
 			"plugin:activate": {
-				handler: async (_event, ctx) => {
+				handler: async (_event: any, ctx: any) => {
 					// Schedule weekly cleanup for expired submissions
 					if (ctx.cron) {
 						await ctx.cron.schedule("cleanup", { schedule: "@weekly" });
@@ -109,7 +108,7 @@ export function createPlugin(_options: FormsPluginOptions = {}): ResolvedPlugin 
 			},
 
 			cron: {
-				handler: async (event, ctx) => {
+				handler: async (event: any, ctx: any) => {
 					if (event.name === "cleanup") {
 						await handleCleanup(ctx);
 					} else if (event.name.startsWith("digest:")) {
@@ -182,9 +181,9 @@ export function createPlugin(_options: FormsPluginOptions = {}): ResolvedPlugin 
 			},
 
 			"settings/turnstile-status": {
-				handler: async (ctx) => {
-					const siteKey = await ctx.kv.get<string>("settings:turnstileSiteKey");
-					const secretKey = await ctx.kv.get<string>("settings:turnstileSecretKey");
+				handler: async (ctx: any) => {
+					const siteKey = (await ctx.kv.get("settings:turnstileSiteKey")) as string | null;
+					const secretKey = (await ctx.kv.get("settings:turnstileSecretKey")) as string | null;
 					return {
 						hasSiteKey: !!siteKey,
 						hasSecretKey: !!secretKey,
@@ -221,7 +220,7 @@ export function createPlugin(_options: FormsPluginOptions = {}): ResolvedPlugin 
 				},
 			],
 		},
-	});
+	} as any);
 }
 
 export default createPlugin;

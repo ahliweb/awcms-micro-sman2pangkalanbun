@@ -14,15 +14,13 @@
 
 import type { PluginDescriptor } from "emdash";
 
-import { version } from "../package.json";
-
 /**
  * Plugin factory -- returns a descriptor for the integration.
  */
 export function marketplaceTestPlugin(): PluginDescriptor {
 	return {
 		id: "marketplace-test",
-		version,
+		version: "0.1.0",
 		format: "standard",
 		entrypoint: "@emdash-cms/plugin-marketplace-test/sandbox",
 		capabilities: ["content:read", "content:write"],
