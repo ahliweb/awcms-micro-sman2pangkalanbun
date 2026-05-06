@@ -3,13 +3,15 @@
  * and the fixture database is back in "setup complete" state.
  */
 import { readFileSync, writeFileSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
 
-const SERVER_INFO_PATH = join(tmpdir(), "emdash-pw-server.json");
+import { buildFromBase, parseSafeHttpBaseUrl } from "./safe-base-url";
+import { SERVER_INFO_PATH } from "./server-info-path";
 
 export async function refreshServerPatAfterDevBypass(baseUrl: string): Promise<void> {
-	const res = await fetch(`${baseUrl}/_emdash/api/setup/dev-bypass?token=1`);
+	const safeBase = parseSafeHttpBaseUrl(baseUrl);
+	const url = buildFromBase(safeBase, "/_emdash/api/setup/dev-bypass");
+	url.searchParams.set("token", "1");
+	const res = await fetch(url);
 	if (!res.ok) {
 		throw new Error(`dev-bypass failed (${res.status}): ${await res.text()}`);
 	}

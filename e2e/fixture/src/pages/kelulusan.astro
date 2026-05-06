@@ -1,0 +1,64 @@
+---
+---
+
+<html>
+	<body>
+		<h1>Kelulusan</h1>
+		<form id="nisn-form">
+			<label for="nisn">NISN</label>
+			<input id="nisn" name="nisn" type="text" required minlength="6" maxlength="32" />
+			<button type="submit">Lihat Hasil</button>
+		</form>
+		<p id="status" role="status"></p>
+
+		<script is:inline>
+			const API_BASE = "/_emdash/api/plugins/kelulusan";
+			const SESSION_KEY = "kelulusan:gate-session";
+			const form = document.getElementById("nisn-form");
+			const statusEl = document.getElementById("status");
+
+			async function post(path, body) {
+				const response = await fetch(`${API_BASE}/${path}`, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(body),
+				});
+				const payload = await response.json().catch(() => ({}));
+				if (!response.ok) {
+					throw new Error(payload?.error?.message || "Request failed");
+				}
+				if (payload && typeof payload === "object" && "success" in payload) {
+					if (!payload.success) {
+						throw new Error(payload?.error?.message || "Request failed");
+					}
+					return payload.data;
+				}
+				if (payload && typeof payload === "object" && "data" in payload) {
+					return payload.data;
+				}
+				return payload;
+			}
+
+			form.addEventListener("submit", async (event) => {
+				event.preventDefault();
+				statusEl.textContent = "Memverifikasi NISN...";
+				const nisn = String(new FormData(form).get("nisn") || "").trim();
+
+				try {
+					const session = await post("gate/session/start", { nisn });
+					sessionStorage.setItem(
+						SESSION_KEY,
+						JSON.stringify({
+							nisn: session.nisn,
+							accessToken: session.accessToken,
+							expiresAt: session.expiresAt,
+						}),
+					);
+					window.location.assign("/kelulusan/hasil");
+				} catch (error) {
+					statusEl.textContent = error instanceof Error ? error.message : "NISN invalid";
+				}
+			});
+		</script>
+	</body>
+</html>

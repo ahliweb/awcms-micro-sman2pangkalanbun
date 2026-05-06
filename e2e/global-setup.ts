@@ -7,11 +7,14 @@
  */
 
 import { execFile, spawn } from "node:child_process";
-import { existsSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
+
+import { SERVER_INFO_PATH } from "./fixtures/server-info-path";
+import { SMOKE_SEED_ITEMS } from "./fixtures/smoke-seed";
 
 const execAsync = promisify(execFile);
 
@@ -22,10 +25,9 @@ const FIXTURE_DIR = resolve(ROOT, "e2e/fixture");
 const CLI_BINARY = resolve(ROOT, "packages/core/dist/cli/index.mjs");
 const PORT = 4444;
 const MARKETPLACE_PORT = 4445;
-const SERVER_INFO_PATH = join(tmpdir(), "emdash-pw-server.json");
-
 // Regex patterns
 const COOKIE_VALUE_PATTERN = /^([^;]+)/;
+const TOKEN_PATTERN = /^[A-Za-z0-9._-]{20,300}$/;
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -131,7 +133,7 @@ async function seedTestData(
 	contentIds: Record<string, string[]>;
 	mediaIds: Record<string, string>;
 }> {
-	const collections: string[] = ["posts", "pages"];
+	const collections: string[] = ["posts", "pages", "events"];
 	const contentIds: Record<string, string[]> = {};
 	const mediaIds: Record<string, string> = {};
 
@@ -140,26 +142,17 @@ async function seedTestData(
 
 	const postIds: string[] = [];
 	let result: any;
-
-	result = await apiPost(baseUrl, token, "/_emdash/api/content/posts", {
-		data: { title: "First Post", excerpt: "The very first post" },
-		slug: "first-post",
-	});
-	postIds.push(result.item?.id ?? result.id);
-	await apiPost(baseUrl, token, `/_emdash/api/content/posts/${postIds[0]}/publish`, {});
-
-	result = await apiPost(baseUrl, token, "/_emdash/api/content/posts", {
-		data: { title: "Second Post", excerpt: "Another post" },
-		slug: "second-post",
-	});
-	postIds.push(result.item?.id ?? result.id);
-	await apiPost(baseUrl, token, `/_emdash/api/content/posts/${postIds[1]}/publish`, {});
-
-	result = await apiPost(baseUrl, token, "/_emdash/api/content/posts", {
-		data: { title: "Draft Post", excerpt: "Not published yet" },
-		slug: "draft-post",
-	});
-	postIds.push(result.item?.id ?? result.id);
+	for (const item of SMOKE_SEED_ITEMS.filter((entry) => entry.collection === "posts")) {
+		result = await apiPost(baseUrl, token, "/_emdash/api/content/posts", {
+			data: { title: item.title, excerpt: item.excerpt },
+			slug: item.slug,
+		});
+		const postId = result.item?.id ?? result.id;
+		postIds.push(postId);
+		if (item.publish) {
+			await apiPost(baseUrl, token, `/_emdash/api/content/posts/${postId}/publish`, {});
+		}
+	}
 
 	// --- Upload test image and create post with image block ---
 	const testImagePath = join(ROOT, "e2e/fixtures/assets/test-image.png");
@@ -203,20 +196,36 @@ async function seedTestData(
 	contentIds["posts"] = postIds;
 
 	const pageIds: string[] = [];
-
-	result = await apiPost(baseUrl, token, "/_emdash/api/content/pages", {
-		data: { title: "About" },
-		slug: "about",
-	});
-	pageIds.push(result.item?.id ?? result.id);
-	await apiPost(baseUrl, token, `/_emdash/api/content/pages/${pageIds[0]}/publish`, {});
-
-	result = await apiPost(baseUrl, token, "/_emdash/api/content/pages", {
-		data: { title: "Contact" },
-		slug: "contact",
-	});
-	pageIds.push(result.item?.id ?? result.id);
+	for (const item of SMOKE_SEED_ITEMS.filter((entry) => entry.collection === "pages")) {
+		result = await apiPost(baseUrl, token, "/_emdash/api/content/pages", {
+			data: { title: item.title },
+			slug: item.slug,
+		});
+		const pageId = result.item?.id ?? result.id;
+		pageIds.push(pageId);
+		if (item.publish) {
+			await apiPost(baseUrl, token, `/_emdash/api/content/pages/${pageId}/publish`, {});
+		}
+	}
 	contentIds["pages"] = pageIds;
+
+	const eventIds: string[] = [];
+	for (const item of SMOKE_SEED_ITEMS.filter((entry) => entry.collection === "events")) {
+		result = await apiPost(baseUrl, token, "/_emdash/api/content/events", {
+			data: {
+				title: item.title,
+				description: item.description,
+				starts_at: item.startsAt,
+			},
+			slug: item.slug,
+		});
+		const eventId = result.item?.id ?? result.id;
+		eventIds.push(eventId);
+		if (item.publish) {
+			await apiPost(baseUrl, token, `/_emdash/api/content/events/${eventId}/publish`, {});
+		}
+	}
+	contentIds["events"] = eventIds;
 
 	return { collections, contentIds, mediaIds };
 }
@@ -281,6 +290,7 @@ export default async function globalSetup(): Promise<void> {
 		const setupData = setupJson.data;
 		const token = setupData.token;
 		if (!token) throw new Error("Setup bypass did not return a PAT token");
+		if (!TOKEN_PATTERN.test(token)) throw new Error("Setup bypass returned an invalid token");
 
 		const setCookie = setupRes.headers.get("set-cookie");
 		let sessionCookie = "";
@@ -320,6 +330,7 @@ export default async function globalSetup(): Promise<void> {
 			contentIds: seed.contentIds,
 			mediaIds: seed.mediaIds,
 		};
+		mkdirSync(dirname(SERVER_INFO_PATH), { recursive: true });
 		writeFileSync(SERVER_INFO_PATH, JSON.stringify(info, null, 2));
 
 		console.log(`[pw] Server ready at ${baseUrl} (pid ${server.pid})`);

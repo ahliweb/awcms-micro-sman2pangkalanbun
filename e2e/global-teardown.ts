@@ -6,11 +6,11 @@
  */
 
 import { existsSync, readFileSync, readdirSync, rmSync, unlinkSync } from "node:fs";
-import { tmpdir } from "node:os";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const SERVER_INFO_PATH = join(tmpdir(), "emdash-pw-server.json");
+import { SERVER_INFO_PATH } from "./fixtures/server-info-path";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 const FIXTURE_DIR = resolve(ROOT, "e2e/fixture");
