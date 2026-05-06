@@ -119,16 +119,15 @@ describe("countdown public fragments", () => {
 		expect(result).toBeNull();
 	});
 
-	it("auto-initializes settings on first access", async () => {
+	it("uses defaults on first access without persisting", async () => {
 		const fragmentHook = (plugin as any).hooks["page:fragments"];
 		const { ctx, kvStore } = makeCtx();
 
 		const result = await fragmentHook.handler({ page: { kind: "content" } }, ctx);
 
 		expect(Array.isArray(result)).toBe(true);
-		expect(kvStore.has("settings:enabled")).toBe(true);
-		expect(kvStore.get("settings:enabled")).toBe(true);
-		expect(typeof kvStore.get("settings:targetAt")).toBe("string");
+		expect(kvStore.has("settings:enabled")).toBe(false);
+		expect(kvStore.has("settings:targetAt")).toBe(false);
 	});
 
 	it("returns fragments when popup is enabled with valid settings", async () => {
