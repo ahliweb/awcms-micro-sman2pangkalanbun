@@ -28,15 +28,6 @@ function asRecord(value: unknown): Record<string, unknown> {
 	return value as Record<string, unknown>;
 }
 
-function escapeHtml(value: string): string {
-	return value
-		.replaceAll("&", "&amp;")
-		.replaceAll("<", "&lt;")
-		.replaceAll(">", "&gt;")
-		.replaceAll('"', "&quot;")
-		.replaceAll("'", "&#39;");
-}
-
 function serializeForInlineScript(value: unknown): string {
 	return JSON.stringify(value).replaceAll("<", "\\u003c");
 }
@@ -121,7 +112,6 @@ async function getSettings(ctx: any): Promise<YoutubeHeroSettings> {
 		typeof description === "string";
 
 	if (!hasAnySetting) {
-		await saveSettings(ctx, DEFAULT_SETTINGS);
 		return DEFAULT_SETTINGS;
 	}
 
@@ -219,33 +209,24 @@ async function saveSettingsFromAdmin(ctx: any, values: Record<string, unknown>) 
 }
 
 const HERO_CSS = `<style>
-#eyt-hero{position:relative;isolation:isolate;padding:1.25rem var(--spacing-6) 1.5rem}
-#eyt-hero .eyt-hero-wrap{max-width:var(--wide-width);margin:0 auto;background:color-mix(in srgb,var(--color-bg) 70%,#0000);border:1px solid var(--color-border);border-radius:1rem;overflow:hidden;box-shadow:0 16px 42px rgb(0 0 0/.16)}
-#eyt-hero .eyt-hero-copy{padding:1rem 1.25rem;border-bottom:1px solid var(--color-border-subtle);background:color-mix(in srgb,var(--color-bg-subtle) 75%,#0000)}
-#eyt-hero .eyt-hero-title{margin:0;font-size:clamp(1.05rem,1.7vw,1.35rem);line-height:1.2;color:var(--color-text)}
-#eyt-hero .eyt-hero-description{margin:.4rem 0 0;color:var(--color-text-secondary);font-size:.95rem;line-height:1.45}
-#eyt-hero .eyt-hero-media{position:relative;aspect-ratio:16/9;background:#000}
-#eyt-hero .eyt-hero-media iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-@media (max-width:640px){#eyt-hero{padding:.85rem var(--spacing-4) 1rem}#eyt-hero .eyt-hero-copy{padding:.8rem 1rem}}
+#eyt-hero{position:relative;isolation:isolate}
+#eyt-hero .eyt-hero-media{position:relative;width:100%;aspect-ratio:16/9;background:#000}
+#eyt-hero .eyt-hero-media iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
 </style>`;
 
 function buildHeroScript(settings: YoutubeHeroSettings): string {
 	const videoId = parseYoutubeVideoId(settings.videoUrl);
-	const title = escapeHtml(settings.title);
-	const description = escapeHtml(settings.description);
 	const embedUrl =
 		videoId !== null
-			? `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&playsinline=1&rel=0&modestbranding=1`
+			? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&playsinline=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&rel=0&modestbranding=1`
 			: "";
 
 	const initial = {
 		enabled: settings.enabled,
 		embedUrl,
-		title,
-		description,
 	};
 
-	return `(function(){var cfg=${serializeForInlineScript(initial)};if(!cfg.enabled||!cfg.embedUrl)return;if(location.pathname.startsWith('/_emdash/'))return;var header=document.querySelector('.site-header');if(!header)return;if(document.getElementById('eyt-hero'))return;var hero=document.createElement('section');hero.id='eyt-hero';hero.innerHTML='<div class="eyt-hero-wrap">'+(cfg.title||cfg.description?'<div class="eyt-hero-copy">'+(cfg.title?'<h2 class="eyt-hero-title">'+cfg.title+'</h2>':'')+(cfg.description?'<p class="eyt-hero-description">'+cfg.description+'</p>':'')+'</div>':'')+'<div class="eyt-hero-media"><iframe src="'+cfg.embedUrl+'" title="YouTube hero video" loading="eager" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div>';header.insertAdjacentElement('afterend',hero);})();`;
+	return `(function(){var cfg=${serializeForInlineScript(initial)};if(!cfg.enabled||!cfg.embedUrl)return;if(location.pathname.startsWith('/_emdash/'))return;var header=document.querySelector('.site-header');if(!header)return;if(document.getElementById('eyt-hero'))return;var hero=document.createElement('section');hero.id='eyt-hero';hero.innerHTML='<div class="eyt-hero-media"><iframe src="'+cfg.embedUrl+'" title="YouTube hero video" loading="eager" allow="autoplay; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>';header.insertAdjacentElement('afterend',hero);})();`;
 }
 
 async function buildHeroFragments(ctx: any) {
