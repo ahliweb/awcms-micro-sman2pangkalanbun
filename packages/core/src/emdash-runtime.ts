@@ -357,10 +357,9 @@ export class EmDashRuntime {
 		return this._hooks;
 	}
 
-	private async withFtsCorruptionRetry<T extends { success: boolean; error?: { message?: string } }>(
-		collection: string,
-		op: () => Promise<T>,
-	): Promise<T> {
+	private async withFtsCorruptionRetry<
+		T extends { success: boolean; error?: { message?: string } },
+	>(collection: string, op: () => Promise<T>): Promise<T> {
 		const first = await op();
 		if (first.success) return first;
 

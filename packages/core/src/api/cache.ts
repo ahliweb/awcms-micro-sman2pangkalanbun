@@ -9,7 +9,10 @@ interface CacheInvalidator {
  * Some runtimes/adapters expose a cache object but may throw at runtime when
  * tag invalidation is unavailable. Mutations should still succeed in that case.
  */
-export async function invalidateTags(cache: CacheInvalidator | undefined, tags: string[]): Promise<void> {
+export async function invalidateTags(
+	cache: CacheInvalidator | undefined,
+	tags: string[],
+): Promise<void> {
 	if (!cache?.enabled) return;
 	try {
 		await cache.invalidate({ tags });

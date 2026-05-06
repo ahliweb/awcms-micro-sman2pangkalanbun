@@ -119,12 +119,7 @@
 	--color-on-accent: #fff6dc;
 	--color-accent-ring: color-mix(in srgb, var(--color-accent) 30%, transparent);
 
-	--theme-bg-gradient: radial-gradient(
-		120% 120% at 0% 0%,
-		#ffeaa4 0%,
-		#eecb72 40%,
-		#c28d3a 100%
-	);
+	--theme-bg-gradient: radial-gradient(120% 120% at 0% 0%, #ffeaa4 0%, #eecb72 40%, #c28d3a 100%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -140,12 +135,7 @@
 		--color-accent: #f0b429;
 		--color-accent-hover: #ffd267;
 		--color-on-accent: #332008;
-		--theme-bg-gradient: radial-gradient(
-			120% 120% at 0% 0%,
-			#5c3a13 0%,
-			#3f280f 46%,
-			#251706 100%
-		);
+		--theme-bg-gradient: radial-gradient(120% 120% at 0% 0%, #5c3a13 0%, #3f280f 46%, #251706 100%);
 	}
 }
 
@@ -161,12 +151,7 @@
 	--color-accent: #f0b429;
 	--color-accent-hover: #ffd267;
 	--color-on-accent: #332008;
-	--theme-bg-gradient: radial-gradient(
-		120% 120% at 0% 0%,
-		#5c3a13 0%,
-		#3f280f 46%,
-		#251706 100%
-	);
+	--theme-bg-gradient: radial-gradient(120% 120% at 0% 0%, #5c3a13 0%, #3f280f 46%, #251706 100%);
 }
 
 body {

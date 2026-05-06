@@ -9,9 +9,9 @@ import { sql } from "kysely";
 
 import { isSqlite, tableExists as dialectTableExists } from "../database/dialect-helpers.js";
 import type { Database } from "../database/types.js";
-import { isSqliteCorruptionError } from "../utils/db-errors.js";
 import { validateIdentifier } from "../database/validate.js";
 import { logEvent } from "../observability/log.js";
+import { isSqliteCorruptionError } from "../utils/db-errors.js";
 import type { SearchConfig } from "./types.js";
 
 /**
@@ -486,9 +486,7 @@ export class FTSManager {
 			const fields = await this.getSearchableFields(collectionSlug);
 			if (fields.length === 0) return false;
 
-			console.warn(
-				`FTS corruption detected for "${collectionSlug}". Forcing index rebuild.`,
-			);
+			console.warn(`FTS corruption detected for "${collectionSlug}". Forcing index rebuild.`);
 			await this.rebuildIndex(collectionSlug, fields, config.weights);
 			return true;
 		}

@@ -47,7 +47,9 @@ describe("isMissingTableError", () => {
 
 describe("isSqliteCorruptionError", () => {
 	it("detects SQLite corruption signatures", () => {
-		expect(isSqliteCorruptionError(new Error("SQLITE_CORRUPT: database disk image is malformed"))).toBe(true);
+		expect(
+			isSqliteCorruptionError(new Error("SQLITE_CORRUPT: database disk image is malformed")),
+		).toBe(true);
 		expect(isSqliteCorruptionError(new Error("D1_ERROR: SQLITE_CORRUPT_VTAB"))).toBe(true);
 		expect(isSqliteCorruptionError("database disk image is malformed")).toBe(true);
 	});

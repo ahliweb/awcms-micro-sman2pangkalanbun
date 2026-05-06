@@ -41,11 +41,7 @@ function getDownloadFilename(key: string, requestedName: string | null): string 
 		return key.includes("/") ? key.slice(key.lastIndexOf("/") + 1) : key;
 	}
 
-	const normalized = raw
-		.replace(CRLF_RE, "")
-		.replace(SLASH_RE, "-")
-		.replace(QUOTE_RE, "")
-		.trim();
+	const normalized = raw.replace(CRLF_RE, "").replace(SLASH_RE, "-").replace(QUOTE_RE, "").trim();
 
 	if (!normalized) {
 		return key.includes("/") ? key.slice(key.lastIndexOf("/") + 1) : key;
@@ -90,7 +86,8 @@ export const GET: APIRoute = async ({ params, locals, url }) => {
 		if (forceDownload) {
 			const requestedName = url.searchParams.get("name");
 			const filename = getDownloadFilename(key, requestedName);
-			headers["Content-Disposition"] = `attachment; filename*=UTF-8''${encodeURIComponent(filename)}`;
+			headers["Content-Disposition"] =
+				`attachment; filename*=UTF-8''${encodeURIComponent(filename)}`;
 		}
 
 		// Sandbox CSP on non-inline content — prevents script execution for SVGs,

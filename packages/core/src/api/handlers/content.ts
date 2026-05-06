@@ -1157,7 +1157,8 @@ export async function handleContentPublish(
 					success: false,
 					error: {
 						code: "SLUG_CONFLICT",
-						message: "A page with this slug already exists. Please choose a different slug before publishing.",
+						message:
+							"A page with this slug already exists. Please choose a different slug before publishing.",
 					},
 				};
 			}
@@ -1170,7 +1171,12 @@ export async function handleContentPublish(
 			};
 		}
 		const errMsg = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
-		console.error("Content publish error:", errMsg, "stack:", error instanceof Error ? error.stack : undefined);
+		console.error(
+			"Content publish error:",
+			errMsg,
+			"stack:",
+			error instanceof Error ? error.stack : undefined,
+		);
 		return {
 			success: false,
 			error: {

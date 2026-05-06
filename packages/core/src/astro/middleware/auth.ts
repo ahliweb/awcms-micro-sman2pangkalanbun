@@ -119,9 +119,7 @@ const PUBLIC_API_PREFIXES = [
  * the route handler checks permissions. GET requests remain public
  * so anonymous visitors can read navigation menus.
  */
-const WRITE_GUARDED_PUBLIC_PREFIXES: string[] = [
-	"/_emdash/api/menus/",
-];
+const WRITE_GUARDED_PUBLIC_PREFIXES: string[] = ["/_emdash/api/menus/"];
 
 const PUBLIC_API_EXACT = new Set([
 	"/_emdash/api/auth/passkey/options",
@@ -218,10 +216,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 			}
 			// fall through to full auth below
 		} else {
-			if (
-				isUnsafeMethod(method) &&
-				!isCsrfExemptPublicRoute(url.pathname)
-			) {
+			if (isUnsafeMethod(method) && !isCsrfExemptPublicRoute(url.pathname)) {
 				const publicOrigin = getPublicOrigin(url, context.locals.emdash?.config);
 				const csrfError = checkPublicCsrf(context.request, url, publicOrigin);
 				if (csrfError) return csrfError;
@@ -674,7 +669,9 @@ async function handlePasskeyAuth(
 		if (!sessionUser?.id) {
 			if (isApiRoute) {
 				return Response.json(
-					{ error: { code: "NOT_AUTHENTICATED", message: "Session expired. Please sign in again." } },
+					{
+						error: { code: "NOT_AUTHENTICATED", message: "Session expired. Please sign in again." },
+					},
 					{ status: 401, headers: MW_CACHE_HEADERS },
 				);
 			}
