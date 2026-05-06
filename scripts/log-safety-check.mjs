@@ -9,7 +9,7 @@ const SENSITIVE_PATTERN =
 const SUPPRESS_MARKER = "log-safety: allow";
 const CONSOLE_LOG_PATTERN = /console\.(debug|info|log|warn|error)\(/;
 const STRUCTURED_LOG_PATTERN = /logEvent\(/;
-const SAFE_REF_PATTERN = /^[A-Za-z0-9_./:-]+$/;
+const SAFE_REF_PATTERN = /^[A-Za-z0-9_./:~^-]+$/;
 
 const SCAN_DIRS = ["packages/core/src", "packages/admin/src", "demos/simple/src"];
 const SCAN_EXTS = new Set([".ts", ".tsx", ".js", ".mjs", ".cjs", ".astro"]);

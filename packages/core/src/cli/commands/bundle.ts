@@ -180,6 +180,7 @@ export const bundleCommand = defineCommand({
 				dts: false,
 				platform: "node",
 				external: ["emdash", emdash_SCOPE_RE],
+				failOnWarn: false,
 			});
 
 			// Symlink plugin's node_modules so the built module can resolve
@@ -263,6 +264,7 @@ export const bundleCommand = defineCommand({
 									external: [],
 									alias: { emdash: join(probeShimDir, "emdash.mjs") },
 									treeshake: true,
+									failOnWarn: false,
 								});
 								const backendBaseName = basename(backendEntry).replace(TS_EXT_RE, "");
 								const backendProbePath = await findBuildOutput(backendProbeDir, backendBaseName);
@@ -381,6 +383,7 @@ export const bundleCommand = defineCommand({
 					alias: { emdash: join(shimDir, "emdash.mjs") },
 					minify: true,
 					treeshake: true,
+					failOnWarn: false,
 				});
 
 				const backendBaseName = basename(backendEntry).replace(TS_EXT_RE, "");
@@ -412,6 +415,7 @@ export const bundleCommand = defineCommand({
 					external: [],
 					minify: true,
 					treeshake: true,
+					failOnWarn: false,
 				});
 
 				const adminBaseName = basename(adminEntry).replace(TS_EXT_RE, "");

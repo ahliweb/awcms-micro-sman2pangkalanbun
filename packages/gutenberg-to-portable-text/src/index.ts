@@ -121,13 +121,18 @@ export function gutenbergToPortableText(
 	content: string,
 	options: ConvertOptions = {},
 ): PortableTextBlock[] {
+	// Handle null/undefined input
+	if (content == null) {
+		return [];
+	}
+
 	// Reject pathologically large inputs to prevent polynomial regex backtracking
 	if (content.length > MAX_CONVERTER_INPUT_LENGTH) {
 		return [];
 	}
 
 	// Handle empty content
-	if (!content || !content.trim()) {
+	if (!content.trim()) {
 		return [];
 	}
 
