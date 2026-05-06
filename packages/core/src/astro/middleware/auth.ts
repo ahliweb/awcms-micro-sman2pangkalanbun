@@ -113,6 +113,16 @@ const PUBLIC_API_PREFIXES = [
 	"/_emdash/api/menus/",
 ];
 
+/**
+ * Public prefixes where writes (POST/PUT/DELETE) must go through
+ * full auth — the auth middleware authenticates the user, then
+ * the route handler checks permissions. GET requests remain public
+ * so anonymous visitors can read navigation menus.
+ */
+const WRITE_GUARDED_PUBLIC_PREFIXES: string[] = [
+	"/_emdash/api/menus/",
+];
+
 const PUBLIC_API_EXACT = new Set([
 	"/_emdash/api/auth/passkey/options",
 	"/_emdash/api/auth/passkey/verify",
@@ -193,25 +203,39 @@ export const onRequest = defineMiddleware(async (context, next) => {
 	// We check Origin header against the request host (same approach as Astro's checkOrigin).
 	// This prevents cross-origin form submissions and fetch requests from malicious sites.
 	//
-	// IMPORTANT: Public routes only skip auth for safe methods (GET/HEAD/OPTIONS).
-	// State-changing methods (POST/PUT/DELETE) must go through full auth so that
-	// session-authenticated users can make writes (e.g. menu item updates).
+	// Write-guarded public routes (e.g. /api/menus/) have a special case:
+	// GET remains public, but POST/PUT/DELETE must go through full auth so
+	// session-authenticated users can make writes. All other public routes
+	// skip auth for every method.
 	if (isPublicApiRoute) {
 		const method = context.request.method.toUpperCase();
-		if (isUnsafeMethod(method)) {
+		const isWriteGuarded = WRITE_GUARDED_PUBLIC_PREFIXES.some((p) => url.pathname.startsWith(p));
+		if (isUnsafeMethod(method) && isWriteGuarded) {
 			if (!isCsrfExemptPublicRoute(url.pathname)) {
 				const publicOrigin = getPublicOrigin(url, context.locals.emdash?.config);
 				const csrfError = checkPublicCsrf(context.request, url, publicOrigin);
 				if (csrfError) return csrfError;
 			}
-			// public route with unsafe method: fall through to full auth below
+			// fall through to full auth below
 		} else {
+			if (
+				isUnsafeMethod(method) &&
+				!isCsrfExemptPublicRoute(url.pathname)
+			) {
+				const publicOrigin = getPublicOrigin(url, context.locals.emdash?.config);
+				const csrfError = checkPublicCsrf(context.request, url, publicOrigin);
+				if (csrfError) return csrfError;
+			}
 			return next();
 		}
-	} else if (url.pathname.startsWith("/_emdash/api/plugins/")) {
-		// Plugin routes: soft auth (resolve user if credentials present, but never block).
-		// The catch-all handler decides per-route whether auth is required (public vs private).
-		const method = context.request.method.toUpperCase();
+	}
+
+	// Plugin routes: soft auth (resolve user if credentials present, but never block).
+	// The catch-all handler decides per-route whether auth is required (public vs private).
+	// Public plugin routes that accept POST are vulnerable to cross-origin form submissions,
+	// so we apply the same Origin-based CSRF check as other public routes.
+	const isPluginRoute = url.pathname.startsWith("/_emdash/api/plugins/");
+	if (isPluginRoute) {
 		if (method !== "GET" && method !== "HEAD" && method !== "OPTIONS") {
 			const publicOrigin = getPublicOrigin(url, context.locals.emdash?.config);
 			const csrfError = checkPublicCsrf(context.request, url, publicOrigin);
