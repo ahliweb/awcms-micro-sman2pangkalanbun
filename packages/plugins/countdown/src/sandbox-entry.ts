@@ -43,13 +43,11 @@ async function getSettings(ctx: any): Promise<CountdownSettings> {
 		typeof imageUrl === "string";
 
 	if (!hasAnySetting) {
-		const defaults: CountdownSettings = {
+		return {
 			...DEFAULT_COUNTDOWN_SETTINGS,
 			enabled: true,
 			targetAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
 		};
-		await saveSettings(ctx, defaults);
-		return defaults;
 	}
 
 	return {
