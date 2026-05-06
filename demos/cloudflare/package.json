@@ -22,6 +22,7 @@
     "@emdash-cms/plugin-countdown": "workspace:*",
     "@emdash-cms/plugin-forms": "workspace:*",
     "@emdash-cms/plugin-kelulusan": "workspace:*",
+    "@emdash-cms/plugin-youtube-hero": "workspace:*",
     "@emdash-cms/plugin-webhook-notifier": "workspace:*",
     "@tanstack/react-query": "catalog:",
     "@tanstack/react-router": "catalog:",
