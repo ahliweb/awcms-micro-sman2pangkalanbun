@@ -15,6 +15,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# temp
+temp
+
 # environment variables
 .env
 .env.production
@@ -71,6 +74,7 @@ examples/wp-theme-unit-test/
 # pattern so we can re-include the agents subdirectory.
 .opencode/*
 !.opencode/agents/
+!.opencode/config.json
 
 # .claude is local-only EXCEPT for the symlinks pointing at AGENTS.md and skills/
 .claude/*

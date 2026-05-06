@@ -1,5 +1,5 @@
 ---
-import { getMenu, getEmDashCollection, getSiteSettings } from "emdash";
+import { getMenu, getSiteSettings } from "emdash";
 import {
 	WidgetArea,
 	EmDashHead,
@@ -52,8 +52,8 @@ const menu = await getMenu("primary");
 // just shows RSS, avoiding duplication with the "Navigate" column above.
 const socialMenu = await getMenu("social");
 
-// Fetch pages for footer
-const { entries: pages } = await getEmDashCollection("pages");
+// Fetch footer menu for dynamic navigation
+const footerMenu = await getMenu("footer");
 
 // Build public page context for plugin contributions
 // SEO data is passed here and rendered securely by EmDashHead
@@ -70,6 +70,7 @@ const pageCtx = createPublicPageContext({
 	seo: { ogImage: image, robots },
 	articleMeta: { publishedTime, modifiedTime, author },
 	siteName: siteTitle,
+	siteLogo: siteLogo?.url,
 });
 
 // Check if user is logged in (for showing admin link)
@@ -154,22 +155,28 @@ const isLoggedIn = !!Astro.locals.user;
 						</a>
 						<p class="footer-tagline">{siteTagline}</p>
 					</div>
-					<div class="footer-nav">
-						<h4 class="footer-heading">Navigate</h4>
-						<ul class="footer-links">
-							<li><a href="/">Home</a></li>
-							<li><a href="/posts">All Posts</a></li>
-							{
-								pages.slice(0, 3).map((page) => (
-									<li>
-										<a href={`/pages/${page.data.slug || page.id}`}>
-											{page.data.title}
-										</a>
-									</li>
-								))
-							}
-						</ul>
-					</div>
+				<div class="footer-nav" id="footer-nav-container">
+					<h4 class="footer-heading">Navigate</h4>
+					<ul class="footer-links" id="footer-links">
+						{
+							footerMenu?.items.map((item) => (
+								<li>
+									<a
+										href={item.url}
+										target={item.target}
+										rel={
+											item.target === "_blank"
+												? "noopener noreferrer"
+												: undefined
+										}
+									>
+										{item.label}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</div>
 					<div class="footer-nav">
 						<h4 class="footer-heading">Connect</h4>
 						<ul class="footer-links">
@@ -344,6 +351,41 @@ const isLoggedIn = !!Astro.locals.user;
 						root.classList.toggle("dark", e.matches);
 					}
 				});
+
+			// Fetch fresh footer menu from public API
+			// This ensures menu updates appear immediately even when pages are cached
+			async function fetchFooterMenu() {
+				const container = document.getElementById("footer-links");
+				if (!container) return;
+
+				try {
+					const res = await fetch("/_emdash/api/menus/footer", {
+						headers: { Accept: "application/json" },
+					});
+					if (!res.ok) return; // Keep server-rendered menu on error
+
+					const json: { data?: { items?: { label: string; custom_url: string | null; target: string | null }[] } } = await res.json();
+					const menu = json?.data;
+					if (!menu || !Array.isArray(menu.items) || menu.items.length === 0) return;
+
+					// Build fresh menu HTML
+					const html = menu.items
+						.map((item: { label: string; custom_url: string | null; target: string | null }) => {
+							const url = item.custom_url || "#";
+							const target = item.target;
+							const rel = target === "_blank" ? ' rel="noopener noreferrer"' : "";
+							const targetAttr = target ? ` target="${target}"` : "";
+							return `<li><a href="${url}"${targetAttr}${rel}>${item.label}</a></li>`;
+						})
+						.join("");
+
+					container.innerHTML = html;
+				} catch {
+					// Fetch failed - keep server-rendered menu
+				}
+			}
+
+			fetchFooterMenu();
 		</script>
 
 		<style is:global>

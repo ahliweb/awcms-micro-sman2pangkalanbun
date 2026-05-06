@@ -1,0 +1,102 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Kelulusan" description="Akses hasil kelulusan dengan NISN">
+	<section class="kelulusan-wrap">
+		<h1>Kelulusan</h1>
+		<p class="intro">Masukkan NISN untuk memulai sesi dan lanjut ke halaman hasil kelulusan.</p>
+
+		<form id="nisn-form" class="nisn-form">
+			<label for="nisn-input">NISN</label>
+			<div class="row">
+				<input
+					id="nisn-input"
+					name="nisn"
+					type="text"
+					required
+					minlength="6"
+					maxlength="32"
+					inputmode="numeric"
+					autocomplete="off"
+					placeholder="Masukkan NISN"
+				/>
+				<button type="submit">Lihat Hasil</button>
+			</div>
+		</form>
+
+		<p id="status" class="status" role="status" aria-live="polite"></p>
+
+	</section>
+
+	<script is:inline>
+		const API_BASE = "/_emdash/api/plugins/kelulusan";
+		const form = document.getElementById("nisn-form");
+		const statusEl = document.getElementById("status");
+
+		const SESSION_KEY = "kelulusan:gate-session";
+
+		async function apiPost(path, body) {
+			const res = await fetch(`${API_BASE}/${path}`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(body),
+			});
+			const payload = await res.json().catch(() => ({}));
+			if (!res.ok || payload.success === false) {
+				const message = payload?.error?.message || "Permintaan gagal";
+				throw new Error(message);
+			}
+			return payload.data ?? payload;
+		}
+
+		function showMessage(message, isError = false) {
+			statusEl.textContent = message;
+			statusEl.classList.toggle("error", isError);
+		}
+
+		const reason = new URLSearchParams(window.location.search).get("reason");
+		if (reason) showMessage(reason, true);
+
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			showMessage("Memverifikasi NISN...");
+
+			const nisn = String(new FormData(form).get("nisn") || "").trim();
+			if (!nisn) {
+				showMessage("NISN wajib diisi.", true);
+				return;
+			}
+
+			try {
+				const session = await apiPost("gate/session/start", { nisn });
+				sessionStorage.setItem(
+					SESSION_KEY,
+					JSON.stringify({
+						nisn: session.nisn,
+						accessToken: session.accessToken,
+						expiresAt: session.expiresAt,
+					}),
+				);
+				showMessage("NISN valid. Mengalihkan ke halaman hasil...");
+				window.location.assign("/kelulusan/hasil");
+			} catch (error) {
+				showMessage(error instanceof Error ? error.message : "NISN tidak valid", true);
+			}
+		});
+	</script>
+</Base>
+
+<style>
+	.kelulusan-wrap { max-width: 760px; margin: 0 auto; padding: var(--spacing-12) var(--spacing-6); }
+	.intro { color: var(--color-text-secondary); margin-bottom: var(--spacing-6); }
+	.nisn-form label { display: block; font-weight: 600; margin-bottom: var(--spacing-2); }
+	.row { display: flex; gap: var(--spacing-3); }
+	.row input { flex: 1; padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius); }
+	.row button, .actions button, .actions .download { padding: 0.75rem 1rem; border-radius: var(--radius); border: 1px solid var(--color-border); background: var(--color-text); color: var(--color-bg); text-decoration: none; cursor: pointer; }
+	.status { min-height: 1.5rem; margin-top: var(--spacing-4); }
+	.status.error { color: #b91c1c; }
+	@media (max-width: 720px) {
+		.row { flex-direction: column; }
+	}
+</style>

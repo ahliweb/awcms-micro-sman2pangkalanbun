@@ -163,32 +163,6 @@ Runs after successful delete.
 Event: `{ id: string, collection: string }`
 Returns: `void`
 
-### `content:afterPublish`
-
-Runs after content is published (promoted from draft to live). Side effects only.
-
-```typescript
-"content:afterPublish": async (event, ctx) => {
-	ctx.log.info(`Published ${event.collection}/${event.content.id}`);
-}
-```
-
-Event: `{ content: Record<string, unknown>, collection: string }`
-Returns: `void`
-
-### `content:afterUnpublish`
-
-Runs after content is unpublished (reverted to draft). Side effects only.
-
-```typescript
-"content:afterUnpublish": async (event, ctx) => {
-	ctx.log.info(`Unpublished ${event.collection}/${event.content.id}`);
-}
-```
-
-Event: `{ content: Record<string, unknown>, collection: string }`
-Returns: `void`
-
 ## Media Hooks
 
 ### `media:beforeUpload`
@@ -233,14 +207,14 @@ Email hooks require specific capabilities. Without the required capability, hook
 
 ### `email:beforeSend`
 
-**Requires:** `hooks.email-events:register` capability.
+**Requires:** `email:intercept` capability.
 
 Runs before email delivery. Return modified message, or `false` to cancel delivery. Handlers are chained — each receives the output of the previous one.
 
 ```typescript
 definePlugin({
 	id: "email-footer",
-	capabilities: ["hooks.email-events:register"],
+	capabilities: ["email:intercept"],
 	hooks: {
 		"email:beforeSend": async (event, ctx) => {
 			return { ...event.message, text: event.message.text + "\n\n-- Sent via EmDash" };
@@ -254,14 +228,14 @@ Returns: `EmailMessage | false`
 
 ### `email:deliver`
 
-**Requires:** `hooks.email-transport:register` capability. **Exclusive hook** — exactly one provider is active.
+**Requires:** `email:provide` capability. **Exclusive hook** — exactly one provider is active.
 
 Implements email transport (e.g. Resend, SMTP, SES). Selected by the admin in Settings > Email.
 
 ```typescript
 definePlugin({
 	id: "emdash-resend",
-	capabilities: ["hooks.email-transport:register", "network:request"],
+	capabilities: ["email:provide", "network:fetch"],
 	allowedHosts: ["api.resend.com"],
 	hooks: {
 		"email:deliver": {
@@ -284,14 +258,14 @@ Returns: `void`
 
 ### `email:afterSend`
 
-**Requires:** `hooks.email-events:register` capability.
+**Requires:** `email:intercept` capability.
 
 Runs after successful delivery. Fire-and-forget — errors are logged but don't propagate.
 
 ```typescript
 definePlugin({
 	id: "email-logger",
-	capabilities: ["hooks.email-events:register"],
+	capabilities: ["email:intercept"],
 	hooks: {
 		"email:afterSend": async (event, ctx) => {
 			ctx.log.info(`Email sent to ${event.message.to}`, { source: event.source });
@@ -418,23 +392,21 @@ Use `"continue"` for non-critical operations (analytics, notifications, external
 
 ## Quick Reference
 
-| Hook                     | Trigger              | Capability Required              | Return                       |
-| ------------------------ | -------------------- | -------------------------------- | ---------------------------- |
-| `plugin:install`         | First install        | —                                | `void`                       |
-| `plugin:activate`        | Plugin enabled       | —                                | `void`                       |
-| `plugin:deactivate`      | Plugin disabled      | —                                | `void`                       |
-| `plugin:uninstall`       | Plugin removed       | —                                | `void`                       |
-| `content:beforeSave`     | Before save          | `content:write`                  | Modified content or `void`   |
-| `content:afterSave`      | After save           | `content:read`                   | `void`                       |
-| `content:beforeDelete`   | Before delete        | `content:read`                   | `false` to cancel            |
-| `content:afterDelete`    | After delete         | `content:read`                   | `void`                       |
-| `content:afterPublish`   | After publish        | `content:read`                   | `void`                       |
-| `content:afterUnpublish` | After unpublish      | `content:read`                   | `void`                       |
-| `media:beforeUpload`     | Before upload        | —                                | Modified file info or `void` |
-| `media:afterUpload`      | After upload         | —                                | `void`                       |
-| `email:beforeSend`       | Before email send    | `hooks.email-events:register`    | Modified message or `false`  |
-| `email:deliver`          | Email delivery       | `hooks.email-transport:register` | `void` (exclusive)           |
-| `email:afterSend`        | After email send     | `hooks.email-events:register`    | `void`                       |
-| `cron`                   | Scheduled task fires | —                                | `void`                       |
-| `page:metadata`          | Page render          | —                                | Metadata contributions       |
-| `page:fragments`         | Page render          | — (trusted only)                 | Fragment contributions       |
+| Hook                   | Trigger              | Capability Required | Return                       |
+| ---------------------- | -------------------- | ------------------- | ---------------------------- |
+| `plugin:install`       | First install        | —                   | `void`                       |
+| `plugin:activate`      | Plugin enabled       | —                   | `void`                       |
+| `plugin:deactivate`    | Plugin disabled      | —                   | `void`                       |
+| `plugin:uninstall`     | Plugin removed       | —                   | `void`                       |
+| `content:beforeSave`   | Before save          | —                   | Modified content or `void`   |
+| `content:afterSave`    | After save           | —                   | `void`                       |
+| `content:beforeDelete` | Before delete        | —                   | `false` to cancel            |
+| `content:afterDelete`  | After delete         | —                   | `void`                       |
+| `media:beforeUpload`   | Before upload        | —                   | Modified file info or `void` |
+| `media:afterUpload`    | After upload         | —                   | `void`                       |
+| `email:beforeSend`     | Before email send    | `email:intercept`   | Modified message or `false`  |
+| `email:deliver`        | Email delivery       | `email:provide`     | `void` (exclusive)           |
+| `email:afterSend`      | After email send     | `email:intercept`   | `void`                       |
+| `cron`                 | Scheduled task fires | —                   | `void`                       |
+| `page:metadata`        | Page render          | —                   | Metadata contributions       |
+| `page:fragments`       | Page render          | — (trusted only)    | Fragment contributions       |

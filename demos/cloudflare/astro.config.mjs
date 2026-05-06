@@ -4,30 +4,25 @@ import react from "@astrojs/react";
 import {
 	d1,
 	r2,
-	access,
-	sandbox,
 	cloudflareCache,
 	cloudflareImages,
 	cloudflareStream,
 } from "@emdash-cms/cloudflare";
+import { academicCalendarPlugin } from "@emdash-cms/plugin-academic-calendar";
+import { countdownPlugin } from "@emdash-cms/plugin-countdown";
 import { formsPlugin } from "@emdash-cms/plugin-forms";
+import { kelulusanPlugin } from "@emdash-cms/plugin-kelulusan";
 import { webhookNotifierPlugin } from "@emdash-cms/plugin-webhook-notifier";
+import { youtubeHeroPlugin } from "@emdash-cms/plugin-youtube-hero";
 import { defineConfig, fontProviders } from "astro/config";
 import emdash from "emdash/astro";
 
 export default defineConfig({
+	site: "https://sman2pangkalanbun.sch.id",
 	output: "server",
 	adapter: cloudflare({
 		imageService: "cloudflare",
 	}),
-	i18n: {
-		defaultLocale: "en",
-		locales: ["en", "fr", "es"],
-		fallback: {
-			fr: "en",
-			es: "en",
-		},
-	},
 	image: {
 		// Enable responsive images globally
 		layout: "constrained",
@@ -42,18 +37,11 @@ export default defineConfig({
 			database: d1({ binding: "DB", session: "auto" }),
 			// R2 storage for media
 			storage: r2({ binding: "MEDIA" }),
-			// Cloudflare Access authentication
-			// Reads CF_ACCESS_AUDIENCE from env (wrangler secret or .dev.vars)
-			auth: access({
-				teamDomain: "cloudflare-cto.cloudflareaccess.com",
-				autoProvision: true,
-				defaultRole: 30, // Author
-				// Map your IdP groups to roles (optional)
-				// roleMapping: {
-				// 	"Admins": 50,
-				// 	"Editors": 40,
-				// },
-			}),
+			// Public site URL and allowed additional origins
+			// siteUrl is derived from Astro's `site` config above
+			// allowedOrigins permits the www subdomain for passkey/CSRF
+			allowedOrigins: ["https://www.sman2pangkalanbun.sch.id"],
+			// Use EmDash built-in auth providers for deployment portability.
 			// Media providers - Cloudflare Images and Stream
 			// Reads from env vars at runtime: CF_ACCOUNT_ID, CF_IMAGES_TOKEN, CF_STREAM_TOKEN
 			// Or customize with accountIdEnvVar/apiTokenEnvVar options
@@ -70,15 +58,13 @@ export default defineConfig({
 			],
 			// Trusted plugins (run in host worker)
 			plugins: [
-				// Test plugin that exercises all v2 APIs
+				academicCalendarPlugin(),
+				countdownPlugin(),
 				formsPlugin(),
+				kelulusanPlugin(),
+				youtubeHeroPlugin(),
+				webhookNotifierPlugin(),
 			],
-			// Sandboxed plugins (run in isolated workers)
-			sandboxed: [webhookNotifierPlugin()],
-			// Sandbox runner for Cloudflare
-			sandboxRunner: sandbox(),
-			// Plugin marketplace
-			marketplace: "https://marketplace.emdashcms.com",
 		}),
 	],
 	experimental: {

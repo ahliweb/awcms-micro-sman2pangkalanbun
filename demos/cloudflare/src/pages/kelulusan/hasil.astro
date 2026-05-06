@@ -1,0 +1,228 @@
+---
+import Base from "../../layouts/Base.astro";
+---
+
+<Base title="Hasil Kelulusan" description="Data kelulusan siswa">
+	<section class="kelulusan-wrap">
+		<header class="kelulusan-header">
+			<h1>Surat Keterangan Lulus</h1>
+			<p class="subtitle">SMAN 2 Pangkalan Bun — Tahun Ajaran 2025/2026</p>
+		</header>
+
+		<p id="status" class="status" role="status" aria-live="polite"></p>
+
+		<section id="result" class="result hidden" aria-live="polite">
+			<div class="student-info">
+				<div class="info-row">
+					<span class="info-label">NISN</span>
+					<span id="out-nisn" class="info-value">-</span>
+				</div>
+				<div class="info-row">
+					<span class="info-label">Nama Peserta Didik</span>
+					<span id="out-name" class="info-value">-</span>
+				</div>
+				<div class="info-row">
+					<span class="info-label">Dokumen</span>
+					<span id="out-file" class="info-value">-</span>
+				</div>
+			</div>
+
+			<div class="actions">
+				<button id="open-pdf" type="button" class="btn-primary">
+					<span class="btn-icon">&#128196;</span> Buka PDF
+				</button>
+			<a id="download-pdf" class="btn-secondary" href="#" role="button">
+				<span class="btn-icon">&#11015;</span> Unduh PDF
+			</a>
+			</div>
+		</section>
+	</section>
+
+	<dialog id="pdf-dialog" class="pdf-dialog">
+		<div class="pdf-head">
+			<strong id="dialog-title">Dokumen Kelulusan</strong>
+			<button id="close-dialog" type="button" aria-label="Tutup">&#10005; Tutup</button>
+		</div>
+		<iframe id="pdf-frame" title="PDF Kelulusan"></iframe>
+	</dialog>
+
+	<script is:inline>
+		const API_BASE = "/_emdash/api/plugins/kelulusan";
+		const SESSION_KEY = "kelulusan:gate-session";
+		const state = { nisn: "", accessToken: "", pdfUrl: "", pdfFilename: "" };
+
+		const statusEl = document.getElementById("status");
+		const resultEl = document.getElementById("result");
+		const outNisn = document.getElementById("out-nisn");
+		const outName = document.getElementById("out-name");
+		const outFile = document.getElementById("out-file");
+		const openPdfBtn = document.getElementById("open-pdf");
+		const downloadPdf = document.getElementById("download-pdf");
+		const dialog = document.getElementById("pdf-dialog");
+		const closeDialog = document.getElementById("close-dialog");
+		const frame = document.getElementById("pdf-frame");
+		const title = document.getElementById("dialog-title");
+
+		async function apiPost(path, body) {
+			const res = await fetch(`${API_BASE}/${path}`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(body),
+			});
+			const payload = await res.json().catch(() => ({}));
+			if (!res.ok || payload.success === false) {
+				const message = payload?.error?.message || "Permintaan gagal";
+				throw new Error(message);
+			}
+			return payload.data ?? payload;
+		}
+
+		function showMessage(message, isError = false) {
+			statusEl.textContent = message;
+			statusEl.classList.toggle("error", isError);
+		}
+
+		function showResult(data) {
+			outNisn.textContent = data.nisn;
+			outName.textContent = data.name;
+			outFile.textContent = data.pdfFilename;
+			resultEl.classList.remove("hidden");
+		}
+
+		function redirectToGate(message) {
+			sessionStorage.removeItem(SESSION_KEY);
+			const target = `/kelulusan?reason=${encodeURIComponent(message)}`;
+			window.location.replace(target);
+		}
+
+		async function init() {
+			const raw = sessionStorage.getItem(SESSION_KEY);
+			if (!raw) {
+				redirectToGate("Sesi tidak ditemukan. Silakan verifikasi NISN kembali.");
+				return;
+			}
+
+			let session;
+			try {
+				session = JSON.parse(raw);
+			} catch {
+				redirectToGate("Sesi tidak valid. Silakan verifikasi NISN kembali.");
+				return;
+			}
+
+			state.nisn = typeof session.nisn === "string" ? session.nisn : "";
+			state.accessToken = typeof session.accessToken === "string" ? session.accessToken : "";
+			if (!state.nisn || !state.accessToken) {
+				redirectToGate("Sesi tidak lengkap. Silakan verifikasi NISN kembali.");
+				return;
+			}
+
+			showMessage("Memverifikasi sesi...");
+			try {
+				const summary = await apiPost("gate/session/resolve", {
+					nisn: state.nisn,
+					accessToken: state.accessToken,
+				});
+				showResult(summary);
+				showMessage("Sesi valid. Anda dapat membuka dokumen PDF.");
+			} catch (error) {
+				redirectToGate(
+					error instanceof Error
+						? error.message
+						: "Sesi kedaluwarsa. Silakan verifikasi NISN kembali.",
+				);
+			}
+		}
+
+		openPdfBtn.addEventListener("click", async () => {
+			if (!state.nisn || !state.accessToken) return;
+			openPdfBtn.disabled = true;
+			openPdfBtn.textContent = "Memuat PDF...";
+			try {
+				const opened = await apiPost("documents/access/public", {
+					nisn: state.nisn,
+					accessToken: state.accessToken,
+					eventType: "opened",
+				});
+				state.pdfUrl = opened.pdfUrl;
+				state.pdfFilename = opened.pdfFilename;
+				frame.src = `${opened.pdfUrl}#toolbar=1&navpanes=0`;
+				title.textContent = opened.pdfFilename;
+				dialog.showModal();
+			} catch (error) {
+				showMessage(error instanceof Error ? error.message : "Gagal membuka PDF", true);
+			} finally {
+				openPdfBtn.disabled = false;
+				openPdfBtn.innerHTML = '<span class="btn-icon">&#128196;</span> Buka PDF';
+			}
+		});
+
+		downloadPdf.addEventListener("click", async (event) => {
+			event.preventDefault();
+			if (!state.nisn || !state.accessToken) return;
+			showMessage("Menyiapkan unduhan...");
+			try {
+				const downloaded = await apiPost("documents/access/public", {
+					nisn: state.nisn,
+					accessToken: state.accessToken,
+					eventType: "downloaded",
+				});
+				const a = document.createElement("a");
+				a.href = downloaded.pdfUrl + "?dl=1";
+				a.style.display = "none";
+				document.body.appendChild(a);
+				a.click();
+				setTimeout(() => document.body.removeChild(a), 5000);
+				showMessage("Unduhan dimulai.");
+			} catch (error) {
+				showMessage(error instanceof Error ? error.message : "Gagal mengunduh PDF", true);
+			}
+		});
+
+		closeDialog.addEventListener("click", () => {
+			dialog.close();
+			frame.src = "";
+		});
+
+		dialog.addEventListener("click", (event) => {
+			if (event.target === dialog) {
+				dialog.close();
+				frame.src = "";
+			}
+		});
+
+		void init();
+	</script>
+</Base>
+
+<style>
+	.kelulusan-wrap { max-width: 640px; margin: 0 auto; padding: var(--spacing-16) var(--spacing-6); }
+	.kelulusan-header { text-align: center; margin-bottom: var(--spacing-8); }
+	.kelulusan-header h1 { font-size: 1.5rem; margin-bottom: var(--spacing-2); }
+	.subtitle { color: var(--color-text-secondary); font-size: 0.9rem; }
+	.status { min-height: 1.5rem; margin-bottom: var(--spacing-4); font-size: 0.9rem; }
+	.status.error { color: #b91c1c; }
+	.result { background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-6); }
+	.result.hidden { display: none; }
+	.student-info { margin-bottom: var(--spacing-5); }
+	.info-row { display: flex; justify-content: space-between; padding: var(--spacing-3) 0; border-bottom: 1px solid var(--color-border); }
+	.info-row:last-child { border-bottom: none; }
+	.info-label { font-size: 0.85rem; color: var(--color-text-secondary); }
+	.info-value { font-weight: 600; text-align: end; max-width: 60%; word-break: break-word; }
+	.actions { display: flex; gap: var(--spacing-3); flex-wrap: wrap; }
+	.btn-primary, .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; border-radius: var(--radius); font-weight: 600; text-decoration: none; cursor: pointer; border: none; font-size: 0.95rem; }
+	.btn-primary { background: var(--color-brand); color: #fff; }
+	.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+	.btn-secondary { background: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-border); }
+	.btn-icon { font-style: normal; }
+	.pdf-dialog { width: min(92vw, 980px); border: 0; padding: 0; border-radius: var(--radius-lg); overflow: hidden; }
+	.pdf-dialog::backdrop { background: rgba(0, 0, 0, 0.58); }
+	.pdf-head { display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 1rem; border-bottom: 1px solid var(--color-border); }
+	.pdf-head button { border: 1px solid var(--color-border); background: transparent; border-radius: var(--radius); padding: 0.4rem 0.75rem; cursor: pointer; }
+	#pdf-frame { width: 100%; height: min(80vh, 760px); border: 0; }
+	@media (max-width: 540px) {
+		.actions { flex-direction: column; }
+		.info-row { flex-direction: column; gap: 0.25rem; }
+		.info-value { max-width: 100%; text-align: start; }
+	}
+</style>

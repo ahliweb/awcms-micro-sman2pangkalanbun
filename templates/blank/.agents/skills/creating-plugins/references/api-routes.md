@@ -215,11 +215,11 @@ routes: {
 
 ### External API Proxy
 
-Requires `network:request` capability and `allowedHosts`:
+Requires `network:fetch` capability and `allowedHosts`:
 
 ```typescript
 definePlugin({
-	capabilities: ["network:request"],
+	capabilities: ["network:fetch"],
 	allowedHosts: ["api.weather.example.com"],
 
 	routes: {
