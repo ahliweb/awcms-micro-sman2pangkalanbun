@@ -5,6 +5,36 @@
 
 import type { ContentBylineCredit, PortableTextBlock } from "emdash";
 
+export interface Download {
+  id: string;
+  slug: string | null;
+  status: string;
+  title: string;
+  description?: string;
+  category?: string;
+  preview_image?: { id: string; src?: string; alt?: string; width?: number; height?: number };
+  resource_url?: string;
+  published_on?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+}
+
+export interface Gallery {
+  id: string;
+  slug: string | null;
+  status: string;
+  title: string;
+  description?: string;
+  content?: PortableTextBlock[];
+  cover_image?: { id: string; src?: string; alt?: string; width?: number; height?: number };
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+}
+
 export interface Page {
   id: string;
   slug: string | null;
@@ -33,6 +63,8 @@ export interface Post {
 
 declare module "emdash" {
   interface EmDashCollections {
+    downloads: Download;
+    galleries: Gallery;
     pages: Page;
     posts: Post;
   }

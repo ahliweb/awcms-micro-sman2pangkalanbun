@@ -2,14 +2,14 @@
 	"$schema": "https://emdashcms.com/seed.schema.json",
 	"version": "1",
 	"meta": {
-		"name": "Blog Starter",
-		"description": "A blog with posts and pages",
-		"author": "EmDash"
+		"name": "SMAN 2 Pangkalan Bun",
+		"description": "School website baseline with EmDash-managed navigation",
+		"author": "AWCMS"
 	},
 
 	"settings": {
-		"title": "My Blog",
-		"tagline": "Thoughts on building for the web"
+		"title": "SMAN 2 Pangkalan Bun",
+		"tagline": "Beriman, Cerdas, Berprestasi (BERDASI)"
 	},
 
 	"collections": [
@@ -65,6 +65,44 @@
 					"searchable": true
 				}
 			]
+		},
+		{
+			"slug": "galleries",
+			"label": "Galleries",
+			"labelSingular": "Gallery",
+			"supports": ["drafts", "revisions", "search"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{ "slug": "description", "label": "Description", "type": "text", "searchable": true },
+				{ "slug": "content", "label": "Content", "type": "portableText", "searchable": true },
+				{ "slug": "cover_image", "label": "Cover Image", "type": "image" }
+			]
+		},
+		{
+			"slug": "downloads",
+			"label": "Downloads",
+			"labelSingular": "Download",
+			"supports": ["drafts", "revisions", "search"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{ "slug": "description", "label": "Description", "type": "text", "searchable": true },
+				{ "slug": "category", "label": "Category", "type": "string", "searchable": true },
+				{ "slug": "preview_image", "label": "Preview Image", "type": "image" },
+				{ "slug": "resource_url", "label": "Resource URL", "type": "url" },
+				{ "slug": "published_on", "label": "Published On", "type": "datetime" }
+			]
 		}
 	],
 
@@ -115,9 +153,48 @@
 			"name": "primary",
 			"label": "Primary Navigation",
 			"items": [
-				{ "type": "custom", "label": "Home", "url": "/" },
-				{ "type": "custom", "label": "About", "url": "/pages/about" },
-				{ "type": "custom", "label": "Posts", "url": "/posts" }
+				{ "type": "custom", "label": "Beranda", "url": "/" },
+				{ "type": "custom", "label": "Profil Sekolah", "url": "/pages/profil-sekolah" },
+				{ "type": "custom", "label": "Blog", "url": "/posts" },
+				{ "type": "custom", "label": "Galeri", "url": "/galleries" },
+				{ "type": "custom", "label": "Unduhan", "url": "/downloads" },
+				{ "type": "custom", "label": "Profil Alumni", "url": "/pages/profil-alumni" },
+				{ "type": "custom", "label": "Kontak", "url": "/pages/kontak" }
+			]
+		},
+		{
+			"name": "footer",
+			"label": "Footer Navigation",
+			"items": [
+				{ "type": "custom", "label": "Profil Sekolah", "url": "/pages/profil-sekolah" },
+				{
+					"type": "custom",
+					"label": "Sambutan Kepala Sekolah",
+					"url": "/pages/sambutan-kepala-sekolah"
+				},
+				{ "type": "custom", "label": "Sejarah", "url": "/pages/sejarah" },
+				{ "type": "custom", "label": "Visi & Misi", "url": "/pages/visi-misi" },
+				{ "type": "custom", "label": "Info Sekolah", "url": "/posts" },
+				{ "type": "custom", "label": "Unduhan", "url": "/downloads" },
+				{ "type": "custom", "label": "Kontak", "url": "/pages/kontak" }
+			]
+		},
+		{
+			"name": "social",
+			"label": "Social Links",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Instagram",
+					"url": "https://instagram.com/sman2pangkalanbun",
+					"target": "_blank"
+				},
+				{
+					"type": "custom",
+					"label": "YouTube",
+					"url": "https://youtube.com/@sman2pangkalanbun",
+					"target": "_blank"
+				}
 			]
 		}
 	],
@@ -260,6 +337,186 @@
 								{
 									"_type": "span",
 									"text": "Built with Astro and EmDash. The source is open if you want to see how it works."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "profil-sekolah",
+				"slug": "profil-sekolah",
+				"status": "published",
+				"data": {
+					"title": "Profil Sekolah",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Halaman ringkasan profil sekolah. Konten detail dimigrasikan bertahap melalui EmDash."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "sambutan-kepala-sekolah",
+				"slug": "sambutan-kepala-sekolah",
+				"status": "published",
+				"data": {
+					"title": "Sambutan Kepala Sekolah",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Sambutan kepala sekolah tersedia sebagai konten referensi awal dan akan disempurnakan saat migrasi konten."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "sejarah",
+				"slug": "sejarah",
+				"status": "published",
+				"data": {
+					"title": "Sejarah",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Halaman sejarah sekolah untuk baseline navigasi EmDash."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "visi-misi",
+				"slug": "visi-misi",
+				"status": "published",
+				"data": {
+					"title": "Visi & Misi",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Visi, misi, dan tujuan sekolah dikelola dari EmDash pada fase migrasi konten."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "keuangan",
+				"slug": "keuangan",
+				"status": "published",
+				"data": {
+					"title": "Keuangan",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Transparansi keuangan (BOS, APBD, Komite) akan dipublikasikan melalui koleksi EmDash terkait."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "layanan",
+				"slug": "layanan",
+				"status": "published",
+				"data": {
+					"title": "Layanan",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Informasi layanan sekolah akan dikelola sebagai konten EmDash dan diperluas bertahap."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "prestasi",
+				"slug": "prestasi",
+				"status": "published",
+				"data": {
+					"title": "Prestasi",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Daftar prestasi siswa dan sekolah akan dipopulasi dari pipeline migrasi konten."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "profil-alumni",
+				"slug": "profil-alumni",
+				"status": "published",
+				"data": {
+					"title": "Profil Alumni",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Profil alumni akan dikelola melalui koleksi alumni di EmDash."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "kontak",
+				"slug": "kontak",
+				"status": "published",
+				"data": {
+					"title": "Kontak",
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Informasi kontak resmi sekolah dikelola melalui pengaturan dan konten EmDash."
 								}
 							]
 						}
@@ -771,6 +1028,50 @@
 							]
 						}
 					]
+				}
+			}
+		],
+		"galleries": [
+			{
+				"id": "gal-1",
+				"slug": "galeri-kegiatan-upacara",
+				"status": "published",
+				"data": {
+					"title": "Galeri Kegiatan Upacara",
+					"description": "Dokumentasi kegiatan upacara bendera.",
+					"cover_image": {
+						"$media": {
+							"url": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&h=800&fit=crop",
+							"alt": "Kegiatan sekolah",
+							"filename": "gallery-ceremony.jpg"
+						}
+					},
+					"content": [
+						{
+							"_type": "block",
+							"style": "normal",
+							"children": [
+								{
+									"_type": "span",
+									"text": "Galeri ini akan diperbarui rutin oleh tim publikasi sekolah."
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"downloads": [
+			{
+				"id": "dl-1",
+				"slug": "kalender-pendidikan-2026",
+				"status": "published",
+				"data": {
+					"title": "Kalender Pendidikan 2026",
+					"description": "Dokumen kalender pendidikan tahun ajaran berjalan.",
+					"category": "Akademik",
+					"resource_url": "https://sman2pangkalanbun.sch.id/documents/kalender-pendidikan-2026.pdf",
+					"published_on": "2026-01-10T08:00:00.000Z"
 				}
 			}
 		]

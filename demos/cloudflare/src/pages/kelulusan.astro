@@ -1,0 +1,119 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Kelulusan" description="Akses hasil kelulusan dengan NISN">
+	<section class="kelulusan-wrap">
+		<header class="kelulusan-header">
+			<h1>Hasil Kelulusan</h1>
+			<p class="subtitle">SMAN 2 Pangkalan Bun — Tahun Ajaran 2025/2026</p>
+		</header>
+
+		<div class="card">
+			<p class="intro">Masukkan NISN Anda untuk mengakses Surat Keterangan Lulus (SKL).</p>
+
+			<form id="nisn-form" class="nisn-form">
+				<label for="nisn-input" class="form-label">Nomor Induk Siswa Nasional (NISN)</label>
+				<div class="input-row">
+					<input
+						id="nisn-input"
+						name="nisn"
+						type="text"
+						required
+						minlength="6"
+						maxlength="32"
+						inputmode="numeric"
+						autocomplete="off"
+						placeholder="Contoh: 0051718871"
+					/>
+					<button type="submit" id="submit-btn">Cek Kelulusan</button>
+				</div>
+			</form>
+
+			<p id="status" class="status" role="status" aria-live="polite"></p>
+		</div>
+	</section>
+
+	<script is:inline>
+		const API_BASE = "/_emdash/api/plugins/kelulusan";
+		const form = document.getElementById("nisn-form");
+		const statusEl = document.getElementById("status");
+		const submitBtn = document.getElementById("submit-btn");
+		const SESSION_KEY = "kelulusan:gate-session";
+
+		async function apiPost(path, body) {
+			const res = await fetch(`${API_BASE}/${path}`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(body),
+			});
+			const payload = await res.json().catch(() => ({}));
+			if (!res.ok || payload.success === false) {
+				const message = payload?.error?.message || "Permintaan gagal";
+				throw new Error(message);
+			}
+			return payload.data ?? payload;
+		}
+
+		function showMessage(message, isError = false) {
+			statusEl.textContent = message;
+			statusEl.classList.toggle("error", isError);
+		}
+
+		const reason = new URLSearchParams(window.location.search).get("reason");
+		if (reason) showMessage(reason, true);
+
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+			showMessage("Memverifikasi NISN...");
+			submitBtn.disabled = true;
+			submitBtn.textContent = "Memproses...";
+
+			const nisn = String(new FormData(form).get("nisn") || "").trim();
+			if (!nisn) {
+				showMessage("NISN wajib diisi.", true);
+				submitBtn.disabled = false;
+				submitBtn.textContent = "Cek Kelulusan";
+				return;
+			}
+
+			try {
+				const session = await apiPost("gate/session/start", { nisn });
+				sessionStorage.setItem(
+					SESSION_KEY,
+					JSON.stringify({
+						nisn: session.nisn,
+						accessToken: session.accessToken,
+						expiresAt: session.expiresAt,
+					}),
+				);
+				showMessage("NISN valid. Mengalihkan ke halaman hasil...");
+				window.location.assign("/kelulusan/hasil");
+			} catch (error) {
+				showMessage(error instanceof Error ? error.message : "NISN tidak ditemukan", true);
+				submitBtn.disabled = false;
+				submitBtn.textContent = "Cek Kelulusan";
+			}
+		});
+	</script>
+</Base>
+
+<style>
+	.kelulusan-wrap { max-width: 560px; margin: 0 auto; padding: var(--spacing-16) var(--spacing-6); }
+	.kelulusan-header { text-align: center; margin-bottom: var(--spacing-8); }
+	.kelulusan-header h1 { font-size: 1.75rem; margin-bottom: var(--spacing-2); }
+	.subtitle { color: var(--color-text-secondary); font-size: 0.95rem; }
+	.card { background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-6); }
+	.intro { color: var(--color-text-secondary); margin-bottom: var(--spacing-5); }
+	.form-label { display: block; font-weight: 600; margin-bottom: var(--spacing-2); }
+	.input-row { display: flex; gap: var(--spacing-3); }
+	.input-row input { flex: 1; padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius); font-size: 1rem; }
+	.input-row input:focus { outline: 2px solid var(--color-brand); border-color: transparent; }
+	.input-row button { padding: 0.75rem 1.25rem; border-radius: var(--radius); border: none; background: var(--color-brand); color: #fff; font-weight: 600; cursor: pointer; white-space: nowrap; }
+	.input-row button:disabled { opacity: 0.6; cursor: not-allowed; }
+	.status { min-height: 1.5rem; margin-top: var(--spacing-4); font-size: 0.9rem; }
+	.status.error { color: #b91c1c; }
+	@media (max-width: 540px) {
+		.input-row { flex-direction: column; }
+	}
+</style>

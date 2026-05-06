@@ -110,6 +110,12 @@ pnpm format       # auto-format with oxfmt (tabs, not spaces)
 
 Type checking **must** pass. Lint **must** pass. Don't commit with known failures.
 
+## CI and Branch Protection
+
+- Required quality gates and merge requirements are documented in `.github/branch-protection-policy.md`.
+- PRs into `main` must satisfy required CI checks before merge.
+- Incident rollback follows the revert-first procedure in the same policy document.
+
 ### Tests
 
 ```bash

@@ -1,0 +1,8 @@
+{
+  "mcp": {
+    "emdash-docs": {
+      "type": "remote",
+      "url": "https://docs.emdashcms.com/mcp"
+    }
+  }
+}

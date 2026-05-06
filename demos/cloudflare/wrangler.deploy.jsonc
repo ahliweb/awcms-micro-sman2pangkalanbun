@@ -1,0 +1,41 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "sman2pangkalanbunweb",
+	"main": "./dist/server/entry.mjs",
+	"compatibility_date": "2026-01-14",
+	"compatibility_flags": ["nodejs_compat", "disable_nodejs_process_v2"],
+	"routes": [
+		{
+			"pattern": "sman2pangkalanbun.sch.id",
+			"zone_name": "sman2pangkalanbun.sch.id",
+			"custom_domain": true,
+		},
+	],
+	"assets": {
+		"binding": "ASSETS",
+		"directory": "./dist/client",
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "sman2pangkalanbunweb",
+			"database_id": "24247c48-0dd9-472f-9d55-3098da8d799e",
+		},
+	],
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "sman2pangkalanbunweb",
+		},
+	],
+	"kv_namespaces": [
+		{
+			"binding": "SESSION",
+			"id": "b40b1549d5ed4cd289fb68292252bfae",
+			"preview_id": "37a3ede4864d4914aa136239640269b0",
+		},
+	],
+	"observability": {
+		"enabled": true,
+	},
+}

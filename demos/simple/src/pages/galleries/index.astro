@@ -1,0 +1,47 @@
+---
+import { getEmDashCollection } from "emdash";
+import type { MediaValue } from "emdash";
+import { Image } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+
+function asString(value: unknown): string | null {
+	return typeof value === "string" ? value : null;
+}
+
+function asMedia(value: unknown): MediaValue | string | null {
+	if (typeof value === "string") return value;
+	if (typeof value === "object" && value !== null) return value as MediaValue;
+	return null;
+}
+
+const { entries: galleries, cacheHint } = await getEmDashCollection("galleries", {
+	orderBy: { published_at: "desc" }
+});
+
+const galleryItems = galleries.map((item) => {
+	const data = item.data as unknown as Record<string, unknown>;
+	return {
+		id: item.id,
+		title: asString(data.title) ?? item.id,
+		coverImage: asMedia(data.cover_image),
+		description: asString(data.description),
+	};
+});
+
+Astro.cache.set(cacheHint);
+---
+
+<Base title="Galeri" description="Galeri kegiatan sekolah">
+	<section class="list-page">
+		<h1>Galeri</h1>
+		<ul>
+			{galleryItems.map((item) => (
+				<li>
+					<a href={`/galleries/${item.id}`}>{item.title}</a>
+					{item.coverImage && <Image image={item.coverImage} />}
+					{item.description && <p>{item.description}</p>}
+				</li>
+			))}
+		</ul>
+	</section>
+</Base>

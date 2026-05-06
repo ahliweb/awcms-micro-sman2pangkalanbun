@@ -66,7 +66,7 @@ A visual portfolio for showcasing creative work.
 - Case study pages
 - RSS feed
 - Dark / light mode
-<br /><br />
+
 </td>
 </tr>
 </table>
@@ -178,7 +178,7 @@ Run the demo (Node.js + SQLite, no Cloudflare account needed):
 
 ```bash
 pnpm --filter emdash-demo seed
-pnpm --filter emdash-demo dev
+pnpm dev:simple
 ```
 
 Open the admin at [http://localhost:4321/\_emdash/admin](http://localhost:4321/_emdash/admin).
@@ -192,10 +192,13 @@ pnpm format        # format with oxfmt
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contributor guide.
 
+## Project Customization Docs
+
+For the AI-native implementation plan of **Website SMAN 2 Pangkalanbun**, see `project-docs/README.md`.
+
 ## Repository Structure
 
-```
-packages/
+```text
   core/           Astro integration, APIs, admin UI, CLI
   auth/           Authentication library
   blocks/         Portable Text block definitions
