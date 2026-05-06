@@ -4,10 +4,13 @@
 	"version": "0.0.1",
 	"description": "Kelulusan plugin scaffold for NISN-gated graduation PDF access",
 	"type": "module",
-	"main": "src/index.ts",
+	"main": "dist/index.mjs",
 	"exports": {
-		".": "./src/index.ts",
-		"./sandbox": "./src/sandbox-entry.ts"
+		".": {
+			"import": "./dist/index.mjs",
+			"types": "./dist/index.d.mts"
+		},
+		"./sandbox": "./dist/sandbox-entry.mjs"
 	},
 	"files": ["src"],
 	"scripts": {

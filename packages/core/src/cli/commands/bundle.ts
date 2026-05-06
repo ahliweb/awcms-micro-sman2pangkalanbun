@@ -252,7 +252,16 @@ export const bundleCommand = defineCommand({
 								await mkdir(probeShimDir, { recursive: true });
 								await writeFile(
 									join(probeShimDir, "emdash.mjs"),
-									"export const definePlugin = (d) => d;\n",
+									"export const definePlugin = (d) => d;\n" +
+										"export class PluginRouteError extends Error {\n" +
+										"  constructor(code, message, status = 400) { super(message); this.code = code; this.status = status; }\n" +
+										"  static badRequest(message) { return new PluginRouteError('BAD_REQUEST', message, 400); }\n" +
+										"  static unauthorized(message = 'Unauthorized') { return new PluginRouteError('UNAUTHORIZED', message, 401); }\n" +
+										"  static forbidden(message = 'Forbidden') { return new PluginRouteError('FORBIDDEN', message, 403); }\n" +
+										"  static notFound(message = 'Not found') { return new PluginRouteError('NOT_FOUND', message, 404); }\n" +
+										"  static conflict(message) { return new PluginRouteError('CONFLICT', message, 409); }\n" +
+										"  static internal(message = 'Internal error') { return new PluginRouteError('INTERNAL_ERROR', message, 500); }\n" +
+										"}\n",
 								);
 								await build({
 									config: false,
@@ -368,7 +377,16 @@ export const bundleCommand = defineCommand({
 				// format, and PluginContext is a type-only import that disappears.
 				const shimDir = join(tmpDir, "shims");
 				await mkdir(shimDir, { recursive: true });
-				await writeFile(join(shimDir, "emdash.mjs"), "export const definePlugin = (d) => d;\n");
+				await writeFile(join(shimDir, "emdash.mjs"), "export const definePlugin = (d) => d;\n" +
+				"export class PluginRouteError extends Error {\n" +
+				"  constructor(code, message, status = 400) { super(message); this.code = code; this.status = status; }\n" +
+				"  static badRequest(message) { return new PluginRouteError('BAD_REQUEST', message, 400); }\n" +
+				"  static unauthorized(message = 'Unauthorized') { return new PluginRouteError('UNAUTHORIZED', message, 401); }\n" +
+				"  static forbidden(message = 'Forbidden') { return new PluginRouteError('FORBIDDEN', message, 403); }\n" +
+				"  static notFound(message = 'Not found') { return new PluginRouteError('NOT_FOUND', message, 404); }\n" +
+				"  static conflict(message) { return new PluginRouteError('CONFLICT', message, 409); }\n" +
+				"  static internal(message = 'Internal error') { return new PluginRouteError('INTERNAL_ERROR', message, 500); }\n" +
+				"}\n");
 
 				await build({
 					config: false,
