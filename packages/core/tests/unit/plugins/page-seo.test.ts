@@ -85,6 +85,8 @@ describe("page SEO metadata", () => {
 
 	it("includes organization logo in website JSON-LD", () => {
 		const page = createPage({
+			url: "https://example.com/",
+			path: "/",
 			kind: "custom",
 			pageType: "website",
 			siteUrl: "https://example.com",
@@ -106,5 +108,23 @@ describe("page SEO metadata", () => {
 				},
 			},
 		});
+	});
+
+	it("does not emit organization logo off homepage", () => {
+		const page = createPage({
+			kind: "custom",
+			pageType: "website",
+			siteUrl: "https://example.com",
+			siteLogo: "/_emdash/api/media/file/logo.png",
+		});
+
+		const graph = buildWebSiteJsonLd(page);
+
+		expect(graph).toMatchObject({
+			"@type": "WebSite",
+			name: "My Site",
+			url: "https://example.com",
+		});
+		expect(graph).not.toHaveProperty("publisher");
 	});
 });
