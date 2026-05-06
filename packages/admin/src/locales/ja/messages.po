@@ -443,6 +443,14 @@ msgstr "有効"
 msgid "Add"
 msgstr "追加"
 
+#: packages/admin/src/components/PortableTextEditor.tsx:2507
+msgid "Add column before"
+msgstr "前に列を追加"
+
+#: packages/admin/src/components/PortableTextEditor.tsx:2514
+msgid "Add column after"
+msgstr "後に列を追加"
+
 #. placeholder {0}: field.item_label
 #: packages/admin/src/components/PortableTextEditor.tsx:1321
 msgid "Add {0}"
@@ -500,6 +508,14 @@ msgstr ""
 #: packages/admin/src/components/RepeaterField.tsx:153
 msgid "Add Item"
 msgstr "アイテムを追加"
+
+#: packages/admin/src/components/PortableTextEditor.tsx:2530
+msgid "Add row before"
+msgstr "前に行を追加"
+
+#: packages/admin/src/components/PortableTextEditor.tsx:2537
+msgid "Add row after"
+msgstr "後に行を追加"
 
 #: packages/admin/src/components/MenuEditor.tsx:399
 msgid "Add links to build your navigation menu"
@@ -1547,6 +1563,10 @@ msgstr "{0}を削除しますか？"
 msgid "Delete Comment?"
 msgstr "コメントを削除しますか？"
 
+#: packages/admin/src/components/PortableTextEditor.tsx:2521
+msgid "Delete column"
+msgstr "列を削除"
+
 #: packages/admin/src/components/ContentTypeList.tsx:142
 msgid "Delete Content Type?"
 msgstr "コンテンツタイプを削除しますか？"
@@ -1585,9 +1605,17 @@ msgstr "リダイレクト{0}を削除"
 msgid "Delete Redirect?"
 msgstr "リダイレクトを削除しますか？"
 
+#: packages/admin/src/components/PortableTextEditor.tsx:2542
+msgid "Delete row"
+msgstr "行を削除"
+
 #: packages/admin/src/components/Sections.tsx:294
 msgid "Delete Section?"
 msgstr "セクションを削除しますか？"
+
+#: packages/admin/src/components/PortableTextEditor.tsx:2558
+msgid "Delete table"
+msgstr "テーブルを削除"
 
 #: packages/admin/src/components/ContentList.tsx:346
 msgid "Deleted"
@@ -2509,6 +2537,10 @@ msgstr "コードブロックを挿入"
 msgid "Insert a horizontal rule"
 msgstr "水平線を挿入"
 
+#: packages/admin/src/components/PortableTextEditor.tsx:937
+msgid "Insert a table"
+msgstr "テーブルを挿入"
+
 #: packages/admin/src/components/PortableTextEditor.tsx:1810
 msgid "Insert a reusable section"
 msgstr "再利用可能なセクションを挿入"
@@ -2524,6 +2556,10 @@ msgstr "URLから挿入"
 #: packages/admin/src/components/SectionPickerModal.tsx:57
 msgid "Insert Section"
 msgstr "セクションを挿入"
+
+#: packages/admin/src/components/PortableTextEditor.tsx:2842
+msgid "Insert Table"
+msgstr "テーブルを挿入"
 
 #: packages/admin/src/components/settings/SocialSettings.tsx:161
 msgid "Instagram"
@@ -4890,6 +4926,10 @@ msgstr "テーマのマーケットプレイスは空です。後で確認して
 msgid "Theme"
 msgstr "テーマ"
 
+#: packages/admin/src/components/PortableTextEditor.tsx:936
+msgid "Table"
+msgstr "テーブル"
+
 #. placeholder {0}: section.themeId
 #: packages/admin/src/components/SectionEditor.tsx:282
 msgid "Theme ID: {0}"
@@ -5031,6 +5071,10 @@ msgstr "選択"
 #: packages/admin/src/components/ThemeToggle.tsx:41
 msgid "Toggle theme (current: {label})"
 msgstr "テーマを切り替え（現在: {label}）"
+
+#: packages/admin/src/components/PortableTextEditor.tsx:2551
+msgid "Toggle header row"
+msgstr "ヘッダー行を切り替え"
 
 #. placeholder {0}: newToken.info.name
 #: packages/admin/src/components/settings/ApiTokenSettings.tsx:202
