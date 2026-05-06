@@ -535,7 +535,7 @@ function ContentNewPage() {
 				const updated = await updateBylineMutation.mutateAsync({ id: bylineId, ...input });
 				return updated;
 			}}
-			manifest={manifest}
+			manifest={manifest ?? null}
 		/>
 	);
 }
@@ -949,7 +949,7 @@ function ContentEditPage() {
 				const updated = await updateBylineMutation.mutateAsync({ id: bylineId, ...input });
 				return updated;
 			}}
-			manifest={manifest}
+			manifest={manifest ?? null}
 		/>
 	);
 }
@@ -1326,6 +1326,11 @@ const menuEditorRoute = createRoute({
 	getParentRoute: () => adminLayoutRoute,
 	path: "/menus/$name",
 	component: MenuEditor,
+	validateSearch: (search: Record<string, unknown>) => {
+		return {
+			locale: typeof search.locale === "string" ? search.locale : undefined,
+		};
+	},
 });
 
 // Taxonomy manager route

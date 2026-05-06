@@ -14,7 +14,7 @@
  */
 
 import { createHash } from "node:crypto";
-import { readFile, mkdir, writeFile, rm, copyFile, symlink, readdir } from "node:fs/promises";
+import { readFile, stat, mkdir, writeFile, rm, copyFile, symlink, readdir } from "node:fs/promises";
 import { resolve, join, extname, basename } from "node:path";
 
 import { defineCommand } from "citty";
@@ -180,7 +180,6 @@ export const bundleCommand = defineCommand({
 				dts: false,
 				platform: "node",
 				external: ["emdash", emdash_SCOPE_RE],
-				failOnWarn: false,
 			});
 
 			// Symlink plugin's node_modules so the built module can resolve
@@ -252,16 +251,7 @@ export const bundleCommand = defineCommand({
 								await mkdir(probeShimDir, { recursive: true });
 								await writeFile(
 									join(probeShimDir, "emdash.mjs"),
-									"export const definePlugin = (d) => d;\n" +
-										"export class PluginRouteError extends Error {\n" +
-										"  constructor(code, message, status = 400) { super(message); this.code = code; this.status = status; }\n" +
-										"  static badRequest(message) { return new PluginRouteError('BAD_REQUEST', message, 400); }\n" +
-										"  static unauthorized(message = 'Unauthorized') { return new PluginRouteError('UNAUTHORIZED', message, 401); }\n" +
-										"  static forbidden(message = 'Forbidden') { return new PluginRouteError('FORBIDDEN', message, 403); }\n" +
-										"  static notFound(message = 'Not found') { return new PluginRouteError('NOT_FOUND', message, 404); }\n" +
-										"  static conflict(message) { return new PluginRouteError('CONFLICT', message, 409); }\n" +
-										"  static internal(message = 'Internal error') { return new PluginRouteError('INTERNAL_ERROR', message, 500); }\n" +
-										"}\n",
+									"export const definePlugin = (d) => d;\n",
 								);
 								await build({
 									config: false,
@@ -273,7 +263,6 @@ export const bundleCommand = defineCommand({
 									external: [],
 									alias: { emdash: join(probeShimDir, "emdash.mjs") },
 									treeshake: true,
-									failOnWarn: false,
 								});
 								const backendBaseName = basename(backendEntry).replace(TS_EXT_RE, "");
 								const backendProbePath = await findBuildOutput(backendProbeDir, backendBaseName);
@@ -377,19 +366,7 @@ export const bundleCommand = defineCommand({
 				// format, and PluginContext is a type-only import that disappears.
 				const shimDir = join(tmpDir, "shims");
 				await mkdir(shimDir, { recursive: true });
-				await writeFile(
-					join(shimDir, "emdash.mjs"),
-					"export const definePlugin = (d) => d;\n" +
-						"export class PluginRouteError extends Error {\n" +
-						"  constructor(code, message, status = 400) { super(message); this.code = code; this.status = status; }\n" +
-						"  static badRequest(message) { return new PluginRouteError('BAD_REQUEST', message, 400); }\n" +
-						"  static unauthorized(message = 'Unauthorized') { return new PluginRouteError('UNAUTHORIZED', message, 401); }\n" +
-						"  static forbidden(message = 'Forbidden') { return new PluginRouteError('FORBIDDEN', message, 403); }\n" +
-						"  static notFound(message = 'Not found') { return new PluginRouteError('NOT_FOUND', message, 404); }\n" +
-						"  static conflict(message) { return new PluginRouteError('CONFLICT', message, 409); }\n" +
-						"  static internal(message = 'Internal error') { return new PluginRouteError('INTERNAL_ERROR', message, 500); }\n" +
-						"}\n",
-				);
+				await writeFile(join(shimDir, "emdash.mjs"), "export const definePlugin = (d) => d;\n");
 
 				await build({
 					config: false,
@@ -404,7 +381,6 @@ export const bundleCommand = defineCommand({
 					alias: { emdash: join(shimDir, "emdash.mjs") },
 					minify: true,
 					treeshake: true,
-					failOnWarn: false,
 				});
 
 				const backendBaseName = basename(backendEntry).replace(TS_EXT_RE, "");
@@ -436,7 +412,6 @@ export const bundleCommand = defineCommand({
 					external: [],
 					minify: true,
 					treeshake: true,
-					failOnWarn: false,
 				});
 
 				const adminBaseName = basename(adminEntry).replace(TS_EXT_RE, "");
@@ -652,10 +627,11 @@ export const bundleCommand = defineCommand({
 			consola.start("Creating tarball...");
 			await createTarball(bundleDir, tarballPath);
 
-			const tarballBuf = await readFile(tarballPath);
-			const tarballSizeKB = (tarballBuf.length / 1024).toFixed(1);
+			const tarballStat = await stat(tarballPath);
+			const tarballSizeKB = (tarballStat.size / 1024).toFixed(1);
 
 			// Calculate checksum
+			const tarballBuf = await readFile(tarballPath);
 			const checksum = createHash("sha256").update(tarballBuf).digest("hex");
 
 			consola.success(`Created ${tarballName} (${tarballSizeKB}KB)`);

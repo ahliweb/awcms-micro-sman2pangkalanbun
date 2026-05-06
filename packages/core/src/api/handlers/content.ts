@@ -476,6 +476,17 @@ export async function handleContentCreate(
 			}
 			await hydrateBylines(trx, collection, created);
 
+			// When this row is a translation of an existing item, inherit the
+			// source's taxonomy assignments. The pivot stores translation_groups
+			// so the copied rows apply to every locale of the translation group
+			// (existing per-locale assignments still resolve correctly in
+			// `getEntryTerms` because the join picks the locale-specific row).
+			if (body.translationOf) {
+				const { TaxonomyRepository } = await import("../../database/repositories/taxonomy.js");
+				const taxRepo = new TaxonomyRepository(trx);
+				await taxRepo.copyEntryTerms(collection, body.translationOf, created.id);
+			}
+
 			// Side-write SEO data if provided
 			if (body.seo && hasSeo) {
 				const seoRepo = new SeoRepository(trx);
@@ -818,15 +829,17 @@ export async function handleContentDelete(
 	try {
 		const deleted = await withTransaction(db, async (trx) => {
 			const repo = new ContentRepository(trx);
-			const resolvedId = (await resolveIdIncludingTrashed(repo, collection, id)) ?? id;
+			const resolvedId = (await resolveId(repo, collection, id)) ?? id;
 			return repo.delete(collection, resolvedId);
 		});
 
 		if (!deleted) {
-			// Item may already be in trash — treat as success
 			return {
-				success: true,
-				data: { deleted: true },
+				success: false,
+				error: {
+					code: "NOT_FOUND",
+					message: `Content item not found: ${id}`,
+				},
 			};
 		}
 
@@ -835,13 +848,12 @@ export async function handleContentDelete(
 			data: { deleted: true },
 		};
 	} catch (error) {
-		const errMsg = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
-		console.error("Content delete error:", errMsg);
+		console.error("Content delete error:", error);
 		return {
 			success: false,
 			error: {
 				code: "CONTENT_DELETE_ERROR",
-				message: `Failed to delete content: ${errMsg}`,
+				message: "Failed to delete content",
 			},
 		};
 	}
@@ -1149,39 +1161,12 @@ export async function handleContentPublish(
 				},
 			};
 		}
-		// Handle UNIQUE constraint violations (slug collision etc.)
-		const message = error instanceof Error ? error.message.toLowerCase() : "";
-		if (message.includes("unique constraint failed") || message.includes("duplicate key")) {
-			if (message.includes("slug")) {
-				return {
-					success: false,
-					error: {
-						code: "SLUG_CONFLICT",
-						message:
-							"A page with this slug already exists. Please choose a different slug before publishing.",
-					},
-				};
-			}
-			return {
-				success: false,
-				error: {
-					code: "CONFLICT",
-					message: "Unique constraint violation",
-				},
-			};
-		}
-		const errMsg = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
-		console.error(
-			"Content publish error:",
-			errMsg,
-			"stack:",
-			error instanceof Error ? error.stack : undefined,
-		);
+		console.error("Content publish error:", error);
 		return {
 			success: false,
 			error: {
 				code: "CONTENT_PUBLISH_ERROR",
-				message: `Failed to publish content: ${errMsg}`,
+				message: "Failed to publish content",
 			},
 		};
 	}

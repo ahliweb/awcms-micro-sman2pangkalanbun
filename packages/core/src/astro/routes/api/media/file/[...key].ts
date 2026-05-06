@@ -11,10 +11,8 @@ import { apiError, handleError } from "#api/error.js";
 export const prerender = false;
 
 /**
- * Content types that are safe to display inline (images, video, audio, PDF).
+ * Content types that are safe to display inline (simple raster/vector images, video, audio).
  * Everything else gets Content-Disposition: attachment to prevent script execution.
- * PDFs are included because browser built-in viewers sandbox JS and in-iframe
- * rendering requires inline disposition.
  */
 const SAFE_INLINE_TYPES = new Set([
 	"image/jpeg",
@@ -28,29 +26,9 @@ const SAFE_INLINE_TYPES = new Set([
 	"audio/mpeg",
 	"audio/wav",
 	"audio/ogg",
-	"application/pdf",
 ]);
 
-const CRLF_RE = /[\r\n]/g;
-const SLASH_RE = /[\\/]/g;
-const QUOTE_RE = /"/g;
-
-function getDownloadFilename(key: string, requestedName: string | null): string {
-	const raw = (requestedName ?? "").trim();
-	if (!raw) {
-		return key.includes("/") ? key.slice(key.lastIndexOf("/") + 1) : key;
-	}
-
-	const normalized = raw.replace(CRLF_RE, "").replace(SLASH_RE, "-").replace(QUOTE_RE, "").trim();
-
-	if (!normalized) {
-		return key.includes("/") ? key.slice(key.lastIndexOf("/") + 1) : key;
-	}
-
-	return normalized;
-}
-
-export const GET: APIRoute = async ({ params, locals, url }) => {
+export const GET: APIRoute = async ({ params, locals }) => {
 	const { key } = params;
 	const { emdash } = locals;
 
@@ -65,38 +43,26 @@ export const GET: APIRoute = async ({ params, locals, url }) => {
 	try {
 		const result = await emdash.storage.download(key);
 
-		const forceDownload = url.searchParams.has("dl");
-		const isInline = !forceDownload && SAFE_INLINE_TYPES.has(result.contentType);
-
 		const headers: Record<string, string> = {
 			"Content-Type": result.contentType,
-			"Cache-Control": forceDownload
-				? "private, max-age=300"
-				: "public, max-age=31536000, immutable",
+			"Cache-Control": "public, max-age=31536000, immutable",
 			"X-Content-Type-Options": "nosniff",
-			"Content-Disposition": isInline ? "inline" : "attachment",
+			// Sandbox CSP on all user-uploaded content — prevents script execution
+			// even for SVGs navigated to directly or content types that support scripting.
+			"Content-Security-Policy":
+				"sandbox; default-src 'none'; img-src 'self'; style-src 'unsafe-inline'",
 		};
 
 		if (result.size) {
 			headers["Content-Length"] = String(result.size);
 		}
 
-		// When forcing download, include the filename derived from the storage key
-		// so browsers save with the correct name instead of the object-key UUID.
-		if (forceDownload) {
-			const requestedName = url.searchParams.get("name");
-			const filename = getDownloadFilename(key, requestedName);
-			headers["Content-Disposition"] =
-				`attachment; filename*=UTF-8''${encodeURIComponent(filename)}`;
-		}
-
-		// Sandbox CSP on non-inline content — prevents script execution for SVGs,
-		// HTML, JS, etc. navigated to directly. Skipped for safe inline types
-		// (images, video, audio, PDF) because sandbox blocks in-iframe PDF rendering
-		// and is unnecessary for content types without active script execution.
-		if (!isInline) {
-			headers["Content-Security-Policy"] =
-				"sandbox; default-src 'none'; img-src 'self'; style-src 'unsafe-inline'";
+		// Safe image/media types can render inline; everything else (SVG, PDF,
+		// HTML, JS, etc.) must be downloaded to prevent stored XSS.
+		if (SAFE_INLINE_TYPES.has(result.contentType)) {
+			headers["Content-Disposition"] = "inline";
+		} else {
+			headers["Content-Disposition"] = "attachment";
 		}
 
 		return new Response(result.body, { status: 200, headers });

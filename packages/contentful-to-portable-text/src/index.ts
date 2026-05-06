@@ -61,34 +61,6 @@ type InlineChild = PortableTextSpan | ArbitraryTypedObject;
 /** Output block: either a standard PT block or a custom typed object */
 type OutputBlock = PortableTextBlock | ArbitraryTypedObject;
 
-function asRecord(value: unknown): Record<string, unknown> | null {
-	if (typeof value !== "object" || value === null) return null;
-	return Object.fromEntries(Object.entries(value));
-}
-
-function getString(value: unknown): string | undefined {
-	return typeof value === "string" ? value : undefined;
-}
-
-function getNodeText(node: ContentfulNode): string {
-	if (!("value" in node)) return "";
-	return typeof node.value === "string" ? node.value : "";
-}
-
-function getNodeMarks(node: ContentfulNode): string[] {
-	if (!("marks" in node) || !Array.isArray(node.marks)) return [];
-	return node.marks
-		.map((mark) => (mark && typeof mark === "object" && "type" in mark ? mark.type : undefined))
-		.map((type) => (typeof type === "string" ? (MARK_MAP[type] ?? type) : undefined))
-		.filter((v): v is string => Boolean(v));
-}
-
-function getTargetId(node: ContentfulNode): string | undefined {
-	const target = asRecord(asRecord(node.data)?.target);
-	const sys = asRecord(target?.sys);
-	return getString(sys?.id);
-}
-
 /**
  * Create a call-scoped key generator.
  *
@@ -219,7 +191,7 @@ function convertTextBlock(
 		style === "normal" &&
 		children.length === 1 &&
 		children[0]!._type === "span" &&
-		children[0]!.text === ""
+		(children[0] as PortableTextSpan).text === ""
 	) {
 		return null;
 	}
@@ -349,7 +321,7 @@ function convertEmbeddedEntry(
 	includes: ContentfulIncludes,
 	generateKey: () => string,
 ): OutputBlock | null {
-	const targetId = getTargetId(node);
+	const targetId = (node.data?.target as { sys?: { id?: string } })?.sys?.id;
 	if (!targetId) return null;
 
 	const entry = includes.entries.get(targetId);
@@ -383,7 +355,7 @@ function convertEmbeddedAsset(
 	includes: ContentfulIncludes,
 	generateKey: () => string,
 ): OutputBlock | null {
-	const targetId = getTargetId(node);
+	const targetId = (node.data?.target as { sys?: { id?: string } })?.sys?.id;
 	if (!targetId) return null;
 
 	const asset = includes.assets.get(targetId);
@@ -417,16 +389,18 @@ function convertInlineContent(
 
 	for (const node of nodes) {
 		if (node.nodeType === "text") {
-			const marks = getNodeMarks(node);
+			const marks = ((node as { marks?: Array<{ type: string }> }).marks ?? [])
+				.map((m) => MARK_MAP[m.type] ?? m.type)
+				.filter(Boolean);
 
 			children.push({
 				_type: "span",
 				_key: generateKey(),
-				text: getNodeText(node),
+				text: (node as { value?: string }).value ?? "",
 				marks,
 			});
 		} else if (node.nodeType === INLINES.HYPERLINK) {
-			const rawUri = getString(node.data?.uri) ?? "";
+			const rawUri = (node.data?.uri as string) ?? "";
 			const href = sanitizeUri(rawUri);
 			const markKey = generateKey();
 			const isExternal = isExternalLink(href, options.blogHostname);
@@ -441,12 +415,14 @@ function convertInlineContent(
 			const linkContent = "content" in node ? (node.content as ContentfulNode[]) : [];
 			for (const child of linkContent) {
 				if (child.nodeType === "text") {
-					const marks = getNodeMarks(child);
+					const marks = ((child as { marks?: Array<{ type: string }> }).marks ?? [])
+						.map((m) => MARK_MAP[m.type] ?? m.type)
+						.filter(Boolean);
 
 					children.push({
 						_type: "span",
 						_key: generateKey(),
-						text: getNodeText(child),
+						text: (child as { value?: string }).value ?? "",
 						marks: [...marks, markKey],
 					});
 				}
@@ -455,7 +431,7 @@ function convertInlineContent(
 			node.nodeType === INLINES.ENTRY_HYPERLINK ||
 			node.nodeType === INLINES.ASSET_HYPERLINK
 		) {
-			const targetId = getTargetId(node);
+			const targetId = (node.data?.target as { sys?: { id?: string } })?.sys?.id;
 			let href = "#";
 
 			if (node.nodeType === INLINES.ENTRY_HYPERLINK && targetId) {
@@ -463,8 +439,8 @@ function convertInlineContent(
 				if (entry) {
 					const rawHref = options.entryHrefResolver
 						? options.entryHrefResolver(entry)
-						: typeof entry.fields.slug === "string"
-							? `/${entry.fields.slug}/`
+						: entry.fields.slug
+							? `/${entry.fields.slug as string}/`
 							: "#";
 					href = sanitizeUri(rawHref);
 				}
@@ -482,11 +458,13 @@ function convertInlineContent(
 			const linkContent = "content" in node ? (node.content as ContentfulNode[]) : [];
 			for (const child of linkContent) {
 				if (child.nodeType === "text") {
-					const marks = getNodeMarks(child);
+					const marks = ((child as { marks?: Array<{ type: string }> }).marks ?? [])
+						.map((m) => MARK_MAP[m.type] ?? m.type)
+						.filter(Boolean);
 					children.push({
 						_type: "span",
 						_key: generateKey(),
-						text: getNodeText(child),
+						text: (child as { value?: string }).value ?? "",
 						marks: [...marks, markKey],
 					});
 				}
@@ -495,7 +473,7 @@ function convertInlineContent(
 			node.nodeType === INLINES.EMBEDDED_ENTRY ||
 			node.nodeType === INLINES.EMBEDDED_RESOURCE
 		) {
-			const targetId = getTargetId(node);
+			const targetId = (node.data?.target as { sys?: { id?: string } })?.sys?.id;
 			console.warn(
 				`[rich-text-to-pt] Inline ${node.nodeType} encountered (target: ${targetId ?? "unknown"}). ` +
 					`Preserved as custom inline block — consumer should handle or strip.`,
@@ -514,11 +492,13 @@ function convertInlineContent(
 			const linkContent = "content" in node ? (node.content as ContentfulNode[]) : [];
 			for (const child of linkContent) {
 				if (child.nodeType === "text") {
-					const marks = getNodeMarks(child);
+					const marks = ((child as { marks?: Array<{ type: string }> }).marks ?? [])
+						.map((m) => MARK_MAP[m.type] ?? m.type)
+						.filter(Boolean);
 					children.push({
 						_type: "span",
 						_key: generateKey(),
-						text: getNodeText(child),
+						text: (child as { value?: string }).value ?? "",
 						marks,
 					});
 				}
@@ -580,37 +560,34 @@ export function buildIncludes(raw: {
 	const assets = new Map<string, import("./types.js").ContentfulAsset>();
 
 	for (const entry of raw.Entry ?? []) {
-		const entryRec = asRecord(entry);
-		const sys = asRecord(entryRec?.sys);
-		const id = getString(sys?.id);
-		if (!id) continue;
-		const contentType = getString(asRecord(asRecord(sys?.contentType)?.sys)?.id) ?? "unknown";
-		const fields = asRecord(entryRec?.fields) ?? {};
-		entries.set(id, {
-			id,
-			contentType,
-			fields,
+		const sys = entry.sys as { id?: string; contentType?: { sys?: { id?: string } } } | undefined;
+		if (!sys?.id) continue;
+		entries.set(sys.id, {
+			id: sys.id,
+			contentType: sys.contentType?.sys?.id ?? "unknown",
+			fields: (entry.fields as Record<string, unknown>) ?? {},
 		});
 	}
 
 	for (const asset of raw.Asset ?? []) {
-		const assetRec = asRecord(asset);
-		const sys = asRecord(assetRec?.sys);
-		const id = getString(sys?.id);
-		if (!id) continue;
-		const fields = asRecord(assetRec?.fields);
-		const file = asRecord(fields?.file);
-		const image = asRecord(asRecord(file?.details)?.image);
-		const width = typeof image?.width === "number" ? image.width : undefined;
-		const height = typeof image?.height === "number" ? image.height : undefined;
-		assets.set(id, {
-			id,
-			title: getString(fields?.title),
-			description: getString(fields?.description),
-			url: getString(file?.url) ?? "",
-			width,
-			height,
-			contentType: getString(file?.contentType),
+		const sys = asset.sys as { id?: string } | undefined;
+		if (!sys?.id) continue;
+		const fields = asset.fields as Record<string, unknown> | undefined;
+		const file = fields?.file as
+			| {
+					url?: string;
+					contentType?: string;
+					details?: { image?: { width?: number; height?: number } };
+			  }
+			| undefined;
+		assets.set(sys.id, {
+			id: sys.id,
+			title: fields?.title as string | undefined,
+			description: fields?.description as string | undefined,
+			url: file?.url ?? "",
+			width: file?.details?.image?.width,
+			height: file?.details?.image?.height,
+			contentType: file?.contentType,
 		});
 	}
 

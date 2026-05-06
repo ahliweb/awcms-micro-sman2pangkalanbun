@@ -17,18 +17,10 @@ describe("buildEmDashCsp", () => {
 		expect(imgSrc).toContain("blob:");
 	});
 
-	it("allows Cloudflare Insights beacon endpoint in connect-src", () => {
+	it("keeps connect-src restricted to self", () => {
 		const csp = buildEmDashCsp();
 		const connectSrc = csp.split("; ").find((d) => d.startsWith("connect-src"));
-		expect(connectSrc).toContain("'self'");
-		expect(connectSrc).toContain("https://cloudflareinsights.com");
-	});
-
-	it("allows Cloudflare Insights script source in script-src", () => {
-		const csp = buildEmDashCsp();
-		const scriptSrc = csp.split("; ").find((d) => d.startsWith("script-src"));
-		expect(scriptSrc).toContain("'self'");
-		expect(scriptSrc).toContain("https://static.cloudflareinsights.com");
+		expect(connectSrc).toBe("connect-src 'self'");
 	});
 
 	it("blocks framing with frame-ancestors none", () => {

@@ -6,17 +6,13 @@
 
 import { spawn } from "node:child_process";
 import { readFile, access } from "node:fs/promises";
-import { resolve, sep } from "node:path";
+import { resolve } from "node:path";
 
 import { defineCommand } from "citty";
 import consola from "consola";
 
 import { createDatabase } from "../../database/connection.js";
 import { runMigrations } from "../../database/migrations/runner.js";
-import {
-	validateGeneratedTypesPayload,
-	validateSchemaExportPayload,
-} from "../../typegen/validate.js";
 
 interface PackageJson {
 	name?: string;
@@ -44,10 +40,6 @@ async function fileExists(path: string): Promise<boolean> {
 	} catch {
 		return false;
 	}
-}
-
-function isInside(baseDir: string, targetPath: string): boolean {
-	return targetPath === baseDir || targetPath.startsWith(`${baseDir}${sep}`);
 }
 
 export const devCommand = defineCommand({
@@ -125,27 +117,16 @@ export const devCommand = defineCommand({
 					const { createClientFromArgs } = await import("../client-factory.js");
 					const client = createClientFromArgs({ url: remoteUrl });
 					const schema = await client.schemaExport();
-					const schemaValidation = validateSchemaExportPayload(schema);
-					if (!schemaValidation.ok) {
-						throw new Error(schemaValidation.reason);
-					}
 					const types = await client.schemaTypes();
-					const validation = validateGeneratedTypesPayload(types);
-					if (!validation.ok) {
-						throw new Error(validation.reason);
-					}
 
 					const { writeFile, mkdir } = await import("node:fs/promises");
 					const { resolve: resolvePath, dirname } = await import("node:path");
 					const outputPath = resolvePath(cwd, ".emdash/types.ts");
-					if (!isInside(cwd, outputPath)) {
-						throw new Error("Generated types path must stay within working directory");
-					}
 					await mkdir(dirname(outputPath), { recursive: true });
 					await writeFile(outputPath, types, "utf-8");
 					await writeFile(
 						resolvePath(dirname(outputPath), "schema.json"),
-						schemaValidation.serialized,
+						JSON.stringify(schema, null, 2),
 						"utf-8",
 					);
 					consola.success(`Generated types for ${schema.collections.length} collections`);

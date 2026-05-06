@@ -14,7 +14,6 @@ import { hasPermission } from "@emdash-cms/auth";
 import type { APIRoute } from "astro";
 
 import { requireOwnerPerm } from "#api/authorize.js";
-import { invalidateTags } from "#api/cache.js";
 import { apiError, mapErrorStatus, unwrapResult } from "#api/error.js";
 import { isParseError, parseOptionalBody } from "#api/parse.js";
 import { contentPublishBody } from "#api/schemas.js";
@@ -81,7 +80,7 @@ export const POST: APIRoute = async ({ params, request, locals, cache }) => {
 
 	if (!result.success) return unwrapResult(result);
 
-	await invalidateTags(cache, [collection, resolvedId]);
+	if (cache.enabled) await cache.invalidate({ tags: [collection, resolvedId] });
 
 	return unwrapResult(result);
 };

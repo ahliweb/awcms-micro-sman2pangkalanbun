@@ -12,7 +12,7 @@
 import type { APIRoute } from "astro";
 
 import { requirePerm } from "#api/authorize.js";
-import { apiError, apiSuccess, handleError } from "#api/error.js";
+import { apiError, apiSuccess } from "#api/error.js";
 import { requireScope } from "#auth/scopes.js";
 
 export const prerender = false;
@@ -65,12 +65,7 @@ const handleRequest: APIRoute = async ({ params, request, locals }) => {
 		}
 	}
 
-	let result;
-	try {
-		result = await emdash.handlePluginApiRoute(pluginId, method, `/${path}`, request);
-	} catch (error) {
-		return handleError(error, "Plugin route error", "PLUGIN_ROUTE_ERROR");
-	}
+	const result = await emdash.handlePluginApiRoute(pluginId, method, `/${path}`, request);
 
 	if (!result.success) {
 		const code = result.error?.code ?? "PLUGIN_ERROR";

@@ -12,7 +12,7 @@
  * 6. Display audit results
  */
 
-import { readFile } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import { resolve, basename } from "node:path";
 
 import { defineCommand } from "citty";
@@ -27,25 +27,8 @@ import {
 	saveMarketplaceCredential,
 	removeMarketplaceCredential,
 } from "../credentials.js";
-import { getOpenExternalUrlCommand } from "../open-external-url.js";
 
 const DEFAULT_REGISTRY = "https://marketplace.emdashcms.com";
-const SAFE_PLUGIN_ID_PATTERN = /^[a-z0-9][a-z0-9_-]*$/;
-
-function normalizeRegistryUrl(input: string): string {
-	const url = new URL(input);
-	const isLocalhost = url.hostname === "localhost" || url.hostname === "127.0.0.1";
-	if (url.protocol !== "https:" && !(url.protocol === "http:" && isLocalhost)) {
-		throw new Error("Registry URL must use HTTPS (or localhost HTTP)");
-	}
-	return url.toString();
-}
-
-function assertSafePluginId(pluginId: string): void {
-	if (!SAFE_PLUGIN_ID_PATTERN.test(pluginId)) {
-		throw new Error(`Unsafe plugin id: ${pluginId}`);
-	}
-}
 
 // ── GitHub Device Flow ──────────────────────────────────────────
 
@@ -128,9 +111,12 @@ async function authenticateViaDeviceFlow(registryUrl: string): Promise<Marketpla
 	// Try to open browser
 	try {
 		const { execFile } = await import("node:child_process");
-		const openCommand = getOpenExternalUrlCommand(process.platform, deviceCode.verification_uri);
-		if (openCommand) {
-			execFile(openCommand.command, openCommand.args);
+		if (process.platform === "darwin") {
+			execFile("open", [deviceCode.verification_uri]);
+		} else if (process.platform === "win32") {
+			execFile("cmd", ["/c", "start", "", deviceCode.verification_uri]);
+		} else {
+			execFile("xdg-open", [deviceCode.verification_uri]);
 		}
 	} catch {
 		// User can open manually
@@ -227,7 +213,8 @@ type ManifestSummary = typeof manifestSummarySchema._zod.output;
 /**
  * Read manifest.json from a tarball without fully extracting it.
  */
-async function readManifestFromTarball(data: Buffer): Promise<ManifestSummary> {
+async function readManifestFromTarball(tarballPath: string): Promise<ManifestSummary> {
+	const data = await readFile(tarballPath);
 	const stream = new ReadableStream<Uint8Array>({
 		start(controller) {
 			controller.enqueue(new Uint8Array(data.buffer, data.byteOffset, data.byteLength));
@@ -384,7 +371,7 @@ export const publishCommand = defineCommand({
 		},
 	},
 	async run({ args }) {
-		const registryUrl = normalizeRegistryUrl(args.registry);
+		const registryUrl = args.registry;
 
 		// ── Step 1: Resolve tarball ──
 
@@ -437,14 +424,13 @@ export const publishCommand = defineCommand({
 			}
 		}
 
-		const tarballData = await readFile(tarballPath);
-		const sizeKB = (tarballData.byteLength / 1024).toFixed(1);
+		const tarballStat = await stat(tarballPath);
+		const sizeKB = (tarballStat.size / 1024).toFixed(1);
 		consola.info(`Tarball: ${pc.dim(tarballPath)} (${sizeKB}KB)`);
 
 		// ── Step 2: Read manifest from tarball ──
 
-		const manifest = await readManifestFromTarball(tarballData);
-		assertSafePluginId(manifest.id);
+		const manifest = await readManifestFromTarball(tarballPath);
 		console.log();
 		consola.info(`Plugin: ${pc.bold(`${manifest.id}@${manifest.version}`)}`);
 		if (manifest.capabilities.length > 0) {
@@ -560,6 +546,7 @@ export const publishCommand = defineCommand({
 
 		consola.start(`Publishing ${manifest.id}@${manifest.version}...`);
 
+		const tarballData = await readFile(tarballPath);
 		const formData = new FormData();
 		formData.append(
 			"bundle",

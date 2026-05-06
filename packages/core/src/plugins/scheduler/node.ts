@@ -9,7 +9,6 @@
  *
  */
 
-import { logEvent } from "../../observability/log.js";
 import type { CronExecutor } from "../cron.js";
 import type { CronScheduler, SystemCleanupFn } from "./types.js";
 
@@ -85,10 +84,7 @@ export class NodeCronScheduler implements CronScheduler {
 				return undefined;
 			})
 			.catch((error: unknown) => {
-				logEvent("error", {
-					event: "cron.node_get_next_due_time_failed",
-					error,
-				});
+				console.error("[cron:node] Failed to get next due time:", error);
 				// Retry after max interval
 				if (this.running) {
 					this.timer = setTimeout(() => this.arm(), MAX_INTERVAL_MS);
@@ -112,10 +108,7 @@ export class NodeCronScheduler implements CronScheduler {
 			.then((results) => {
 				for (const r of results) {
 					if (r.status === "rejected") {
-						logEvent("error", {
-							event: "cron.node_tick_task_failed",
-							error: r.reason,
-						});
+						console.error("[cron:node] Tick task failed:", r.reason);
 					}
 				}
 				return undefined;

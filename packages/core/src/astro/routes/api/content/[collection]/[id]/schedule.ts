@@ -8,7 +8,6 @@
 import type { APIRoute } from "astro";
 
 import { requireOwnerPerm } from "#api/authorize.js";
-import { invalidateTags } from "#api/cache.js";
 import { apiError, mapErrorStatus, unwrapResult } from "#api/error.js";
 import { parseBody, isParseError } from "#api/parse.js";
 import { contentScheduleBody } from "#api/schemas.js";
@@ -64,7 +63,7 @@ export const POST: APIRoute = async ({ params, request, locals, cache }) => {
 
 	if (!result.success) return unwrapResult(result);
 
-	await invalidateTags(cache, [collection, resolvedId ?? id]);
+	if (cache.enabled) await cache.invalidate({ tags: [collection, resolvedId ?? id] });
 
 	return unwrapResult(result);
 };
@@ -96,7 +95,7 @@ export const DELETE: APIRoute = async ({ params, locals, cache }) => {
 
 	if (!result.success) return unwrapResult(result);
 
-	await invalidateTags(cache, [collection, resolvedId ?? id]);
+	if (cache.enabled) await cache.invalidate({ tags: [collection, resolvedId ?? id] });
 
 	return unwrapResult(result);
 };

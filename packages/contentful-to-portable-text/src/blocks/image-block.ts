@@ -8,21 +8,11 @@ export function transformImageBlock(
 	includes: ContentfulIncludes,
 	key: string,
 ): ArbitraryTypedObject {
-	const fieldAsset = entry.fields.assetFile;
-	let assetId: string | undefined;
-	if (fieldAsset && typeof fieldAsset === "object") {
-		const sys = "sys" in fieldAsset ? fieldAsset.sys : undefined;
-		if (sys && typeof sys === "object" && "id" in sys && typeof sys.id === "string") {
-			assetId = sys.id;
-		}
-	}
+	const assetLink = entry.fields.assetFile as { sys?: { id?: string } } | undefined;
+	const assetId = assetLink?.sys?.id;
 	const asset = assetId ? includes.assets.get(assetId) : undefined;
 
 	const src = asset?.url ? (asset.url.startsWith("//") ? `https:${asset.url}` : asset.url) : "";
-
-	const linkUrl =
-		typeof entry.fields.linkUrl === "string" ? sanitizeUri(entry.fields.linkUrl) : undefined;
-	const size = typeof entry.fields.size === "string" ? entry.fields.size : undefined;
 
 	return {
 		_type: "image",
@@ -33,7 +23,7 @@ export function transformImageBlock(
 			width: asset?.width,
 			height: asset?.height,
 		},
-		linkUrl,
-		size,
+		linkUrl: entry.fields.linkUrl ? sanitizeUri(entry.fields.linkUrl as string) : undefined,
+		size: (entry.fields.size as string) ?? undefined,
 	};
 }

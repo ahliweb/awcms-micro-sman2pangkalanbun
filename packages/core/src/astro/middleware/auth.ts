@@ -107,19 +107,7 @@ const PUBLIC_API_PREFIXES = [
 	"/_emdash/api/comments/",
 	"/_emdash/api/media/file/",
 	"/_emdash/.well-known/",
-	// Public menu API — read-only, no authentication required.
-	// Used by client-side scripts to fetch fresh menu data for
-	// dynamic footer/header navigation.
-	"/_emdash/api/menus/",
 ];
-
-/**
- * Public prefixes where writes (POST/PUT/DELETE) must go through
- * full auth — the auth middleware authenticates the user, then
- * the route handler checks permissions. GET requests remain public
- * so anonymous visitors can read navigation menus.
- */
-const WRITE_GUARDED_PUBLIC_PREFIXES: string[] = ["/_emdash/api/menus/"];
 
 const PUBLIC_API_EXACT = new Set([
 	"/_emdash/api/auth/passkey/options",
@@ -188,7 +176,6 @@ function isCsrfExemptPublicRoute(pathname: string): boolean {
 
 export const onRequest = defineMiddleware(async (context, next) => {
 	const { url } = context;
-	const method = context.request.method.toUpperCase();
 
 	// Only check auth on admin routes and API routes
 	const isAdminRoute = url.pathname.startsWith("/_emdash/admin");
@@ -201,28 +188,17 @@ export const onRequest = defineMiddleware(async (context, next) => {
 	// Public API routes skip auth but still need CSRF protection on state-changing methods.
 	// We check Origin header against the request host (same approach as Astro's checkOrigin).
 	// This prevents cross-origin form submissions and fetch requests from malicious sites.
-	//
-	// Write-guarded public routes (e.g. /api/menus/) have a special case:
-	// GET remains public, but POST/PUT/DELETE must go through full auth so
-	// session-authenticated users can make writes. All other public routes
-	// skip auth for every method.
 	if (isPublicApiRoute) {
-		const isWriteGuarded = WRITE_GUARDED_PUBLIC_PREFIXES.some((p) => url.pathname.startsWith(p));
-		if (isUnsafeMethod(method) && isWriteGuarded) {
-			if (!isCsrfExemptPublicRoute(url.pathname)) {
-				const publicOrigin = getPublicOrigin(url, context.locals.emdash?.config);
-				const csrfError = checkPublicCsrf(context.request, url, publicOrigin);
-				if (csrfError) return csrfError;
-			}
-			// fall through to full auth below
-		} else {
-			if (isUnsafeMethod(method) && !isCsrfExemptPublicRoute(url.pathname)) {
-				const publicOrigin = getPublicOrigin(url, context.locals.emdash?.config);
-				const csrfError = checkPublicCsrf(context.request, url, publicOrigin);
-				if (csrfError) return csrfError;
-			}
-			return next();
+		const method = context.request.method.toUpperCase();
+		if (
+			isUnsafeMethod(method) &&
+			!isCsrfExemptPublicRoute(url.pathname) // OAuth protocol endpoints — cross-origin by design
+		) {
+			const publicOrigin = getPublicOrigin(url, context.locals.emdash?.config);
+			const csrfError = checkPublicCsrf(context.request, url, publicOrigin);
+			if (csrfError) return csrfError;
 		}
+		return next();
 	}
 
 	// Plugin routes: soft auth (resolve user if credentials present, but never block).
@@ -231,6 +207,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 	// so we apply the same Origin-based CSRF check as other public routes.
 	const isPluginRoute = url.pathname.startsWith("/_emdash/api/plugins/");
 	if (isPluginRoute) {
+		const method = context.request.method.toUpperCase();
 		if (method !== "GET" && method !== "HEAD" && method !== "OPTIONS") {
 			const publicOrigin = getPublicOrigin(url, context.locals.emdash?.config);
 			const csrfError = checkPublicCsrf(context.request, url, publicOrigin);
@@ -241,6 +218,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
 	// Setup routes: skip auth but still enforce CSRF on state-changing methods
 	if (isSetupRoute) {
+		const method = context.request.method.toUpperCase();
 		if (method !== "GET" && method !== "HEAD" && method !== "OPTIONS") {
 			const csrfHeader = context.request.headers.get("X-EmDash-Request");
 			if (csrfHeader !== "1") {
@@ -291,6 +269,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
 	// MCP discovery/tooling is bearer-only. Session/external auth should never
 	// be consulted for this endpoint, and unauthenticated requests must return
 	// the OAuth discovery-style 401 response.
+	const method = context.request.method.toUpperCase();
 	const isMcpEndpoint = url.pathname === MCP_ENDPOINT_PATH;
 	if (isMcpEndpoint && !isTokenAuth) {
 		return mcpUnauthorizedResponse(url, context.locals.emdash?.config);
@@ -664,14 +643,13 @@ async function handlePasskeyAuth(
 	const { emdash } = locals;
 
 	try {
+		// Check session for user (session.get returns a Promise)
 		const sessionUser = await session?.get("user");
 
 		if (!sessionUser?.id) {
 			if (isApiRoute) {
 				return Response.json(
-					{
-						error: { code: "NOT_AUTHENTICATED", message: "Session expired. Please sign in again." },
-					},
+					{ error: { code: "NOT_AUTHENTICATED", message: "Not authenticated" } },
 					{ status: 401, headers: MW_CACHE_HEADERS },
 				);
 			}
@@ -689,7 +667,7 @@ async function handlePasskeyAuth(
 			session?.destroy();
 			if (isApiRoute) {
 				return Response.json(
-					{ error: { code: "NOT_FOUND", message: "Session expired. Please sign in again." } },
+					{ error: { code: "NOT_FOUND", message: "User not found" } },
 					{ status: 401, headers: MW_CACHE_HEADERS },
 				);
 			}

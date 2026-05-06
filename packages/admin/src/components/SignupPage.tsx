@@ -24,20 +24,6 @@ import { LogoLockup } from "./Logo.js";
 // ============================================================================
 
 type SignupStep = "email" | "check-email" | "verify" | "complete" | "error";
-const MAX_SIGNUP_TOKEN_LENGTH = 512;
-const CONTROL_CHAR_PATTERN = new RegExp(
-	"[" +
-		String.fromCodePoint(0x0000) +
-		"-" +
-		String.fromCodePoint(0x001f) +
-		String.fromCodePoint(0x007f) +
-		"]",
-);
-
-function isReasonableSignupToken(token: string): boolean {
-	if (token.length === 0 || token.length > MAX_SIGNUP_TOKEN_LENGTH) return false;
-	return !CONTROL_CHAR_PATTERN.test(token);
-}
 
 // ============================================================================
 // Step Components
@@ -318,13 +304,9 @@ export function SignupPage() {
 		const params = new URLSearchParams(window.location.search);
 		const urlToken = params.get("token");
 
-		if (urlToken && isReasonableSignupToken(urlToken)) {
+		if (urlToken) {
 			setToken(urlToken);
 			void verifyToken(urlToken);
-		} else if (urlToken) {
-			setError("Invalid signup token");
-			setErrorCode("invalid_token");
-			setStep("error");
 		}
 	}, []);
 

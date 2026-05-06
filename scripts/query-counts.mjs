@@ -54,27 +54,25 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, "..");
 const fixtureDir = resolve(repoRoot, "fixtures/perf-site");
-const routesConfigPath = resolve(__dirname, "query-counts.routes.json");
 
 const HOST = "127.0.0.1";
 const PORT = 14321;
 const BASE = `http://${HOST}:${PORT}`;
 
-const ROUTES = JSON.parse(readFileSync(routesConfigPath, "utf8")).map((route) => [
-	route.method,
-	route.path,
-]);
+const ROUTES = [
+	["GET", "/"],
+	["GET", "/posts"],
+	["GET", "/posts/building-for-the-long-term"],
+	["GET", "/pages/about"],
+	["GET", "/category/development"],
+	["GET", "/tag/webdev"],
+	["GET", "/rss.xml"],
+	["GET", "/search?q=static"],
+];
 
 const TRACKED_PHASES = new Set(["cold", "warm"]);
 const VALID_TARGETS = new Set(["sqlite", "d1"]);
 const QUERY_LOG_PREFIX = "[emdash-query-log] ";
-const SAFE_ROUTE_PATH_PATTERN = /^\/[A-Za-z0-9/_-]*$/;
-
-function assertSafeRoutePath(routePath) {
-	if (!SAFE_ROUTE_PATH_PATTERN.test(routePath)) {
-		throw new Error(`Unsafe route path in query-counts.routes.json: ${routePath}`);
-	}
-}
 
 /**
  * Resolve once a TCP connection to (host, port) succeeds, or reject on
@@ -319,7 +317,6 @@ async function hit(method, path, phase) {
 	let lastErr;
 	for (let i = 0; i < 10; i++) {
 		try {
-			assertSafeRoutePath(path);
 			const r = await fetch(`${BASE}${path}`, {
 				method,
 				headers: { "x-perf-phase": phase },
