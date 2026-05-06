@@ -39,6 +39,10 @@ jobs:
       # resolve binaries from workspace packages (only from dependencies).
       - name: Seed plugins
         run: |
+          if [ -z "$MARKETPLACE_TOKEN" ]; then
+            echo "::warning::MARKETPLACE_SEED_TOKEN is not set — skipping marketplace publish"
+            exit 0
+          fi
           CLI="node packages/core/dist/cli/index.mjs"
           failures=0
           for dir in packages/plugins/*/; do
@@ -69,5 +73,6 @@ jobs:
             exit 1
           fi
         env:
+          MARKETPLACE_TOKEN: ${{ secrets.MARKETPLACE_SEED_TOKEN }}
           EMDASH_MARKETPLACE_TOKEN: ${{ secrets.MARKETPLACE_SEED_TOKEN }}
           MARKETPLACE_URL: https://marketplace.emdashcms.com
