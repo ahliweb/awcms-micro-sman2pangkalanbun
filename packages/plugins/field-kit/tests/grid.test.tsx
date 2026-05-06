@@ -152,6 +152,26 @@ describe("Grid widget", () => {
 		});
 	});
 
+	it("drops unsafe prototype keys from incoming grid object data", () => {
+		const onChange = vi.fn();
+		render(
+			<Grid
+				value={{ mon: { am: true, __proto__: { polluted: true } as unknown } }}
+				onChange={onChange}
+				label="Grid"
+				id="g"
+				options={{ rows, columns }}
+			/>,
+		);
+
+		fireEvent.click(screen.getByLabelText("Mon — PM"));
+		expect(onChange).toHaveBeenCalledWith({
+			mon: { am: true, pm: true },
+			tue: {},
+		});
+		expect(({} as { polluted?: boolean }).polluted).toBeUndefined();
+	});
+
 	it("shows misconfigured warning when rows or columns are missing", () => {
 		render(
 			<Grid

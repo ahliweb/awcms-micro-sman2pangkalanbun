@@ -16,8 +16,6 @@
 import type { ResolvedPlugin, PluginDescriptor } from "emdash";
 import { definePlugin } from "emdash";
 
-import { version } from "../package.json";
-
 /** Narrow unknown to a record */
 function isRecord(value: unknown): value is Record<string, unknown> {
 	return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -51,7 +49,7 @@ export function apiTestPlugin(
 ): PluginDescriptor<ApiTestPluginOptions> {
 	return {
 		id: "api-test",
-		version,
+		version: "0.0.1",
 		entrypoint: "@emdash-cms/plugin-api-test",
 		options,
 		adminEntry: "@emdash-cms/plugin-api-test/admin",
@@ -66,7 +64,7 @@ export function apiTestPlugin(
 export function createPlugin(_options: ApiTestPluginOptions = {}): ResolvedPlugin {
 	return definePlugin({
 		id: "api-test",
-		version,
+		version: "0.0.1",
 
 		// Declare ALL capabilities to test everything
 		capabilities: ["content:read", "content:write", "media:read", "media:write", "network:request"],

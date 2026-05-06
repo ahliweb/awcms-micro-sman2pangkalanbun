@@ -19,8 +19,6 @@
 
 import type { PluginDescriptor } from "emdash";
 
-import { version } from "../package.json";
-
 // ── Descriptor ──────────────────────────────────────────────────
 
 /**
@@ -30,7 +28,7 @@ import { version } from "../package.json";
 export function atprotoPlugin(): PluginDescriptor {
 	return {
 		id: "atproto",
-		version,
+		version: "0.1.0",
 		format: "standard",
 		entrypoint: "@emdash-cms/plugin-atproto/sandbox",
 		capabilities: ["content:read", "network:request:unrestricted"],

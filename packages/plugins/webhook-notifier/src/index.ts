@@ -21,8 +21,6 @@
 
 import type { PluginDescriptor } from "emdash";
 
-import { version } from "../package.json";
-
 export interface WebhookPayload {
 	event: "content:create" | "content:update" | "content:delete" | "media:upload";
 	timestamp: string;
@@ -39,7 +37,7 @@ export interface WebhookPayload {
 export function webhookNotifierPlugin(): PluginDescriptor {
 	return {
 		id: "webhook-notifier",
-		version,
+		version: "0.1.0",
 		format: "standard",
 		entrypoint: "@emdash-cms/plugin-webhook-notifier/sandbox",
 		capabilities: ["network:request:unrestricted"],

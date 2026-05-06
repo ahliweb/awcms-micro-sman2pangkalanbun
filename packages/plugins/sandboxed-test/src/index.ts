@@ -7,15 +7,13 @@
 
 import type { PluginDescriptor } from "emdash";
 
-import { version } from "../package.json";
-
 /**
  * Plugin factory - returns a descriptor for the integration
  */
 export function sandboxedTestPlugin(): PluginDescriptor {
 	return {
 		id: "sandboxed-test",
-		version,
+		version: "0.0.1",
 		format: "standard",
 		entrypoint: "@emdash-cms/plugin-sandboxed-test/sandbox",
 
