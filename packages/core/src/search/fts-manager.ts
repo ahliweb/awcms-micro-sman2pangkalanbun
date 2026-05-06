@@ -10,8 +10,6 @@ import { sql } from "kysely";
 import { isSqlite, tableExists as dialectTableExists } from "../database/dialect-helpers.js";
 import type { Database } from "../database/types.js";
 import { validateIdentifier } from "../database/validate.js";
-import { logEvent } from "../observability/log.js";
-import { isSqliteCorruptionError } from "../utils/db-errors.js";
 import type { SearchConfig } from "./types.js";
 
 /**
@@ -453,42 +451,10 @@ export class FTSManager {
 				const wasRepaired = await this.verifyAndRepairIndex(slug);
 				if (wasRepaired) repaired++;
 			} catch (error) {
-				logEvent("error", {
-					event: "search.fts_verify_repair_failed",
-					context: { collectionSlug: slug },
-					error,
-				});
+				console.error(`Failed to verify/repair FTS index for "${slug}":`, error);
 			}
 		}
 
 		return repaired;
-	}
-
-	/**
-	 * Repair a corrupted FTS index for a collection.
-	 *
-	 * First attempts the lightweight verify/repair path. If that fails due to
-	 * corruption (e.g. SQLITE_CORRUPT_VTAB), force a full rebuild from current
-	 * collection configuration.
-	 */
-	async repairCorruptedIndex(collectionSlug: string): Promise<boolean> {
-		if (!isSqlite(this.db)) return false;
-		this.validateInputs(collectionSlug);
-
-		try {
-			return await this.verifyAndRepairIndex(collectionSlug);
-		} catch (error) {
-			if (!isSqliteCorruptionError(error)) throw error;
-
-			const config = await this.getSearchConfig(collectionSlug);
-			if (!config?.enabled) return false;
-
-			const fields = await this.getSearchableFields(collectionSlug);
-			if (fields.length === 0) return false;
-
-			console.warn(`FTS corruption detected for "${collectionSlug}". Forcing index rebuild.`);
-			await this.rebuildIndex(collectionSlug, fields, config.weights);
-			return true;
-		}
 	}
 }

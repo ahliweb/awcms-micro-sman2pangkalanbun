@@ -31,7 +31,12 @@ const TABLE_ROW_PATTERN = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
 const TABLE_CELL_PATTERN = /<(th|td)[^>]*>([\s\S]*?)<\/\1>/gi;
 const TBODY_TAG_PATTERN = /<tbody[^>]*>([\s\S]*?)<\/tbody>/i;
 const CITE_TAG_PATTERN = /<cite[^>]*>([\s\S]*?)<\/cite>/i;
-const HTML_ENTITY_PATTERN = /&(lt|gt|amp|quot|#039|nbsp);/g;
+const LT_ENTITY_PATTERN = /&lt;/g;
+const GT_ENTITY_PATTERN = /&gt;/g;
+const AMP_ENTITY_PATTERN = /&amp;/g;
+const QUOT_ENTITY_PATTERN = /&quot;/g;
+const APOS_ENTITY_PATTERN = /&#039;/g;
+const NBSP_ENTITY_PATTERN = /&nbsp;/g;
 
 /**
  * core/paragraph → block with style "normal"
@@ -715,24 +720,13 @@ function mapAlignment(
  * Decode HTML entities
  */
 function decodeHtmlEntities(html: string): string {
-	return html.replace(HTML_ENTITY_PATTERN, (entity) => {
-		switch (entity) {
-			case "&lt;":
-				return "<";
-			case "&gt;":
-				return ">";
-			case "&amp;":
-				return "&";
-			case "&quot;":
-				return '"';
-			case "&#039;":
-				return "'";
-			case "&nbsp;":
-				return " ";
-			default:
-				return entity;
-		}
-	});
+	return html
+		.replace(LT_ENTITY_PATTERN, "<")
+		.replace(GT_ENTITY_PATTERN, ">")
+		.replace(AMP_ENTITY_PATTERN, "&")
+		.replace(QUOT_ENTITY_PATTERN, '"')
+		.replace(APOS_ENTITY_PATTERN, "'")
+		.replace(NBSP_ENTITY_PATTERN, " ");
 }
 
 /**

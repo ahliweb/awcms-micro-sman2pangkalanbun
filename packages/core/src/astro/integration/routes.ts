@@ -314,6 +314,11 @@ export function injectCoreRoutes(injectRoute: InjectRoute): void {
 	});
 
 	injectRoute({
+		pattern: "/_emdash/api/taxonomies/[name]/terms/[slug]/translations",
+		entrypoint: resolveRoute("api/taxonomies/[name]/terms/[slug]/translations.ts"),
+	});
+
+	injectRoute({
 		pattern: "/_emdash/api/content/[collection]/[id]/terms/[taxonomy]",
 		entrypoint: resolveRoute("api/content/[collection]/[id]/terms/[taxonomy].ts"),
 	});
@@ -555,10 +560,9 @@ export function injectCoreRoutes(injectRoute: InjectRoute): void {
 		entrypoint: resolveRoute("api/menus/[name]/reorder.ts"),
 	});
 
-	// Public menu API route (no authentication required)
 	injectRoute({
-		pattern: "/_emdash/api/public/menus/[name]",
-		entrypoint: resolveRoute("api/public/menus/[name].ts"),
+		pattern: "/_emdash/api/menus/[name]/translations",
+		entrypoint: resolveRoute("api/menus/[name]/translations.ts"),
 	});
 
 	// Widget area routes

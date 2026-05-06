@@ -7,15 +7,6 @@
 
 import type { PublicPageContext } from "../plugins/types.js";
 
-function toAbsoluteUrl(input: string, siteUrl: string): string {
-	if (input.startsWith("http://") || input.startsWith("https://")) return input;
-	try {
-		return new URL(input, siteUrl).toString();
-	} catch {
-		return input;
-	}
-}
-
 /**
  * Remove null/undefined values from a JSON-LD object recursively.
  * JSON-LD validators prefer absent keys over null values.
@@ -103,16 +94,5 @@ export function buildWebSiteJsonLd(page: PublicPageContext): Record<string, unkn
 		"@type": "WebSite",
 		name: siteName,
 		url: siteUrl,
-		publisher:
-			page.path === "/" && page.siteLogo && page.siteLogo.length > 0
-				? {
-						"@type": "Organization",
-						name: siteName,
-						logo: {
-							"@type": "ImageObject",
-							url: toAbsoluteUrl(page.siteLogo, siteUrl),
-						},
-					}
-				: undefined,
 	});
 }

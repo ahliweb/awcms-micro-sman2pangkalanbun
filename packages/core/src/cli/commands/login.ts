@@ -29,7 +29,6 @@ import {
 	resolveCredentialKey,
 	saveCredentials,
 } from "../credentials.js";
-import { getOpenExternalUrlCommand } from "../open-external-url.js";
 import { configureOutputMode } from "../output.js";
 
 // ---------------------------------------------------------------------------
@@ -294,12 +293,12 @@ export const loginCommand = defineCommand({
 			// Try to open browser (best-effort)
 			try {
 				const { execFile } = await import("node:child_process");
-				const openCommand = getOpenExternalUrlCommand(
-					process.platform,
-					deviceCode.verification_uri,
-				);
-				if (openCommand) {
-					execFile(openCommand.command, openCommand.args);
+				if (process.platform === "darwin") {
+					execFile("open", [deviceCode.verification_uri]);
+				} else if (process.platform === "win32") {
+					execFile("cmd", ["/c", "start", "", deviceCode.verification_uri]);
+				} else {
+					execFile("xdg-open", [deviceCode.verification_uri]);
 				}
 			} catch {
 				// Ignore — user can open manually
@@ -490,6 +489,7 @@ export const whoamiCommand = defineCommand({
 			// Try dev bypass for local
 			const isLocal = baseUrl.includes("localhost") || baseUrl.includes("127.0.0.1");
 			if (isLocal) {
+				authMethod = "dev-bypass";
 				consola.info(`Auth method: ${pc.cyan("dev-bypass")}`);
 				consola.info("No stored credentials. Client will use dev bypass for localhost.");
 				return;

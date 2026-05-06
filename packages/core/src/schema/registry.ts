@@ -930,25 +930,15 @@ export class SchemaRegistry {
 		}
 
 		// TEXT — escape single quotes via SQL standard doubling
-		let text = "";
-		switch (typeof value) {
-			case "string":
-				text = value;
-				break;
-			case "number":
-			case "boolean":
-				text = String(value);
-				break;
-			case "object": {
-				if (!value) {
-					text = "";
-					break;
-				}
-				text = (JSON.stringify(value) as string | undefined) ?? "";
-				break;
-			}
-			default:
-				text = "";
+		let text: string;
+		if (typeof value === "string") {
+			text = value;
+		} else if (typeof value === "number" || typeof value === "boolean") {
+			text = String(value);
+		} else if (typeof value === "object" && value !== null) {
+			text = JSON.stringify(value);
+		} else {
+			text = "";
 		}
 		return `'${text.replace(SINGLE_QUOTE_PATTERN, "''")}'`;
 	}

@@ -10,6 +10,8 @@ import { resolve } from "node:path";
 import { defineCommand } from "citty";
 import consola from "consola";
 
+import { CompiledQuery } from "kysely";
+
 import { createDatabase } from "../../database/connection.js";
 import { runMigrations } from "../../database/migrations/runner.js";
 
@@ -59,11 +61,7 @@ async function runSqlFile(db: ReturnType<typeof createDatabase>, filePath: strin
 		.filter((s) => s.length > 0);
 
 	for (const statement of statements) {
-		await db.executeQuery({
-			sql: statement,
-			parameters: [],
-			query: { kind: "RawNode", sqlFragments: [statement], parameters: [] },
-		} as any);
+		await db.executeQuery(CompiledQuery.raw(statement));
 	}
 }
 

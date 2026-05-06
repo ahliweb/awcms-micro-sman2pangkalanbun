@@ -44,21 +44,3 @@ export function isMissingTableError(error: unknown): boolean {
 
 	return false;
 }
-
-/**
- * Returns true when `error` indicates SQLite/D1 database corruption.
- *
- * This includes generic corruption (`SQLITE_CORRUPT`, "database disk image is
- * malformed") and virtual-table corruption (`SQLITE_CORRUPT_VTAB`) commonly
- * seen when FTS shadow tables or triggers get out of sync after crashes.
- */
-export function isSqliteCorruptionError(error: unknown): boolean {
-	const message = messageOf(error);
-	if (!message) return false;
-
-	return (
-		message.includes("sqlite_corrupt") ||
-		message.includes("sqlite_corrupt_vtab") ||
-		message.includes("disk image is malformed")
-	);
-}

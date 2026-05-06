@@ -31,7 +31,9 @@ const BLOCK_TAG_PATTERNS: Record<string, { open: RegExp; close: RegExp }> = {
 const IMG_ALT_PATTERN = /<img[^>]+alt=["']([^"']*)["']/i;
 const FIGCAPTION_PATTERN = /<figcaption[^>]*>([\s\S]*?)<\/figcaption>/i;
 const IMG_SRC_PATTERN = /<img[^>]+src=["']([^"']*)["']/i;
-const URL_ENTITY_PATTERN = /&(amp|#0?38|#x26);/gi;
+const URL_AMP_ENTITY_PATTERN = /&amp;/g;
+const URL_NUMERIC_AMP_ENTITY_PATTERN = /&#0?38;/g;
+const URL_HEX_AMP_ENTITY_PATTERN = /&#x26;/gi;
 
 type Node = DefaultTreeAdapterMap["node"];
 type TextNode = DefaultTreeAdapterMap["textNode"];
@@ -324,5 +326,8 @@ export function extractSrc(html: string): string | undefined {
  * Decode HTML entities commonly found in URLs
  */
 function decodeUrlEntities(url: string): string {
-	return url.replace(URL_ENTITY_PATTERN, "&");
+	return url
+		.replace(URL_AMP_ENTITY_PATTERN, "&")
+		.replace(URL_NUMERIC_AMP_ENTITY_PATTERN, "&")
+		.replace(URL_HEX_AMP_ENTITY_PATTERN, "&");
 }

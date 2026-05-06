@@ -5,7 +5,6 @@
 import { describe, it, expect } from "vitest";
 
 import { gutenbergToPortableText, htmlToPortableText, parseGutenbergBlocks } from "../src/index.js";
-import { extractText } from "../src/inline.js";
 import type {
 	PortableTextTextBlock,
 	PortableTextImageBlock,
@@ -15,6 +14,7 @@ import type {
 	PortableTextCoverBlock,
 } from "../src/types.js";
 
+const HTML_TAG_PATTERN = /<[^>]+>/g;
 const knownProviders = [
 	["youtube.com", "youtube"],
 	["youtu.be", "youtube"],
@@ -521,40 +521,6 @@ https://${domain}/123456
 			},
 		);
 
-		it("does not match provider on lookalike hostnames", () => {
-			const content = `<!-- wp:embed {"url":"https://youtube.com.evil.example/123456"} -->
-<figure class="wp-block-embed">
-<div class="wp-block-embed__wrapper">
-https://youtube.com.evil.example/123456
-</div>
-</figure>
-<!-- /wp:embed -->`;
-
-			const result = gutenbergToPortableText(content);
-
-			expect(result[0]).toMatchObject({
-				_type: "embed",
-				provider: undefined,
-			});
-		});
-
-		it("does not match provider when hostname only contains provider substring", () => {
-			const content = `<!-- wp:embed {"url":"https://evilyoutube.com/123456"} -->
-<figure class="wp-block-embed">
-<div class="wp-block-embed__wrapper">
-https://evilyoutube.com/123456
-</div>
-</figure>
-<!-- /wp:embed -->`;
-
-			const result = gutenbergToPortableText(content);
-
-			expect(result[0]).toMatchObject({
-				_type: "embed",
-				provider: undefined,
-			});
-		});
-
 		it("converts audio embeds", () => {
 			const content = `<!-- wp:audio {"src":"https://example.com/audio.mp3"} -->
 <audio controls src="https://example.com/audio.mp3"></audio>
@@ -1057,7 +1023,7 @@ https://evilyoutube.com/123456
 						{
 							_type: "testimonial" as const,
 							_key: ctx.generateKey(),
-							text: extractText(block.innerHTML),
+							text: block.innerHTML.replace(HTML_TAG_PATTERN, "").trim(),
 							rating: block.attrs.rating as number,
 						} as unknown as import("../src/types.js").PortableTextBlock,
 					],
@@ -1259,14 +1225,6 @@ describe("WordPress.com classic editor content", () => {
 
 		const img = result.find((b) => b._type === "image") as PortableTextImageBlock;
 		expect(img.asset.url).toBe("https://example.com/photo.jpg?a=1&b=2");
-	});
-
-	it("decodes URL entities in a single pass", () => {
-		const html = `<p><img src="https://example.com/photo.jpg?a=1&amp;#38;b=2" alt="test"></p>`;
-		const result = htmlToPortableText(html);
-
-		const img = result.find((b) => b._type === "image") as PortableTextImageBlock;
-		expect(img.asset.url).toBe("https://example.com/photo.jpg?a=1&#38;b=2");
 	});
 
 	// Test for figure with HTML entities

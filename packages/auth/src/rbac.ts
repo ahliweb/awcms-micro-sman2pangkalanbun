@@ -21,6 +21,10 @@ export const Permissions = {
 	"content:edit_any": Role.EDITOR,
 	"content:delete_own": Role.AUTHOR,
 	"content:delete_any": Role.EDITOR,
+	// Permanent deletion (empty trash) is irreversible and bypasses the
+	// soft-delete safety net, so it sits at the same authorization tier as
+	// other destructive system actions (schema:manage, comments:delete).
+	"content:delete_permanent": Role.ADMIN,
 	"content:publish_own": Role.AUTHOR,
 	"content:publish_any": Role.EDITOR,
 
@@ -89,8 +93,6 @@ export const Permissions = {
 
 export type Permission = keyof typeof Permissions;
 
-const AUTH_EXPIRED_MESSAGE = "Session expired. Please sign in again.";
-
 /**
  * Check if a user has a specific permission
  */
@@ -110,7 +112,7 @@ export function requirePermission(
 	permission: Permission,
 ): asserts user is { role: RoleLevel } {
 	if (!user) {
-		throw new PermissionError("unauthorized", AUTH_EXPIRED_MESSAGE);
+		throw new PermissionError("unauthorized", "Authentication required");
 	}
 	if (!hasPermission(user, permission)) {
 		throw new PermissionError("forbidden", `Missing permission: ${permission}`);
@@ -148,7 +150,7 @@ export function requirePermissionOnResource(
 	anyPermission: Permission,
 ): asserts user is { role: RoleLevel; id: string } {
 	if (!user) {
-		throw new PermissionError("unauthorized", AUTH_EXPIRED_MESSAGE);
+		throw new PermissionError("unauthorized", "Authentication required");
 	}
 	if (!canActOnOwn(user, ownerId, ownPermission, anyPermission)) {
 		throw new PermissionError("forbidden", `Missing permission: ${anyPermission}`);

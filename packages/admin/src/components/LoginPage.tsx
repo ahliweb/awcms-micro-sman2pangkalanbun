@@ -21,7 +21,7 @@ import * as React from "react";
 
 import { apiFetch, fetchAuthMode } from "../lib/api";
 import { useAuthProviderList } from "../lib/auth-provider-context";
-import { isSafeRedirectPath, sanitizeRedirectUrl } from "../lib/url";
+import { sanitizeRedirectUrl } from "../lib/url";
 import { SUPPORTED_LOCALES } from "../locales/index.js";
 import { useLocale } from "../locales/useLocale.js";
 import { PasskeyLogin } from "./auth/PasskeyLogin";
@@ -163,11 +163,6 @@ function MagicLinkForm({ onBack }: MagicLinkFormProps) {
 export function LoginPage({ redirectUrl = "/_emdash/admin" }: LoginPageProps) {
 	// Defense-in-depth: sanitize even if the caller already validated
 	const safeRedirectUrl = sanitizeRedirectUrl(redirectUrl);
-	const navigateToSafeRedirect = React.useCallback(() => {
-		if (!isSafeRedirectPath(safeRedirectUrl)) return;
-		const next = new URL(safeRedirectUrl, window.location.origin);
-		window.location.assign(`${next.pathname}${next.search}${next.hash}`);
-	}, [safeRedirectUrl]);
 	const { t } = useLingui();
 	const { locale, setLocale } = useLocale();
 	const [method, setMethod] = React.useState<LoginMethod>("passkey");
@@ -186,9 +181,9 @@ export function LoginPage({ redirectUrl = "/_emdash/admin" }: LoginPageProps) {
 	// Redirect to admin when using external auth (authentication is handled externally)
 	React.useEffect(() => {
 		if (authInfo?.authMode && authInfo.authMode !== "passkey") {
-			navigateToSafeRedirect();
+			window.location.href = safeRedirectUrl;
 		}
-	}, [authInfo, navigateToSafeRedirect]);
+	}, [authInfo, safeRedirectUrl]);
 
 	// Check for error in URL (from OAuth/provider redirect)
 	React.useEffect(() => {
@@ -205,7 +200,7 @@ export function LoginPage({ redirectUrl = "/_emdash/admin" }: LoginPageProps) {
 
 	const handleSuccess = () => {
 		// Redirect after successful login
-		navigateToSafeRedirect();
+		window.location.href = safeRedirectUrl;
 	};
 
 	// All providers with a LoginButton show in the button grid

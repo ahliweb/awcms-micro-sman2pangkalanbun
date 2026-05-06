@@ -105,51 +105,38 @@ export const audio: BlockTransformer = (block, _options, context) => {
 function detectProvider(url: string): string | undefined {
 	if (!url) return undefined;
 
-	const host = getLowercaseHostname(url);
-	if (!host) return undefined;
+	const urlLower = url.toLowerCase();
 
-	if (hostMatches(host, "youtube.com") || hostMatches(host, "youtu.be")) {
+	if (urlLower.includes("youtube.com") || urlLower.includes("youtu.be")) {
 		return "youtube";
 	}
-	if (hostMatches(host, "vimeo.com")) {
+	if (urlLower.includes("vimeo.com")) {
 		return "vimeo";
 	}
-	if (hostMatches(host, "twitter.com") || hostMatches(host, "x.com")) {
+	if (urlLower.includes("twitter.com") || urlLower.includes("x.com")) {
 		return "twitter";
 	}
-	if (hostMatches(host, "instagram.com")) {
+	if (urlLower.includes("instagram.com")) {
 		return "instagram";
 	}
-	if (hostMatches(host, "facebook.com")) {
+	if (urlLower.includes("facebook.com")) {
 		return "facebook";
 	}
-	if (hostMatches(host, "tiktok.com")) {
+	if (urlLower.includes("tiktok.com")) {
 		return "tiktok";
 	}
-	if (hostMatches(host, "spotify.com")) {
+	if (urlLower.includes("spotify.com")) {
 		return "spotify";
 	}
-	if (hostMatches(host, "soundcloud.com")) {
+	if (urlLower.includes("soundcloud.com")) {
 		return "soundcloud";
 	}
-	if (hostMatches(host, "codepen.io")) {
+	if (urlLower.includes("codepen.io")) {
 		return "codepen";
 	}
-	if (hostMatches(host, "gist.github.com")) {
+	if (urlLower.includes("gist.github.com")) {
 		return "gist";
 	}
 
 	return undefined;
-}
-
-function getLowercaseHostname(rawUrl: string): string | undefined {
-	try {
-		return new URL(rawUrl).hostname.toLowerCase();
-	} catch {
-		return undefined;
-	}
-}
-
-function hostMatches(hostname: string, expectedHost: string): boolean {
-	return hostname === expectedHost || hostname.endsWith(`.${expectedHost}`);
 }

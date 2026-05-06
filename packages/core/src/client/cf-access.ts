@@ -144,21 +144,7 @@ export function createHeaderAwareFetch(headers: Record<string, string>): typeof 
 // Cloudflare Access detection
 // ---------------------------------------------------------------------------
 
-const ACCESS_LOGIN_HOST = "cloudflareaccess.com";
-const ACCESS_LOGIN_PATH = "/cdn-cgi/access/login";
-
-function isCloudflareAccessLoginUrl(location: string): boolean {
-	try {
-		const parsed = new URL(location);
-		const host = parsed.hostname.toLowerCase();
-		if (host !== ACCESS_LOGIN_HOST && !host.endsWith(`.${ACCESS_LOGIN_HOST}`)) {
-			return false;
-		}
-		return parsed.pathname === ACCESS_LOGIN_PATH;
-	} catch {
-		return false;
-	}
-}
+const ACCESS_LOGIN_PATTERN = /cloudflareaccess\.com\/cdn-cgi\/access\/login/;
 
 /**
  * Check whether a response (fetched with `redirect: "manual"`) is a
@@ -167,7 +153,7 @@ function isCloudflareAccessLoginUrl(location: string): boolean {
 export function isAccessRedirect(response: Response): boolean {
 	if (response.status !== 301 && response.status !== 302) return false;
 	const location = response.headers.get("location") ?? "";
-	return isCloudflareAccessLoginUrl(location);
+	return ACCESS_LOGIN_PATTERN.test(location);
 }
 
 /**

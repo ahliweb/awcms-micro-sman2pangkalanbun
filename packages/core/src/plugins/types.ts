@@ -1002,8 +1002,6 @@ export interface PublicPageContext {
 	breadcrumbs?: BreadcrumbItem[];
 	/** Public-facing site URL (origin) for structured data */
 	siteUrl?: string;
-	/** Site logo URL for structured data (Organization/WebSite JSON-LD). */
-	siteLogo?: string;
 }
 
 // ── page:metadata ───────────────────────────────────────────────

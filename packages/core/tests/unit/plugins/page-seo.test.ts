@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { buildBlogPostingJsonLd, buildWebSiteJsonLd } from "../../../src/page/jsonld.js";
+import { buildBlogPostingJsonLd } from "../../../src/page/jsonld.js";
 import { generateBaseSeoContributions } from "../../../src/page/seo-contributions.js";
 import type { PublicPageContext } from "../../../src/plugins/types.js";
 
@@ -81,50 +81,5 @@ describe("page SEO metadata", () => {
 		expect(graph).toMatchObject({
 			headline: "Hello World",
 		});
-	});
-
-	it("includes organization logo in website JSON-LD", () => {
-		const page = createPage({
-			url: "https://example.com/",
-			path: "/",
-			kind: "custom",
-			pageType: "website",
-			siteUrl: "https://example.com",
-			siteLogo: "/_emdash/api/media/file/logo.png",
-		});
-
-		const graph = buildWebSiteJsonLd(page);
-
-		expect(graph).toMatchObject({
-			"@type": "WebSite",
-			name: "My Site",
-			url: "https://example.com",
-			publisher: {
-				"@type": "Organization",
-				name: "My Site",
-				logo: {
-					"@type": "ImageObject",
-					url: "https://example.com/_emdash/api/media/file/logo.png",
-				},
-			},
-		});
-	});
-
-	it("does not emit organization logo off homepage", () => {
-		const page = createPage({
-			kind: "custom",
-			pageType: "website",
-			siteUrl: "https://example.com",
-			siteLogo: "/_emdash/api/media/file/logo.png",
-		});
-
-		const graph = buildWebSiteJsonLd(page);
-
-		expect(graph).toMatchObject({
-			"@type": "WebSite",
-			name: "My Site",
-			url: "https://example.com",
-		});
-		expect(graph).not.toHaveProperty("publisher");
 	});
 });

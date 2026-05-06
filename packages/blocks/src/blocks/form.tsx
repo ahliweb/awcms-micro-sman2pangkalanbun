@@ -4,20 +4,6 @@ import { useCallback, useState } from "react";
 import { renderElement } from "../render-element.js";
 import type { BlockInteraction, FieldCondition, FormBlock, FormField } from "../types.js";
 
-function isSafeActionKey(key: string): boolean {
-	return key !== "__proto__" && key !== "prototype" && key !== "constructor";
-}
-
-function safeSetValue(target: Record<string, unknown>, key: string, value: unknown): void {
-	if (!isSafeActionKey(key)) return;
-	Object.defineProperty(target, key, {
-		value,
-		writable: true,
-		enumerable: true,
-		configurable: true,
-	});
-}
-
 function deepEqual(a: unknown, b: unknown): boolean {
 	if (a === b) return true;
 	if (Array.isArray(a) && Array.isArray(b)) {
@@ -28,7 +14,6 @@ function deepEqual(a: unknown, b: unknown): boolean {
 }
 
 function evaluateCondition(condition: FieldCondition, values: Record<string, unknown>): boolean {
-	if (!isSafeActionKey(condition.field)) return false;
 	const fieldValue = values[condition.field];
 	if ("eq" in condition && condition.eq !== undefined) {
 		return deepEqual(fieldValue, condition.eq);
@@ -40,11 +25,10 @@ function evaluateCondition(condition: FieldCondition, values: Record<string, unk
 }
 
 function getInitialValues(fields: FormField[]): Record<string, unknown> {
-	const values: Record<string, unknown> = Object.create(null) as Record<string, unknown>;
+	const values: Record<string, unknown> = {};
 	for (const field of fields) {
-		if (!isSafeActionKey(field.action_id)) continue;
 		if ("initial_value" in field && field.initial_value !== undefined) {
-			safeSetValue(values, field.action_id, field.initial_value);
+			values[field.action_id] = field.initial_value;
 		}
 	}
 	return values;
@@ -62,12 +46,7 @@ export function FormBlockComponent({
 	);
 
 	const handleChange = useCallback((actionId: string, value: unknown) => {
-		if (!isSafeActionKey(actionId)) return;
-		setValues((prev) => {
-			const next = { ...prev };
-			safeSetValue(next, actionId, value);
-			return next;
-		});
+		setValues((prev) => ({ ...prev, [actionId]: value }));
 	}, []);
 
 	function handleSubmit(e: React.FormEvent) {

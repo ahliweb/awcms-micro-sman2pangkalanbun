@@ -283,8 +283,6 @@ describe("PluginRouteHandler", () => {
 		});
 
 		it("handles unknown errors from handler", async () => {
-			const logSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-
 			const plugin = createTestPlugin({
 				routes: {
 					crash: {
@@ -304,13 +302,6 @@ describe("PluginRouteHandler", () => {
 			expect(result.status).toBe(500);
 			expect(result.error?.code).toBe("INTERNAL_ERROR");
 			expect(result.error?.message).toBe("An internal error occurred");
-
-			expect(logSpy).toHaveBeenCalledOnce();
-			const payload = JSON.parse(String(logSpy.mock.calls[0]?.[0])) as Record<string, unknown>;
-			expect(payload.scope).toBe("emdash");
-			expect(payload.event).toBe("plugin.route_handler_failed");
-			expect(payload.level).toBe("error");
-			expect(payload.context).toEqual({ pluginId: plugin.id, route: "crash" });
 		});
 
 		it("includes ctx.email when email pipeline is configured", async () => {

@@ -3,7 +3,7 @@
  * Identify queries that fire on cold but not warm in the d1 target —
  * the cold-isolate startup tax.
  */
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 

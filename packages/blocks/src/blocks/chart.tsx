@@ -57,20 +57,6 @@ function isRecord(v: unknown): v is Record<string, unknown> {
 	return typeof v === "object" && v !== null && !Array.isArray(v);
 }
 
-function isUnsafeObjectKey(key: string): boolean {
-	return key === "__proto__" || key === "prototype" || key === "constructor";
-}
-
-function safeSet(target: Record<string, unknown>, key: string, value: unknown): void {
-	if (isUnsafeObjectKey(key)) return;
-	Object.defineProperty(target, key, {
-		value,
-		writable: true,
-		enumerable: true,
-		configurable: true,
-	});
-}
-
 const RE_HTML_TAG = /<[a-z/!]/i;
 
 function containsHtml(v: unknown): boolean {
@@ -86,25 +72,20 @@ function sanitizeOptions(obj: Record<string, unknown>): Record<string, unknown> 
 	const result: Record<string, unknown> = {};
 	for (const [key, value] of Object.entries(obj)) {
 		if (DANGEROUS_KEYS.has(key)) continue;
-		if (isUnsafeObjectKey(key)) continue;
 		if (containsHtml(value)) {
-			safeSet(result, key, escapeHtml(value as string));
+			result[key] = escapeHtml(value as string);
 		} else if (Array.isArray(value)) {
-			safeSet(
-				result,
-				key,
-				value.map((item) =>
-					isRecord(item)
-						? sanitizeOptions(item)
-						: containsHtml(item)
-							? escapeHtml(item as string)
-							: item,
-				),
+			result[key] = value.map((item) =>
+				isRecord(item)
+					? sanitizeOptions(item)
+					: containsHtml(item)
+						? escapeHtml(item as string)
+						: item,
 			);
 		} else if (isRecord(value)) {
-			safeSet(result, key, sanitizeOptions(value));
+			result[key] = sanitizeOptions(value);
 		} else {
-			safeSet(result, key, value);
+			result[key] = value;
 		}
 	}
 	return result;

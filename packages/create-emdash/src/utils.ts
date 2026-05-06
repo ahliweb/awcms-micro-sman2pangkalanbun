@@ -1,5 +1,5 @@
 import { randomBytes } from "node:crypto";
-import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 export const PROJECT_NAME_PATTERN = /^[a-z0-9-]+$/;
@@ -43,12 +43,7 @@ const ANY_KEY_LINE_PATTERN = /^EMDASH_ENCRYPTION_KEY=.*$/m;
  */
 export function writeEncryptionKey(projectDir: string, fileName: string): "wrote" | "skipped" {
 	const target = resolve(projectDir, fileName);
-	let existing = "";
-	try {
-		existing = readFileSync(target, "utf-8");
-	} catch {
-		existing = "";
-	}
+	const existing = existsSync(target) ? readFileSync(target, "utf-8") : "";
 	if (POPULATED_KEY_LINE_PATTERN.test(existing)) {
 		return "skipped";
 	}
@@ -62,7 +57,7 @@ export function writeEncryptionKey(projectDir: string, fileName: string): "wrote
 		const sep = existing.length === 0 ? "" : existing.endsWith("\n") ? "" : "\n";
 		next = `${existing}${sep}${newLine}\n`;
 	}
-	writeFileSync(target, next, { encoding: "utf-8" });
+	writeFileSync(target, next);
 	return "wrote";
 }
 

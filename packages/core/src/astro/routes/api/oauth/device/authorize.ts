@@ -30,7 +30,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	}
 
 	if (!user) {
-		return apiError("NOT_AUTHENTICATED", "Session expired. Please sign in again.", 401);
+		return apiError("NOT_AUTHENTICATED", "Authentication required", 401);
 	}
 
 	try {
