@@ -364,7 +364,7 @@ const isLoggedIn = !!Astro.locals.user;
 					});
 					if (!res.ok) return; // Keep server-rendered menu on error
 
-					const json = await res.json();
+					const json: { data?: { items?: { label: string; custom_url: string | null; target: string | null }[] } } = await res.json();
 					const menu = json?.data;
 					if (!menu || !Array.isArray(menu.items) || menu.items.length === 0) return;
 
