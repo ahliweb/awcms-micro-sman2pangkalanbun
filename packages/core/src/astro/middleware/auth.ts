@@ -190,6 +190,7 @@ function isCsrfExemptPublicRoute(pathname: string): boolean {
 
 export const onRequest = defineMiddleware(async (context, next) => {
 	const { url } = context;
+	const method = context.request.method.toUpperCase();
 
 	// Only check auth on admin routes and API routes
 	const isAdminRoute = url.pathname.startsWith("/_emdash/admin");
@@ -208,7 +209,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
 	// session-authenticated users can make writes. All other public routes
 	// skip auth for every method.
 	if (isPublicApiRoute) {
-		const method = context.request.method.toUpperCase();
 		const isWriteGuarded = WRITE_GUARDED_PUBLIC_PREFIXES.some((p) => url.pathname.startsWith(p));
 		if (isUnsafeMethod(method) && isWriteGuarded) {
 			if (!isCsrfExemptPublicRoute(url.pathname)) {
@@ -246,7 +246,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
 	// Setup routes: skip auth but still enforce CSRF on state-changing methods
 	if (isSetupRoute) {
-		const method = context.request.method.toUpperCase();
 		if (method !== "GET" && method !== "HEAD" && method !== "OPTIONS") {
 			const csrfHeader = context.request.headers.get("X-EmDash-Request");
 			if (csrfHeader !== "1") {
@@ -297,7 +296,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
 	// MCP discovery/tooling is bearer-only. Session/external auth should never
 	// be consulted for this endpoint, and unauthenticated requests must return
 	// the OAuth discovery-style 401 response.
-	const method = context.request.method.toUpperCase();
 	const isMcpEndpoint = url.pathname === MCP_ENDPOINT_PATH;
 	if (isMcpEndpoint && !isTokenAuth) {
 		return mcpUnauthorizedResponse(url, context.locals.emdash?.config);
