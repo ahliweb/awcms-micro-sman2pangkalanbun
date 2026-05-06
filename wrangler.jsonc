@@ -10,6 +10,11 @@
 			"zone_name": "sman2pangkalanbun.sch.id",
 			"custom_domain": true,
 		},
+		{
+			"pattern": "www.sman2pangkalanbun.sch.id",
+			"zone_name": "sman2pangkalanbun.sch.id",
+			"custom_domain": true,
+		},
 	],
 	"assets": {
 		"binding": "ASSETS",
