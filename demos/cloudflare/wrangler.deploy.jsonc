@@ -1,9 +1,25 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "sman2pangkalanbunweb",
-	"main": "./src/worker.ts",
+	"main": "./dist/server/entry.mjs",
 	"compatibility_date": "2026-01-14",
 	"compatibility_flags": ["nodejs_compat", "disable_nodejs_process_v2"],
+	"routes": [
+		{
+			"pattern": "sman2pangkalanbun.sch.id",
+			"zone_name": "sman2pangkalanbun.sch.id",
+			"custom_domain": true,
+		},
+		{
+			"pattern": "www.sman2pangkalanbun.sch.id",
+			"zone_name": "sman2pangkalanbun.sch.id",
+			"custom_domain": true,
+		},
+	],
+	"assets": {
+		"binding": "ASSETS",
+		"directory": "./dist/client",
+	},
 	"d1_databases": [
 		{
 			"binding": "DB",
