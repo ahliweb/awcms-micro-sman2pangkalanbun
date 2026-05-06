@@ -27,9 +27,11 @@ type SignupStep = "email" | "check-email" | "verify" | "complete" | "error";
 const MAX_SIGNUP_TOKEN_LENGTH = 512;
 const CONTROL_CHAR_PATTERN = new RegExp(
 	"[" +
-	String.fromCodePoint(0x0000) + "-" + String.fromCodePoint(0x001F) +
-	String.fromCodePoint(0x007F) +
-	"]"
+		String.fromCodePoint(0x0000) +
+		"-" +
+		String.fromCodePoint(0x001f) +
+		String.fromCodePoint(0x007f) +
+		"]",
 );
 
 function isReasonableSignupToken(token: string): boolean {

@@ -432,9 +432,7 @@ describe("kelulusan plugin routes", () => {
 
 		expect(action.toast).toMatchObject({ type: "success" });
 		expect(action.blocks[0]).toMatchObject({ type: "banner" });
-		expect(String(action.blocks[0].description)).toContain(
-			"/_emdash/api/media/file/SKL-2026/SKL",
-		);
+		expect(String(action.blocks[0].description)).toContain("/_emdash/api/media/file/SKL-2026/SKL");
 	});
 
 	it("falls back to SKL-2026/filename when pdfMediaId is unresolvable", async () => {

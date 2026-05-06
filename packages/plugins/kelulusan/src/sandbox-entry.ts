@@ -612,7 +612,7 @@ async function enforceRateLimit(ctx: any) {
 }
 
 export default definePlugin({
-		routes: {
+	routes: {
 		admin: {
 			handler: async (routeCtx: any, pluginCtx: any) => {
 				const ctx = { ...pluginCtx, ...routeCtx };
@@ -705,87 +705,87 @@ export default definePlugin({
 					};
 				}
 
-			if (interaction.type === "interaction" && interaction.action_id === "show_import") {
-				const listed = await fetchAllStudentsWithTelemetry(ctx);
-				return {
-					blocks: [
-						...buildImportBlocks(listed.items.length).blocks,
-						{ type: "divider" },
-						...buildAdminBlocks(listed.items).blocks,
-					],
-				};
-			}
-
-			if (interaction.type === "form_submit" && interaction.action_id === "upload_pdf") {
-				const uploadNisn =
-					typeof interaction.values?.upload_nisn === "string"
-						? interaction.values.upload_nisn.trim()
-						: "";
-				const uploadFilename =
-					typeof interaction.values?.upload_filename === "string"
-						? interaction.values.upload_filename.trim()
-						: "";
-				const listed = await fetchAllStudentsWithTelemetry(ctx);
-
-				if (!uploadNisn || !uploadFilename) {
+				if (interaction.type === "interaction" && interaction.action_id === "show_import") {
+					const listed = await fetchAllStudentsWithTelemetry(ctx);
 					return {
 						blocks: [
-							...buildImportBlocks(listed.items.length, {
-								title: "Error",
-								description: "NISN dan nama file wajib diisi.",
-							}).blocks,
+							...buildImportBlocks(listed.items.length).blocks,
 							{ type: "divider" },
 							...buildAdminBlocks(listed.items).blocks,
 						],
-						toast: { message: "NISN dan nama file wajib diisi", type: "error" },
 					};
 				}
 
-				const student = await findStudentByNisn(ctx, uploadNisn);
-				if (!student) {
+				if (interaction.type === "form_submit" && interaction.action_id === "upload_pdf") {
+					const uploadNisn =
+						typeof interaction.values?.upload_nisn === "string"
+							? interaction.values.upload_nisn.trim()
+							: "";
+					const uploadFilename =
+						typeof interaction.values?.upload_filename === "string"
+							? interaction.values.upload_filename.trim()
+							: "";
+					const listed = await fetchAllStudentsWithTelemetry(ctx);
+
+					if (!uploadNisn || !uploadFilename) {
+						return {
+							blocks: [
+								...buildImportBlocks(listed.items.length, {
+									title: "Error",
+									description: "NISN dan nama file wajib diisi.",
+								}).blocks,
+								{ type: "divider" },
+								...buildAdminBlocks(listed.items).blocks,
+							],
+							toast: { message: "NISN dan nama file wajib diisi", type: "error" },
+						};
+					}
+
+					const student = await findStudentByNisn(ctx, uploadNisn);
+					if (!student) {
+						return {
+							blocks: [
+								...buildImportBlocks(listed.items.length, {
+									title: "Error",
+									description: `Siswa dengan NISN ${uploadNisn} tidak ditemukan. Import data terlebih dahulu.`,
+								}).blocks,
+								{ type: "divider" },
+								...buildAdminBlocks(listed.items).blocks,
+							],
+							toast: { message: "NISN tidak ditemukan", type: "error" },
+						};
+					}
+
+					if (!ctx.media) {
+						throw PluginRouteError.internal("Media access is not available");
+					}
+
+					const pdfKey = `SKL-2026/${uploadFilename}`;
+					const studentKey =
+						student.nisnNormalized ?? (normalizeNisn(student.nisn) || student.nisn);
+					await ctx.storage.students.put(studentKey, {
+						...student,
+						nisnNormalized: normalizeNisn(student.nisn),
+						pdfMediaId: pdfKey,
+						pdfFilename: uploadFilename,
+						createdAt: student.createdAt || nowIso(),
+					});
+
+					const updatedList = await fetchAllStudentsWithTelemetry(ctx);
 					return {
 						blocks: [
-							...buildImportBlocks(listed.items.length, {
-								title: "Error",
-								description: `Siswa dengan NISN ${uploadNisn} tidak ditemukan. Import data terlebih dahulu.`,
+							...buildImportBlocks(updatedList.items.length, {
+								title: "Upload Berhasil",
+								description: `PDF untuk ${student.name} (${uploadNisn}) terdaftar sebagai ${uploadFilename}. Upload file ke folder SKL-2026/ di R2.`,
 							}).blocks,
 							{ type: "divider" },
-							...buildAdminBlocks(listed.items).blocks,
+							...buildAdminBlocks(updatedList.items).blocks,
 						],
-						toast: { message: "NISN tidak ditemukan", type: "error" },
+						toast: { message: "PDF berhasil didaftarkan", type: "success" },
 					};
 				}
 
-				if (!ctx.media) {
-					throw PluginRouteError.internal("Media access is not available");
-				}
-
-				const pdfKey = `SKL-2026/${uploadFilename}`;
-				const studentKey =
-					student.nisnNormalized ?? (normalizeNisn(student.nisn) || student.nisn);
-				await ctx.storage.students.put(studentKey, {
-					...student,
-					nisnNormalized: normalizeNisn(student.nisn),
-					pdfMediaId: pdfKey,
-					pdfFilename: uploadFilename,
-					createdAt: student.createdAt || nowIso(),
-				});
-
-				const updatedList = await fetchAllStudentsWithTelemetry(ctx);
-				return {
-					blocks: [
-						...buildImportBlocks(updatedList.items.length, {
-							title: "Upload Berhasil",
-							description: `PDF untuk ${student.name} (${uploadNisn}) terdaftar sebagai ${uploadFilename}. Upload file ke folder SKL-2026/ di R2.`,
-						}).blocks,
-						{ type: "divider" },
-						...buildAdminBlocks(updatedList.items).blocks,
-					],
-					toast: { message: "PDF berhasil didaftarkan", type: "success" },
-				};
-			}
-
-			if (interaction.type === "form_submit" && interaction.action_id === "open_document") {
+				if (interaction.type === "form_submit" && interaction.action_id === "open_document") {
 					const nisn = typeof interaction.values?.nisn === "string" ? interaction.values.nisn : "";
 					const eventType =
 						interaction.values?.eventType === "downloaded" ? "downloaded" : "opened";
@@ -804,14 +804,14 @@ export default definePlugin({
 							toast: { message: "Data siswa tidak ditemukan", type: "error" },
 						};
 					}
-				if (!ctx.media) {
-					throw PluginRouteError.internal("Media access is not available");
-				}
-				const resolvedPdf = await resolveStudentPdf(ctx, student);
-				if (!resolvedPdf) {
-					const listed = await fetchAllStudentsWithTelemetry(ctx);
-					return {
-						...buildAdminBlocks(listed.items, nisn, eventType),
+					if (!ctx.media) {
+						throw PluginRouteError.internal("Media access is not available");
+					}
+					const resolvedPdf = await resolveStudentPdf(ctx, student);
+					if (!resolvedPdf) {
+						const listed = await fetchAllStudentsWithTelemetry(ctx);
+						return {
+							...buildAdminBlocks(listed.items, nisn, eventType),
 							toast: {
 								message: "Dokumen siswa belum diupload. Upload ke R2: SKL-2026/",
 								type: "error",
@@ -821,12 +821,12 @@ export default definePlugin({
 					await recordDocumentEvent(ctx, student, eventType, "admin");
 					const listed = await fetchAllStudentsWithTelemetry(ctx);
 
-				return {
-					...buildAdminBlocks(listed.items, nisn, eventType, {
-						title: "URL PDF tersedia",
-						description: `${student.pdfFilename}: ${resolvedPdf.url}`,
-					}),
-					toast: {
+					return {
+						...buildAdminBlocks(listed.items, nisn, eventType, {
+							title: "URL PDF tersedia",
+							description: `${student.pdfFilename}: ${resolvedPdf.url}`,
+						}),
+						toast: {
 							message:
 								eventType === "downloaded"
 									? "URL unduh PDF berhasil diambil"
@@ -866,17 +866,17 @@ export default definePlugin({
 		},
 		"students/import-template": {
 			input: importTemplateSchema,
-				handler: async (routeCtx: any, pluginCtx: any) => {
-					const ctx = { ...pluginCtx, ...routeCtx };
-					let imported = 0;
-					for (const row of ctx.input.rows) {
-						const normalizedNisn = normalizeNisn(row.nisn);
-						await ctx.storage.students.put(normalizedNisn || row.nisn, {
-							nisn: row.nisn,
-							nisnNormalized: normalizedNisn,
-							name: row.name,
-							pdfMediaId: `SKL-2026/${row.filename}`,
-							pdfFilename: row.filename,
+			handler: async (routeCtx: any, pluginCtx: any) => {
+				const ctx = { ...pluginCtx, ...routeCtx };
+				let imported = 0;
+				for (const row of ctx.input.rows) {
+					const normalizedNisn = normalizeNisn(row.nisn);
+					await ctx.storage.students.put(normalizedNisn || row.nisn, {
+						nisn: row.nisn,
+						nisnNormalized: normalizedNisn,
+						name: row.name,
+						pdfMediaId: `SKL-2026/${row.filename}`,
+						pdfFilename: row.filename,
 						createdAt: nowIso(),
 					});
 					imported++;
@@ -918,13 +918,16 @@ export default definePlugin({
 				const binary = Uint8Array.from(atob(contentBase64), (c) => c.charCodeAt(0));
 				await ctx.media.put(pdfKey, binary, { contentType: "application/pdf" });
 
-				await ctx.storage.students.put(student.nisnNormalized || normalizeNisn(student.nisn) || nisn, {
-					...student,
-					nisnNormalized: normalizeNisn(student.nisn),
-					pdfMediaId: pdfKey,
-					pdfFilename: filename,
-					createdAt: student.createdAt || nowIso(),
-				});
+				await ctx.storage.students.put(
+					student.nisnNormalized || normalizeNisn(student.nisn) || nisn,
+					{
+						...student,
+						nisnNormalized: normalizeNisn(student.nisn),
+						pdfMediaId: pdfKey,
+						pdfFilename: filename,
+						createdAt: student.createdAt || nowIso(),
+					},
+				);
 
 				return {
 					success: true,

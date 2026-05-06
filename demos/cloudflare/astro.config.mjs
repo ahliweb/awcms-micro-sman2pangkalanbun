@@ -12,8 +12,8 @@ import { academicCalendarPlugin } from "@emdash-cms/plugin-academic-calendar";
 import { countdownPlugin } from "@emdash-cms/plugin-countdown";
 import { formsPlugin } from "@emdash-cms/plugin-forms";
 import { kelulusanPlugin } from "@emdash-cms/plugin-kelulusan";
-import { youtubeHeroPlugin } from "@emdash-cms/plugin-youtube-hero";
 import { webhookNotifierPlugin } from "@emdash-cms/plugin-webhook-notifier";
+import { youtubeHeroPlugin } from "@emdash-cms/plugin-youtube-hero";
 import { defineConfig, fontProviders } from "astro/config";
 import emdash from "emdash/astro";
 

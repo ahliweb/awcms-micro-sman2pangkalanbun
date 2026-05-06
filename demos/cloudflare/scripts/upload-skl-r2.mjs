@@ -51,7 +51,9 @@ if (rows.length === 0) {
 	process.exit(1);
 }
 
-const localFiles = new Set(readdirSync(pdfDir).filter((name) => name.toLowerCase().endsWith(".pdf")));
+const localFiles = new Set(
+	readdirSync(pdfDir).filter((name) => name.toLowerCase().endsWith(".pdf")),
+);
 const missing = rows.filter((row) => !localFiles.has(row.filename));
 if (missing.length > 0) {
 	console.error(`Missing ${missing.length} PDF(s) referenced by SKL-DATA.md`);

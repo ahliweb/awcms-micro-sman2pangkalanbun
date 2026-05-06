@@ -79,7 +79,7 @@ function getNodeMarks(node: ContentfulNode): string[] {
 	if (!("marks" in node) || !Array.isArray(node.marks)) return [];
 	return node.marks
 		.map((mark) => (mark && typeof mark === "object" && "type" in mark ? mark.type : undefined))
-		.map((type) => (typeof type === "string" ? MARK_MAP[type] ?? type : undefined))
+		.map((type) => (typeof type === "string" ? (MARK_MAP[type] ?? type) : undefined))
 		.filter((v): v is string => Boolean(v));
 }
 

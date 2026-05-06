@@ -1,6 +1,5 @@
-import { describe, expect, it } from "vitest";
-
 import { Role } from "@emdash-cms/auth";
+import { describe, expect, it } from "vitest";
 
 import { requireOwnerPerm, requirePerm } from "../../../src/api/authorize.js";
 

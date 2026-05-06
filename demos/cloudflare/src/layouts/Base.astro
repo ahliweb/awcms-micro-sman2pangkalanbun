@@ -70,6 +70,7 @@ const pageCtx = createPublicPageContext({
 	seo: { ogImage: image, robots },
 	articleMeta: { publishedTime, modifiedTime, author },
 	siteName: siteTitle,
+	siteLogo: siteLogo?.url,
 });
 
 // Check if user is logged in (for showing admin link)
