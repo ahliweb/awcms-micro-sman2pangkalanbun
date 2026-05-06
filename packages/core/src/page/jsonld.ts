@@ -104,7 +104,7 @@ export function buildWebSiteJsonLd(page: PublicPageContext): Record<string, unkn
 		name: siteName,
 		url: siteUrl,
 		publisher:
-			page.siteLogo && page.siteLogo.length > 0
+			page.path === "/" && page.siteLogo && page.siteLogo.length > 0
 				? {
 						"@type": "Organization",
 						name: siteName,
