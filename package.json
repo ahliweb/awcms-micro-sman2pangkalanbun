@@ -13,8 +13,11 @@
 		"test:unit": "pnpm run --filter emdash --filter @emdash-cms/auth --filter @emdash-cms/blocks --filter @emdash-cms/gutenberg-to-portable-text --filter @emdash-cms/marketplace test",
 		"test:browser": "pnpm run --filter @emdash-cms/admin test",
 		"test:e2e": "playwright test",
+		"test:e2e:smoke": "playwright test e2e/tests/smoke-edit-publish.spec.ts",
 		"test:e2e:ui": "playwright test --ui",
-		"build": "pnpm run --filter {./packages/**} build",
+		"build": "pnpm run --filter {./packages/**} build && pnpm --filter @emdash-cms/demo-cloudflare run build",
+		"deploy:cloudflare": "pnpm --filter @emdash-cms/demo-cloudflare run deploy",
+		"dev:simple": "pnpm --dir demos/simple dev",
 		"postbuild": "node scripts/relink-bins-if-needed.mjs",
 		"format": "oxfmt --ignore-path .gitignore && prettier --write .",
 		"format:check": "oxfmt --ignore-path .gitignore --check && prettier --check .",
@@ -27,6 +30,7 @@
 		"new": "create-emdash",
 		"screenshots": "node scripts/screenshot-all-templates.mjs",
 		"query-counts": "node scripts/query-counts.mjs",
+		"log-safety": "node scripts/log-safety-check.mjs --mode=changed --base=HEAD~1 --head=HEAD",
 		"locale:extract": "pnpm --filter @emdash-cms/admin locale:extract",
 		"locale:compile": "pnpm --filter @emdash-cms/admin locale:compile",
 		"changeset:version": "pnpm changeset version && pnpm install --no-frozen-lockfile"
@@ -50,7 +54,8 @@
 		"oxlint-tsgolint": "^0.15.0",
 		"prettier": "^3.8.1",
 		"prettier-plugin-astro": "^0.14.1",
-		"typescript": "6.0.0-beta"
+		"typescript": "6.0.0-beta",
+		"wrangler": "catalog:"
 	},
 	"packageManager": "pnpm@10.28.0",
 	"engines": {
@@ -61,6 +66,33 @@
 			"better-sqlite3",
 			"esbuild",
 			"workerd"
-		]
+		],
+		"overrides": {
+			"@astrojs/cloudflare": ">=13.1.10",
+			"@hono/node-server": ">=1.19.13",
+			"ajv": ">=8.18.0",
+			"defu": ">=6.1.5",
+			"devalue": ">=5.6.4",
+			"dompurify": ">=3.4.0",
+			"express-rate-limit": ">=8.2.2",
+			"ip-address": ">=10.1.1",
+			"flatted": ">=3.4.2",
+			"h3": ">=1.15.9",
+			"hono": ">=4.12.14",
+			"js-yaml": ">=3.14.2",
+			"kysely": ">=0.28.14",
+			"lodash": ">=4.18.0",
+			"markdown-it": ">=14.1.1",
+			"path-to-regexp": ">=8.4.0",
+			"picomatch": ">=2.3.2",
+			"postcss": ">=8.5.10",
+			"rollup": ">=4.59.0",
+			"smol-toml": ">=1.6.1",
+			"simple-git": ">=3.36.0",
+			"svgo": ">=4.0.1",
+			"tar": ">=7.5.11",
+			"undici": ">=7.24.0",
+			"yaml": ">=2.8.3"
+		}
 	}
 }
