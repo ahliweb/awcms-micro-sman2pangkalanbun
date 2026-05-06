@@ -9,7 +9,7 @@ const { entry, cacheHint } = await getEmDashEntry("downloads", slug);
 if (!entry) return Astro.redirect("/404");
 Astro.cache.set(cacheHint);
 
-const data = entry.data as Record<string, unknown>;
+const data = entry.data as unknown as Record<string, unknown>;
 const title = typeof data.title === "string" ? data.title : "Unduhan";
 const description =
 	typeof data.description === "string" ? data.description : null;
