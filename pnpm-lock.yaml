@@ -255,6 +255,9 @@ importers:
       '@emdash-cms/plugin-webhook-notifier':
         specifier: workspace:*
         version: link:../../packages/plugins/webhook-notifier
+      '@emdash-cms/plugin-youtube-hero':
+        specifier: workspace:*
+        version: link:../../packages/plugins/youtube-hero
       '@tanstack/react-query':
         specifier: 'catalog:'
         version: 5.90.21(react@19.2.4)
@@ -1653,6 +1656,22 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
+
+  packages/plugins/youtube-hero:
+    dependencies:
+      emdash:
+        specifier: workspace:>=0.9.0
+        version: link:../../core
+    devDependencies:
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.20.3(@arethetypeswrong/core@0.18.2)(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(@typescript/native-preview@7.0.0-dev.20260213.1)(oxc-resolver@11.16.4)(publint@0.3.17)(typescript@5.9.3)
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.18(@opentelemetry/api@1.9.0)(@types/node@24.10.13)(@vitest/browser-playwright@4.0.18)(jiti@2.6.1)(jsdom@26.1.0)(lightningcss@1.32.0)(tsx@4.21.0)(yaml@2.8.4)
 
   packages/x402:
     dependencies:
