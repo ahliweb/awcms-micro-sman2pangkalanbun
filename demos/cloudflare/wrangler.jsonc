@@ -13,6 +13,11 @@
 			"zone_name": "sman2pangkalanbun.sch.id",
 			"custom_domain": true,
 		},
+		{
+			"pattern": "www.sman2pangkalanbun.sch.id",
+			"zone_name": "sman2pangkalanbun.sch.id",
+			"custom_domain": true,
+		},
 	],
 	// D1 Database binding
 	"d1_databases": [

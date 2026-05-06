@@ -18,6 +18,7 @@ import { defineConfig, fontProviders } from "astro/config";
 import emdash from "emdash/astro";
 
 export default defineConfig({
+	site: "https://sman2pangkalanbun.sch.id",
 	output: "server",
 	adapter: cloudflare({
 		imageService: "cloudflare",
@@ -36,6 +37,10 @@ export default defineConfig({
 			database: d1({ binding: "DB", session: "auto" }),
 			// R2 storage for media
 			storage: r2({ binding: "MEDIA" }),
+			// Public site URL and allowed additional origins
+			// siteUrl is derived from Astro's `site` config above
+			// allowedOrigins permits the www subdomain for passkey/CSRF
+			allowedOrigins: ["https://www.sman2pangkalanbun.sch.id"],
 			// Use EmDash built-in auth providers for deployment portability.
 			// Media providers - Cloudflare Images and Stream
 			// Reads from env vars at runtime: CF_ACCOUNT_ID, CF_IMAGES_TOKEN, CF_STREAM_TOKEN
