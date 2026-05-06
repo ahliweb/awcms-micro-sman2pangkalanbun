@@ -5,6 +5,19 @@
 
 import type { ContentBylineCredit, PortableTextBlock } from "emdash";
 
+export interface Event {
+  id: string;
+  slug: string | null;
+  status: string;
+  title: string;
+  starts_at?: string;
+  description?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+}
+
 export interface Page {
   id: string;
   slug: string | null;
@@ -34,6 +47,7 @@ export interface Post {
 
 declare module "emdash" {
   interface EmDashCollections {
+    events: Event;
     pages: Page;
     posts: Post;
   }

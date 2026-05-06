@@ -6,26 +6,25 @@
  */
 
 import { readFileSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
 
 import { expect, test } from "../fixtures";
 import { refreshServerPatAfterDevBypass } from "../fixtures/refresh-server-pat";
+import { buildFromBase, parseSafeHttpBaseUrl } from "../fixtures/safe-base-url";
+import { SERVER_INFO_PATH } from "../fixtures/server-info-path";
 import { addVirtualWebAuthnAuthenticator } from "../fixtures/virtual-authenticator";
 
 const ADMIN_AFTER_SETUP_URL = /\/_emdash\/admin(\/login)?/;
-
-const SERVER_INFO_PATH = join(tmpdir(), "emdash-pw-server.json");
 
 function fixtureBaseUrl(): string {
 	return JSON.parse(readFileSync(SERVER_INFO_PATH, "utf-8")).baseUrl as string;
 }
 
 async function resetSetup(): Promise<void> {
-	const base = fixtureBaseUrl();
-	const res = await fetch(`${base}/_emdash/api/setup/dev-reset`, {
+	const base = parseSafeHttpBaseUrl(fixtureBaseUrl());
+	const url = buildFromBase(base, "/_emdash/api/setup/dev-reset");
+	const res = await fetch(url, {
 		method: "POST",
-		headers: { "X-EmDash-Request": "1", Origin: base },
+		headers: { "X-EmDash-Request": "1", Origin: base.origin },
 	});
 	if (!res.ok) throw new Error(`dev-reset failed: ${res.status}`);
 }
