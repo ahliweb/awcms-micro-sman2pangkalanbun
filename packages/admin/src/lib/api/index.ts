@@ -154,14 +154,11 @@ export {
 	type Menu,
 	type MenuItem,
 	type MenuWithItems,
-	type MenuTranslation,
-	type MenuTranslationsResponse,
 	type CreateMenuInput,
 	type UpdateMenuInput,
 	type CreateMenuItemInput,
 	type UpdateMenuItemInput,
 	type ReorderMenuItemsInput,
-	type LocaleOptions as MenuLocaleOptions,
 	fetchMenus,
 	fetchMenu,
 	createMenu,
@@ -171,8 +168,6 @@ export {
 	updateMenuItem,
 	deleteMenuItem,
 	reorderMenuItems,
-	fetchMenuTranslations,
-	createMenuTranslation,
 } from "./menus.js";
 
 // Widget areas
