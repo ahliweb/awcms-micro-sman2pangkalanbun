@@ -2701,7 +2701,7 @@ function EditorToolbar({
 		const currentIndex = buttons.findIndex((btn) => btn === document.activeElement);
 		if (currentIndex === -1) return;
 
-		let nextIndex: number | null = null;
+		let nextIndex: number;
 
 		switch (e.key) {
 			case "ArrowRight":
@@ -2722,7 +2722,7 @@ function EditorToolbar({
 				return;
 		}
 
-		if (nextIndex !== null) {
+		{
 			e.preventDefault();
 			buttons[nextIndex]?.focus();
 		}
