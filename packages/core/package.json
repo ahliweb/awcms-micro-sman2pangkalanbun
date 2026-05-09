@@ -200,7 +200,7 @@
     "jpeg-js": "^0.4.4",
     "kysely": "^0.27.0",
     "mime": "^4.1.0",
-    "modern-tar": "^0.7.5",
+    "modern-tar": "^0.7.6",
     "picocolors": "^1.1.1",
     "sanitize-html": "^2.17.1",
     "sax": "^1.4.1",
