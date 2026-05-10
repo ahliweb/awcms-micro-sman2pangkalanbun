@@ -12,50 +12,62 @@ packages:
   - infra/cache-demo
   - infra/perf-monitor
 
+pnpm:
+  overrides:
+    fast-uri: ^3.1.0
+    defu: ^6.1.5
+    lodash: ^4.17.21
+    simple-git: ^3.29.0
+    vite: ^7.3.1
+    hono: ^4.12.18
+    dompurify: ^3.2.4
+    postcss: ^8.5.14
+    ip-address: ^10.1.1
+
 catalog:
-  "@arethetypeswrong/cli": ^0.18.2
-  "@astrojs/check": ^0.9.7
-  "@astrojs/cloudflare": ^13.3.0
-  "@astrojs/node": ^10.0.5
-  "@astrojs/react": ^5.0.4
-  "@cloudflare/workers-types": ^4.20260305.1
-  "@lingui/babel-plugin-lingui-macro": ^5.9.4
-  "@lingui/cli": ^5.9.4
-  "@lingui/conf": ^5.9.4
-  "@lingui/core": ^5.9.4
-  "@lingui/macro": ^5.9.4
-  "@lingui/react": ^5.9.4
-  "@iconify-json/ph": ^1.2.2
-  "@oslojs/crypto": ^1.0.1
-  "@oslojs/encoding": ^1.1.0
-  "@oslojs/webauthn": ^1.0.0
-  "@phosphor-icons/react": ^2.1.10
-  "@tanstack/react-query": 5.90.21
-  "@tanstack/react-router": 1.163.2
-  "@tiptap/core": ^3.20.0
-  "@tiptap/extension-character-count": ^3.20.0
-  "@tiptap/extension-drag-handle": ^3.20.0
-  "@tiptap/extension-drag-handle-react": ^3.20.0
-  "@tiptap/extension-dropcursor": ^3.20.0
-  "@tiptap/extension-focus": ^3.20.0
-  "@tiptap/extension-image": ^3.20.0
-  "@tiptap/extension-link": ^3.20.0
-  "@tiptap/extension-node-range": ^3.20.0
-  "@tiptap/extension-placeholder": ^3.20.0
-  "@tiptap/extension-table": ^3.20.0
-  "@tiptap/extension-table-cell": ^3.20.0
-  "@tiptap/extension-table-header": ^3.20.0
-  "@tiptap/extension-table-row": ^3.20.0
-  "@tiptap/extension-text-align": ^3.20.0
-  "@tiptap/extension-typography": ^3.20.0
-  "@tiptap/extension-underline": ^3.20.0
-  "@tiptap/pm": ^3.20.0
-  "@tiptap/react": ^3.20.0
-  "@tiptap/starter-kit": ^3.20.0
-  "@tiptap/suggestion": ^3.20.0
-  "@types/node": 24.10.13
-  "@types/react": 19.2.14
-  "@types/react-dom": 19.2.3
+  '@arethetypeswrong/cli': ^0.18.2
+  '@astrojs/check': ^0.9.7
+  '@astrojs/cloudflare': ^13.3.0
+  '@astrojs/node': ^10.0.5
+  '@astrojs/react': ^5.0.4
+  '@cloudflare/workers-types': ^4.20260305.1
+  '@iconify-json/ph': ^1.2.2
+  '@lingui/babel-plugin-lingui-macro': ^5.9.4
+  '@lingui/cli': ^5.9.4
+  '@lingui/conf': ^5.9.4
+  '@lingui/core': ^5.9.4
+  '@lingui/macro': ^5.9.4
+  '@lingui/react': ^5.9.4
+  '@oslojs/crypto': ^1.0.1
+  '@oslojs/encoding': ^1.1.0
+  '@oslojs/webauthn': ^1.0.0
+  '@phosphor-icons/react': ^2.1.10
+  '@tanstack/react-query': 5.90.21
+  '@tanstack/react-router': 1.163.2
+  '@tiptap/core': ^3.20.0
+  '@tiptap/extension-character-count': ^3.20.0
+  '@tiptap/extension-drag-handle': ^3.20.0
+  '@tiptap/extension-drag-handle-react': ^3.20.0
+  '@tiptap/extension-dropcursor': ^3.20.0
+  '@tiptap/extension-focus': ^3.20.0
+  '@tiptap/extension-image': ^3.20.0
+  '@tiptap/extension-link': ^3.20.0
+  '@tiptap/extension-node-range': ^3.20.0
+  '@tiptap/extension-placeholder': ^3.20.0
+  '@tiptap/extension-table': ^3.20.0
+  '@tiptap/extension-table-cell': ^3.20.0
+  '@tiptap/extension-table-header': ^3.20.0
+  '@tiptap/extension-table-row': ^3.20.0
+  '@tiptap/extension-text-align': ^3.20.0
+  '@tiptap/extension-typography': ^3.20.0
+  '@tiptap/extension-underline': ^3.20.0
+  '@tiptap/pm': ^3.20.0
+  '@tiptap/react': ^3.20.0
+  '@tiptap/starter-kit': ^3.20.0
+  '@tiptap/suggestion': ^3.20.0
+  '@types/node': 25.6.2
+  '@types/react': 19.2.14
+  '@types/react-dom': 19.2.3
   astro: ^6.1.6
   astro-iconset: ^0.0.4
   better-sqlite3: ^12.8.0
@@ -65,4 +77,4 @@ catalog:
   tsdown: 0.20.3
   typescript: ^5.9.3
   vitest: ^4.0.18
-  wrangler: ^4.87.0
+  wrangler: ^4.90.0
