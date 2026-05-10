@@ -6,156 +6,9 @@ settings:
 
 catalogs:
   default:
-    '@arethetypeswrong/cli':
-      specifier: ^0.18.2
-      version: 0.18.2
-    '@astrojs/check':
-      specifier: ^0.9.7
-      version: 0.9.7
-    '@astrojs/node':
-      specifier: ^10.0.5
-      version: 10.0.6
-    '@astrojs/react':
-      specifier: ^5.0.4
-      version: 5.0.4
-    '@cloudflare/workers-types':
-      specifier: ^4.20260305.1
-      version: 4.20260305.1
-    '@iconify-json/ph':
-      specifier: ^1.2.2
-      version: 1.2.2
-    '@lingui/babel-plugin-lingui-macro':
-      specifier: ^5.9.4
-      version: 5.9.5
-    '@lingui/cli':
-      specifier: ^5.9.4
-      version: 5.9.5
-    '@lingui/core':
-      specifier: ^5.9.4
-      version: 5.9.5
-    '@lingui/macro':
-      specifier: ^5.9.4
-      version: 5.9.5
-    '@lingui/react':
-      specifier: ^5.9.4
-      version: 5.9.5
-    '@oslojs/crypto':
-      specifier: ^1.0.1
-      version: 1.0.1
-    '@oslojs/encoding':
-      specifier: ^1.1.0
-      version: 1.1.0
-    '@oslojs/webauthn':
-      specifier: ^1.0.0
-      version: 1.0.0
-    '@phosphor-icons/react':
-      specifier: ^2.1.10
-      version: 2.1.10
-    '@tanstack/react-query':
-      specifier: 5.90.21
-      version: 5.90.21
-    '@tanstack/react-router':
-      specifier: 1.163.2
-      version: 1.163.2
-    '@tiptap/core':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-character-count':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-drag-handle':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-drag-handle-react':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-dropcursor':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-focus':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-image':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-link':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-node-range':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-placeholder':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-table':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-table-cell':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-table-header':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-table-row':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-text-align':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-typography':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/extension-underline':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/pm':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/react':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/starter-kit':
-      specifier: ^3.20.0
-      version: 3.20.0
-    '@tiptap/suggestion':
-      specifier: ^3.20.0
-      version: 3.20.0
     '@types/node':
       specifier: 25.6.2
       version: 25.6.2
-    '@types/react':
-      specifier: 19.2.14
-      version: 19.2.14
-    '@types/react-dom':
-      specifier: 19.2.3
-      version: 19.2.3
-    astro:
-      specifier: ^6.1.6
-      version: 6.1.7
-    astro-iconset:
-      specifier: ^0.0.4
-      version: 0.0.4
-    better-sqlite3:
-      specifier: ^12.8.0
-      version: 12.8.0
-    publint:
-      specifier: 0.3.17
-      version: 0.3.17
-    react:
-      specifier: 19.2.4
-      version: 19.2.4
-    react-dom:
-      specifier: 19.2.4
-      version: 19.2.4
-    tsdown:
-      specifier: 0.20.3
-      version: 0.20.3
-    typescript:
-      specifier: ^5.9.3
-      version: 5.9.3
-    vitest:
-      specifier: ^4.0.18
-      version: 4.0.18
     wrangler:
       specifier: ^4.90.0
       version: 4.90.0
@@ -192,7 +45,7 @@ importers:
   .:
     dependencies:
       defu:
-        specifier: 6.1.7
+        specifier: '>=6.1.5'
         version: 6.1.7
       dompurify:
         specifier: '>=3.4.0'
@@ -206,9 +59,6 @@ importers:
       ip-address:
         specifier: '>=10.1.1'
         version: 10.2.0
-      lodash:
-        specifier: 4.17.21
-        version: 4.17.21
       postcss:
         specifier: '>=8.5.10'
         version: 8.5.14
@@ -263,7 +113,7 @@ importers:
         version: 6.0.3
       wrangler:
         specifier: 'catalog:'
-        version: 4.90.0(@cloudflare/workers-types@4.20260305.1)
+        version: 4.90.0
 
   demos/cloudflare:
     dependencies:
@@ -7497,9 +7347,6 @@ packages:
 
   lodash.startcase@4.4.0:
     resolution: {integrity: sha512-+WKqsK294HMSc2jEbNgpHpd0JfIBhp7rEV4aqXWqFr6AlXov+SlcgB1Fv01y2kGe3Gc8nMW7VA0SrGuSkRfIEg==}
-
-  lodash@4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
 
   lodash@4.18.1:
     resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
@@ -15678,8 +15525,6 @@ snapshots:
 
   lodash.startcase@4.4.0: {}
 
-  lodash@4.17.21: {}
-
   lodash@4.18.1: {}
 
   log-symbols@4.1.0:
@@ -18248,6 +18093,22 @@ snapshots:
       '@cloudflare/workerd-linux-64': 1.20260507.1
       '@cloudflare/workerd-linux-arm64': 1.20260507.1
       '@cloudflare/workerd-windows-64': 1.20260507.1
+
+  wrangler@4.90.0:
+    dependencies:
+      '@cloudflare/kv-asset-handler': 0.5.0
+      '@cloudflare/unenv-preset': 2.16.1(unenv@2.0.0-rc.24)(workerd@1.20260507.1)
+      blake3-wasm: 2.1.5
+      esbuild: 0.27.3
+      miniflare: 4.20260507.1
+      path-to-regexp: 8.4.2
+      unenv: 2.0.0-rc.24
+      workerd: 1.20260507.1
+    optionalDependencies:
+      fsevents: 2.3.3
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
 
   wrangler@4.90.0(@cloudflare/workers-types@4.20260305.1):
     dependencies:
