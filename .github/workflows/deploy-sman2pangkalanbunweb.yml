@@ -1,0 +1,52 @@
+name: Deploy sman2pangkalanbunweb
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "demos/cloudflare/**"
+      - "packages/core/**"
+      - "packages/admin/**"
+      - "packages/cloudflare/**"
+      - "packages/plugins/**"
+      - ".github/workflows/deploy-sman2pangkalanbunweb.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-sman2pangkalanbunweb
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to Cloudflare
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Build demo
+        run: pnpm --filter @emdash-cms/demo-cloudflare build
+
+      - name: Deploy to Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --config demos/cloudflare/wrangler.deploy.jsonc
+          secrets: |
+            CF_MEDIA_API_TOKEN
+        env:
+          CF_MEDIA_API_TOKEN: ${{ secrets.CF_MEDIA_API_TOKEN }}
