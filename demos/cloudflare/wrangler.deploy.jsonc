@@ -10,6 +10,11 @@
 			"zone_id": "8cf3f522e7e4a016d30ca4b6484e4c9f",
 			"custom_domain": true,
 		},
+		{
+			"pattern": "www.sman2pangkalanbun.sch.id",
+			"zone_id": "8cf3f522e7e4a016d30ca4b6484e4c9f",
+			"custom_domain": true,
+		},
 	],
 	"assets": {
 		"binding": "ASSETS",
