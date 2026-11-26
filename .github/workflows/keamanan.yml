@@ -1,0 +1,103 @@
+# Leg keamanan CI: rahasia (gitleaks) + SAST (OpenGrep). Tanpa bun audit: repo memakai pnpm
+# dan tidak punya audit dependensi di CI; tidak ditambahkan di PR adopsi ini.
+# Template standar lintas-portofolio internal DL-098. Pasang ke .github/workflows/keamanan.yml.
+#
+# Nama check yang dijadikan wajib di branch protection / ruleset:
+#   "keamanan / sast-rahasia-dependensi"  (= nilai `name:` pada job di bawah)
+#
+# Sengaja TANPA filter `paths` pada pull_request: check wajib harus selalu jalan,
+# karena check wajib yang tidak pernah dilaporkan menahan merge selamanya.
+# Sengaja TANPA upload SARIF ke code scanning (butuh lisensi untuk repo privat);
+# hasil ada di log job dan ringkasan JSON.
+name: ci-keamanan
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-keamanan-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Harus sama dengan OPENGREP_VERSION dan sha256 di tools/ci/sast/opengrep-scan.ts
+  # (kunci cache; skrip tetap memverifikasi sha256 sendiri).
+  OPENGREP_VERSION: v2.1.0
+  OPENGREP_SHA256_X86: d6a68a84c01a3d8ee933f60847decf1b4d0fd7791a26833b32b95922baf28974
+  GITLEAKS_VERSION: 8.30.1
+  # sha256 gitleaks_8.30.1_linux_x64.tar.gz (digest asset release GitHub).
+  GITLEAKS_SHA256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
+
+jobs:
+  keamanan:
+    name: keamanan / sast-rahasia-dependensi
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      # actions/checkout v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0 # rentang commit PR atau push harus tersedia untuk gitleaks
+          persist-credentials: false
+
+      # oven-sh/setup-bun v2.2.0. Sesuaikan versi Bun dengan `packageManager`/.bun-version repo.
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          # Repo ini memakai pnpm (packageManager pnpm@10.28.0). Bun dipasang hanya untuk
+          # menjalankan skrip pemindai; versi dipin di sini karena repo tidak punya .bun-version.
+          bun-version: 1.4.4
+
+      - name: Gitleaks (versi dipin, checksum diverifikasi, rentang commit)
+        env:
+          # Nilai event lewat env, bukan disisipkan ke skrip, supaya tidak bisa menyuntik perintah.
+          KEJADIAN: ${{ github.event_name }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          SEBELUM: ${{ github.event.before }}
+          SESUDAH: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          url="https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -fsSL --retry 3 -o "$tmp/gitleaks.tgz" "$url"
+          echo "${GITLEAKS_SHA256}  $tmp/gitleaks.tgz" | sha256sum -c -
+          tar -xzf "$tmp/gitleaks.tgz" -C "$tmp" gitleaks
+          # Yang dipindai adalah rentang commit, bukan seluruh riwayat: PR = base..head,
+          # push = sebelum..sesudah, selain itu (push pertama, workflow_dispatch) satu commit ujung.
+          # Pindai seluruh riwayat adalah triase sekali jalan di luar workflow (lihat README).
+          if [ "$KEJADIAN" = "pull_request" ]; then
+            rentang="${PR_BASE}..${PR_HEAD}"
+          elif [ -n "$SEBELUM" ] && ! printf '%s' "$SEBELUM" | grep -Eq '^0+$'; then
+            rentang="${SEBELUM}..${SESUDAH}"
+          else
+            rentang="-1 ${SESUDAH}"
+          fi
+          # --redact: nilai rahasia tidak dicetak ke log. Tambahkan --config <berkas> bila repo punya aturan sendiri.
+          "$tmp/gitleaks" git --no-banner --redact --verbose --log-opts="$rentang" .
+
+      # actions/cache v6.1.0. Cache hanya mempercepat; binary tetap diverifikasi sha256 oleh skrip.
+      - name: Cache binary OpenGrep
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: ~/.cache/opengrep/${{ env.OPENGREP_VERSION }}
+          key: opengrep-${{ env.OPENGREP_VERSION }}-${{ env.OPENGREP_SHA256_X86 }}
+
+      - name: SEMENTARA buat baseline
+        run: |
+          mkdir -p "$RUNNER_TEMP/b"
+          start=$(date +%s)
+          bun tools/ci/sast/opengrep-scan.ts baseline --buat --baseline "$RUNNER_TEMP/b/baseline.json"
+          echo "DURASI_DETIK=$(( $(date +%s) - start ))"
+          echo "=====BASELINE-BEGIN====="
+          cat "$RUNNER_TEMP/b/baseline.json"
+          echo "=====BASELINE-END====="
+
+      # Nama langkah dikutip: ": " di dalam skalar polos membuat YAML tidak valid.
+      - name: "SAST OpenGrep (gerbang: ERROR baru di luar baseline)"
+        run: bun tools/ci/sast/opengrep-scan.ts --keluaran "$RUNNER_TEMP/sast"
