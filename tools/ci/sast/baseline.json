@@ -1,0 +1,61 @@
+{
+  "versi": 1,
+  "entri": [
+    {
+      "rule": "typescript.lang.correctness.useless-ternary",
+      "path": "packages/plugins/field-kit/tests/object-form.test.tsx",
+      "fingerprint": "09701dafe4433f10ea7f299dfb59d4b48a516236e150f797ab1f4fba11c8b8e4",
+      "alasan": "temuan lama saat adopsi 2026-11-26",
+      "baris": 16
+    },
+    {
+      "rule": "typescript.lang.correctness.useless-ternary",
+      "path": "packages/plugins/field-kit/tests/object-form.test.tsx",
+      "fingerprint": "a52e8f1b12e38701d94beaaefc487184fadae8d51ebbdaa830a84d799c886c79",
+      "alasan": "temuan lama saat adopsi 2026-11-26",
+      "baris": 28
+    },
+    {
+      "rule": "typescript.lang.correctness.useless-ternary",
+      "path": "packages/plugins/field-kit/tests/object-form.test.tsx",
+      "fingerprint": "dec147951de989e4cecaf1b691b3561febc05b1dec481460bab01f8f4295b351",
+      "alasan": "temuan lama saat adopsi 2026-11-26",
+      "baris": 34
+    },
+    {
+      "rule": "lokal.larang-eval",
+      "path": "packages/plugins/sandboxed-test/src/sandbox-entry.ts",
+      "fingerprint": "2fae1b1deada94ec675b32ffb6842573e8acd92bdfcdedf00fc5eb7cf7874d70",
+      "alasan": "temuan lama saat adopsi 2026-11-26",
+      "baris": 360
+    },
+    {
+      "rule": "lokal.larang-eval",
+      "path": "packages/plugins/sandboxed-test/src/sandbox-entry.ts",
+      "fingerprint": "a3f1228fdd49e87863d61c38439f848e1d3df3a3f5b50e7976caba3dbf66a292",
+      "alasan": "temuan lama saat adopsi 2026-11-26",
+      "baris": 1050
+    },
+    {
+      "rule": "typescript.react.security.react-insecure-request",
+      "path": "scripts/query-counts-dump.mjs",
+      "fingerprint": "a74f8460eece0b8db7d03f5d98d571207401b023bcf0181dcfc012f96c9bb77e",
+      "alasan": "temuan lama saat adopsi 2026-11-26",
+      "baris": 158
+    },
+    {
+      "rule": "typescript.react.security.react-insecure-request",
+      "path": "scripts/query-counts.mjs",
+      "fingerprint": "2313d6b98e52f7f6cdd7dbb63ad3f1a670c75bdc91086008bfc102af55b25fe4",
+      "alasan": "temuan lama saat adopsi 2026-11-26",
+      "baris": 225
+    },
+    {
+      "rule": "typescript.react.security.react-insecure-request",
+      "path": "scripts/query-counts.mjs",
+      "fingerprint": "27dd454e3053ff14773431c31a1378f2450b21ccee41f0cf98a04a37b8314f58",
+      "alasan": "temuan lama saat adopsi 2026-11-26",
+      "baris": 339
+    }
+  ]
+}
