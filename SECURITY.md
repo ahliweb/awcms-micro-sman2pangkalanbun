@@ -34,3 +34,12 @@ This policy covers the SMAN 2 Pangkalan Bun school website, its CMS configuratio
 - Issues in third-party dependencies (report to upstream instead)
 - Theoretical vulnerabilities without a working proof of concept
 - Social engineering or phishing attacks
+
+## Automated security checks
+
+Pull requests and pushes to `main` run the `ci-keamanan` workflow (check `keamanan / sast-rahasia-dependensi`):
+
+- **Secrets:** gitleaks scans the commit range of the PR or push (values are redacted in logs).
+- **SAST:** OpenGrep `v2.1.0` (checksum-pinned) with a committed copy of the `opengrep-rules` JavaScript and TypeScript rules plus local rules in `tools/ci/sast/rules/lokal/`. The check fails only on `ERROR` findings that are not in `tools/ci/sast/baseline.json`. The baseline only shrinks; new entries need a written reason and human review.
+
+CodeQL is not used. This follows the internal cross-portfolio standard (DL-098). Results are not uploaded to GitHub code scanning.

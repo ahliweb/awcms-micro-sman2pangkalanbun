@@ -19,6 +19,7 @@ Protect `main` with required checks from repository workflows:
 - `CI / E2E Tests`
 - `PR Compliance / Validate PR`
 - `Query Counts / Measure`
+- `keamanan / sast-rahasia-dependensi` (workflow `ci-keamanan`: gitleaks on the commit range + OpenGrep SAST gated by `tools/ci/sast/baseline.json`; replaces CodeQL, internal cross-portfolio standard DL-098)
 
 ## Merge Requirements
 

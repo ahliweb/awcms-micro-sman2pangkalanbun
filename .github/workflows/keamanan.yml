@@ -88,16 +88,6 @@ jobs:
           path: ~/.cache/opengrep/${{ env.OPENGREP_VERSION }}
           key: opengrep-${{ env.OPENGREP_VERSION }}-${{ env.OPENGREP_SHA256_X86 }}
 
-      - name: SEMENTARA buat baseline
-        run: |
-          mkdir -p "$RUNNER_TEMP/b"
-          start=$(date +%s)
-          bun tools/ci/sast/opengrep-scan.ts baseline --buat --baseline "$RUNNER_TEMP/b/baseline.json"
-          echo "DURASI_DETIK=$(( $(date +%s) - start ))"
-          echo "=====BASELINE-BEGIN====="
-          cat "$RUNNER_TEMP/b/baseline.json"
-          echo "=====BASELINE-END====="
-
       # Nama langkah dikutip: ": " di dalam skalar polos membuat YAML tidak valid.
       - name: "SAST OpenGrep (gerbang: ERROR baru di luar baseline)"
         run: bun tools/ci/sast/opengrep-scan.ts --keluaran "$RUNNER_TEMP/sast"
